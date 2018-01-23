@@ -31,9 +31,6 @@
     <Filter Include="2DGameFramework\image">
       <UniqueIdentifier>{efeeb4a5-f3de-4942-a317-21258d10129e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="playGround\bullets">
-      <UniqueIdentifier>{c0baca9e-5efa-4ae8-a7df-08910ac1b783}</UniqueIdentifier>
-    </Filter>
     <Filter Include="2DGameFramework\progressBar">
       <UniqueIdentifier>{f316504a-bdda-4a8d-b01b-87142c0dfff6}</UniqueIdentifier>
     </Filter>
@@ -57,9 +54,6 @@
     </Filter>
     <Filter Include="2DGameFramework\action">
       <UniqueIdentifier>{b3e765fe-3f62-4682-9f1a-6ee96401a17c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="playGround\ghostNGoblins">
-      <UniqueIdentifier>{47e77aa4-7246-4b0c-ae6f-5b085e025615}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -105,9 +99,6 @@
     <ClInclude Include="imageManager.h">
       <Filter>2DGameFramework\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="bullets.h">
-      <Filter>playGround\bullets</Filter>
-    </ClInclude>
     <ClInclude Include="progressBar.h">
       <Filter>2DGameFramework\progressBar</Filter>
     </ClInclude>
@@ -147,17 +138,8 @@
     <ClInclude Include="action.h">
       <Filter>2DGameFramework\action</Filter>
     </ClInclude>
-    <ClInclude Include="ghostNGoblinsScene.h">
-      <Filter>playGround\ghostNGoblins</Filter>
-    </ClInclude>
-    <ClInclude Include="knight.h">
-      <Filter>playGround\ghostNGoblins</Filter>
-    </ClInclude>
     <ClInclude Include="keyAniManager.h">
       <Filter>2DGameFramework\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="jump.h">
-      <Filter>playGround\ghostNGoblins</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -187,9 +169,6 @@
     </ClCompile>
     <ClCompile Include="imageManager.cpp">
       <Filter>2DGameFramework\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="bullets.cpp">
-      <Filter>playGround\bullets</Filter>
     </ClCompile>
     <ClCompile Include="progressBar.cpp">
       <Filter>2DGameFramework\progressBar</Filter>
@@ -230,17 +209,8 @@
     <ClCompile Include="action.cpp">
       <Filter>2DGameFramework\action</Filter>
     </ClCompile>
-    <ClCompile Include="ghostNGoblinsScene.cpp">
-      <Filter>playGround\ghostNGoblins</Filter>
-    </ClCompile>
-    <ClCompile Include="knight.cpp">
-      <Filter>playGround\ghostNGoblins</Filter>
-    </ClCompile>
     <ClCompile Include="keyAniManager.cpp">
       <Filter>2DGameFramework\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="jump.cpp">
-      <Filter>playGround\ghostNGoblins</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
