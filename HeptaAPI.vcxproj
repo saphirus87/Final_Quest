@@ -82,9 +82,11 @@
     <ClInclude Include="animation.h" />
     <ClInclude Include="battleScene.h" />
     <ClInclude Include="button.h" />
+    <ClInclude Include="CameraManager.h" />
     <ClInclude Include="collision.h" />
     <ClInclude Include="commonMacroFunction.h" />
     <ClInclude Include="database.h" />
+    <ClInclude Include="DLCManager.h" />
     <ClInclude Include="effect.h" />
     <ClInclude Include="effectManager.h" />
     <ClInclude Include="fieldScene.h" />
@@ -116,8 +118,10 @@
     <ClCompile Include="animation.cpp" />
     <ClCompile Include="battleScene.cpp" />
     <ClCompile Include="button.cpp" />
+    <ClCompile Include="CameraManager.cpp" />
     <ClCompile Include="collision.cpp" />
     <ClCompile Include="database.cpp" />
+    <ClCompile Include="DLCManager.cpp" />
     <ClCompile Include="effect.cpp" />
     <ClCompile Include="effectManager.cpp" />
     <ClCompile Include="fieldScene.cpp" />

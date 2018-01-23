@@ -27,6 +27,8 @@
 #include "collision.h"
 #include "txtData.h"
 #include "database.h"
+#include "CameraManager.h"
+#include "DLCManager.h"
 
 using namespace std;
 using namespace HEPTA_UTIL;
@@ -36,10 +38,10 @@ using namespace HEPTA_UTIL;
 //=======================================================
 
 #define WINNAME		(LPTSTR)TEXT("Hepta Window API")
-#define WINSTARTX	2000	//윈도우 시작좌표 X
+#define WINSTARTX	50	//윈도우 시작좌표 X
 #define WINSTARTY	50		//윈도우 시작좌표 Y
-#define WINSIZEX	800		//윈도우 가로크기
-#define WINSIZEY	800		//윈도우 세로크기
+#define WINSIZEX	1024		//윈도우 가로크기
+#define WINSIZEY	760		//윈도우 세로크기
 #define WINSTYLE	WS_CAPTION | WS_SYSMENU
 
 #define KEYMANAGER		keyManager::getSingleton()
@@ -53,6 +55,8 @@ using namespace HEPTA_UTIL;
 #define TXTDATA			txtData::getSingleton()
 #define INIDATA			iniDataManager::getSingleton()
 #define DATABASE		database::getSingleton()
+#define CAMERAMANAGER	CameraManager::getSingleton()
+#define DLCMANAGER		DLCManager::getSingleton()
 
 //=======================================================
 // ## 매크로 ## 2017.11.15 ##
