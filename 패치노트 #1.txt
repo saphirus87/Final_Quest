@@ -1,12 +1,22 @@
 플레이어(적) 스탯
 
-힘
-속도
-체력
-마법
-공격력
-방어력
-마법방어력
+---통합 변수명---(대소문자 꼭 맞춰주세용)
+	
+힘         	 Str
+마력       	 Int        ( I 대문자)
+속도       	 Speed
+체력      	 maxHp  /  curruntHp
+mp        	 maxMp  /  curruntMp     
+공격력    	 Damage
+방어력    	 Def
+스킬공격력	 m_Damage 
+마법방어력	 m_Def
+
+
+
+
+
+
 
 장비
 
