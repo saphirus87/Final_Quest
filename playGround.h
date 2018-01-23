@@ -9,7 +9,7 @@
 class playGround : public gameNode
 {
 private:
-	gameNode* currentScene;
+
 
 public:
 	virtual HRESULT init(void);		//초기화 함수

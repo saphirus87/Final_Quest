@@ -21,6 +21,8 @@ HRESULT playGround::init()
 	SCENEMANAGER->addScene("startScene", new gameStartScene);
 	SCENEMANAGER->addScene("fieldScene", new fieldScene);
 	SCENEMANAGER->addScene("battleScene", new battleScene);
+
+	SCENEMANAGER->changeScene("openningScene");
 	
 	return S_OK;
 }
@@ -47,6 +49,8 @@ void playGround::render(void)
 	PatBlt(getMemDC(), 0, 0, WINSIZEX, WINSIZEY, WHITENESS);
 	//================== 이 위는 손대지 마시오 =========================
 	
+	SCENEMANAGER->render();
+
 	SetTextColor(getMemDC(), RGB(255, 255, 255));
 	TIMEMANAGER->render(getMemDC());
 
