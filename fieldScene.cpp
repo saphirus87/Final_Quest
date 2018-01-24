@@ -14,9 +14,9 @@ fieldScene::~fieldScene()
 HRESULT fieldScene::init(void)
 {
 	//============================= 월드맵 이미지 추가 =============================
-	IMAGEMANAGER->addImage("worldMap", ".//mapImage//worldMap.bmp", 8500, 8000, true, RGB(255, 0, 255));				// 월드맵 추가
-	IMAGEMANAGER->addImage("worldMapSea", ".//mapImage//sea.bmp", 8500, 8000, true, RGB(255, 0, 255));					// 월드맵 바다 이미지
-	IMAGEMANAGER->addImage("worldMapCollision", ".//mapImage//worldMapCollision", 8500, 8000, true, RGB(255, 0, 255));	// 월드맵 충돌 영역
+	IMAGEMANAGER->addImage("worldMap", ".//mapImage//worldMap.bmp", 4608, 4608, true, RGB(255, 0, 255));				// 월드맵 추가
+	IMAGEMANAGER->addImage("worldMapSea", ".//mapImage//sea.bmp", 4608, 4608, true, RGB(255, 0, 255));					// 월드맵 바다 이미지
+	IMAGEMANAGER->addImage("worldMapCollision", ".//mapImage//worldMapCollision", 4608, 4608, true, RGB(255, 0, 255));	// 월드맵 충돌 영역
 	//============================= 월드맵 이미지 추가 =============================
 
 	//==================== 테스트 변수 ====================

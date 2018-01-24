@@ -73,3 +73,4 @@ using namespace HEPTA_UTIL;
 extern HINSTANCE	_hInstance;		//인스턴스 핸들
 extern HWND			_hWnd;			//핸들
 extern POINT		_ptMouse;
+extern BOOL			_isDebug;		//디버그 모드
