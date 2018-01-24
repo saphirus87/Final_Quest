@@ -143,6 +143,6 @@ void gameMenuScene::selectMove()
 	}
 	else if (KEYMANAGER->isOnceKeyDown(VK_BACK))
 	{
-		SCENEMANAGER->changeScene("fieldScene");
+		SCENEMANAGER->changeScene("fieldScene", FALSE);
 	}
 }

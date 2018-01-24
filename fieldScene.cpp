@@ -57,7 +57,7 @@ void fieldScene::update(void)
 
 	if (KEYMANAGER->isOnceKeyDown(VK_ESCAPE))
 	{
-		SCENEMANAGER->changeScene("¸Þ´º¾À");
+		SCENEMANAGER->changeScene("¸Þ´º¾À", FALSE);
 	}
 
 	_playerRc = RectMake(_x, _y, PLAYER_WIDTH, PLAYER_HEIGHT);

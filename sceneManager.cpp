@@ -83,11 +83,12 @@ gameNode* sceneManager::addScene(string sceneName, gameNode* scene)
 	if (!scene) return NULL;
 
 	//씬에 키 값을 부여해서 map컨테이너에 담아준다
+	scene->init();		
 	_mSceneList.insert(make_pair(sceneName, scene));
 
 	//반환
 	return scene;
-}
+}// 2018. 01. 24 씬 추가시 초기화
 
 gameNode* sceneManager::addLoadingScene(string loadingSceneName, gameNode* scene)
 {
@@ -169,6 +170,7 @@ HRESULT sceneManager::changeScene(string sceneName, string loadingSceneName)
 	return E_FAIL;
 }
 
+// 2018. 01. 24 씬 변경시 씬 초기화 무시
 HRESULT sceneManager::changeScene(string sceneName, BOOL isPrevSceneInit)
 {
 	//이터레이터에 찾고자하는 씬의 키 값을 대입
@@ -203,18 +205,7 @@ HRESULT sceneManager::changeScene(string sceneName, BOOL isPrevSceneInit)
 	}
 	else
 	{
-		//만약 현재씬에 다른 씬이 있다면 해제 해주고
-		//if (_currentScene) _currentScene->release();
-
-		//바꾸려는u 씬으로 체인지 한다
 		_currentScene = find->second;
-
-		//지금 씬 변환하는 이 구조는 여러분이 입맛에 따라 바꿔도 된다
-		//디폴트로 만들어 놨지만 위에 구조의 단점이 딱 하나 있는데
-		//스테이지1 -> 스테이지2로 씬이 바뀌었을때 스테이지1의 데이터를
-		//넘기려고 할때 릴리즈가 먼저 호출이 되서 조금 신경을 써줘야한다
-
-		//뭐 그렇다고.. ㅎ _ㅎ)
 
 		return S_OK;
 	}
