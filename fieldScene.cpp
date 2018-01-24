@@ -55,6 +55,11 @@ void fieldScene::update(void)
 		if (KEYMANAGER->isStayKeyDown(VK_DOWN)) _y += 3;
 	}
 
+	if (KEYMANAGER->isOnceKeyDown(VK_ESCAPE))
+	{
+		SCENEMANAGER->changeScene("¸Þ´º¾À");
+	}
+
 	_playerRc = RectMake(_x, _y, PLAYER_WIDTH, PLAYER_HEIGHT);
 
 	if (_x > WINSIZEX / 2 - PLAYER_WIDTH / 2 && _x < IMAGEMANAGER->findImage("worldMap")->getWidth() - WINSIZEX / 2 - PLAYER_WIDTH / 2)

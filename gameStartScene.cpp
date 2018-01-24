@@ -46,7 +46,7 @@ void gameStartScene::update()
 	{
 		if (_cursorMenuNum == 1)
 		{
-			SCENEMANAGER->changeScene("¸Þ´º¾À");
+			SCENEMANAGER->changeScene("fieldScene");
 		}
 		else if (_cursorMenuNum == 3)
 		{

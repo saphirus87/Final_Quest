@@ -28,7 +28,7 @@ HRESULT playGround::init()
 	SCENEMANAGER->addScene("fieldScene", new fieldScene);
 	SCENEMANAGER->addScene("battleScene", new battleScene);
 
-	SCENEMANAGER->changeScene("¸Þ´º¾À");
+	SCENEMANAGER->changeScene("½ºÅ¸Æ®¾À");
 	
 	return S_OK;
 }
