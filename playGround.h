@@ -5,11 +5,15 @@
 #include "gameEndingScene.h"
 #include "gameOpenningScene.h"
 #include "gameStartScene.h"
+#include "gameMenuScene.h"
+#include "itemMenu.h"
+#include "saveLoadMenu.h"
+#include "abilitiesMenu.h"
 
 class playGround : public gameNode
 {
 private:
-
+	gameNode* _start;				//스타트 씬
 
 public:
 	virtual HRESULT init(void);		//초기화 함수

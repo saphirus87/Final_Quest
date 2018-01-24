@@ -16,15 +16,20 @@ HRESULT playGround::init()
 {
 	gameNode::init(true);
 
-	SCENEMANAGER->addScene("openningScene", new gameOpenningScene);
-	SCENEMANAGER->addScene("endingScene", new gameEndingScene);
-	SCENEMANAGER->addScene("startScene", new gameStartScene);
+	IMAGEMANAGER->addImage("스타트배경", ".\\SceneImage\\startBackground", 1024, 665, true, RGB(255, 0, 255));
+
+	SCENEMANAGER->addScene("오프닝씬", new gameOpenningScene);
+	SCENEMANAGER->addScene("엔딩씬", new gameEndingScene);
+	SCENEMANAGER->addScene("스타트씬", new gameStartScene);
+	SCENEMANAGER->addScene("메뉴씬", new gameMenuScene);
+	SCENEMANAGER->addScene("아이템메뉴씬", new itemMenu);
+	SCENEMANAGER->addScene("세이브로드메뉴씬", new saveLoadMenu);
+	SCENEMANAGER->addScene("스킬메뉴씬", new abilitiesMenu);
 	SCENEMANAGER->addScene("fieldScene", new fieldScene);
 	SCENEMANAGER->addScene("battleScene", new battleScene);
 
-	//SCENEMANAGER->changeScene("openningScene");
-	SCENEMANAGER->changeScene("fieldScene");
-
+	SCENEMANAGER->changeScene("메뉴씬");
+	
 	return S_OK;
 }
 
@@ -40,9 +45,6 @@ void playGround::update(void)
 {
 	gameNode::update();
 
-	// 디버그 모드 on/off
-	if (KEYMANAGER->isOnceKeyDown(VK_F1)) _isDebug = !_isDebug;
-
 	SCENEMANAGER->update();
 
 }
@@ -50,12 +52,12 @@ void playGround::update(void)
 //그리는거.......
 void playGround::render(void)
 {
-	PatBlt(getMemDC(), 0, 0, WINSIZEX, WINSIZEY, WHITENESS);
+	PatBlt(getMemDC(), 0, 0, WINSIZEX, WINSIZEY, BLACKNESS);
 	//================== 이 위는 손대지 마시오 =========================
 	
 	SCENEMANAGER->render();
 
-	SetTextColor(getMemDC(), RGB(255, 255, 255));
+	//SetTextColor(getMemDC(), RGB(255, 255, 255));
 	TIMEMANAGER->render(getMemDC());
 
 	//================== 이 아래는 손대지 마시오 ========================
