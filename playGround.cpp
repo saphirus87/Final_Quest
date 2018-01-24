@@ -22,8 +22,9 @@ HRESULT playGround::init()
 	SCENEMANAGER->addScene("fieldScene", new fieldScene);
 	SCENEMANAGER->addScene("battleScene", new battleScene);
 
-	SCENEMANAGER->changeScene("openningScene");
-	
+	//SCENEMANAGER->changeScene("openningScene");
+	SCENEMANAGER->changeScene("fieldScene");
+
 	return S_OK;
 }
 
@@ -38,6 +39,9 @@ void playGround::release(void)
 void playGround::update(void)
 {
 	gameNode::update();
+
+	// 디버그 모드 on/off
+	if (KEYMANAGER->isOnceKeyDown(VK_F1)) _isDebug = !_isDebug;
 
 	SCENEMANAGER->update();
 
