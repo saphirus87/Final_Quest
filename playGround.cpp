@@ -15,6 +15,7 @@ playGround::~playGround()
 HRESULT playGround::init()
 {
 	gameNode::init(true);
+	soundInit();
 
 	IMAGEMANAGER->addImage("스타트배경", ".\\SceneImage\\startBackground", 1024, 665, true, RGB(255, 0, 255));
 
@@ -27,8 +28,12 @@ HRESULT playGround::init()
 	SCENEMANAGER->addScene("스킬메뉴씬", new abilitiesMenu);
 	SCENEMANAGER->addScene("fieldScene", new fieldScene);
 	SCENEMANAGER->addScene("battleScene", new battleScene);
+	
+
 
 	SCENEMANAGER->changeScene("스타트씬");
+
+
 	
 	return S_OK;
 }

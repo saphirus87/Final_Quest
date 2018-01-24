@@ -14,6 +14,7 @@ gameOpenningScene::~gameOpenningScene()
 
 HRESULT gameOpenningScene::init()
 {
+
 	return S_OK;
 }
 

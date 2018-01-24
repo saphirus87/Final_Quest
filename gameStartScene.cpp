@@ -14,10 +14,13 @@ gameStartScene::~gameStartScene()
 
 HRESULT gameStartScene::init()
 {
+	SOUNDMANAGER->play("02.선택", 0.75);
 	_startBackground = IMAGEMANAGER->addImage("스타트씬", ".\\SceneImage\\startBackground.bmp", 1024, 665, true, RGB(255, 0, 255));
 	_selectCursor = IMAGEMANAGER->addImage("스타트선택", ".\\SceneImage\\selectPoint.bmp", 27, 27, true, RGB(255, 0, 255));
 
 	_cursorMenuNum = 1;
+
+
 
 	return S_OK;
 }
