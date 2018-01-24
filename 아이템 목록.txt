@@ -1,0 +1,33 @@
+이름			가격	수치	타입
+포션			5	10	TYPE_USE
+하이포션		10	30	TYPE_USE
+메가 포션		15	50	TYPE_USE
+에테르			10	10	TYPE_USE
+피닉스의 깃털		50	9999	TYPE_USE
+메가 피닉스의 깃털	100	99999	TYPE_USE
+연막탄			20	0	TYPE_USE
+
+이름			가격	수치	타입
+밀집모자		10	5	TYPE_HEAD
+철투구			30	20	TYPE_HEAD
+후드			40	50	TYPE_HEAD
+
+이름			가격	수치	타입
+가죽갑옷		10	5	TYPE_BODY
+철갑옷			30	20	TYPE_BODY
+로브			40	50	TYPE_BODY
+
+이름			가격	수치	타입
+단검(右)		10	5	TYPE_RIGHT
+지팡이			30	10	TYPE_RIGHT
+양손검			40	20	TYPE_RIGHT
+
+이름			가격	수치	타입
+단검(左)		10	5	TYPE_LEFT
+방패			20	20	TYPE_LEFT
+양손검1			40	20	TYPE_LEFT
+
+이름			가격	수치	타입
+힘의 목걸이		20	10	TYPE_ACCESSARY
+체력의 목걸이		20	10	TYPE_ACCESSARY
+마력의 목걸이		20	10	TYPE_ACCESSARY
