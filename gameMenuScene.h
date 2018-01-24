@@ -1,10 +1,10 @@
 #pragma once
 #include "gameNode.h"
 
-class gameStartScene : public gameNode
+class gameMenuScene : public gameNode
 {
 private:
-	image* _startBackground;
+	image* _menuScene;
 	image* _selectCursor;
 
 	int _cursorMenuNum;
@@ -15,7 +15,9 @@ public:
 	void update();
 	void render();
 
-	gameStartScene();
-	~gameStartScene();
+	void selectMove();
+
+	gameMenuScene();
+	~gameMenuScene();
 };
 

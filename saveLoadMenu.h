@@ -1,13 +1,11 @@
 #pragma once
 #include "gameNode.h"
 
-class gameStartScene : public gameNode
+class saveLoadMenu : public gameNode
 {
 private:
-	image* _startBackground;
+	image* _saveLoadScene;
 	image* _selectCursor;
-
-	int _cursorMenuNum;
 
 public:
 	HRESULT init();
@@ -15,7 +13,7 @@ public:
 	void update();
 	void render();
 
-	gameStartScene();
-	~gameStartScene();
+	saveLoadMenu();
+	~saveLoadMenu();
 };
 

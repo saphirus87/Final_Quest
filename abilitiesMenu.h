@@ -1,15 +1,18 @@
 #pragma once
 #include "gameNode.h"
 
-class gameOpenningScene : public gameNode
+class abilitiesMenu : public gameNode
 {
+private:
+	image* _abilitiesScene;
+
 public:
 	HRESULT init();
 	void release();
 	void update();
 	void render();
 
-	gameOpenningScene();
-	~gameOpenningScene();
+	abilitiesMenu();
+	~abilitiesMenu();
 };
 

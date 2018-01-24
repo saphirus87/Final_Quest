@@ -58,11 +58,14 @@
     <Filter Include="playGround\Scene">
       <UniqueIdentifier>{cb56b997-3fe6-47cd-a4bb-1cef61bebb6a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="playGround\Scene\mainGame">
-      <UniqueIdentifier>{361bed77-f80d-4d0d-8a2c-713045064d16}</UniqueIdentifier>
+    <Filter Include="playGround\Scene\startScene">
+      <UniqueIdentifier>{ebe41371-28b4-4e05-8e91-06ee63607d26}</UniqueIdentifier>
     </Filter>
-    <Filter Include="playGround\enemy">
-      <UniqueIdentifier>{7ca6e964-4f3a-45ad-a413-120e2bad95f2}</UniqueIdentifier>
+    <Filter Include="playGround\Scene\MenuScene">
+      <UniqueIdentifier>{cc5f5cb2-bf63-4994-b1d3-6511c7669134}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\Scene\mainGameScene">
+      <UniqueIdentifier>{361bed77-f80d-4d0d-8a2c-713045064d16}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -150,20 +153,11 @@
     <ClInclude Include="keyAniManager.h">
       <Filter>2DGameFramework\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="gameStartScene.h">
-      <Filter>playGround\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="battleScene.h">
-      <Filter>playGround\Scene\mainGame</Filter>
+      <Filter>playGround\Scene\mainGameScene</Filter>
     </ClInclude>
     <ClInclude Include="fieldScene.h">
-      <Filter>playGround\Scene\mainGame</Filter>
-    </ClInclude>
-    <ClInclude Include="gameEndingScene.h">
-      <Filter>playGround\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="gameOpenningScene.h">
-      <Filter>playGround\Scene</Filter>
+      <Filter>playGround\Scene\mainGameScene</Filter>
     </ClInclude>
     <ClInclude Include="CameraManager.h">
       <Filter>2DGameFramework\Manager</Filter>
@@ -171,20 +165,26 @@
     <ClInclude Include="DLCManager.h">
       <Filter>2DGameFramework\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="enemyManager.h">
-      <Filter>playGround\enemy</Filter>
+    <ClInclude Include="gameMenuScene.h">
+      <Filter>playGround\Scene\MenuScene</Filter>
     </ClInclude>
-    <ClInclude Include="enemy.h">
-      <Filter>playGround\enemy</Filter>
+    <ClInclude Include="abilitiesMenu.h">
+      <Filter>playGround\Scene\MenuScene</Filter>
     </ClInclude>
-    <ClInclude Include="wolf.h">
-      <Filter>playGround\enemy</Filter>
+    <ClInclude Include="itemMenu.h">
+      <Filter>playGround\Scene\MenuScene</Filter>
     </ClInclude>
-    <ClInclude Include="mammos.h">
-      <Filter>playGround\enemy</Filter>
+    <ClInclude Include="saveLoadMenu.h">
+      <Filter>playGround\Scene\MenuScene</Filter>
     </ClInclude>
-    <ClInclude Include="knight.h">
-      <Filter>playGround\enemy</Filter>
+    <ClInclude Include="gameEndingScene.h">
+      <Filter>playGround\Scene\startScene</Filter>
+    </ClInclude>
+    <ClInclude Include="gameOpenningScene.h">
+      <Filter>playGround\Scene\startScene</Filter>
+    </ClInclude>
+    <ClInclude Include="gameStartScene.h">
+      <Filter>playGround\Scene\startScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -257,20 +257,11 @@
     <ClCompile Include="keyAniManager.cpp">
       <Filter>2DGameFramework\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="gameStartScene.cpp">
-      <Filter>playGround\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="battleScene.cpp">
-      <Filter>playGround\Scene\mainGame</Filter>
+      <Filter>playGround\Scene\mainGameScene</Filter>
     </ClCompile>
     <ClCompile Include="fieldScene.cpp">
-      <Filter>playGround\Scene\mainGame</Filter>
-    </ClCompile>
-    <ClCompile Include="gameEndingScene.cpp">
-      <Filter>playGround\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="gameOpenningScene.cpp">
-      <Filter>playGround\Scene</Filter>
+      <Filter>playGround\Scene\mainGameScene</Filter>
     </ClCompile>
     <ClCompile Include="CameraManager.cpp">
       <Filter>2DGameFramework\Manager</Filter>
@@ -278,20 +269,26 @@
     <ClCompile Include="DLCManager.cpp">
       <Filter>2DGameFramework\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="enemyManager.cpp">
-      <Filter>playGround\enemy</Filter>
+    <ClCompile Include="gameMenuScene.cpp">
+      <Filter>playGround\Scene\MenuScene</Filter>
     </ClCompile>
-    <ClCompile Include="enemy.cpp">
-      <Filter>playGround\enemy</Filter>
+    <ClCompile Include="saveLoadMenu.cpp">
+      <Filter>playGround\Scene\MenuScene</Filter>
     </ClCompile>
-    <ClCompile Include="wolf.cpp">
-      <Filter>playGround\enemy</Filter>
+    <ClCompile Include="itemMenu.cpp">
+      <Filter>playGround\Scene\MenuScene</Filter>
     </ClCompile>
-    <ClCompile Include="mammos.cpp">
-      <Filter>playGround\enemy</Filter>
+    <ClCompile Include="abilitiesMenu.cpp">
+      <Filter>playGround\Scene\MenuScene</Filter>
     </ClCompile>
-    <ClCompile Include="knight.cpp">
-      <Filter>playGround\enemy</Filter>
+    <ClCompile Include="gameEndingScene.cpp">
+      <Filter>playGround\Scene\startScene</Filter>
+    </ClCompile>
+    <ClCompile Include="gameOpenningScene.cpp">
+      <Filter>playGround\Scene\startScene</Filter>
+    </ClCompile>
+    <ClCompile Include="gameStartScene.cpp">
+      <Filter>playGround\Scene\startScene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
