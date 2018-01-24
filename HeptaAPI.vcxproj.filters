@@ -67,6 +67,9 @@
     <Filter Include="playGround\Scene\mainGameScene">
       <UniqueIdentifier>{361bed77-f80d-4d0d-8a2c-713045064d16}</UniqueIdentifier>
     </Filter>
+    <Filter Include="playGround\item">
+      <UniqueIdentifier>{a811e2cc-23f2-42d9-8e68-88d269f6f857}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -186,6 +189,9 @@
     <ClInclude Include="gameStartScene.h">
       <Filter>playGround\Scene\startScene</Filter>
     </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>playGround\item</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -289,6 +295,9 @@
     </ClCompile>
     <ClCompile Include="gameStartScene.cpp">
       <Filter>playGround\Scene\startScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>playGround\item</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

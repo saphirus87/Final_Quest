@@ -5,10 +5,13 @@
 #define PLAYER_WIDTH 48
 #define PLAYER_HEIGHT 48
 
+#define ENCOUNT_MAX_VALUE 8000
+#define ENCOUNT_VALUE RND->getFromIntTo(5, 10)
+
 class fieldScene : public gameNode
 {
 private:
-	image* _worldMap;
+	int _encount;
 
 //==================== 테스트 변수 ====================
 private:
@@ -30,5 +33,10 @@ public:
 	void release(void);
 	void update(void);
 	void render(void);
+
+	void playerMove(void);
+	void playerAni(void);
+
+	void increasedEncount(void);
 };
 

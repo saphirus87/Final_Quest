@@ -17,7 +17,13 @@ HRESULT fieldScene::init(void)
 	IMAGEMANAGER->addImage("worldMap", ".//mapImage//worldMap.bmp", 4608, 4608, true, RGB(255, 0, 255));				// 월드맵 추가
 	IMAGEMANAGER->addImage("worldMapSea", ".//mapImage//sea.bmp", 4608, 4608, true, RGB(255, 0, 255));					// 월드맵 바다 이미지
 	IMAGEMANAGER->addImage("worldMapCollision", ".//mapImage//worldMapCollision", 4608, 4608, true, RGB(255, 0, 255));	// 월드맵 충돌 영역
+
+	IMAGEMANAGER->addFrameImage("playerMove", ".//playerImage//playerMove.bmp", 84, 184, 3, 4, true, RGB(255, 0, 255));	// 플레이어 이동 이미지
 	//============================= 월드맵 이미지 추가 =============================
+
+	//==================== 월드맵 사용 변수 초기화 ====================
+	_encount = 0;
+	//==================== 월드맵 사용 변수 초기화 ====================
 
 	//==================== 테스트 변수 ====================
 	_x = 100;
@@ -49,10 +55,7 @@ void fieldScene::update(void)
 	}
 	else
 	{
-		if (KEYMANAGER->isStayKeyDown(VK_LEFT)) _x -= 3;
-		if (KEYMANAGER->isStayKeyDown(VK_RIGHT)) _x += 3;
-		if (KEYMANAGER->isStayKeyDown(VK_UP)) _y -= 3;
-		if (KEYMANAGER->isStayKeyDown(VK_DOWN)) _y += 3;
+		playerMove();
 	}
 
 	if (KEYMANAGER->isOnceKeyDown(VK_ESCAPE))
@@ -93,4 +96,38 @@ void fieldScene::render(void)
 	}
 	
 	Rectangle(getMemDC(), _playerRc.left, _playerRc.top, _playerRc.right, _playerRc.bottom);
+}
+
+void fieldScene::playerMove(void)
+{
+	if (KEYMANAGER->isStayKeyDown(VK_LEFT))
+	{
+		_x -= 3;
+		increasedEncount();
+	}
+	if (KEYMANAGER->isStayKeyDown(VK_RIGHT))
+	{
+		_x += 3;
+		increasedEncount();
+	}
+	if (KEYMANAGER->isStayKeyDown(VK_UP))
+	{
+		_y -= 3;
+		increasedEncount();
+	}
+	if (KEYMANAGER->isStayKeyDown(VK_DOWN))
+	{
+		_y += 3;
+		increasedEncount();
+	}
+}
+
+void fieldScene::increasedEncount(void)
+{
+	if (_encount < ENCOUNT_MAX_VALUE) _encount += ENCOUNT_VALUE;
+	else if (_encount > ENCOUNT_MAX_VALUE)
+	{
+		SCENEMANAGER->changeScene("battleScene");
+		_encount = 0;
+	}
 }
