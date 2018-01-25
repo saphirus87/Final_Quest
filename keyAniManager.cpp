@@ -82,7 +82,7 @@ void keyAniManager::addDefaultFrameAnimation(string animationKeyName, char* imag
 
 
 //배열 애니메이션
-void keyAniManager::addArrayFrameAnimation(string animationKeyName, char* imageKeyName, int* arr, int arrLen, int fps, bool loop)
+void keyAniManager::addArrayFrameAnimation(string animationKeyName, const char* imageKeyName, int* arr, int arrLen, int fps, bool loop)
 {
 	image* img = IMAGEMANAGER->findImage(imageKeyName);
 	animation* ani = new animation;

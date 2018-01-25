@@ -22,6 +22,10 @@ void battleScene::release(void)
 
 void battleScene::update(void)
 {
+	if (KEYMANAGER->isOnceKeyDown(VK_F10))
+	{
+		SCENEMANAGER->changeScene("fieldScene", false);
+	}
 }
 
 void battleScene::render(void)
