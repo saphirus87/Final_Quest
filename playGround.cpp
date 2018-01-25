@@ -17,7 +17,7 @@ HRESULT playGround::init()
 	gameNode::init(true);
 	soundInit();
 
-	IMAGEMANAGER->addImage("½ºÅ¸Æ®¹è°æ", ".\\SceneImage\\startBackground", 1024, 665, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("½ºÅ¸Æ®¹è°æ", ".\\SceneImage\\startBackground.bmp", 1024, 665, true, RGB(255, 0, 255));
 
 	SCENEMANAGER->addScene("¿ÀÇÁ´×¾À", new gameOpenningScene);
 	SCENEMANAGER->addScene("¿£µù¾À", new gameEndingScene);
@@ -30,12 +30,8 @@ HRESULT playGround::init()
 	SCENEMANAGER->addScene("fieldScene", new fieldScene);
 	SCENEMANAGER->addScene("battleScene", new battleScene);
 	
+	SCENEMANAGER->changeScene("½ºÅ¸Æ®¾À");
 
-
-	SCENEMANAGER->changeScene("¿É¼Ç¾À");
-
-
-	
 	return S_OK;
 }
 

@@ -148,6 +148,7 @@
     <ClInclude Include="CameraManager.h" />
     <ClInclude Include="collision.h" />
     <ClInclude Include="commonMacroFunction.h" />
+    <ClInclude Include="configMenu.h" />
     <ClInclude Include="database.h" />
     <ClInclude Include="DLCManager.h" />
     <ClInclude Include="effect.h" />
@@ -191,6 +192,7 @@
     <ClCompile Include="button.cpp" />
     <ClCompile Include="CameraManager.cpp" />
     <ClCompile Include="collision.cpp" />
+    <ClCompile Include="configMenu.cpp" />
     <ClCompile Include="database.cpp" />
     <ClCompile Include="DLCManager.cpp" />
     <ClCompile Include="effect.cpp" />
