@@ -14,18 +14,16 @@ gameStartScene::~gameStartScene()
 
 HRESULT gameStartScene::init()
 {
-	SOUNDMANAGER->play("02.선택", 1);
-	SOUNDMANAGER->addMusicGroup("02.선택");
-
-
-
-
-	_startBackground = IMAGEMANAGER->addImage("스타트씬", ".\\SceneImage\\startBackground.bmp", 1024, 665, true, RGB(255, 0, 255));
-	_selectCursor = IMAGEMANAGER->addImage("스타트선택", ".\\SceneImage\\selectPoint.bmp", 27, 27, true, RGB(255, 0, 255));
+	SOUNDMANAGER->play("02.선택", 0.75);
+	IMAGEMANAGER->addImage("스타트씬", ".\\SceneImage\\startBackground.bmp", 1024, 665, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("선택", ".\\SceneImage\\selectPoint.bmp", 27, 27, true, RGB(255, 0, 255));
 
 	_cursorMenuNum = 1;
 
+	_alpha = 5;
+	_isStart = true;
 
+	CAMERAMANAGER->addImage("스타트", WINSIZEX, WINSIZEY);
 
 	return S_OK;
 }
@@ -36,6 +34,37 @@ void gameStartScene::release()
 }
 
 void gameStartScene::update() 
+{
+	keyControl();
+	startAlpha();
+}
+
+void gameStartScene::render() 
+{
+	//_startBackground->render(getMemDC(), WINSIZEX / 2 - _startBackground->getWidth() / 2, WINSIZEY / 2 - _startBackground->getHeight() / 2);
+
+	IMAGEMANAGER->findImage("스타트씬")->render(CAMERAMANAGER->findImage("스타트")->getMemDC(), 0, 47);
+	
+	if (_alpha == 255)
+	{
+		if (_cursorMenuNum == 1)
+		{
+			IMAGEMANAGER->findImage("선택")->render(CAMERAMANAGER->findImage("스타트")->getMemDC(), WINSIZEX / 2 - 150, WINSIZEY / 2 + 120);
+		}
+		if (_cursorMenuNum == 2)
+		{
+			IMAGEMANAGER->findImage("선택")->render(CAMERAMANAGER->findImage("스타트")->getMemDC(), WINSIZEX / 2 - 150, WINSIZEY / 2 + 180);
+		}
+		if (_cursorMenuNum == 3)
+		{
+			IMAGEMANAGER->findImage("선택")->render(CAMERAMANAGER->findImage("스타트")->getMemDC(), WINSIZEX / 2 - 150, WINSIZEY / 2 + 240);
+		}
+	}
+
+	CAMERAMANAGER->findImage("스타트")->alphaCameraRender(getMemDC(), 0, 0, WINSIZEX, WINSIZEY, 0, 0, 1, _alpha);
+}
+
+void gameStartScene::keyControl()
 {
 	if (KEYMANAGER->isOnceKeyDown(VK_UP))
 	{
@@ -54,29 +83,35 @@ void gameStartScene::update()
 	{
 		if (_cursorMenuNum == 1)
 		{
-			SCENEMANAGER->changeScene("fieldScene");
+			if (_isStart == true && _alpha == 255)
+			{
+				_isStart = false;
+			}
 		}
 		else if (_cursorMenuNum == 3)
 		{
 			PostQuitMessage(0);
 		}
 	}
+
+	if (_alpha == 0)
+	{
+		SCENEMANAGER->changeScene("fieldScene");
+	}
 }
 
-void gameStartScene::render() 
+void gameStartScene::startAlpha()
 {
-	_startBackground->render(getMemDC(), WINSIZEX / 2 - _startBackground->getWidth() / 2, WINSIZEY / 2 - _startBackground->getHeight() / 2);
+	if (_isStart == true)
+	{
+		_alpha += 5;
 
-	if (_cursorMenuNum == 1)
-	{
-		_selectCursor->render(getMemDC(), WINSIZEX / 2 - 150, WINSIZEY / 2 + 120);
+		if (_alpha > 255) _alpha = 255;
 	}
-	if (_cursorMenuNum == 2)
+	if (_isStart == false)
 	{
-		_selectCursor->render(getMemDC(), WINSIZEX / 2 - 150, WINSIZEY / 2 + 180);
-	}
-	if (_cursorMenuNum == 3)
-	{
-		_selectCursor->render(getMemDC(), WINSIZEX / 2 - 150, WINSIZEY / 2 + 240);
+		_alpha -= 5;
+
+		if (_alpha < 0) _alpha = 0;
 	}
 }

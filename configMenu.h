@@ -1,14 +1,12 @@
 #pragma once
 #include "gameNode.h"
 
-class gameStartScene : public gameNode
+class configMenu : public gameNode
 {
 private:
 	int _cursorMenuNum;
-
-	int _alpha;
-
-	bool _isStart;
+	int _musicVolume;
+	int _effectVolume;
 
 public:
 	HRESULT init();
@@ -18,9 +16,7 @@ public:
 
 	void keyControl();
 
-	void startAlpha();
-
-	gameStartScene();
-	~gameStartScene();
+	configMenu();
+	~configMenu();
 };
 

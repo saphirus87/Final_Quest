@@ -4,7 +4,6 @@
 class abilitiesMenu : public gameNode
 {
 private:
-	image* _abilitiesScene;
 
 public:
 	HRESULT init();

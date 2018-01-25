@@ -4,9 +4,6 @@
 class gameMenuScene : public gameNode
 {
 private:
-	image* _menuScene;
-	image* _selectCursor;
-
 	int _cursorMenuNum;
 
 public:
@@ -15,7 +12,7 @@ public:
 	void update();
 	void render();
 
-	void selectMove();
+	void keyControl();
 
 	gameMenuScene();
 	~gameMenuScene();

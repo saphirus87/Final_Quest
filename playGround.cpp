@@ -26,12 +26,13 @@ HRESULT playGround::init()
 	SCENEMANAGER->addScene("¾ÆÀÌÅÛ¸Þ´º¾À", new itemMenu);
 	SCENEMANAGER->addScene("¼¼ÀÌºê·Îµå¸Þ´º¾À", new saveLoadMenu);
 	SCENEMANAGER->addScene("½ºÅ³¸Þ´º¾À", new abilitiesMenu);
+	SCENEMANAGER->addScene("¿É¼Ç¾À", new configMenu);
 	SCENEMANAGER->addScene("fieldScene", new fieldScene);
 	SCENEMANAGER->addScene("battleScene", new battleScene);
 	
 
 
-	SCENEMANAGER->changeScene("½ºÅ¸Æ®¾À");
+	SCENEMANAGER->changeScene("¿É¼Ç¾À");
 
 
 	

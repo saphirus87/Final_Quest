@@ -9,6 +9,7 @@
 #include "itemMenu.h"
 #include "saveLoadMenu.h"
 #include "abilitiesMenu.h"
+#include "configMenu.h"
 
 class playGround : public gameNode
 {

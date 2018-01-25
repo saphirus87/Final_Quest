@@ -13,8 +13,8 @@ gameMenuScene::~gameMenuScene()
 
 HRESULT gameMenuScene::init()
 {
-	_menuScene = IMAGEMANAGER->addImage("메뉴씬", ".\\SceneImage\\mainMenu.bmp", 1024, 760, true, RGB(255, 0, 255));
-	_selectCursor = IMAGEMANAGER->addImage("메뉴씬선택", ".\\SceneImage\\selectPoint.bmp", 27, 27, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("메뉴씬", ".\\SceneImage\\mainMenu.bmp", 1024, 760, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("선택", ".\\SceneImage\\selectPoint.bmp", 27, 27, true, RGB(255, 0, 255));
 
 	_cursorMenuNum = 1;
 
@@ -28,57 +28,57 @@ void gameMenuScene::release()
 
 void gameMenuScene::update()
 {
-	selectMove();
+	keyControl();
 }
 
 void gameMenuScene::render()
 {
-	_menuScene->render(getMemDC(), WINSIZEX / 2 - _menuScene->getWidth() / 2, WINSIZEY / 2 - _menuScene->getHeight() / 2);
+	IMAGEMANAGER->findImage("메뉴씬")->render(getMemDC(), WINSIZEX / 2 - IMAGEMANAGER->findImage("메뉴씬")->getWidth() / 2, WINSIZEY / 2 - IMAGEMANAGER->findImage("메뉴씬")->getHeight() / 2);
 
 	if (_cursorMenuNum == 1)
 	{
-		_selectCursor->render(getMemDC(), WINSIZEX / 2 + 250, 85);
+		IMAGEMANAGER->findImage("선택")->render(getMemDC(), WINSIZEX / 2 + 250, 85);
 	}
 	if (_cursorMenuNum == 2)
 	{
-		_selectCursor->render(getMemDC(), WINSIZEX / 2 + 250, 165);
+		IMAGEMANAGER->findImage("선택")->render(getMemDC(), WINSIZEX / 2 + 250, 165);
 	}
 	if (_cursorMenuNum == 3)
 	{
-		_selectCursor->render(getMemDC(), WINSIZEX / 2 + 250, 245);
+		IMAGEMANAGER->findImage("선택")->render(getMemDC(), WINSIZEX / 2 + 250, 245);
 	}
 	if (_cursorMenuNum == 4)
 	{
-		_selectCursor->render(getMemDC(), WINSIZEX / 2 + 250, 325);
+		IMAGEMANAGER->findImage("선택")->render(getMemDC(), WINSIZEX / 2 + 250, 325);
 	}
 	if (_cursorMenuNum == 5)
 	{
-		_selectCursor->render(getMemDC(), WINSIZEX / 2 + 250, 405);
+		IMAGEMANAGER->findImage("선택")->render(getMemDC(), WINSIZEX / 2 + 250, 405);
 	}
 	if (_cursorMenuNum == 6)
 	{
-		_selectCursor->render(getMemDC(), WINSIZEX / 2 + 250, 485);
+		IMAGEMANAGER->findImage("선택")->render(getMemDC(), WINSIZEX / 2 + 250, 485);
 	}
 
 	if (_cursorMenuNum == 7)
 	{
-		_selectCursor->render(getMemDC(), 40, 115);
+		IMAGEMANAGER->findImage("선택")->render(getMemDC(), 40, 115);
 	}
 	if (_cursorMenuNum == 8)
 	{
-		_selectCursor->render(getMemDC(), 40, 265);
+		IMAGEMANAGER->findImage("선택")->render(getMemDC(), 40, 265);
 	}
 	if (_cursorMenuNum == 9)
 	{
-		_selectCursor->render(getMemDC(), 40, 415);
+		IMAGEMANAGER->findImage("선택")->render(getMemDC(), 40, 415);
 	}
 	if (_cursorMenuNum == 10)
 	{
-		_selectCursor->render(getMemDC(), 40, 565);
+		IMAGEMANAGER->findImage("선택")->render(getMemDC(), 40, 565);
 	}
 }
 
-void gameMenuScene::selectMove()
+void gameMenuScene::keyControl()
 {
 	if (KEYMANAGER->isOnceKeyDown(VK_UP))
 	{
@@ -138,7 +138,7 @@ void gameMenuScene::selectMove()
 		}
 		else if (_cursorMenuNum == 6)
 		{
-			PostQuitMessage(0);
+			SCENEMANAGER->changeScene("옵션씬", FALSE);
 		}
 	}
 	else if (KEYMANAGER->isOnceKeyDown(VK_BACK))
