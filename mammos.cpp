@@ -17,10 +17,10 @@ HRESULT mammos::init()
 	img = IMAGEMANAGER->addImage("mammos", "enemyimages/mammos.bmp", 173, 114, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("mammos_hit", "enemyimages/mammos_hit.bmp", 173, 114, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("mammos_die", "enemyimages/mammos_die.bmp", 173, 114, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("wolf_attack", "enemyimages/mammos_attack.bmp", 600, 134, 3, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("mammos_attack", "enemyimages/mammos_attack.bmp", 600, 134, 3, 1, true, RGB(255, 0, 255));
 	isAttack = false;
 	_startTime = 0.0f;
-	_endTime = 5.0f;
+	_endTime = 22.0f;
 	_curruntHp = _maxHp = 60;
 	_curruntMp = _maxMp = 60;
 	_str = _int = 3;
@@ -56,13 +56,16 @@ void mammos::update()
 
 	if (attack_state == ATTACK)
 	{
-		frameCount++;
-		if (frameCount >= IMAGEMANAGER->findImage("mammos_attack")->getMaxFrameX())
+		if (count % 10 == 0)
 		{
-			frameCount = 0;
-			attack_state = NONE;
+			frameCount++;
+			if (frameCount >= IMAGEMANAGER->findImage("mammos_attack")->getMaxFrameX())
+			{
+				frameCount = 0;
+				attack_state = NONE;
+			}
+			IMAGEMANAGER->findImage("mammos_attack")->setFrameX(frameCount);
 		}
-		IMAGEMANAGER->findImage("mammos_attack")->setFrameX(frameCount);
 	}
 
 
@@ -74,21 +77,21 @@ void mammos::render(HDC hdc)
 	switch (state)
 	{
 	case LIFE_NONE:
-		img->render(hdc, 200, 300);
+		img->render(hdc, 200, 230);
 		break;
 	case HIT:
-		IMAGEMANAGER->findImage("mammos_hit")->render(hdc, 200, 300);
+		IMAGEMANAGER->findImage("mammos_hit")->render(hdc, 200, 230);
 		break;
 	case DIE:
-		IMAGEMANAGER->findImage("mammos_hit")->alphaRender(hdc, 200, 300, _alpha);
+		IMAGEMANAGER->findImage("mammos_die")->alphaRender(hdc, 200, 230, _alpha);
 		break;
 	default:
 		break;
 	}
 
 	if (attack_state == ATTACK)
-		IMAGEMANAGER->findImage("wolf_attack")->frameRender(hdc, 500, 500,
-			IMAGEMANAGER->findImage("wolf_attack")->getFrameX(),
-			IMAGEMANAGER->findImage("wolf_attack")->getFrameY());
+		IMAGEMANAGER->findImage("mammos_attack")->frameRender(hdc, 500, 230,
+			IMAGEMANAGER->findImage("mammos_attack")->getFrameX(),
+			IMAGEMANAGER->findImage("mammos_attack")->getFrameY());
 
 }

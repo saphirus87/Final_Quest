@@ -1,6 +1,7 @@
 #pragma once
 #include "gameNode.h"
 #include <vector>
+#include "enemyManager.h"
 
 typedef void(*ACTION_FUNTION)(void*, void*);
 
@@ -8,7 +9,7 @@ class battleScene : public gameNode
 {
 private:
 	vector<CALLBACK_FUNCTION> _vActionList;
-
+	enemyManager* em;
 public:
 	battleScene();
 	~battleScene();

@@ -28,11 +28,11 @@ void enemyManager::update()
 	}
 }
 
-void enemyManager::render(HDC hdc)
+void enemyManager::render()
 {
 	for (vienemy = venemy.begin(); vienemy != venemy.end(); vienemy++)
 	{
-		(*vienemy)->render();
+		(*vienemy)->render(getMemDC());
 	}
 }
 

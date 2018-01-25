@@ -38,7 +38,7 @@ void enemy::update()
 	}
 }
 
-void enemy::render()
+void enemy::render(HDC hdc)
 {
 }
 
@@ -53,7 +53,7 @@ void enemy::Attack()
 			isAttack = true;
 		}
 		if (!isAttack)
-			_startTime += 0.08;
+			_startTime += 0.04;
 
 		else if (isAttack)
 		{

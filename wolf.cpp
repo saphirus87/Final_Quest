@@ -14,9 +14,10 @@ wolf::~wolf()
 HRESULT wolf::init()
 {
 	enemy::init();
+	state = LIFE_NONE;
 	isAttack = false;
 	_startTime = 0.0f;
-	_endTime = 5.0f;
+	_endTime = 12.0f;
 	img = IMAGEMANAGER->addImage("wolf", "enemyimages/wolf.bmp", 144, 116, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("wolf_die", "enemyimages/wolf_die.bmp", 144, 116, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("wolf_hit", "enemyimages/wolf_hit.bmp", 144, 116, true, RGB(255, 0, 255));
@@ -57,13 +58,16 @@ void wolf::update()
 
 	if (attack_state == ATTACK)
 	{
-		frameCount++;
-		if (frameCount >= IMAGEMANAGER->findImage("wolf_attack")->getMaxFrameX())
+		if (count % 10 == 0)
 		{
-			frameCount = 0;
-			attack_state = NONE;
+			frameCount++;
+			if (frameCount >= IMAGEMANAGER->findImage("wolf_attack")->getMaxFrameX())
+			{
+				frameCount = 0;
+				attack_state = NONE;
+			}
+			IMAGEMANAGER->findImage("wolf_attack")->setFrameX(frameCount);
 		}
-		IMAGEMANAGER->findImage("wolf_attack")->setFrameX(frameCount);
 	}
 
 	//스킬소리
@@ -74,20 +78,20 @@ void wolf::render(HDC hdc)
 	switch (state)
 	{
 	case LIFE_NONE:
-		img->alphaRender(hdc, 200, 500, _alpha);
+		img->alphaRender(hdc, 200, 390, _alpha);
 		break;
 	case HIT:
-		IMAGEMANAGER->findImage("wolf_hit")->render(hdc, 200, 500);
+		IMAGEMANAGER->findImage("wolf_hit")->render(hdc, 200, 390);
 		break;
 	case DIE:
-		IMAGEMANAGER->findImage("wolf_hit")->alphaRender(hdc, 200, 500,_alpha);
+		IMAGEMANAGER->findImage("wolf_die")->alphaRender(hdc, 200, 390,_alpha);
 		break;
 	default:
 		break;
 	}
 
 	if (attack_state==ATTACK)
-		IMAGEMANAGER->findImage("wolf_attack")->frameRender(hdc, 500, 500,
+		IMAGEMANAGER->findImage("wolf_attack")->frameRender(hdc, 500, 390,
 			IMAGEMANAGER->findImage("wolf_attack")->getFrameX(), 
 			IMAGEMANAGER->findImage("wolf_attack")->getFrameY());
 	

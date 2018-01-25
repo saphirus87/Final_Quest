@@ -144,6 +144,7 @@
     <ClInclude Include="action.h" />
     <ClInclude Include="animation.h" />
     <ClInclude Include="battleScene.h" />
+    <ClInclude Include="Boss.h" />
     <ClInclude Include="button.h" />
     <ClInclude Include="CameraManager.h" />
     <ClInclude Include="collision.h" />
@@ -153,6 +154,8 @@
     <ClInclude Include="DLCManager.h" />
     <ClInclude Include="effect.h" />
     <ClInclude Include="effectManager.h" />
+    <ClInclude Include="enemy.h" />
+    <ClInclude Include="enemyManager.h" />
     <ClInclude Include="equipMenu.h" />
     <ClInclude Include="fieldScene.h" />
     <ClInclude Include="gameEndingScene.h" />
@@ -167,6 +170,8 @@
     <ClInclude Include="itemMenu.h" />
     <ClInclude Include="keyAniManager.h" />
     <ClInclude Include="keyManager.h" />
+    <ClInclude Include="knight.h" />
+    <ClInclude Include="mammos.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="player1.h" />
     <ClInclude Include="player2.h" />
@@ -186,12 +191,14 @@
     <ClInclude Include="timer.h" />
     <ClInclude Include="txtData.h" />
     <ClInclude Include="utils.h" />
+    <ClInclude Include="wolf.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="abilitiesMenu.cpp" />
     <ClCompile Include="action.cpp" />
     <ClCompile Include="animation.cpp" />
     <ClCompile Include="battleScene.cpp" />
+    <ClCompile Include="Boss.cpp" />
     <ClCompile Include="button.cpp" />
     <ClCompile Include="CameraManager.cpp" />
     <ClCompile Include="collision.cpp" />
@@ -200,6 +207,8 @@
     <ClCompile Include="DLCManager.cpp" />
     <ClCompile Include="effect.cpp" />
     <ClCompile Include="effectManager.cpp" />
+    <ClCompile Include="enemy.cpp" />
+    <ClCompile Include="enemyManager.cpp" />
     <ClCompile Include="equipMenu.cpp" />
     <ClCompile Include="fieldScene.cpp" />
     <ClCompile Include="gameEndingScene.cpp" />
@@ -214,6 +223,8 @@
     <ClCompile Include="itemMenu.cpp" />
     <ClCompile Include="keyAniManager.cpp" />
     <ClCompile Include="keyManager.cpp" />
+    <ClCompile Include="knight.cpp" />
+    <ClCompile Include="mammos.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="player1.cpp" />
     <ClCompile Include="player2.cpp" />
@@ -236,6 +247,7 @@
     <ClCompile Include="utils.cpp" />
     <ClCompile Include="winMain.cpp" />
     <ClCompile Include="playGround+SoundAdd.cpp" />
+    <ClCompile Include="wolf.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
