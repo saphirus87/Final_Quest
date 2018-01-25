@@ -51,10 +51,12 @@ public:
 	//아이템 갯수 감소
 	void delItem(string strKey);
 
-	//소비템 이름 하나 출력
+	//소비템 목록
 	vector<string>* iteminventory();
-	//장비템 이름 하나 출력
+	string vitemstring(int num) { return _iteminventory[num]; }
+	//장비템 목록
 	vector<string>* equipinventory();
+	string vequipstring(int num) { return _equipinventory[num]; }
 
 	//아이템 리스트 호출
 	mapItemList itemlist() { return _mItemList; }

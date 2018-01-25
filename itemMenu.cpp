@@ -86,51 +86,84 @@ void itemMenu::update()
 		if (KEYMANAGER->isOnceKeyDown(VK_RIGHT))
 		{
 			++selnum;
+			if (itemsize)
+			{
+				selnum = selnum % itemsize;
+			}
+			if (equipsize)
+			{
+				selnum = selnum % equipsize;
+			}
 		}
 		if (KEYMANAGER->isOnceKeyDown(VK_LEFT))
 		{
 			--selnum;
+			if (itemsize)
+			{
+				if (selnum < 0)selnum += itemsize;
+			}
+			if (equipsize)
+			{
+				if (selnum < 0)selnum += equipsize;
+			}
 		}
 		if (KEYMANAGER->isOnceKeyDown(VK_UP))
 		{
 			selnum -= 3;
-			if (selnum > itemsize) selnum += 6;
+			if (itemsize)
+			{
+				if (selnum < 0)selnum += (itemsize / 3 + 1) * 3;
+				if (selnum >= itemsize)selnum -= 3;
+				if (selnum < 0)selnum += 3;
+			}
+			if (equipsize)
+			{
+				if (selnum < 0)selnum += (equipsize / 3 + 1) * 3;
+				if (selnum >= equipsize)selnum -= 3;
+				if (selnum < 0)selnum += 3;
+			}
 		}
 		if (KEYMANAGER->isOnceKeyDown(VK_DOWN))
 		{
 			selnum += 3;
-			if (selnum > itemsize) selnum -= 6;
-		}
-		if (itemsize)
-		{
-			if (selnum < 0)selnum += itemsize;
-			selnum = selnum % itemsize;
-		}
-		if (equipsize)
-		{
-			if (selnum < 0)selnum += equipsize;
-			selnum = selnum % equipsize;
+			if (itemsize)
+			{
+				if (selnum > itemsize)selnum -= (itemsize / 3 + 1) * 3;
+				if (selnum >= itemsize)selnum -= 3;
+				if (selnum < 0)selnum += 3;
+			}
+			if (equipsize)
+			{
+				if (selnum > equipsize)selnum -= (equipsize / 3 + 1) * 3;
+				if (selnum > equipsize)selnum -= 3;
+				if (selnum < 0)selnum += 3;
+			}
 		}
 	}
 	if (KEYMANAGER->isOnceKeyDown('1'))
 	{
 		_Item->addItem("포션");
+		_Item->addItem("밀집모자");
 	}
 	if (KEYMANAGER->isOnceKeyDown('2'))
 	{
 		_Item->addItem("하이포션");
+		_Item->addItem("가죽갑옷");
 	}
 	if (KEYMANAGER->isOnceKeyDown('3'))
 	{
 		_Item->addItem("연막탄");
+		_Item->addItem("방패");
 	}
 	if (KEYMANAGER->isOnceKeyDown('4'))
 	{
 		_Item->addItem("에테르");
+		_Item->addItem("지팡이");
 	}
 	if (KEYMANAGER->isOnceKeyDown('5'))
 	{
 		_Item->addItem("메가포션");
+		_Item->addItem("후드");
 	}
 }
 
@@ -142,14 +175,26 @@ void itemMenu::render()
 	{
 		if (waitselnum)
 		{
-
+			for (int i = 0; i < equipsize; ++i)
+			{
+				IMAGEMANAGER->findImage("아이템버튼")->render(getMemDC(), 82 + (int)(i % 3) * 293, 163 + (int)(i / 3) * 79);
+				char str[128];
+				sprintf(str, "%s", _Item->vequipstring(i).c_str());
+				TextOut(getMemDC(), 160 + (int)(i % 3) * 293, 175 + (int)(i / 3) * 79, str, strlen(str));
+				sprintf(str, "%d", _Item->findItem(_Item->vequipstring(i)).count);
+				TextOut(getMemDC(), 300 + (int)(i % 3) * 293, 175 + (int)(i / 3) * 79, str, strlen(str));
+			}
 		}
 		else
 		{
 			for (int i = 0; i < itemsize; ++i)
 			{
 				IMAGEMANAGER->findImage("아이템버튼")->render(getMemDC(), 82 + (int)(i % 3) * 293, 163 + (int)(i / 3) * 79);
-
+				char str[128];
+				sprintf(str, "%s", _Item->vitemstring(i).c_str());
+				TextOut(getMemDC(), 160 + (int)(i % 3) * 293, 175 + (int)(i / 3) * 79, str, strlen(str));
+				sprintf(str, "%d", _Item->findItem(_Item->vitemstring(i)).count);
+				TextOut(getMemDC(), 300 + (int)(i % 3) * 293, 175 + (int)(i / 3) * 79, str, strlen(str));
 			}
 		}
 

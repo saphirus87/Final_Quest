@@ -207,11 +207,9 @@ void Item::release(void)
 
 tagItem Item::findItem(string strKey)
 {
-	mapItemIter iter = _mItemList.begin();
-
-	for (; iter != _mItemList.end();)
+	for (int i = 0; i <_mItemList.size(); ++i)
 	{
-		if (iter->second.name == strKey)return iter->second;
+		if (_mItemList[i].name == strKey)return _mItemList[i];
 	}
 	tagItem temp;
 	temp.name = "¾øÀ½";
