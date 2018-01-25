@@ -3,7 +3,7 @@
 #include <vector>
 #include "wolf.h"
 #include "knight.h"
-#include "mammos.h"
+#include "mammos.h"//
 class enemyManager : public gameNode
 {
 private:

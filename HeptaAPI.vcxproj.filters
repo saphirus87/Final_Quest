@@ -296,11 +296,11 @@
     <ClCompile Include="gameStartScene.cpp">
       <Filter>playGround\Scene\startScene</Filter>
     </ClCompile>
-    <ClCompile Include="Item.cpp">
-      <Filter>playGround\item</Filter>
-    </ClCompile>
     <ClCompile Include="playGround+SoundAdd.cpp">
       <Filter>playGround</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>playGround\item</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
