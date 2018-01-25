@@ -66,17 +66,20 @@ void gameStartScene::render()
 
 void gameStartScene::keyControl()
 {
-	if (KEYMANAGER->isOnceKeyDown(VK_UP))
+	if (_alpha == 255)
 	{
-		if (_cursorMenuNum == 1) _cursorMenuNum = 3;
-		else if (_cursorMenuNum == 2) _cursorMenuNum = 1;
-		else if (_cursorMenuNum == 3) _cursorMenuNum = 2;
-	}
-	if (KEYMANAGER->isOnceKeyDown(VK_DOWN))
-	{
-		if (_cursorMenuNum == 1) _cursorMenuNum = 2;
-		else if (_cursorMenuNum == 2) _cursorMenuNum = 3;
-		else if (_cursorMenuNum == 3) _cursorMenuNum = 1;
+		if (KEYMANAGER->isOnceKeyDown(VK_UP))
+		{
+			if (_cursorMenuNum == 1) _cursorMenuNum = 3;
+			else if (_cursorMenuNum == 2) _cursorMenuNum = 1;
+			else if (_cursorMenuNum == 3) _cursorMenuNum = 2;
+		}
+		if (KEYMANAGER->isOnceKeyDown(VK_DOWN))
+		{
+			if (_cursorMenuNum == 1) _cursorMenuNum = 2;
+			else if (_cursorMenuNum == 2) _cursorMenuNum = 3;
+			else if (_cursorMenuNum == 3) _cursorMenuNum = 1;
+		}
 	}
 
 	if (KEYMANAGER->isOnceKeyDown(VK_RETURN))
@@ -87,6 +90,10 @@ void gameStartScene::keyControl()
 			{
 				_isStart = false;
 			}
+		}
+		else if (_cursorMenuNum == 2)
+		{
+			SCENEMANAGER->changeScene("세이브로드메뉴씬");
 		}
 		else if (_cursorMenuNum == 3)
 		{

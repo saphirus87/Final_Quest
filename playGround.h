@@ -10,6 +10,7 @@
 #include "saveLoadMenu.h"
 #include "abilitiesMenu.h"
 #include "configMenu.h"
+#include "equipMenu.h"
 
 class playGround : public gameNode
 {

@@ -27,6 +27,7 @@ HRESULT playGround::init()
 	SCENEMANAGER->addScene("세이브로드메뉴씬", new saveLoadMenu);
 	SCENEMANAGER->addScene("스킬메뉴씬", new abilitiesMenu);
 	SCENEMANAGER->addScene("옵션씬", new configMenu);
+	SCENEMANAGER->addScene("장비메뉴씬", new equipMenu);
 	SCENEMANAGER->addScene("fieldScene", new fieldScene);
 	SCENEMANAGER->addScene("battleScene", new battleScene);
 	
@@ -59,7 +60,7 @@ void playGround::render(void)
 	
 	SCENEMANAGER->render();
 
-	//SetTextColor(getMemDC(), RGB(255, 255, 255));
+	SetTextColor(getMemDC(), RGB(255, 0, 0));
 	TIMEMANAGER->render(getMemDC());
 
 	//================== 이 아래는 손대지 마시오 ========================

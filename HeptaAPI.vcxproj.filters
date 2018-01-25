@@ -73,9 +73,6 @@
     <Filter Include="playGround\player">
       <UniqueIdentifier>{6be0fe1b-30bc-4a83-8d16-624cc10841df}</UniqueIdentifier>
     </Filter>
-    <Filter Include="playGround\enemy">
-      <UniqueIdentifier>{0b7ba3fa-e465-44ff-82ae-47fc0dadda77}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -210,20 +207,8 @@
     <ClInclude Include="configMenu.h">
       <Filter>playGround\Scene\MenuScene</Filter>
     </ClInclude>
-    <ClInclude Include="Boss.h">
-      <Filter>playGround\enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="enemy.h">
-      <Filter>playGround\enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="knight.h">
-      <Filter>playGround\enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="mammos.h">
-      <Filter>playGround\enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="wolf.h">
-      <Filter>playGround\enemy</Filter>
+    <ClInclude Include="equipMenu.h">
+      <Filter>playGround\Scene\MenuScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -347,20 +332,8 @@
     <ClCompile Include="configMenu.cpp">
       <Filter>playGround\Scene\MenuScene</Filter>
     </ClCompile>
-    <ClCompile Include="Boss.cpp">
-      <Filter>playGround\enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="enemy.cpp">
-      <Filter>playGround\enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="knight.cpp">
-      <Filter>playGround\enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="mammos.cpp">
-      <Filter>playGround\enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="wolf.cpp">
-      <Filter>playGround\enemy</Filter>
+    <ClCompile Include="equipMenu.cpp">
+      <Filter>playGround\Scene\MenuScene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

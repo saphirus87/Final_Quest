@@ -126,11 +126,11 @@ void gameMenuScene::keyControl()
 		}
 		else if (_cursorMenuNum == 3)
 		{
-			PostQuitMessage(0);
+			SCENEMANAGER->changeScene("장비메뉴씬");
 		}
 		else if (_cursorMenuNum == 4)
 		{
-			PostQuitMessage(0);
+			SCENEMANAGER->changeScene("스테이터스메뉴씬");
 		}
 		else if (_cursorMenuNum == 5)
 		{
