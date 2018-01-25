@@ -24,7 +24,7 @@ mp		_maxMp   /  _curruntMp
 
 경험치		_exp
 최대경험치	_maxExp
-현재경험치 	_currentExp
+현재경험치 	_curruntExp
 사망유무	_isDead
 골드		_gold
 드랍골드	_minGold / _maxGold

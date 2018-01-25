@@ -7,14 +7,36 @@ enum SKILL
 	SECOND_SKILL,
 	LAST_SKILL
 };
+enum MOVEDIR
+{
+	PLAYER_DOWN,
+	PLAYER_UP,
+	PLAYER_LEFT,
+	PLAYER_RIGHT
+};
+enum BATTLE
+{
+	ATTACK,
+	ITEM,
+	MAGIC,
+	DEFFENCE,
+	RUN
+};
+
+
 
 class player : public gameNode
 {
 protected:
-	image * img;
+	image * _img;
 	int _level;
 	int _str, _int;				// 힘, 지력
-	float _startTime, _endTime; // 속도 타이머
+	float _startTime, _endTime; // 속도 타이머 _startTime = 시작시간 / _endTime = 끝나는 시간  
+								// _startTime 가 0.1씩 올라 _endTime 과 같으면 행동 실행 (예정)<------	
+
+	int _x, _y;					// 플레이어 x,y 좌표
+	int _frameX, _frameY;
+						
 	int _maxHp, _curruntHp;		// 체력
 	int _maxMp, _curruntMp;		// 마나
 	int _mp;					// 소비마나
@@ -25,9 +47,17 @@ protected:
 	int _gold;					// 골드
 	int _exp;					// 경험치
 	int _maxExp;				// 최대경험치
-	int _currentExp;			// 현재경험치
+	int _curruntExp;			// 현재경험치
 	bool _isDead;				// 사망유무 true = 생존 , false 죽음
-	SKILL _skill;
+	bool _isAttack;				// 공격 유무 true = 공격 가능, false 공격 불가능 
+
+	MOVEDIR _dir;				// 상하좌우 판단
+	SKILL _skill;				// 스킬 종류
+	BATTLE _battle;				// 전투시 행동
+
+	int _count;
+
+
 
 public:
 	player();
@@ -37,9 +67,14 @@ public:
 	HRESULT init();
 	void release();
 	void update();
-	void render();
+	void render(HDC hdc);
+
+	void attack();
 
 
+
+
+	// getset 부분
 	void setLevel(int Level) { _level = Level ; }
 	int getLevel(void) { return _level; }
 
@@ -92,11 +127,13 @@ public:
 	void setMaxExp(int MaxExp) { _maxExp = MaxExp; }
 	int getMaxExp(void) { return _maxExp; }
 
-	void setCurrentExp(int CurrentExp) { _currentExp = CurrentExp; }
-	int getCurrentExp(void) { return _currentExp; }
+	void setCurrentExp(int CurrentExp) { _curruntExp = CurrentExp; }
+	int getCurrentExp(void) { return _curruntExp; }
 
 	void setIsDead(bool IsDead) { _isDead = IsDead; }
 	bool getIsDead(void) { return _isDead; }
 
+	void setIsAttack(bool IsAttack) { _isAttack = IsAttack; }
+	bool getIsAttack(void) { return _isAttack; }
 };
 

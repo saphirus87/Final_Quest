@@ -1,14 +1,12 @@
 #pragma once
 #include "player.h"
-class player1 : public player
+class player2 : public player
 {
 private:
 
-
 public:
-	player1();
-	~player1();
-
+	player2();
+	~player2();
 
 	HRESULT init();
 	void release();

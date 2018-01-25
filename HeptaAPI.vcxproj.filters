@@ -210,6 +210,12 @@
     <ClInclude Include="equipMenu.h">
       <Filter>playGround\Scene\MenuScene</Filter>
     </ClInclude>
+    <ClInclude Include="player2.h">
+      <Filter>playGround\player</Filter>
+    </ClInclude>
+    <ClInclude Include="player3.h">
+      <Filter>playGround\player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -334,6 +340,12 @@
     </ClCompile>
     <ClCompile Include="equipMenu.cpp">
       <Filter>playGround\Scene\MenuScene</Filter>
+    </ClCompile>
+    <ClCompile Include="player2.cpp">
+      <Filter>playGround\player</Filter>
+    </ClCompile>
+    <ClCompile Include="player3.cpp">
+      <Filter>playGround\player</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

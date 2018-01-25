@@ -169,6 +169,8 @@
     <ClInclude Include="keyManager.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="player1.h" />
+    <ClInclude Include="player2.h" />
+    <ClInclude Include="player3.h" />
     <ClInclude Include="playerManager.h" />
     <ClInclude Include="playGround.h" />
     <ClInclude Include="progressBar.h" />
@@ -214,6 +216,8 @@
     <ClCompile Include="keyManager.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="player1.cpp" />
+    <ClCompile Include="player2.cpp" />
+    <ClCompile Include="player3.cpp" />
     <ClCompile Include="playerManager.cpp" />
     <ClCompile Include="playGround.cpp" />
     <ClCompile Include="progressBar.cpp" />
