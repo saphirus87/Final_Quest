@@ -48,6 +48,8 @@ void playGround::update(void)
 {
 	gameNode::update();
 
+	if (KEYMANAGER->isOnceKeyDown(VK_F1)) _isDebug = !_isDebug;
+
 	SCENEMANAGER->update();
 
 }
@@ -61,7 +63,7 @@ void playGround::render(void)
 	SCENEMANAGER->render();
 
 	SetTextColor(getMemDC(), RGB(255, 0, 0));
-	TIMEMANAGER->render(getMemDC());
+	if (_isDebug) TIMEMANAGER->render(getMemDC());
 
 	//================== 이 아래는 손대지 마시오 ========================
 	this->getBackBuffer()->render(getHDC(), 0, 0);//hdc영역에 그려준다 

@@ -3,8 +3,8 @@
 
 #define CAMERA_MOVE_SPEED 5.0f
 #define PLAYER_MOVE_SPEED 4.0f
-#define PLAYER_WIDTH 48
-#define PLAYER_HEIGHT 48
+#define PLAYER_WIDTH 28
+#define PLAYER_HEIGHT 46
 
 #define ENCOUNT_MAX_VALUE 8000
 #define ENCOUNT_VALUE RND->getFromIntTo(5, 10)
@@ -56,8 +56,8 @@ public:
 	
 	void playerKeyInput(void);
 	void playerMove(void);
+	void playerPixelCollision(void);
 	
-
 	void increasedEncount(void);
 };
 

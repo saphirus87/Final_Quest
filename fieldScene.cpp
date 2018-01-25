@@ -16,7 +16,7 @@ HRESULT fieldScene::init(void)
 	//============================= 월드맵 이미지 추가 =============================
 	IMAGEMANAGER->addImage("worldMap", ".//mapImage//worldMap.bmp", 4608, 4608, true, RGB(255, 0, 255));				// 월드맵 추가
 	IMAGEMANAGER->addImage("worldMapSea", ".//mapImage//sea.bmp", 4608, 4608, true, RGB(255, 0, 255));					// 월드맵 바다 이미지
-	IMAGEMANAGER->addImage("worldMapCollision", ".//mapImage//worldMapCollision", 4608, 4608, true, RGB(255, 0, 255));	// 월드맵 충돌 영역
+	IMAGEMANAGER->addImage("worldMapCollision", ".//mapImage//worldMapCollision.bmp", 4608, 4608, true, RGB(255, 0, 255));	// 월드맵 충돌 영역
 	//============================= 월드맵 이미지 추가 =============================
 
 
@@ -56,8 +56,8 @@ HRESULT fieldScene::init(void)
 	//==================== 월드맵 사용 변수 초기화 ====================
 
 	//==================== 테스트 변수 ====================
-	_x = 100;
-	_y = 100;
+	_x = 550;
+	_y = 250;
 	_playerRc = RectMake(_x, _y, PLAYER_WIDTH, PLAYER_HEIGHT);
 	_mapMoveX = _mapMoveY = 0;
 	//==================== 테스트 변수 ====================
@@ -75,18 +75,7 @@ void fieldScene::release(void)
 
 void fieldScene::update(void)
 {
-	//디버그 모드시 좌표 이동
-	if (_isDebug)
-	{
-		if (KEYMANAGER->isStayKeyDown(VK_LEFT)) _moveX -= CAMERA_MOVE_SPEED;
-		if (KEYMANAGER->isStayKeyDown(VK_RIGHT)) _moveX += CAMERA_MOVE_SPEED;
-		if (KEYMANAGER->isStayKeyDown(VK_UP)) _moveY -= CAMERA_MOVE_SPEED;
-		if (KEYMANAGER->isStayKeyDown(VK_DOWN)) _moveY += CAMERA_MOVE_SPEED;
-	}
-	else
-	{
-		playerMove();
-	}
+	playerMove();
 
 	//메뉴 호출
 	if (KEYMANAGER->isOnceKeyDown(VK_ESCAPE))
@@ -99,75 +88,12 @@ void fieldScene::update(void)
 
 void fieldScene::render(void)
 {
-	if (_isDebug)
-	{
-		IMAGEMANAGER->render("worldMapSea", getMemDC(), 0, 0, _moveX, _moveY, WINSIZEX, WINSIZEY);
-		IMAGEMANAGER->render("worldMap", getMemDC(), 0, 0, _moveX, _moveY, WINSIZEX, WINSIZEY);
-	}
-	else
-	{
-		IMAGEMANAGER->render("worldMapSea", getMemDC(), 0, 0, _mapMoveX, _mapMoveY, WINSIZEX, WINSIZEY);
-		IMAGEMANAGER->render("worldMap", getMemDC(), 0, 0, _mapMoveX, _mapMoveY, WINSIZEX, WINSIZEY);
-	}
-	
-	_playerImg->aniRender(getMemDC(), _playerRc.left, _playerRc.top, _playerAni);
+
+	IMAGEMANAGER->render("worldMapSea", getMemDC(), 0, 0, _mapMoveX, _mapMoveY, WINSIZEX, WINSIZEY);
+	IMAGEMANAGER->render("worldMap", getMemDC(), 0, 0, _mapMoveX, _mapMoveY, WINSIZEX, WINSIZEY);
+
 	if (_isDebug) Rectangle(getMemDC(), _playerRc.left, _playerRc.top, _playerRc.right, _playerRc.bottom);
-}
-
-void fieldScene::playerMove(void)
-{
-	// 플레이어 방향키 입력
-	playerKeyInput();
-	
-	// 플레이어 이동시 encount 값 증가
-	if (_playerState & PLAYER_MOVE) increasedEncount();
-
-	// 플레이어 상태에 따른 좌표 변경
-	switch (_playerState)
-	{
-	case PLAYER_IDLE | PLAYER_LEFT:
-		break;
-	case PLAYER_IDLE | PLAYER_RIGHT:
-		break;
-	case PLAYER_IDLE | PLAYER_TOP:
-		break;
-	case PLAYER_IDLE | PLAYER_BOTTOM:
-		break;
-	case PLAYER_MOVE | PLAYER_LEFT:
-		_x -= PLAYER_MOVE_SPEED;
-		break;
-	case PLAYER_MOVE | PLAYER_RIGHT:
-		_x += PLAYER_MOVE_SPEED;
-		break;
-	case PLAYER_MOVE | PLAYER_TOP:
-		_y -= PLAYER_MOVE_SPEED;
-		break;
-	case PLAYER_MOVE | PLAYER_BOTTOM:
-		_y += PLAYER_MOVE_SPEED;
-		break;
-	default:
-		break;
-	}
-
-	// 플레이어 좌표에 따라 렉트 생성
-	_playerRc = RectMake(_x, _y, PLAYER_WIDTH, PLAYER_HEIGHT);
-
-	// 카메라 효과를 위해 플레이어 좌표 이동시 플레이어 렉트와 맵 랜더 좌표 변경
-	if (_x > WINSIZEX / 2 - PLAYER_WIDTH / 2 && _x < IMAGEMANAGER->findImage("worldMap")->getWidth() - WINSIZEX / 2 - PLAYER_WIDTH / 2)
-	{
-		_playerRc.left = WINSIZEX / 2 - PLAYER_WIDTH / 2;
-		_playerRc.right = _playerRc.left + PLAYER_WIDTH;
-		_mapMoveX = _x - _playerRc.left;
-	}
-	if (_y > WINSIZEY / 2 - PLAYER_HEIGHT / 2 && _y < IMAGEMANAGER->findImage("worldMap")->getHeight() - WINSIZEY / 2 - PLAYER_HEIGHT / 2)
-	{
-		_playerRc.top = WINSIZEY / 2 - PLAYER_HEIGHT / 2;
-		_playerRc.bottom = _playerRc.top + PLAYER_HEIGHT;
-		_mapMoveY = _y - _playerRc.top;
-	}
-
-	if (_mapMoveX < 0) _mapMoveX = 0;
-	if (_mapMoveY < 0) _mapMoveY = 0;
+	_playerImg->aniRender(getMemDC(), _playerRc.left, _playerRc.top, _playerAni);
 }
 
 void fieldScene::playerKeyInput(void)
@@ -184,7 +110,7 @@ void fieldScene::playerKeyInput(void)
 		_playerAni = KEYANIMANAGER->findAnimation("playerLeftIdle");
 		_playerAni->start();
 	}
-	
+
 	if (KEYMANAGER->isOnceKeyDown(VK_RIGHT))
 	{
 		_playerState = PLAYER_MOVE | PLAYER_RIGHT;
@@ -222,6 +148,96 @@ void fieldScene::playerKeyInput(void)
 		_playerState = PLAYER_IDLE | PLAYER_BOTTOM;
 		_playerAni = KEYANIMANAGER->findAnimation("playerBottomIdle");
 		_playerAni->start();
+	}
+}
+
+void fieldScene::playerMove(void)
+{
+	// 플레이어 방향키 입력
+	playerKeyInput();
+	
+	// 플레이어 이동시 encount 값 증가
+	if (_playerState & PLAYER_MOVE) increasedEncount();
+
+	// 플레이어 상태에 따른 좌표 변경
+	switch (_playerState)
+	{
+	case PLAYER_IDLE | PLAYER_LEFT:
+		break;
+	case PLAYER_IDLE | PLAYER_RIGHT:
+		break;
+	case PLAYER_IDLE | PLAYER_TOP:
+		break;
+	case PLAYER_IDLE | PLAYER_BOTTOM:
+		break;
+	case PLAYER_MOVE | PLAYER_LEFT:
+		_x -= PLAYER_MOVE_SPEED;
+		playerPixelCollision();
+		break;
+	case PLAYER_MOVE | PLAYER_RIGHT:
+		_x += PLAYER_MOVE_SPEED;
+		playerPixelCollision();
+		break;
+	case PLAYER_MOVE | PLAYER_TOP:
+		_y -= PLAYER_MOVE_SPEED;
+		playerPixelCollision();
+		break;
+	case PLAYER_MOVE | PLAYER_BOTTOM:
+		_y += PLAYER_MOVE_SPEED;
+		playerPixelCollision();
+		break;
+	default:
+		break;
+	}
+
+	// 플레이어 좌표에 따라 렉트 생성
+	_playerRc = RectMake(_x, _y, PLAYER_WIDTH, PLAYER_HEIGHT);
+
+	// 카메라 효과를 위해 플레이어 좌표 이동시 플레이어 렉트와 맵 랜더 좌표 변경
+	if (_x > WINSIZEX / 2 - PLAYER_WIDTH / 2 && _x < IMAGEMANAGER->findImage("worldMap")->getWidth() - WINSIZEX / 2 - PLAYER_WIDTH / 2)
+	{
+		_playerRc.left = WINSIZEX / 2 - PLAYER_WIDTH / 2;
+		_playerRc.right = _playerRc.left + PLAYER_WIDTH;
+		_mapMoveX = _x - _playerRc.left;
+	}
+	if (_y > WINSIZEY / 2 - PLAYER_HEIGHT / 2 && _y < IMAGEMANAGER->findImage("worldMap")->getHeight() - WINSIZEY / 2 - PLAYER_HEIGHT / 2)
+	{
+		_playerRc.top = WINSIZEY / 2 - PLAYER_HEIGHT / 2;
+		_playerRc.bottom = _playerRc.top + PLAYER_HEIGHT;
+		_mapMoveY = _y - _playerRc.top;
+	}
+
+	if (_mapMoveX < 0) _mapMoveX = 0;
+	if (_mapMoveY < 0) _mapMoveY = 0;
+}
+
+void fieldScene::playerPixelCollision(void)
+{
+	// leftTop 좌표 getPixel
+	COLORREF leftTopProbe = GetPixel(IMAGEMANAGER->findImage("worldMapCollision")->getMemDC(), _x + 3, _y + 3);
+	// rightTop 좌표 getPixel
+	COLORREF rightTopProbe = GetPixel(IMAGEMANAGER->findImage("worldMapCollision")->getMemDC(), _x + PLAYER_WIDTH - 3, _y + 3);
+	// leftBottom 좌표 getPixel
+	COLORREF leftBottomProbe = GetPixel(IMAGEMANAGER->findImage("worldMapCollision")->getMemDC(), _x + 3, _y + PLAYER_HEIGHT - 3);
+	// rightBottom 좌표 getPixel
+	COLORREF rightBottomProbe = GetPixel(IMAGEMANAGER->findImage("worldMapCollision")->getMemDC(), _x + PLAYER_WIDTH - 3, _y + PLAYER_HEIGHT - 3);
+
+	switch (_playerState)
+	{
+	case PLAYER_MOVE | PLAYER_LEFT:
+		if (leftTopProbe == RGB(255, 0, 255) || leftBottomProbe == RGB(255, 0, 255)) _x += PLAYER_MOVE_SPEED;
+		break;
+	case PLAYER_MOVE | PLAYER_RIGHT:
+		if (rightTopProbe == RGB(255, 0, 255) || rightBottomProbe == RGB(255, 0, 255)) _x -= PLAYER_MOVE_SPEED;
+		break;
+	case PLAYER_MOVE | PLAYER_TOP:
+		if (leftTopProbe == RGB(255, 0, 255) || rightTopProbe == RGB(255, 0, 255)) _y += PLAYER_MOVE_SPEED;
+		break;
+	case PLAYER_MOVE | PLAYER_BOTTOM:
+		if (leftBottomProbe == RGB(255, 0, 255) || rightBottomProbe == RGB(255, 0, 255)) _y -= PLAYER_MOVE_SPEED;
+		break;
+	default:
+		break;
 	}
 }
 
