@@ -28,7 +28,7 @@ void enemyManager::update()
 	}
 }
 
-void enemyManager::render()
+void enemyManager::render(HDC hdc)
 {
 	for (vienemy = venemy.begin(); vienemy != venemy.end(); vienemy++)
 	{
@@ -67,4 +67,13 @@ void enemyManager::set_mammos()
 	_mammos->init();
 
 	venemy.push_back(_mammos);
+}
+
+void enemyManager::set_boss()
+{
+	enemy* _boss;
+	_boss = new Boss;
+	_boss->init();
+
+	venemy.push_back(_boss);
 }

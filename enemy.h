@@ -5,17 +5,20 @@ enum STATE
 	LIFE,
 	DIE
 };
-enum ATTACK_SKILL
+enum ATTACK_STATE
 {
 	ATTACK,
-	SKILL,
+	SKILL, //º¸½º¸¸
+	DEFENSE,
 	NONE
 };
 class enemy : public gameNode
 {
 protected:
+
+	int frameCount, count;
 	STATE state;
-	ATTACK_SKILL attack_skill;
+	ATTACK_STATE attack_state;
 	image* img;
 	int _str, _int;
 	float _startTime, _endTime;
@@ -43,9 +46,11 @@ public:
 	enemy();
 	~enemy();
 
-	HRESULT init();
-	void release();
-	void update();
-	void render();
+	virtual HRESULT init();
+	virtual void release();
+	virtual void update();
+	virtual void render();
+	virtual void Attack();
+	virtual void enemySound();
 };
 

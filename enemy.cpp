@@ -15,8 +15,9 @@ enemy::~enemy()
 HRESULT enemy::init()
 {
 	state = LIFE;
-	attack_skill = NONE;
+	attack_state = NONE;
 	_alpha = 255;
+	frameCount = count = 0;
 	return S_OK;
 }
 
@@ -26,10 +27,27 @@ void enemy::release()
 
 void enemy::update()
 {
+	count++;
+	Attack();
+
+	//hp0되면 죽어라
+	if (_curruntHp <= 0)
+	{
+		state = DIE;
+		_alpha--;
+	}
+}
+
+void enemy::render()
+{
+}
+
+void enemy::Attack()
+{
 	if (state == LIFE)
 	{
 		//타임 셋팅부분
-		if (_startTime >= endTime)
+		if (_startTime >= _endTime)
 		{
 			_startTime = 0;
 			isAttack = true;
@@ -39,30 +57,16 @@ void enemy::update()
 
 		else if (isAttack)
 		{
-			_attack = RND->getFromIntTo(0, 4);
-			if (_curruntMp>=20 _attack = 0)
-			{
-				//스킬공격
-				attack_skill = SKILL;
-				_curruntMp -= 20;
-				isAttack = false;
-			}
-			else
-			{
-				//일반공격
-				attack_skill = ATTACK;
-				isAttack = false;
-				//떄리는소리 사운드매니저로
-			}
+			//일반공격
+			attack_state = ATTACK;
+			enemySound();
+			isAttack = false;
+			//사운드s
 		}
-	}
-	if (state==LIFE&&_curruntHp <= 0;)
-	{
-		state = DIE;
-		_alpha--;
 	}
 }
 
-void enemy::render()
+void enemy::enemySound()
 {
+	SOUNDMANAGER->play("70.basic", 1.0f);
 }

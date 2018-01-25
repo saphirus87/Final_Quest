@@ -4,6 +4,7 @@
 #include "wolf.h"
 #include "knight.h"
 #include "mammos.h"//
+#include "boss.h"
 class enemyManager : public gameNode
 {
 private:
@@ -21,11 +22,11 @@ public:
 	HRESULT init();
 	void release();
 	void update();
-	void render();
+	void render(HDC hdc);
 
-	void enemy_image_init();
 	void set_wolf();
 	void set_knight();
 	void set_mammos();
+	void set_boss();
 };
 
