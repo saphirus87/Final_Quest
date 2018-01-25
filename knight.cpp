@@ -17,7 +17,9 @@ HRESULT knight::init()
 	isAttack = false;
 	_startTime = 0.0f;
 	_endTime = 5.0f;
-	img = IMAGEMANAGER->addImage("knight", "enemyimages/knight.bmp", 32, 48, true, RGB(255, 0, 255));
+	img = IMAGEMANAGER->addImage("knight", "enemyimages/knight.bmp", 92, 122, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("knight_hit", "enemyimages/knight_hit.bmp", 96, 120, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("knight_die", "enemyimages/knight_die.bmp", 96, 120, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("knight_attack", "enemyimages/attack.bmp", 370, 19, 2, 1, true, RGB(25, 0, 255));
 	_curruntHp = _maxHp = 50;
 	_curruntMp = _maxMp = 50;
@@ -69,7 +71,21 @@ void knight::update()
 
 void knight::render(HDC hdc)
 {
-	img->alphaRender(getMemDC(), 200,300, _alpha);
+	switch (state)
+	{
+	case LIFE_NONE:
+		img->alphaRender(hdc, 200, 300, _alpha);
+		break;
+	case HIT:
+		IMAGEMANAGER->findImage("knight_hit")->render(hdc, 200, 300);
+		break;
+	case DIE:
+		IMAGEMANAGER->findImage("knight_die")->alphaRender(hdc, 200, 300, _alpha);
+		break;
+	default:
+		break;
+	}
+	
 
 	if (attack_state == ATTACK)
 		IMAGEMANAGER->findImage("attack")->frameRender(hdc, 200, 500,

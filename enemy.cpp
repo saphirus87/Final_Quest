@@ -14,7 +14,7 @@ enemy::~enemy()
 
 HRESULT enemy::init()
 {
-	state = LIFE;
+	state = LIFE_NONE;
 	attack_state = NONE;
 	_alpha = 255;
 	frameCount = count = 0;
@@ -44,7 +44,7 @@ void enemy::render()
 
 void enemy::Attack()
 {
-	if (state == LIFE)
+	if (state == LIFE_NONE)
 	{
 		//타임 셋팅부분
 		if (_startTime >= _endTime)

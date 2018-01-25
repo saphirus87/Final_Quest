@@ -17,7 +17,7 @@ HRESULT Boss::init()
 	boss_StartTime = 0.08;
 	img = IMAGEMANAGER->addImage("head","boss_head.bmp" ,42, 36, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("body", "boss_body.bmp", 67, 65, true, RGB(255, 0, 255));
-	isReflex = false; //디펜스모드일때 반사하는값
+	isReflex = false; //디펜스모드일때 트루됨
 	isAttack = false;
 	_startTime = 0.0f;
 	_endTime = 5.0f;
@@ -64,7 +64,7 @@ void Boss::update()
 }
 
 void Boss::render(HDC hdc)
-{
+{//보통상태일때
 	IMAGEMANAGER->findImage("body")->alphaRender(hdc, 200, 300, _alpha); //바디알파 일단보류
 	img->alphaRender(getMemDC(), 200, 500, _alpha);
 }
@@ -73,7 +73,7 @@ void Boss::render(HDC hdc)
 
 void Boss::bossAttack()
 {
-	if (state == LIFE)
+	if (state == LIFE_NONE)
 	{
 		//타임 셋팅부분
 		if (_startTime >= _endTime)

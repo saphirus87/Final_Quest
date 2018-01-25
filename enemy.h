@@ -2,7 +2,8 @@
 #include "gameNode.h"
 enum STATE
 {
-	LIFE,
+	LIFE_NONE,
+	HIT,
 	DIE
 };
 enum ATTACK_STATE

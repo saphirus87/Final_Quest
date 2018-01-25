@@ -14,7 +14,10 @@ mammos::~mammos()
 HRESULT mammos::init()
 {
 	enemy::init();
-	img = IMAGEMANAGER->addImage("mammos", "enemyimages/mammos.bmp", 63, 48, true, RGB(255, 0, 255));
+	img = IMAGEMANAGER->addImage("mammos", "enemyimages/mammos.bmp", 173, 114, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("mammos_hit", "enemyimages/mammos_hit.bmp", 173, 114, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("mammos_die", "enemyimages/mammos_die.bmp", 173, 114, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("wolf_attack", "enemyimages/mammos_attack.bmp", 600, 134, 3, 1, true, RGB(255, 0, 255));
 	isAttack = false;
 	_startTime = 0.0f;
 	_endTime = 5.0f;
@@ -54,12 +57,12 @@ void mammos::update()
 	if (attack_state == ATTACK)
 	{
 		frameCount++;
-		if (frameCount >= IMAGEMANAGER->findImage("attack")->getMaxFrameX())
+		if (frameCount >= IMAGEMANAGER->findImage("mammos_attack")->getMaxFrameX())
 		{
 			frameCount = 0;
 			attack_state = NONE;
 		}
-		IMAGEMANAGER->findImage("attack")->setFrameX(frameCount);
+		IMAGEMANAGER->findImage("mammos_attack")->setFrameX(frameCount);
 	}
 
 
@@ -68,5 +71,24 @@ void mammos::update()
 
 void mammos::render(HDC hdc)
 {
-	img->alphaRender(getMemDC(), 200, 300,_alpha);
+	switch (state)
+	{
+	case LIFE_NONE:
+		img->render(hdc, 200, 300);
+		break;
+	case HIT:
+		IMAGEMANAGER->findImage("mammos_hit")->render(hdc, 200, 300);
+		break;
+	case DIE:
+		IMAGEMANAGER->findImage("mammos_hit")->alphaRender(hdc, 200, 300, _alpha);
+		break;
+	default:
+		break;
+	}
+
+	if (attack_state == ATTACK)
+		IMAGEMANAGER->findImage("wolf_attack")->frameRender(hdc, 500, 500,
+			IMAGEMANAGER->findImage("wolf_attack")->getFrameX(),
+			IMAGEMANAGER->findImage("wolf_attack")->getFrameY());
+
 }

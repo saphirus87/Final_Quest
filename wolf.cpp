@@ -17,7 +17,9 @@ HRESULT wolf::init()
 	isAttack = false;
 	_startTime = 0.0f;
 	_endTime = 5.0f;
-	img = IMAGEMANAGER->addImage("wolf", "enemyimages/wolf.bmp", 48, 48, true, RGB(255, 0, 255));
+	img = IMAGEMANAGER->addImage("wolf", "enemyimages/wolf.bmp", 144, 116, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("wolf_die", "enemyimages/wolf_die.bmp", 144, 116, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("wolf_hit", "enemyimages/wolf_hit.bmp", 144, 116, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("wolf_attack", "enemyimages/wolf_attack.bmp", 600, 134, 3, 1, true, RGB(255, 0, 255));
 	_curruntHp = _maxHp = 45;
 	_curruntMp = _maxMp = 45;
@@ -69,9 +71,24 @@ void wolf::update()
 
 void wolf::render(HDC hdc)
 {
-	img->alphaRender(getMemDC(), 200, 500,_alpha);
+	switch (state)
+	{
+	case LIFE_NONE:
+		img->alphaRender(hdc, 200, 500, _alpha);
+		break;
+	case HIT:
+		IMAGEMANAGER->findImage("wolf_hit")->render(hdc, 200, 500);
+		break;
+	case DIE:
+		IMAGEMANAGER->findImage("wolf_hit")->alphaRender(hdc, 200, 500,_alpha);
+		break;
+	default:
+		break;
+	}
+
 	if (attack_state==ATTACK)
 		IMAGEMANAGER->findImage("wolf_attack")->frameRender(hdc, 500, 500,
 			IMAGEMANAGER->findImage("wolf_attack")->getFrameX(), 
 			IMAGEMANAGER->findImage("wolf_attack")->getFrameY());
+	
 }
