@@ -67,7 +67,7 @@ public:
 
 
 	// 1.0 maximum 0.0 ~ 1.0 -> 0 ~ 255
-	void play(string keyName, float volume = 1.0f);
+	void play(string keyName, float volume = 1.0f, bool isMusic = false);
 
 	void stop(string keyName);
 

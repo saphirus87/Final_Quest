@@ -57,9 +57,6 @@ HRESULT soundManager::init()
 	//BGM 노래 그룹
 	_system->createChannelGroup("channelMusic", &_musicGroup);
 
-	_masterGroup->addGroup(_effectGroup);
-	_masterGroup->addGroup(_musicGroup);
-
 	
 	_system->createSoundGroup("soundMusic", &_musicSound);
 	
@@ -143,8 +140,10 @@ void soundManager::addSound(string keyName, string soundName, bool bgm, bool loo
 }
 
 
-// 1.0 maximum 0.0 ~ 1.0 -> 0 ~ 255
-void soundManager::play(string keyName, float volume)
+
+
+//						키값,			볼륨			  BGM = ture,  Effect = false
+void soundManager::play(string keyName, float volume, bool isMusic)
 {
 	arrSoundsIter iter = _mTotalSounds.begin();
 	//배열 의 몇번째인지 세알리기위한 카운트 변수
@@ -153,11 +152,20 @@ void soundManager::play(string keyName, float volume)
 	{
 		if (keyName == iter->first)
 		{
-			_system->playSound(_sound[count],0, false, &_channel[count]);
+			_system->playSound(_sound[count], 0, false, &_channel[count]);
 			_channel[count]->setLoopPoints(0, FMOD_TIMEUNIT_MS, 0, FMOD_TIMEUNIT_MS);
 
 			_channel[count]->setVolume(volume);
-			
+
+			if (isMusic)
+			{
+				_channel[count]->setChannelGroup(_musicGroup);
+			}
+			else if (!isMusic)
+			{
+				_channel[count]->setChannelGroup(_effectGroup);
+			}
+
 			break;
 		}
 	}
