@@ -190,10 +190,6 @@ HRESULT Item::init(void)
 	accessary3.count = 0;
 	_mItemList.insert(make_pair(accessary3.code, accessary3));
 
-
-	_iteminventory = -1;
-	_equipinventory = 0;
-	
 	return S_OK;
 }
 
@@ -224,41 +220,42 @@ tagItem Item::findItem(string strKey)
 
 void Item::addItem(string strKey)
 {
-	mapItemIter iter = _mItemList.begin();
-
-	for (; iter != _mItemList.end();)
+	for (int i = 0; i <_mItemList.size();++i)
 	{
-		if (iter->second.name == strKey)++iter->second.count;
+		if (_mItemList[i].name == strKey)++_mItemList[i].count;
 	}
 }
 
 void Item::delItem(string strKey)
 {
-	mapItemIter iter = _mItemList.begin();
-
-	for (; iter != _mItemList.end();)
+	for (int i = 0; i <_mItemList.size(); ++i)
 	{
-		if (iter->second.name == strKey)--iter->second.count;
-		if (iter->second.count < 0)iter->second.count = 0;
+		if (_mItemList[i].name == strKey)--_mItemList[i].count;
+		if (_mItemList[i].count < 0)_mItemList[i].count = 0;
 	}
 }
 
-string Item::iteminventory()
+vector<string>* Item::iteminventory()
 {
-	++_iteminventory;
-	if (_mItemList[_iteminventory].count != 0 && _mItemList[_equipinventory].itemtype == TYPE_USE)
+	_iteminventory.clear();
+	for (int i = 0; i < _mItemList.size(); ++i)
 	{
-		return _mItemList[_iteminventory].name;
+		if (_mItemList[i].itemtype != TYPE_USE)continue;
+		if (_mItemList[i].count == 0)continue;
+		_iteminventory.push_back(_mItemList[i].name);
 	}
-	return NULL;
+	return &_iteminventory;
 }
 
-string Item::equipinventory()
+vector<string>* Item::equipinventory()
 {
-	for (; _mItemList[_equipinventory].itemtype == TYPE_USE;)++_equipinventory;
-	if (_mItemList[_equipinventory].count != 0)
+	_equipinventory.clear();
+	for (int i = 0; i < _mItemList.size(); ++i)
 	{
-		return _mItemList[_equipinventory].name;
+		if (_mItemList[i].itemtype == TYPE_USE)continue;
+		if (_mItemList[i].count == 0)continue;
+		_equipinventory.push_back(_mItemList[i].name);
 	}
-	return NULL;
+	return &_equipinventory;
 }
+

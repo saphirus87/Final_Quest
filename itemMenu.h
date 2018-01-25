@@ -1,11 +1,17 @@
 #pragma once
 #include "gameNode.h"
+#include "Item.h"
 
 class itemMenu : public gameNode
 {
 private:
-	image* _itemScene;
-
+	Item* _Item;
+	bool seltype;
+	int selnum;
+	int waitselnum;
+	int waitX, waitY;
+	int selX, selY;
+	int itemsize, equipsize;
 
 public:
 	HRESULT init();
@@ -15,5 +21,7 @@ public:
 
 	itemMenu();
 	~itemMenu();
+
+	Item* itempos() { return _Item; }
 };
 
