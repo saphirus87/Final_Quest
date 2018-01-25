@@ -1,17 +1,34 @@
+2018 / 01 / 25 
+
+최종수정자 : 황선호
+
 플레이어(적) 스탯
 
 
 ---통합 변수명--- (대소문자 구별부탁드립니다)
-힘		Str
-마력     	Int       ( I 대문자입니다)
-속도		setTime,endTime   
-hp		maxHp   /  curruntHp
-mp		maxMp   /  curruntMp
-공격력		Damage
-방어력		Def
-스킬 공격력 	m_Damage
-마법방어력      m_Def
+힘		_str
+마력     	_int       ( I 대문자입니다)
+속도		_startTime, _endTime   
+hp		_maxHp   /  _curruntHp
+mp		_maxMp   /  _curruntMp
+공격력		_damage
+방어력		_def
+스킬 공격력 	_m_Damage
+마법방어력      _m_Def
+최소공격력	_min
+최대공격력 	_max
+마력최소공격력	_m_min
+마력최대공격력 	_m_max
 
+
+
+경험치		_exp
+최대경험치	_maxExp
+현재경험치 	_currentExp
+사망유무	_isDead
+골드		_gold
+드랍골드	_minGold / _maxGold
+소모마나	_mp
 
 
 장비
@@ -29,6 +46,7 @@ mp		maxMp   /  curruntMp
 아이템
 방어
 도주
+
 *장비
 
 캐릭마다 렙업할때 올라가는 수치가 다 다름
@@ -48,6 +66,3 @@ mp		maxMp   /  curruntMp
 
 
 
-setTime 
-
-endTime
