@@ -61,7 +61,8 @@ void enemy::Attack()
 			//일반공격
 			attack_state = ATTACK;
 			isAttack = false;
-			//사운드s
+			//endAttack 함수사용 할껀대 그때  밑에 사운드 뺴기~~
+			SOUNDMANAGER->play("70.basic", 0.7f);
 		}
 	}
 }

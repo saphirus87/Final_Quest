@@ -16,15 +16,16 @@ HRESULT battleScene::init(void)
 
 	/////배틀씬 임시 이미지///
 	IMAGEMANAGER->addImage("battleBackground","mapImage/battleBackground.bmp", 1136, 640, true, RGB(255, 0, 255));
+	
 
 	em = new enemyManager;
-
+		
 	int rnd1 = RND->getFromIntTo(2, 3);
 
 	for (int i = 0; i < rnd1; i++)
 	{
 		int rnd2 = RND->getFromFloatTo(1, 4);
-	cout << rnd2 << endl;
+	//cout << rnd2 << endl;
 		int x, y;
 		if (i == 0)
 		{
@@ -61,13 +62,14 @@ HRESULT battleScene::init(void)
 
 void battleScene::release(void) 
 {
+
 }
 
 void battleScene::update(void)
 {
 	if (KEYMANAGER->isOnceKeyDown(VK_F10))
 	{
-		SCENEMANAGER->changeScene("fieldScene", false);
+		SCENEMANAGER->changeScene("fieldScene",false);
 	}
 	em->update();
 }
@@ -75,5 +77,6 @@ void battleScene::update(void)
 void battleScene::render(void)
 {
 	IMAGEMANAGER->findImage("battleBackground")->render(getMemDC(),0,0);
+
 	em->render();
 }

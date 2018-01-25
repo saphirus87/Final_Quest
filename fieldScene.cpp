@@ -149,6 +149,9 @@ void fieldScene::playerKeyInput(void)
 		_playerAni = KEYANIMANAGER->findAnimation("playerBottomIdle");
 		_playerAni->start();
 	}
+
+
+
 }
 
 void fieldScene::playerMove(void)
@@ -246,7 +249,8 @@ void fieldScene::increasedEncount(void)
 	if (_encount < ENCOUNT_MAX_VALUE) _encount += ENCOUNT_VALUE;
 	else if (_encount > ENCOUNT_MAX_VALUE)
 	{
-		SCENEMANAGER->changeScene("battleScene", FALSE);
+		//배틀씬에서 에너미 랜덤받아오게하려면 펄스빼야되서 일단뺏어요
+		SCENEMANAGER->changeScene("battleScene");
 		_encount = 0;
 	}
 }
