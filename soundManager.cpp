@@ -57,6 +57,9 @@ HRESULT soundManager::init()
 	//BGM 노래 그룹
 	_system->createChannelGroup("channelMusic", &_musicGroup);
 
+	_masterGroup->addGroup(_effectGroup);
+	_masterGroup->addGroup(_musicGroup);
+
 	
 	_system->createSoundGroup("soundMusic", &_musicSound);
 	
