@@ -21,7 +21,7 @@ HRESULT fieldScene::init(void)
 
 
 	//============================= 플레이어 이미지 애니메이션 추가 =============================
-	_playerImg = IMAGEMANAGER->addFrameImage("playerMove", ".//playerImage//playerMove.bmp", 84, 184, 3, 4, true, RGB(255, 0, 255));	// 플레이어 이동 이미지
+	_playerImg = IMAGEMANAGER->addFrameImage("playerMove", ".//playerImage//player1Move.bmp", 84, 184, 3, 4, true, RGB(255, 0, 255));	// 플레이어 이동 이미지
 
 	int arrLeftIdle[] = { 7 };
 	KEYANIMANAGER->addArrayFrameAnimation("playerLeftIdle", "playerMove", arrLeftIdle, 1, 10, true);
