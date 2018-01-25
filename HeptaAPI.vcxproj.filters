@@ -70,6 +70,9 @@
     <Filter Include="playGround\item">
       <UniqueIdentifier>{a811e2cc-23f2-42d9-8e68-88d269f6f857}</UniqueIdentifier>
     </Filter>
+    <Filter Include="playGround\player">
+      <UniqueIdentifier>{6be0fe1b-30bc-4a83-8d16-624cc10841df}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -192,6 +195,15 @@
     <ClInclude Include="Item.h">
       <Filter>playGround\item</Filter>
     </ClInclude>
+    <ClInclude Include="player.h">
+      <Filter>playGround\player</Filter>
+    </ClInclude>
+    <ClInclude Include="player1.h">
+      <Filter>playGround\player</Filter>
+    </ClInclude>
+    <ClInclude Include="playerManager.h">
+      <Filter>playGround\player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -301,6 +313,15 @@
     </ClCompile>
     <ClCompile Include="Item.cpp">
       <Filter>playGround\item</Filter>
+    </ClCompile>
+    <ClCompile Include="playerManager.cpp">
+      <Filter>playGround\player</Filter>
+    </ClCompile>
+    <ClCompile Include="player1.cpp">
+      <Filter>playGround\player</Filter>
+    </ClCompile>
+    <ClCompile Include="player.cpp">
+      <Filter>playGround\player</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
