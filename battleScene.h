@@ -10,6 +10,7 @@ class battleScene : public gameNode
 private:
 	vector<CALLBACK_FUNCTION> _vActionList;
 	enemyManager* em;
+
 public:
 	battleScene();
 	~battleScene();

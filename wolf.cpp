@@ -18,10 +18,19 @@ HRESULT wolf::init()
 	isAttack = false;
 	_startTime = 0.0f;
 	_endTime = 12.0f;
-	img = IMAGEMANAGER->addImage("wolf", "enemyimages/wolf.bmp", 144, 116, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("wolf_die", "enemyimages/wolf_die.bmp", 144, 116, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("wolf_hit", "enemyimages/wolf_hit.bmp", 144, 116, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("wolf_attack", "enemyimages/wolf_attack.bmp", 600, 134, 3, 1, true, RGB(255, 0, 255));
+
+	img = new image;
+	img->init("enemyimages/wolf.bmp", 144, 116, true, RGB(255, 0, 255));
+
+	img_hit = new image;
+	img_hit->init("enemyimages/wolf_hit.bmp", 144, 116, true, RGB(255, 0, 255));
+
+	img_die = new image;
+	img_die->init("enemyimages/wolf_die.bmp", 144, 116, true, RGB(255, 0, 255));
+
+	img_attack = new image;
+	img_attack->init("enemyimages/wolf_attack.bmp", 600, 134, 3, 1, true, RGB(255, 0, 255));
+
 	_curruntHp = _maxHp = 45;
 	_curruntMp = _maxMp = 45;
 	_str = _int = 4;
@@ -54,19 +63,18 @@ void wolf::release()
 void wolf::update()
 {
 	enemy::update();
-	cout << "울프" << endl;
 
 	if (attack_state == ATTACK)
 	{
 		if (count % 10 == 0)
 		{
 			frameCount++;
-			if (frameCount >= IMAGEMANAGER->findImage("wolf_attack")->getMaxFrameX())
+			if (frameCount >= img_attack->getMaxFrameX())
 			{
 				frameCount = 0;
 				attack_state = NONE;
 			}
-			IMAGEMANAGER->findImage("wolf_attack")->setFrameX(frameCount);
+			img_attack->setFrameX(frameCount);
 		}
 	}
 
@@ -78,21 +86,19 @@ void wolf::render(HDC hdc)
 	switch (state)
 	{
 	case LIFE_NONE:
-		img->alphaRender(hdc, 200, 390, _alpha);
+		img->render(hdc, x, y);
 		break;
 	case HIT:
-		IMAGEMANAGER->findImage("wolf_hit")->render(hdc, 200, 390);
+		img_hit->render(hdc, x, y);
 		break;
 	case DIE:
-		IMAGEMANAGER->findImage("wolf_die")->alphaRender(hdc, 200, 390,_alpha);
+		img_die->alphaRender(hdc, x, y, _alpha);
 		break;
 	default:
 		break;
 	}
 
-	if (attack_state==ATTACK)
-		IMAGEMANAGER->findImage("wolf_attack")->frameRender(hdc, 500, 390,
-			IMAGEMANAGER->findImage("wolf_attack")->getFrameX(), 
-			IMAGEMANAGER->findImage("wolf_attack")->getFrameY());
+	if (attack_state == ATTACK)                                  //x값 플레이어 위치 받아서 나타내게 밑에꺼 임시값
+		img_attack->frameRender(hdc, x+300, y, img_attack->getFrameX(), img_attack->getFrameY());
 	
 }

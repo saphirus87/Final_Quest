@@ -18,6 +18,7 @@ HRESULT enemy::init()
 	attack_state = NONE;
 	_alpha = 255;
 	frameCount = count = 0;
+	_stmn = RND->getFromFloatTo(0.01f, 0.05f);
 	return S_OK;
 }
 
@@ -53,20 +54,25 @@ void enemy::Attack()
 			isAttack = true;
 		}
 		if (!isAttack)
-			_startTime += 0.04;
+			_startTime += _stmn;
 
 		else if (isAttack)
 		{
 			//일반공격
 			attack_state = ATTACK;
-			enemySound();
 			isAttack = false;
 			//사운드s
 		}
 	}
 }
 
+void enemy::endAttack()
+{	
+	enemySound();
+	attack_state = NONE;
+}
+
 void enemy::enemySound()
 {
-	SOUNDMANAGER->play("70.basic", 1.0f);
+	SOUNDMANAGER->play("70.basic", 0.8f);
 }

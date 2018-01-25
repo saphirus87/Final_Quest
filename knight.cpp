@@ -17,10 +17,24 @@ HRESULT knight::init()
 	isAttack = false;
 	_startTime = 0.0f;
 	_endTime = 19.0f;
-	img = IMAGEMANAGER->addImage("knight", "enemyimages/knight.bmp", 92, 122, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("knight_hit", "enemyimages/knight_hit.bmp", 96, 120, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("knight_die", "enemyimages/knight_die.bmp", 96, 120, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("knight_attack", "enemyimages/knight_attack.bmp", 259, 128, 4, 1, true, RGB(255, 0, 255));
+	//img = IMAGEMANAGER->addImage("knight", "enemyimages/knight.bmp", 92, 122, true, RGB(255, 0, 255));
+	//IMAGEMANAGER->addImage("knight_hit", "enemyimages/knight_hit.bmp", 96, 120, true, RGB(255, 0, 255));
+	//IMAGEMANAGER->addImage("knight_die", "enemyimages/knight_die.bmp", 96, 120, true, RGB(255, 0, 255));
+	//IMAGEMANAGER->addFrameImage("knight_attack", "enemyimages/knight_attack.bmp", 259, 128, 4, 1, true, RGB(255, 0, 255));
+
+	img = new image;
+	img->init("enemyimages/knight.bmp", 92, 122, true, RGB(255, 0, 255));
+
+	img_hit = new image;
+	img_hit->init("enemyimages/knight_hit.bmp", 96, 120, true, RGB(255, 0, 255));
+
+	img_die = new image;
+	img_die->init("enemyimages/knight_die.bmp", 96, 120, true, RGB(255, 0, 255));
+
+	img_attack = new image;
+	img_attack->init("enemyimages/knight_attack.bmp", 259, 128, 4, 1, true, RGB(255, 0, 255));
+
+
 	_curruntHp = _maxHp = 50;
 	_curruntMp = _maxMp = 50;
 	_str = _int = 5;
@@ -52,7 +66,6 @@ void knight::release()
 void knight::update()
 {
 	enemy::update();
-	cout << "나이트" << endl;
 
 	//공격 프레임
 	if (attack_state==ATTACK)
@@ -60,12 +73,13 @@ void knight::update()
 		if (count % 10 == 0)
 		{
 			frameCount++;
-			if (frameCount >= IMAGEMANAGER->findImage("knight_attack")->getMaxFrameX())
+			if (frameCount >= img_attack->getMaxFrameX())
 			{
 				frameCount = 0;
 				attack_state = NONE;
 			}
-			IMAGEMANAGER->findImage("knight_attack")->setFrameX(frameCount);
+			img_attack->setFrameX(frameCount);
+			
 		}
 	}
 
@@ -77,21 +91,20 @@ void knight::render(HDC hdc)
 	switch (state)
 	{
 	case LIFE_NONE:
-		img->alphaRender(hdc, 240, 100, _alpha);
+		img->render(hdc, x, y);
 		break;
 	case HIT:
-		IMAGEMANAGER->findImage("knight_hit")->render(hdc, 240, 100);
+		img_hit->render(hdc, x, y);
 		break;
 	case DIE:
-		IMAGEMANAGER->findImage("knight_die")->alphaRender(hdc, 240, 100, _alpha);
+		img_die->alphaRender(hdc, x, y, _alpha);
 		break;
 	default:
 		break;
 	}
-	
+
 
 	if (attack_state == ATTACK)
-		IMAGEMANAGER->findImage("knight_attack")->frameRender(hdc, 540, 100,
-			IMAGEMANAGER->findImage("knight_attack")->getFrameX(),
-			IMAGEMANAGER->findImage("knight_attack")->getFrameY());
+		img_attack->frameRender(hdc, x + 300, y, img_attack->getFrameX(), img_attack->getFrameY());
+		//플레이어 위치에 하게 설정할꺼에용
 }

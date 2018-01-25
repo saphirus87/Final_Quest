@@ -14,10 +14,18 @@ mammos::~mammos()
 HRESULT mammos::init()
 {
 	enemy::init();
-	img = IMAGEMANAGER->addImage("mammos", "enemyimages/mammos.bmp", 173, 114, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("mammos_hit", "enemyimages/mammos_hit.bmp", 173, 114, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("mammos_die", "enemyimages/mammos_die.bmp", 173, 114, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("mammos_attack", "enemyimages/mammos_attack.bmp", 600, 134, 3, 1, true, RGB(255, 0, 255));
+	img = new image;
+	img->init("enemyimages/mammos.bmp", 173, 114, true, RGB(255, 0, 255));
+
+	img_hit = new image;
+	img_hit->init("enemyimages/mammos_hit.bmp", 173, 114, true, RGB(255, 0, 255));
+
+	img_die = new image;
+	img_die->init("enemyimages/mammos_die.bmp", 173, 114, true, RGB(255, 0, 255));
+
+	img_attack = new image;
+	img_attack->init("enemyimages/mammos_attack.bmp", 600, 134, 3, 1, true, RGB(255, 0, 255));
+
 	isAttack = false;
 	_startTime = 0.0f;
 	_endTime = 22.0f;
@@ -52,19 +60,18 @@ void mammos::release()
 void mammos::update()
 {
 	enemy::update();
-	cout << "¸¾¸ð½º" << endl;
 
 	if (attack_state == ATTACK)
 	{
 		if (count % 10 == 0)
 		{
 			frameCount++;
-			if (frameCount >= IMAGEMANAGER->findImage("mammos_attack")->getMaxFrameX())
+			if (frameCount >= img_attack->getMaxFrameX())
 			{
 				frameCount = 0;
 				attack_state = NONE;
 			}
-			IMAGEMANAGER->findImage("mammos_attack")->setFrameX(frameCount);
+			img_attack->setFrameX(frameCount);
 		}
 	}
 
@@ -77,21 +84,19 @@ void mammos::render(HDC hdc)
 	switch (state)
 	{
 	case LIFE_NONE:
-		img->render(hdc, 200, 230);
+		img->render(hdc, x, y);
 		break;
 	case HIT:
-		IMAGEMANAGER->findImage("mammos_hit")->render(hdc, 200, 230);
+		img_hit->render(hdc, x, y);
 		break;
 	case DIE:
-		IMAGEMANAGER->findImage("mammos_die")->alphaRender(hdc, 200, 230, _alpha);
+		img_die->alphaRender(hdc,x,y,_alpha);
 		break;
 	default:
 		break;
 	}
 
 	if (attack_state == ATTACK)
-		IMAGEMANAGER->findImage("mammos_attack")->frameRender(hdc, 500, 230,
-			IMAGEMANAGER->findImage("mammos_attack")->getFrameX(),
-			IMAGEMANAGER->findImage("mammos_attack")->getFrameY());
+		img_attack->frameRender(hdc,x+300,y, img_attack->getFrameX(), img_attack->getFrameY());
 
 }

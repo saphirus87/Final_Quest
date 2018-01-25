@@ -13,6 +13,6 @@ void playGround::soundInit()
 	SOUNDMANAGER->addSound("02.선택", ".//musicSound//selectScene.mp3", true, true);
 
 	//에너미 사운드
-	SOUNDMANAGER->addSound("70.basic", ".//enemySound//basic.mp3", true, true);
-	SOUNDMANAGER->addSound("71.boss_reflex", ".//enemySound//boss_reflex", true, true);
+	SOUNDMANAGER->addSound("70.basic", ".//enemySound//basic.wav", false, false);
+	SOUNDMANAGER->addSound("71.boss_reflex", ".//enemySound//boss_reflex.wav", false, false);
 }

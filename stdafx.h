@@ -12,7 +12,7 @@
 #include <memory.h>
 #include <tchar.h>
 #include <iostream>
-
+#pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console") 
 #include "commonMacroFunction.h"
 #include "randomFunction.h"
 #include "keyManager.h"
