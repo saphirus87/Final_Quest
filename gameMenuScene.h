@@ -6,6 +6,10 @@ class gameMenuScene : public gameNode
 private:
 	int _cursorMenuNum;
 
+	int _alpha;
+
+	bool _isMenu;
+
 public:
 	HRESULT init();
 	void release();

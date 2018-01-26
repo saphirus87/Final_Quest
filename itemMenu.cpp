@@ -66,7 +66,7 @@ void itemMenu::update()
 		}
 		if (KEYMANAGER->isOnceKeyDown(VK_BACK))
 		{
-			SCENEMANAGER->changeScene("¸Þ´º¾À");
+			SCENEMANAGER->changeScene("¸Þ´º¾À", FALSE);
 		}
 	}
 	else

@@ -16,6 +16,8 @@ public:
 	virtual void release(void);		//메모리 관련 해제
 	virtual void update(void);		//업데이트(연산)
 	virtual void render(void);	//그려주는 함수
+	
+	void alphaPlusMinus(bool TF, int* alpha);
 
 	//interface == 순수가상함수 == 추상성, 확장성
 	//virtual void move(void) = 0; 

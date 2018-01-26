@@ -18,7 +18,6 @@ public:
 
 	void keyControl();
 
-	void startAlpha();
 
 	gameStartScene();
 	~gameStartScene();

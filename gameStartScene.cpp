@@ -35,8 +35,8 @@ void gameStartScene::release()
 
 void gameStartScene::update() 
 {
+	alphaPlusMinus(_isStart, &_alpha);
 	keyControl();
-	startAlpha();
 }
 
 void gameStartScene::render() 
@@ -104,21 +104,7 @@ void gameStartScene::keyControl()
 	if (_alpha == 0)
 	{
 		SCENEMANAGER->changeScene("fieldScene");
-	}
-}
 
-void gameStartScene::startAlpha()
-{
-	if (_isStart == true)
-	{
-		_alpha += 5;
-
-		if (_alpha > 255) _alpha = 255;
-	}
-	if (_isStart == false)
-	{
-		_alpha -= 5;
-
-		if (_alpha < 0) _alpha = 0;
+		_isStart = true;
 	}
 }

@@ -122,3 +122,19 @@ LRESULT gameNode::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lPara
 	return (DefWindowProc(hWnd, iMessage, wParam, lParam));
 
 }
+
+void gameNode::alphaPlusMinus(bool TF, int* alpha)
+{
+	if (TF)
+	{
+		*alpha += 15;
+
+		if (*alpha > 255) *alpha = 255;
+	}
+	else
+	{
+		*alpha -= 15;
+
+		if (*alpha <= 0) *alpha = 0;
+	}
+}

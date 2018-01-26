@@ -16,8 +16,8 @@ HRESULT statusMenu::init()
 {
 	IMAGEMANAGER->addImage("스테이터스메뉴씬", ".\\SceneImage\\statusMenu.bmp", 1024, 760, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("선택", ".\\SceneImage\\selectPoint.bmp", 27, 27, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("플레이어1얼굴", ".\\SceneImage\\player1face.bmp", 170, 170, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("플레이어2얼굴", ".\\SceneImage\\player2face.bmp", 170, 170, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("플레이어1얼굴", ".\\SceneImage\\player1face.bmp", 100, 100, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("플레이어2얼굴", ".\\SceneImage\\player2face.bmp", 100, 100, true, RGB(255, 0, 255));
 
 	_cursorMenuNum = 1;
 
@@ -56,11 +56,11 @@ void statusMenu::render()
 	}
 	if (_isCharater1 == true)
 	{
-		IMAGEMANAGER->findImage("플레이어1얼굴")->render(getMemDC(), 145, 125);
+		IMAGEMANAGER->findImage("플레이어1얼굴")->render(getMemDC(), 180, 160);
 	}
 	if (_isCharater2 == true)
 	{
-		IMAGEMANAGER->findImage("플레이어2얼굴")->render(getMemDC(), 145, 125);
+		IMAGEMANAGER->findImage("플레이어2얼굴")->render(getMemDC(), 180, 160);
 	}
 }
 
