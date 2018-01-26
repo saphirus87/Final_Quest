@@ -35,7 +35,7 @@ HRESULT playGround::init()
 	SCENEMANAGER->addScene("battleScene", new battleScene);
 	SCENEMANAGER->addScene("shopScene", new shopScene);
 	
-	SCENEMANAGER->changeScene("shopScene");
+	SCENEMANAGER->changeScene("½ºÅ¸Æ®¾À");
 
 	_pm = new playerManager;
 	_pm->init();
