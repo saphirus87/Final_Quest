@@ -14,11 +14,14 @@
 #include "configMenu.h"
 #include "equipMenu.h"
 #include "statusMenu.h"
+#include "playerManager.h"
+#include "shopScene.h"
 
 class playGround : public gameNode
 {
 private:
 	gameNode* _start;				//스타트 씬
+	playerManager* _pm;
 
 public:
 	virtual HRESULT init(void);		//초기화 함수

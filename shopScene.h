@@ -1,7 +1,7 @@
 #pragma once
 #include "gameNode.h"
 
-class shopScene
+class shopScene : public gameNode
 {
 public:
 	shopScene();

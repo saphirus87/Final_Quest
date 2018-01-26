@@ -25,7 +25,7 @@ void player3::update()
 {
 
 }
-void player3::render(HDC hdc)
+void player3::render()
 {
 
 }

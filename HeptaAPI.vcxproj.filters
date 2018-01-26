@@ -246,6 +246,9 @@
     <ClInclude Include="statusMenu.h">
       <Filter>playGround\Scene\MenuScene</Filter>
     </ClInclude>
+    <ClInclude Include="gameSaveLoadScene.h">
+      <Filter>playGround\Scene\startScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -403,6 +406,9 @@
     </ClCompile>
     <ClCompile Include="statusMenu.cpp">
       <Filter>playGround\Scene\MenuScene</Filter>
+    </ClCompile>
+    <ClCompile Include="gameSaveLoadScene.cpp">
+      <Filter>playGround\Scene\startScene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

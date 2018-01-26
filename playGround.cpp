@@ -25,7 +25,7 @@ HRESULT playGround::init()
 	SCENEMANAGER->addScene("¸Ş´º¾À", new gameMenuScene);
 	SCENEMANAGER->addScene("¾ÆÀÌÅÛ¸Ş´º¾À", new itemMenu);
 	SCENEMANAGER->addScene("¼¼ÀÌºê·Îµå¸Ş´º¾À", new saveLoadMenu);
-	SCENEMANAGER->addScene("½ºÅ¸Æ®¼¼ÀÌºê·Îµå¸Ş´º¾À", new gameSaveLoadScene);
+	SCENEMANAGER->addScene("°ÔÀÓ¼¼ÀÌºê·Îµå¸Ş´º¾À", new gameSaveLoadScene);
 	SCENEMANAGER->addScene("½ºÅ³¸Ş´º¾À", new abilitiesMenu);
 	SCENEMANAGER->addScene("¿É¼Ç¾À", new configMenu);
 	SCENEMANAGER->addScene("Àåºñ¸Ş´º¾À", new equipMenu);
@@ -33,8 +33,14 @@ HRESULT playGround::init()
 	SCENEMANAGER->addScene("fieldScene", new fieldScene);
 	SCENEMANAGER->addScene("townScene", new townScene);
 	SCENEMANAGER->addScene("battleScene", new battleScene);
+	SCENEMANAGER->addScene("¼¥¾À", new shopScene);
 	
-	SCENEMANAGER->changeScene("Àåºñ¸Ş´º¾À");
+	SCENEMANAGER->changeScene("½ºÅ¸Æ®¾À");
+
+	_pm = new playerManager;
+	_pm->init();
+
+	((fieldScene*)SCENEMANAGER->findScene("fieldScene"))->setPlayerManagerAddressLink(_pm);
 
 	return S_OK;
 }

@@ -5,11 +5,14 @@
 
 typedef void(*ACTION_FUNTION)(void*, void*);
 
+class playerManager;
+
 class battleScene : public gameNode
 {
 private:
 	vector<CALLBACK_FUNCTION> _vActionList;
 	enemyManager* em;
+	playerManager* _pm;
 
 public:
 	battleScene();
@@ -31,5 +34,7 @@ public:
 	void escape(void);
 	// 행동 게이지 증가 함수
 	void increasedActionGauge(void);
+
+	void setPlayerManagerAddressLink(playerManager* pm) { _pm = pm; }
 };
 

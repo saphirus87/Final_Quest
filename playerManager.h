@@ -1,14 +1,17 @@
 #pragma once
 #include <vector>
 #include "player1.h"
+#include "player2.h"
+#include "player3.h"
 
 class playerManager
 {
 
 private:
-	typedef vector<player&> vPlayer;
+	typedef vector<player*> vPlayer;
 
-	vPlayer* _vPlayer;
+private:
+	vPlayer _vPlayer;
 
 public:
 	playerManager();

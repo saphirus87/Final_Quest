@@ -14,6 +14,13 @@ player::~player()
 
 HRESULT player::init()
 {
+	// 배틀 커맨드 창 이미지 추가
+	IMAGEMANAGER->addImage("battleSelectScene", ".//userInterface//battleSelectScene.bmp", 341, 200, true, RGB(255, 0, 255));
+
+	// 배틀 커맨드 사용 가능 불가로 초기화
+	_isCommandReady = true;
+	_curCommand = ATTACK_COMMAND;
+
 	_dir = PLAYER_DOWN;
 	_isAttack = false;
 	_curruntHp = _maxHp = 100;
@@ -32,6 +39,8 @@ HRESULT player::init()
 	_y = WINSIZEY / 2;
 	_frameX = 0;
 
+	_enableCommand = ATTACK_COMMAND | ITEM_COMMAND | MAGIC_COMMAND | RUN_COMMAND;
+
 	return S_OK;
 }
 void player::release()
@@ -40,82 +49,72 @@ void player::release()
 }
 void player::update()
 {
-	attack();
+	if (_isCommandReady)
+	{
+		selectCommand();
+	}
+}
+void player::render(void)
+{
+	HFONT hFont = CreateFont(30, 0, 0, 0, 600, 0, 0, 0, ANSI_CHARSET, 0, 0, 0, VARIABLE_PITCH | FF_ROMAN, TEXT("consolas"));
+	HFONT oFont = (HFONT)SelectObject(getMemDC(), hFont);
 
-	if (KEYMANAGER->isOnceKeyDown(VK_LEFT))
-	{
-		_dir = PLAYER_LEFT;
-		_x -= 3;
-		_img->frameRender(getMemDC(), _x, _y, _frameX, _dir);
-	}
-	if (KEYMANAGER->isOnceKeyDown(VK_RIGHT))
-	{
-		_dir = PLAYER_RIGHT;
-		_x += 3;
-		_img->frameRender(getMemDC(), _x, _y, _frameX, _dir);
-	}
+	SetBkMode(getMemDC(), TRANSPARENT);
+	SetTextColor(getMemDC(), RGB(220, 220, 220));
+	if (_isCommandReady) drawCommand();
+
+	SelectObject(getMemDC(), oFont);
+	DeleteObject(hFont);
+	DeleteObject(oFont);
+}
+
+void player::drawCommand(void)
+{
+	IMAGEMANAGER->findImage("battleSelectScene")->render(getMemDC(), 100, 557);
+	TextOut(getMemDC(), 170, COMMAND1_POSY, "ATTACK", strlen("ATTACK"));
+	TextOut(getMemDC(), 170, COMMAND2_POSY, "ITEM", strlen("ITEM"));
+	TextOut(getMemDC(), 170, COMMAND3_POSY, "MAGIC", strlen("MAGIC"));
+	TextOut(getMemDC(), 170, COMMAND4_POSY, "RUN", strlen("RUN"));
+	
+	if (_curCommand == ATTACK_COMMAND) IMAGEMANAGER->findImage("선택")->render(getMemDC(), 130, COMMAND1_POSY);
+	if (_curCommand == ITEM_COMMAND) IMAGEMANAGER->findImage("선택")->render(getMemDC(), 130, COMMAND2_POSY);
+	if (_curCommand == MAGIC_COMMAND) IMAGEMANAGER->findImage("선택")->render(getMemDC(), 130, COMMAND3_POSY);
+	if (_curCommand == RUN_COMMAND) IMAGEMANAGER->findImage("선택")->render(getMemDC(), 130, COMMAND4_POSY);
+
+}
+
+void player::selectCommand(void)
+{
 	if (KEYMANAGER->isOnceKeyDown(VK_UP))
 	{
-		_dir = PLAYER_UP;
-		_y -= 3;
-		_img->frameRender(getMemDC(), _x, _y, _frameX, _dir);
+		_curCommand = (BATTLE_COMAAND)(_curCommand / 2);
+		
+		if (_curCommand == 0)
+		{
+			if (_enableCommand & DEFFENCE_COMMAND) _curCommand = DEFFENCE_COMMAND;
+			else if (_enableCommand & RUN_COMMAND) _curCommand = RUN_COMMAND;
+			else if (_enableCommand & MAGIC_COMMAND) _curCommand = MAGIC_COMMAND;
+			else if (_enableCommand & ITEM_COMMAND) _curCommand = ITEM_COMMAND;
+			else if (_enableCommand & ATTACK_COMMAND) _curCommand = ATTACK_COMMAND;
+		}
 	}
+	
 	if (KEYMANAGER->isOnceKeyDown(VK_DOWN))
 	{
-		_dir = PLAYER_DOWN;
-		_y += 3;
-		_img->frameRender(getMemDC(), _x, _y, _frameX, _dir);
-	}
+		_curCommand = (BATTLE_COMAAND)(_curCommand * 2);
 
-
-	_count++;
-	if (_count == 10)
-	{
-		_count = 0;
-		if (_frameX < _img->getMaxFrameX()) _frameX++;
-		else _frameX = 0;
-	}
-}
-void player::render(HDC hdc)
-{
-	_img->frameRender(hdc, _x, _y, _frameX, _dir);
-}
-
-void player::attack()
-{
-	if (_isBattle)// 배틀 돌입 
-	{
-		_startTime = _startTime + 0.2;
-
-		if (_startTime >= _endTime)
+		if (_curCommand > _enableCommand)
 		{
-			_isFight = true;
-		}
-		if (_startTime < _endTime)
-		{
-			//초기화
-			_def = 0;
-			_m_def = 0;
-			_isFight = false;
+			if (_enableCommand & ATTACK_COMMAND) _curCommand = ATTACK_COMMAND;
+			else if (_enableCommand & ITEM_COMMAND) _curCommand = ITEM_COMMAND;
+			else if (_enableCommand & MAGIC_COMMAND) _curCommand = MAGIC_COMMAND;
+			else if (_enableCommand & RUN_COMMAND) _curCommand = RUN_COMMAND;
+			else if (_enableCommand & DEFFENCE_COMMAND) _curCommand = DEFFENCE_COMMAND;
 		}
 	}
-	if (!_isBattle)
-	{
-		_startTime = 0;
-		_isFight = false;
-	}
 }
 
-
-//방어력, 마법 방어력(장비 있을 시 증가, 없을 시 초기값 그대로 가져감)
-void player::hitLogic()
+void player::levelUp(void)
 {
-	// if( 적 데미지가 물리 데미지(통상공격) 일 경우
-	// {
-	// 	 _curruntHp = _curruntHp + _def - 적 데미지
-	// }
-	// else if(적 데미지가 마법 데미지(스킬) 일 경우)
-	// {
-	// 	_curruntHp = _curruntHp + _m_def - 적 스킬 데미지
-	// }
+
 }

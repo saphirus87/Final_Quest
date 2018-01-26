@@ -10,7 +10,7 @@
 #define PLAYER_WIDTH 28
 #define PLAYER_HEIGHT 46
 
-#define ENCOUNT_MAX_VALUE 8000
+#define ENCOUNT_MAX_VALUE 100
 #define ENCOUNT_VALUE RND->getFromIntTo(5, 10)
 
 enum PLAYER_STATE
@@ -24,6 +24,8 @@ enum PLAYER_STATE
 	PLAYER_MOVE_MASK = PLAYER_IDLE | PLAYER_MOVE
 };
 
+class playerManager;
+
 class fieldScene : public gameNode
 {
 private:
@@ -32,6 +34,7 @@ private:
 	image* _playerImg;				// 플레이어 이미지
 	animation* _playerAni;			// 플레이어 애니메이션
 	RECT _townRc;					// 마을 진입 영역
+	playerManager* _pm;
 
 //==================== 애니메이션 변수 ====================
 private:
@@ -66,5 +69,7 @@ public:
 	void playerPixelCollision(void);
 	
 	void increasedEncount(void);
+
+	void setPlayerManagerAddressLink(playerManager* pm) { _pm = pm; }
 };
 

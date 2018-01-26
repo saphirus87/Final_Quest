@@ -10,9 +10,9 @@ public:
 	~player1();
 
 
-	HRESULT init();
-	void release();
-	void update();
-	void render(HDC hdc);
+	virtual HRESULT init();
+	virtual void release();
+	virtual void update();
+	virtual void render(void);
 };
 
