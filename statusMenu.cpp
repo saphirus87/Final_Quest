@@ -62,6 +62,10 @@ void statusMenu::render()
 	{
 		IMAGEMANAGER->findImage("플레이어2얼굴")->render(getMemDC(), 180, 160);
 	}
+	if (_isCharater3 == true)
+	{
+		//IMAGEMANAGER->findImage("플레이어2얼굴")->render(getMemDC(), 90, 160);
+	}
 }
 
 void statusMenu::keyControl()

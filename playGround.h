@@ -7,6 +7,7 @@
 #include "gameOpenningScene.h"
 #include "gameStartScene.h"
 #include "gameMenuScene.h"
+#include "gameSaveLoadScene.h"
 #include "itemMenu.h"
 #include "saveLoadMenu.h"
 #include "abilitiesMenu.h"

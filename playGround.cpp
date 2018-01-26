@@ -25,6 +25,7 @@ HRESULT playGround::init()
 	SCENEMANAGER->addScene("메뉴씬", new gameMenuScene);
 	SCENEMANAGER->addScene("아이템메뉴씬", new itemMenu);
 	SCENEMANAGER->addScene("세이브로드메뉴씬", new saveLoadMenu);
+	SCENEMANAGER->addScene("스타트세이브로드메뉴씬", new gameSaveLoadScene);
 	SCENEMANAGER->addScene("스킬메뉴씬", new abilitiesMenu);
 	SCENEMANAGER->addScene("옵션씬", new configMenu);
 	SCENEMANAGER->addScene("장비메뉴씬", new equipMenu);
@@ -33,7 +34,7 @@ HRESULT playGround::init()
 	SCENEMANAGER->addScene("townScene", new townScene);
 	SCENEMANAGER->addScene("battleScene", new battleScene);
 	
-	SCENEMANAGER->changeScene("스타트씬");
+	SCENEMANAGER->changeScene("장비메뉴씬");
 
 	return S_OK;
 }

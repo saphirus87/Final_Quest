@@ -93,7 +93,7 @@ void gameStartScene::keyControl()
 		}
 		else if (_cursorMenuNum == 2)
 		{
-			SCENEMANAGER->changeScene("세이브로드메뉴씬");
+			SCENEMANAGER->changeScene("스타트세이브로드메뉴씬");
 		}
 		else if (_cursorMenuNum == 3)
 		{
