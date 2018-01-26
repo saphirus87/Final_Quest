@@ -5,10 +5,12 @@
 
 //노래 추가를 위한 cpp파일
 //playGround에 종속됨
-//map의 자동정렬 특성상
-//01,02등의 번호를 사용하여 정렬 방지
+
+//노래를 추가할때 위에 주석으로 BGM인지 Effect인지 구분해주세요
 void playGround::soundInit()
 {
+
+	//BGM류
 	SOUNDMANAGER->addSound("오프닝", ".//musicSound//openingThema.mp3", true, true);
 	SOUNDMANAGER->addSound("선택", ".//musicSound//selectScene.mp3", true, true);
 	SOUNDMANAGER->addSound("배틀", ".//musicSound//battleThema.mp3",true, true);
@@ -16,6 +18,8 @@ void playGround::soundInit()
 
 
 
+	//EffectSound
+	SOUNDMANAGER->addSound("배틀입장", ".//effectSound//BattleEncounter.wav", false, false);
 
 	//에너미 사운드
 	SOUNDMANAGER->addSound("70.basic", ".//enemySound//basic.wav", false, false);

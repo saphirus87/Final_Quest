@@ -262,6 +262,7 @@ void fieldScene::increasedEncount(void)
 	if (_encount < ENCOUNT_MAX_VALUE) _encount += ENCOUNT_VALUE;
 	else if (_encount > ENCOUNT_MAX_VALUE)
 	{
+		SOUNDMANAGER->play("배틀입장", 1.0f);
 		//배틀씬에서 에너미 랜덤받아오게하려면 펄스빼야되서 일단뺏어요
 		SCENEMANAGER->changeScene("battleScene");
 		_encount = 0;
