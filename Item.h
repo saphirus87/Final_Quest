@@ -1,5 +1,5 @@
 #pragma once
-#include "gameNode.h"
+#include "singletonBase.h"
 #include <map>
 #include <vector>
 
@@ -23,7 +23,7 @@ struct tagItem
 	int count;
 };
 
-class Item : public gameNode
+class Item : public singletonBase<Item>
 {
 private:
 	typedef map<int, tagItem> mapItemList;
@@ -44,6 +44,8 @@ public:
 	HRESULT init(void);		//초기화 함수
 	//아이템 삭제
 	void release(void);		//메모리 관련 해제
+	void update(void);
+
 	//아이템 찾기(이름)
 	tagItem findItem(string strKey);
 	//아이템 갯수 증가
@@ -52,11 +54,11 @@ public:
 	void delItem(string strKey);
 
 	//소비템 목록
-	vector<string>* iteminventory();
-	string vitemstring(int num) { return _iteminventory[num]; }
+	vector<string>* getiteminventory() { return &_iteminventory; }
+	string getvitemstring(int num) { return _iteminventory[num]; }
 	//장비템 목록
-	vector<string>* equipinventory();
-	string vequipstring(int num) { return _equipinventory[num]; }
+	vector<string>* getequipinventory() { return &_equipinventory; }
+	string getvequipstring(int num) { return _equipinventory[num]; }
 
 	//아이템 리스트 호출
 	mapItemList itemlist() { return _mItemList; }

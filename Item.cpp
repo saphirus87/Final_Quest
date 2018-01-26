@@ -205,6 +205,24 @@ void Item::release(void)
 	_mItemList.clear();
 }
 
+void Item::update(void)
+{
+	_iteminventory.clear();
+	for (int i = 0; i < _mItemList.size(); ++i)
+	{
+		if (_mItemList[i].itemtype != TYPE_USE)continue;
+		if (_mItemList[i].count == 0)continue;
+		_iteminventory.push_back(_mItemList[i].name);
+	}
+	_equipinventory.clear();
+	for (int i = 0; i < _mItemList.size(); ++i)
+	{
+		if (_mItemList[i].itemtype == TYPE_USE)continue;
+		if (_mItemList[i].count == 0)continue;
+		_equipinventory.push_back(_mItemList[i].name);
+	}
+}
+
 tagItem Item::findItem(string strKey)
 {
 	for (int i = 0; i <_mItemList.size(); ++i)
@@ -222,6 +240,7 @@ void Item::addItem(string strKey)
 	{
 		if (_mItemList[i].name == strKey)++_mItemList[i].count;
 	}
+	update();
 }
 
 void Item::delItem(string strKey)
@@ -231,29 +250,6 @@ void Item::delItem(string strKey)
 		if (_mItemList[i].name == strKey)--_mItemList[i].count;
 		if (_mItemList[i].count < 0)_mItemList[i].count = 0;
 	}
-}
-
-vector<string>* Item::iteminventory()
-{
-	_iteminventory.clear();
-	for (int i = 0; i < _mItemList.size(); ++i)
-	{
-		if (_mItemList[i].itemtype != TYPE_USE)continue;
-		if (_mItemList[i].count == 0)continue;
-		_iteminventory.push_back(_mItemList[i].name);
-	}
-	return &_iteminventory;
-}
-
-vector<string>* Item::equipinventory()
-{
-	_equipinventory.clear();
-	for (int i = 0; i < _mItemList.size(); ++i)
-	{
-		if (_mItemList[i].itemtype == TYPE_USE)continue;
-		if (_mItemList[i].count == 0)continue;
-		_equipinventory.push_back(_mItemList[i].name);
-	}
-	return &_equipinventory;
+	update();
 }
 
