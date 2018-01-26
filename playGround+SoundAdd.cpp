@@ -9,8 +9,13 @@
 //01,02등의 번호를 사용하여 정렬 방지
 void playGround::soundInit()
 {
-	SOUNDMANAGER->addSound("01.오프닝", ".//musicSound//openingThema.mp3", true, true);
-	SOUNDMANAGER->addSound("02.선택", ".//musicSound//selectScene.mp3", true, true);
+	SOUNDMANAGER->addSound("오프닝", ".//musicSound//openingThema.mp3", true, true);
+	SOUNDMANAGER->addSound("선택", ".//musicSound//selectScene.mp3", true, true);
+	SOUNDMANAGER->addSound("배틀", ".//musicSound//battleThema.mp3",true, true);
+	SOUNDMANAGER->addSound("배틀승리", ".//musicSound//battleEnding.mp3", true, false);
+
+
+
 
 	//에너미 사운드
 	SOUNDMANAGER->addSound("70.basic", ".//enemySound//basic.wav", false, false);
