@@ -5,7 +5,6 @@ enum SKILL
 {
 	FIRST_SKILL,
 	SECOND_SKILL,
-	LAST_SKILL
 };
 enum MOVEDIR
 {
@@ -29,13 +28,14 @@ class player : public gameNode
 {
 protected:
 	image * _img;
+	image* _imgSkill;
 	int _level;
 	int _str, _int;				// 힘, 지력
 	float _startTime, _endTime; // 속도 타이머 _startTime = 시작시간 / _endTime = 끝나는 시간  
 								// _startTime 가 0.1씩 올라 _endTime 과 같으면 행동 실행 (예정)<------	
 
 	int _x, _y;					// 플레이어 x,y 좌표
-	int _frameX, _frameY;
+	int _frameX, _frameY;		// 프레임 좌표
 						
 	int _maxHp, _curruntHp;		// 체력
 	int _maxMp, _curruntMp;		// 마나
@@ -48,8 +48,14 @@ protected:
 	int _exp;					// 경험치
 	int _maxExp;				// 최대경험치
 	int _curruntExp;			// 현재경험치
+
 	bool _isDead;				// 사망유무 true = 생존 , false 죽음
+
+	bool _isBattle;				// 배틀진행유무 true = 배틀 하고 있음, false = 배틀 안하고 있음 
+	bool _isFight;				// 싸움유무 true = 싸우겟음, false = 안싸우겠음
 	bool _isAttack;				// 공격 유무 true = 공격 가능, false 공격 불가능 
+
+
 
 	MOVEDIR _dir;				// 상하좌우 판단
 	SKILL _skill;				// 스킬 종류
@@ -69,7 +75,8 @@ public:
 	void update();
 	void render(HDC hdc);
 
-	void attack();
+	void attack(); // 공격시
+	void hitLogic(); // 맞을 시
 
 
 
