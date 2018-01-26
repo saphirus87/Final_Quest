@@ -28,6 +28,7 @@ HRESULT playGround::init()
 	SCENEMANAGER->addScene("½ºÅ³¸Þ´º¾À", new abilitiesMenu);
 	SCENEMANAGER->addScene("¿É¼Ç¾À", new configMenu);
 	SCENEMANAGER->addScene("Àåºñ¸Þ´º¾À", new equipMenu);
+	SCENEMANAGER->addScene("½ºÅ×ÀÌÅÍ½º¸Þ´º¾À", new statusMenu);
 	SCENEMANAGER->addScene("fieldScene", new fieldScene);
 	SCENEMANAGER->addScene("battleScene", new battleScene);
 	

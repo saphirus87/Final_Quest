@@ -1,7 +1,7 @@
 #pragma once
 #include "gameNode.h"
 
-class saveLoadMenu : public gameNode
+class statusMenu : public gameNode
 {
 private:
 
@@ -11,7 +11,7 @@ public:
 	void update();
 	void render();
 
-	saveLoadMenu();
-	~saveLoadMenu();
+	statusMenu();
+	~statusMenu();
 };
 

@@ -237,6 +237,9 @@
     <ClInclude Include="player3.h">
       <Filter>playGround\player</Filter>
     </ClInclude>
+    <ClInclude Include="statusMenu.h">
+      <Filter>playGround\Scene\MenuScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -385,6 +388,9 @@
     </ClCompile>
     <ClCompile Include="player3.cpp">
       <Filter>playGround\player</Filter>
+    </ClCompile>
+    <ClCompile Include="statusMenu.cpp">
+      <Filter>playGround\Scene\MenuScene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

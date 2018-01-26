@@ -11,6 +11,7 @@
 #include "abilitiesMenu.h"
 #include "configMenu.h"
 #include "equipMenu.h"
+#include "statusMenu.h"
 
 class playGround : public gameNode
 {
