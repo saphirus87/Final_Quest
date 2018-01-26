@@ -3,6 +3,8 @@
 
 HRESULT Item::init(void)
 {
+	_money = 0;
+
 	tagItem potion;
 	potion.code = 1;
 	potion.itemtype = TYPE_USE;

@@ -36,6 +36,8 @@ private:
 	vItemList _iteminventory;
 	vItemList _equipinventory;
 
+	int _money;
+
 public:
 	Item() {};
 	~Item() {};
@@ -62,4 +64,7 @@ public:
 
 	//아이템 리스트 호출
 	mapItemList itemlist() { return _mItemList; }
+
+	void setMoney(int money) { _money = money; }
+	int getMoney() { return _money; }
 };
