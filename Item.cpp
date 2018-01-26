@@ -179,16 +179,16 @@ HRESULT Item::init(void)
 	accessary2.code = 502;
 	accessary2.itemtype = TYPE_ACCESSARY;
 	accessary2.name = "체력의 목걸이";
-	accessary1.price = 20;
-	accessary1.value = 10;
+	accessary2.price = 20;
+	accessary2.value = 10;
 	accessary2.count = 0;
 	_mItemList.insert(make_pair(accessary2.code, accessary2));
 	tagItem accessary3;
 	accessary3.code = 503;
 	accessary3.itemtype = TYPE_ACCESSARY;
 	accessary3.name = "마력의 목걸이";
-	accessary1.price = 20;
-	accessary1.value = 10;
+	accessary3.price = 20;
+	accessary3.value = 10;
 	accessary3.count = 0;
 	_mItemList.insert(make_pair(accessary3.code, accessary3));
 

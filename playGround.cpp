@@ -33,14 +33,20 @@ HRESULT playGround::init()
 	SCENEMANAGER->addScene("fieldScene", new fieldScene);
 	SCENEMANAGER->addScene("townScene", new townScene);
 	SCENEMANAGER->addScene("battleScene", new battleScene);
-	SCENEMANAGER->addScene("¼¥¾À", new shopScene);
+	SCENEMANAGER->addScene("shopScene", new shopScene);
 	
-	SCENEMANAGER->changeScene("½ºÅ¸Æ®¾À");
+	SCENEMANAGER->changeScene("shopScene");
 
 	_pm = new playerManager;
 	_pm->init();
 
 	((fieldScene*)SCENEMANAGER->findScene("fieldScene"))->setPlayerManagerAddressLink(_pm);
+
+	_Item = new Item;
+	_Item->init();
+
+	((itemMenu*)SCENEMANAGER->findScene("¾ÆÀÌÅÛ¸Þ´º¾À"))->setItemAddressLink(_Item);
+	((shopScene*)SCENEMANAGER->findScene("shopScene"))->setItemAddressLink(_Item);
 
 	return S_OK;
 }

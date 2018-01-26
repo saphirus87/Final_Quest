@@ -29,7 +29,6 @@
 #include "database.h"
 #include "CameraManager.h"
 #include "DLCManager.h"
-#include "Item.h"
 
 using namespace std;
 using namespace HEPTA_UTIL;
@@ -58,7 +57,6 @@ using namespace HEPTA_UTIL;
 #define DATABASE		database::getSingleton()
 #define CAMERAMANAGER	CameraManager::getSingleton()
 #define DLCMANAGER		DLCManager::getSingleton()
-#define ITEMMANAGER		Item::getSingleton()
 
 //=======================================================
 // ## ∏≈≈©∑Œ ## 2017.11.15 ##

@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "itemMenu.h"
+#include "Item.h"
 
 
 itemMenu::itemMenu()
@@ -66,13 +67,13 @@ void itemMenu::update()
 		}
 		if (KEYMANAGER->isOnceKeyDown(VK_BACK))
 		{
-			SCENEMANAGER->changeScene("메뉴씬", FALSE);
+			SCENEMANAGER->changeScene("메뉴씬");
 		}
 	}
 	else
 	{
-		itemsize = ITEMMANAGER->getiteminventory()->size();
-		equipsize = ITEMMANAGER->getequipinventory()->size();
+		itemsize = _Item->getiteminventory().size();
+		equipsize = _Item->getequipinventory().size();
 		if (KEYMANAGER->isOnceKeyDown(VK_BACK) || (!itemsize && !waitselnum) || (!equipsize && waitselnum))
 		{
 			selX = 25;
@@ -83,84 +84,59 @@ void itemMenu::update()
 		if (KEYMANAGER->isOnceKeyDown(VK_RIGHT))
 		{
 			++selnum;
-			if (itemsize)
-			{
-				selnum = selnum % itemsize;
-			}
-			if (equipsize)
+			if (waitselnum)
 			{
 				selnum = selnum % equipsize;
+			}
+			else
+			{
+				selnum = selnum % itemsize;
 			}
 		}
 		if (KEYMANAGER->isOnceKeyDown(VK_LEFT))
 		{
 			--selnum;
-			if (itemsize)
-			{
-				if (selnum < 0)selnum += itemsize;
-			}
-			if (equipsize)
+			if (waitselnum)
 			{
 				if (selnum < 0)selnum += equipsize;
+			}
+			else
+			{
+				if (selnum < 0)selnum += itemsize;
 			}
 		}
 		if (KEYMANAGER->isOnceKeyDown(VK_UP))
 		{
 			selnum -= 3;
-			if (itemsize)
+			if (waitselnum)
 			{
-				if (selnum < 0)selnum += (itemsize / 3 + 1) * 3;
-				if (selnum >= itemsize)selnum -= 3;
+				if (selnum < 0)selnum += ((equipsize - 1) / 3 + 1) * 3;
+				if (selnum >= equipsize)selnum -= 3;
 				if (selnum < 0)selnum += 3;
 			}
-			if (equipsize)
+			else
 			{
-				if (selnum < 0)selnum += (equipsize / 3 + 1) * 3;
-				if (selnum >= equipsize)selnum -= 3;
+				if (selnum < 0)selnum += ((itemsize - 1) / 3 + 1) * 3;
+				if (selnum >= itemsize)selnum -= 3;
 				if (selnum < 0)selnum += 3;
 			}
 		}
 		if (KEYMANAGER->isOnceKeyDown(VK_DOWN))
 		{
 			selnum += 3;
-			if (itemsize)
+			if (waitselnum)
 			{
-				if (selnum > itemsize)selnum -= (itemsize / 3 + 1) * 3;
+				if (selnum >= equipsize)selnum -= ((equipsize - 1) / 3 + 1) * 3;
+				if (selnum >= equipsize)selnum -= 3;
+				if (selnum < 0)selnum += 3;
+			}
+			else
+			{
+				if (selnum >= itemsize)selnum -= ((itemsize - 1) / 3 + 1) * 3;
 				if (selnum >= itemsize)selnum -= 3;
 				if (selnum < 0)selnum += 3;
 			}
-			if (equipsize)
-			{
-				if (selnum > equipsize)selnum -= (equipsize / 3 + 1) * 3;
-				if (selnum > equipsize)selnum -= 3;
-				if (selnum < 0)selnum += 3;
-			}
 		}
-	}
-	if (KEYMANAGER->isOnceKeyDown('1'))
-	{
-		ITEMMANAGER->addItem("포션");
-		ITEMMANAGER->addItem("밀집모자");
-	}
-	if (KEYMANAGER->isOnceKeyDown('2'))
-	{
-		ITEMMANAGER->addItem("하이포션");
-		ITEMMANAGER->addItem("가죽갑옷");
-	}
-	if (KEYMANAGER->isOnceKeyDown('3'))
-	{
-		ITEMMANAGER->addItem("연막탄");
-		ITEMMANAGER->addItem("방패");
-	}
-	if (KEYMANAGER->isOnceKeyDown('4'))
-	{
-		ITEMMANAGER->addItem("에테르");
-		ITEMMANAGER->addItem("지팡이");
-	}
-	if (KEYMANAGER->isOnceKeyDown('5'))
-	{
-		ITEMMANAGER->addItem("메가포션");
-		ITEMMANAGER->addItem("후드");
 	}
 }
 
@@ -178,9 +154,9 @@ void itemMenu::render()
 			{
 				IMAGEMANAGER->findImage("아이템버튼")->render(getMemDC(), 82 + (int)(i % 3) * 293, 163 + (int)(i / 3) * 79);
 				char str[128];
-				sprintf(str, "%s", ITEMMANAGER->getvequipstring(i).c_str());
+				sprintf(str, "%s", _Item->getequipinventory()[i].c_str());
 				TextOut(getMemDC(), 160 + (int)(i % 3) * 293, 175 + (int)(i / 3) * 79, str, strlen(str));
-				sprintf(str, "%d", ITEMMANAGER->findItem(ITEMMANAGER->getvequipstring(i)).count);
+				sprintf(str, "%d", _Item->findItem(_Item->getequipinventory()[i]).count);
 				TextOut(getMemDC(), 300 + (int)(i % 3) * 293, 175 + (int)(i / 3) * 79, str, strlen(str));
 			}
 		}
@@ -190,9 +166,9 @@ void itemMenu::render()
 			{
 				IMAGEMANAGER->findImage("아이템버튼")->render(getMemDC(), 82 + (int)(i % 3) * 293, 163 + (int)(i / 3) * 79);
 				char str[128];
-				sprintf(str, "%s", ITEMMANAGER->getvitemstring(i).c_str());
+				sprintf(str, "%s", _Item->getiteminventory()[i].c_str());
 				TextOut(getMemDC(), 160 + (int)(i % 3) * 293, 175 + (int)(i / 3) * 79, str, strlen(str));
-				sprintf(str, "%d", ITEMMANAGER->findItem(ITEMMANAGER->getvitemstring(i)).count);
+				sprintf(str, "%d", _Item->findItem(_Item->getiteminventory()[i]).count);
 				TextOut(getMemDC(), 300 + (int)(i % 3) * 293, 175 + (int)(i / 3) * 79, str, strlen(str));
 			}
 		}
