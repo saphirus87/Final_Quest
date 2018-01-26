@@ -33,7 +33,7 @@ void gameMenuScene::update()
 
 void gameMenuScene::render()
 {
-	IMAGEMANAGER->findImage("¸Þ´º¾À")->render(getMemDC(), WINSIZEX / 2 - IMAGEMANAGER->findImage("¸Þ´º¾À")->getWidth() / 2, WINSIZEY / 2 - IMAGEMANAGER->findImage("¸Þ´º¾À")->getHeight() / 2);
+	IMAGEMANAGER->findImage("¸Þ´º¾À")->render(getMemDC(), 0, 0);
 
 	if (_cursorMenuNum == 1)
 	{

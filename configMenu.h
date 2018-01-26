@@ -15,6 +15,7 @@ public:
 	void render();
 
 	void keyControl();
+	//POINT cursorReset(POINT x, POINT y);
 
 	configMenu();
 	~configMenu();

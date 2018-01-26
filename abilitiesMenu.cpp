@@ -28,11 +28,11 @@ void abilitiesMenu::update()
 {
 	if (KEYMANAGER->isOnceKeyDown(VK_BACK))
 	{
-		SCENEMANAGER->changeScene("¸Ş´º¾À");
+		SCENEMANAGER->changeScene("¸Ş´º¾À", FALSE);
 	}
 }
 
 void abilitiesMenu::render() 
 {
-	IMAGEMANAGER->findImage("½ºÅ³¸Ş´º¾À")->render(getMemDC(), WINSIZEX / 2 - IMAGEMANAGER->findImage("½ºÅ³¸Ş´º¾À")->getWidth() / 2, WINSIZEY / 2 - IMAGEMANAGER->findImage("½ºÅ³¸Ş´º¾À")->getHeight() / 2);
+	IMAGEMANAGER->findImage("½ºÅ³¸Ş´º¾À")->render(getMemDC(), 0, 0);
 }

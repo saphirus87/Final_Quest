@@ -202,3 +202,7 @@ void configMenu::keyControl()
 		SCENEMANAGER->changeScene("¸Þ´º¾À", FALSE);
 	}
 }
+
+//void configMenu::cursorReset()
+//{
+//}

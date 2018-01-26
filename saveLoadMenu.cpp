@@ -29,11 +29,11 @@ void saveLoadMenu::update()
 {
 	if (KEYMANAGER->isOnceKeyDown(VK_BACK))
 	{
-		SCENEMANAGER->changeScene("메뉴씬");
+		SCENEMANAGER->changeScene("메뉴씬", FALSE);
 	}
 }
 
 void saveLoadMenu::render()	
 {
-	IMAGEMANAGER->findImage("세이브로드메뉴씬")->render(getMemDC(), WINSIZEX / 2 - IMAGEMANAGER->findImage("세이브로드메뉴씬")->getWidth() / 2, WINSIZEY / 2 - IMAGEMANAGER->findImage("세이브로드메뉴씬")->getHeight() / 2);
+	IMAGEMANAGER->findImage("세이브로드메뉴씬")->render(getMemDC(), 0, 0);
 }
