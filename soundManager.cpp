@@ -152,9 +152,9 @@ void soundManager::play(string keyName, float volume, bool isMusic)
 	{
 		if (keyName == iter->first)
 		{
-			_system->playSound(_sound[count], 0, false, &_channel[count]);
+			_system->playSound(*iter->second, 0, false, &_channel[count]);
 			_channel[count]->setLoopPoints(0, FMOD_TIMEUNIT_MS, 0, FMOD_TIMEUNIT_MS);
-
+			
 			_channel[count]->setVolume(volume);
 
 			if (isMusic)
