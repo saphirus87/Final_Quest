@@ -2,6 +2,10 @@
 #include "gameNode.h"
 
 #define CAMERA_MOVE_SPEED 5.0f
+#define TOWN_LEFT 1050
+#define TOWN_TOP 550
+#define TOWN_SIZE 50
+
 #define PLAYER_MOVE_SPEED 4.0f
 #define PLAYER_WIDTH 28
 #define PLAYER_HEIGHT 46
@@ -23,10 +27,11 @@ enum PLAYER_STATE
 class fieldScene : public gameNode
 {
 private:
-	int _encount;
-	int _playerState;
-	image* _playerImg;
-	animation* _playerAni;
+	int _encount;					// 전투 진입 필요 값
+	int _playerState;				// 플레이어 상태 값
+	image* _playerImg;				// 플레이어 이미지
+	animation* _playerAni;			// 플레이어 애니메이션
+	RECT _townRc;					// 마을 진입 영역
 
 //==================== 애니메이션 변수 ====================
 private:
@@ -54,6 +59,8 @@ public:
 	void update(void);
 	void render(void);
 	
+	void enterTown(void);
+
 	void playerKeyInput(void);
 	void playerMove(void);
 	void playerPixelCollision(void);

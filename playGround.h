@@ -2,6 +2,7 @@
 #include "gameNode.h"
 #include "battleScene.h"
 #include "fieldScene.h"
+#include "townScene.h"
 #include "gameEndingScene.h"
 #include "gameOpenningScene.h"
 #include "gameStartScene.h"

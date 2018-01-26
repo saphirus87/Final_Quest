@@ -30,6 +30,7 @@ HRESULT playGround::init()
 	SCENEMANAGER->addScene("장비메뉴씬", new equipMenu);
 	SCENEMANAGER->addScene("스테이터스메뉴씬", new statusMenu);
 	SCENEMANAGER->addScene("fieldScene", new fieldScene);
+	SCENEMANAGER->addScene("townScene", new townScene);
 	SCENEMANAGER->addScene("battleScene", new battleScene);
 	
 	SCENEMANAGER->changeScene("스타트씬");

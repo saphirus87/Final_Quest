@@ -53,6 +53,7 @@ HRESULT fieldScene::init(void)
 	_encount = 0;
 	_playerAni = KEYANIMANAGER->findAnimation("playerBottomIdle");
 	_playerAni->start();
+	_townRc = RectMake(TOWN_LEFT - _mapMoveX, TOWN_TOP - _mapMoveY, TOWN_SIZE, TOWN_SIZE);
 	//==================== 월드맵 사용 변수 초기화 ====================
 
 	//==================== 테스트 변수 ====================
@@ -84,6 +85,9 @@ void fieldScene::update(void)
 	}
 	
 	KEYANIMANAGER->update();
+
+	_townRc = RectMake(TOWN_LEFT - _mapMoveX, TOWN_TOP - _mapMoveY, TOWN_SIZE, TOWN_SIZE);
+	enterTown();
 }
 
 void fieldScene::render(void)
@@ -94,6 +98,18 @@ void fieldScene::render(void)
 
 	if (_isDebug) Rectangle(getMemDC(), _playerRc.left, _playerRc.top, _playerRc.right, _playerRc.bottom);
 	_playerImg->aniRender(getMemDC(), _playerRc.left, _playerRc.top, _playerAni);
+
+	Rectangle(getMemDC(), _townRc.left, _townRc.top, _townRc.right, _townRc.bottom);
+}
+
+void fieldScene::enterTown(void)
+{
+	if (PtInRect(&_townRc, PointMake(_playerRc.left + PLAYER_WIDTH / 2, _playerRc.top + PLAYER_HEIGHT * 3 / 4)))
+	{
+		SCENEMANAGER->changeScene("townScene", FALSE);
+		_x = TOWN_LEFT;
+		_y = TOWN_TOP - 60;
+	}
 }
 
 void fieldScene::playerKeyInput(void)
@@ -149,9 +165,6 @@ void fieldScene::playerKeyInput(void)
 		_playerAni = KEYANIMANAGER->findAnimation("playerBottomIdle");
 		_playerAni->start();
 	}
-
-
-
 }
 
 void fieldScene::playerMove(void)

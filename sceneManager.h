@@ -44,5 +44,7 @@ public:
 	//남발하면 안되는데, 구조상 왠지 1~2개정도는 해두면 좋을 것 같으면 해도됨
 	friend DWORD CALLBACK loadingThread(LPVOID prc);
 
+	gameNode* findScene(string sceneKey) { return _mSceneList.find(sceneKey)->second; }
+
 };
 
