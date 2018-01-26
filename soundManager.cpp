@@ -26,23 +26,6 @@ HRESULT soundManager::init()
 	ZeroMemory(_channel, sizeof(_channel));
 
 
-	_maxCount = 0;
-	_currentPitch = 1.0f;
-	_currentPan = 0;
-
-
-	//로우패스 필터
-	_system->createDSPByType(FMOD_DSP_TYPE_LOWPASS, &dspLowPass);
-	//하이패스필터
-	_system->createDSPByType(FMOD_DSP_TYPE_HIGHPASS, &dspHighPass);
-	// 플랜지 필터
-	_system->createDSPByType(FMOD_DSP_TYPE_FLANGE, &dspFlange);
-	// 에코 필터
-	_system->createDSPByType(FMOD_DSP_TYPE_ECHO, &dspEcho);
-
-
-	//실험을 시작한다.
-	_system->createDSPByType(FMOD_DSP_TYPE_OSCILLATOR, &_dsp);
 
 
 	//마스터그룹 추가된 모든 음악을 조절가능
@@ -59,10 +42,7 @@ HRESULT soundManager::init()
 
 	
 	_system->createSoundGroup("soundMusic", &_musicSound);
-	
-	
-	//주파수~~~
-	_system->createGeometry(1, 3, &_geometry);
+
 
 
 
@@ -89,8 +69,8 @@ void soundManager::release()
 
 	//메모리 지워준다
 	//배열이므로
-	SAFE_DELETE(_channel);
-	SAFE_DELETE(_sound);
+	SAFE_DELETE_ARRAY(_channel);
+	SAFE_DELETE_ARRAY(_sound);
 
 	//마지막으로 FMOD 사운드 시스템 닫아줌
 	if (_system != NULL)
@@ -120,7 +100,6 @@ void soundManager::addSound(string keyName, string soundName, bool bgm, bool loo
 		{
 			_system->createSound(soundName.c_str(), FMOD_LOOP_NORMAL , NULL, &_sound[_mTotalSounds.size()]);
 		}
-		_maxCount++;
 	}
 	else
 	{
@@ -132,7 +111,6 @@ void soundManager::addSound(string keyName, string soundName, bool bgm, bool loo
 		{
 			_system->createSound(soundName.c_str(), FMOD_DEFAULT , NULL, &_sound[_mTotalSounds.size()]);
 		}
-		_maxCount++;
 	}
 
 	_mTotalSounds.insert(make_pair(keyName, &_sound[_mTotalSounds.size()]));
@@ -265,42 +243,6 @@ bool soundManager::isPauseSound(string keyName)
 }
 
 //준우의 사운드매니저!!!!!!!!!!!!!!!!!!!!!!!!!!!!//준우의 사운드매니저!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-
-//채널 뮤직그룹에 추가
-void soundManager::addMusicGroup(string keyName)
-{
-	arrSoundsIter iter = _mTotalSounds.begin();
-
-	int count = 0;
-
-	for (iter; iter != _mTotalSounds.end(); ++iter, count++)
-	{
-		if (keyName == iter->first)
-		{
-			_channel[count]->setChannelGroup(_musicGroup);
-			break;
-		}
-	}
-}
-
-//채널 이펙트그룹에 추가
-void soundManager::addEffectGroup(string keyName)
-{
-	arrSoundsIter iter = _mTotalSounds.begin();
-
-	int count = 0;
-
-	for (iter; iter != _mTotalSounds.end(); ++iter, count++)
-	{
-		if (keyName == iter->first)
-		{
-		_channel[count]->setChannelGroup(_effectGroup);
-		break;
-		}
-	}
-}
-
 
 
 
@@ -442,51 +384,15 @@ void soundManager::setPan(string keyName, float panValue)
 	{
 		if (keyName == iter->first)
 		{
-	_channel[count]->setPan(panValue);
-		break;
+			_channel[count]->setPan(panValue);
+			break;
 		}
 	}
 }
-
-//오른쪽으로 한칸씩 
-void soundManager::rightPan(string keyName)
-{
-	arrSoundsIter iter = _mTotalSounds.begin();
-	int count = 0;
-
-	for (iter; iter != _mTotalSounds.end(); ++iter, count++)
-	{
-		if (keyName == iter->first)
-		{
-	_currentPan += 0.05;
-	_masterGroup->setPan(_currentPan);
-	break;
-		}
-	}
-}
-
-
-//왼쪽으로 한칸씩 팬설정
-void soundManager::leftPan(string keyName)
-{
-	arrSoundsIter iter = _mTotalSounds.begin();
-	int count = 0;
-
-	for (iter; iter != _mTotalSounds.end(); ++iter, count++)
-	{
-		if (keyName == iter->first)
-		{
-	_currentPan -= 0.05;
-	_masterGroup->setPan(_currentPan);
-	break;
-		}
-	}
-}
-
 
 
 //반사음설정
-void soundManager::ssss(string keyName)
+void soundManager::setReverb(string keyName)
 {
 	arrSoundsIter iter = _mTotalSounds.begin();
 	int count = 0;
