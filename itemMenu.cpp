@@ -17,9 +17,6 @@ HRESULT itemMenu::init()
 	IMAGEMANAGER->addImage("아이템메뉴씬", ".\\SceneImage\\itemMenu.bmp", 1024, 760, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("아이템버튼", ".\\SceneImage\\button.bmp", 273, 59, true, RGB(255, 0, 255));
 	
-	_Item = new Item;
-	_Item->init();
-
 	seltype = false;
 
 	waitX = 25;
@@ -74,8 +71,8 @@ void itemMenu::update()
 	}
 	else
 	{
-		itemsize = _Item->iteminventory()->size();
-		equipsize = _Item->equipinventory()->size();
+		itemsize = ITEMMANAGER->getiteminventory()->size();
+		equipsize = ITEMMANAGER->getequipinventory()->size();
 		if (KEYMANAGER->isOnceKeyDown(VK_BACK) || (!itemsize && !waitselnum) || (!equipsize && waitselnum))
 		{
 			selX = 25;
@@ -142,33 +139,35 @@ void itemMenu::update()
 	}
 	if (KEYMANAGER->isOnceKeyDown('1'))
 	{
-		_Item->addItem("포션");
-		_Item->addItem("밀집모자");
+		ITEMMANAGER->addItem("포션");
+		ITEMMANAGER->addItem("밀집모자");
 	}
 	if (KEYMANAGER->isOnceKeyDown('2'))
 	{
-		_Item->addItem("하이포션");
-		_Item->addItem("가죽갑옷");
+		ITEMMANAGER->addItem("하이포션");
+		ITEMMANAGER->addItem("가죽갑옷");
 	}
 	if (KEYMANAGER->isOnceKeyDown('3'))
 	{
-		_Item->addItem("연막탄");
-		_Item->addItem("방패");
+		ITEMMANAGER->addItem("연막탄");
+		ITEMMANAGER->addItem("방패");
 	}
 	if (KEYMANAGER->isOnceKeyDown('4'))
 	{
-		_Item->addItem("에테르");
-		_Item->addItem("지팡이");
+		ITEMMANAGER->addItem("에테르");
+		ITEMMANAGER->addItem("지팡이");
 	}
 	if (KEYMANAGER->isOnceKeyDown('5'))
 	{
-		_Item->addItem("메가포션");
-		_Item->addItem("후드");
+		ITEMMANAGER->addItem("메가포션");
+		ITEMMANAGER->addItem("후드");
 	}
 }
 
 void itemMenu::render()	
 {
+	SetTextColor(getMemDC(), RGB(255, 255, 255));
+	SetBkMode(getMemDC(), 0);
 	IMAGEMANAGER->findImage("아이템메뉴씬")->render(getMemDC(), (WINSIZEX - 1024) / 2, (WINSIZEY - 760) / 2);
 	IMAGEMANAGER->findImage("선택")->alphaRender(getMemDC(), waitX, waitY, 255 - seltype * 125);
 	if (seltype)
@@ -179,9 +178,9 @@ void itemMenu::render()
 			{
 				IMAGEMANAGER->findImage("아이템버튼")->render(getMemDC(), 82 + (int)(i % 3) * 293, 163 + (int)(i / 3) * 79);
 				char str[128];
-				sprintf(str, "%s", _Item->vequipstring(i).c_str());
+				sprintf(str, "%s", ITEMMANAGER->getvequipstring(i).c_str());
 				TextOut(getMemDC(), 160 + (int)(i % 3) * 293, 175 + (int)(i / 3) * 79, str, strlen(str));
-				sprintf(str, "%d", _Item->findItem(_Item->vequipstring(i)).count);
+				sprintf(str, "%d", ITEMMANAGER->findItem(ITEMMANAGER->getvequipstring(i)).count);
 				TextOut(getMemDC(), 300 + (int)(i % 3) * 293, 175 + (int)(i / 3) * 79, str, strlen(str));
 			}
 		}
@@ -191,9 +190,9 @@ void itemMenu::render()
 			{
 				IMAGEMANAGER->findImage("아이템버튼")->render(getMemDC(), 82 + (int)(i % 3) * 293, 163 + (int)(i / 3) * 79);
 				char str[128];
-				sprintf(str, "%s", _Item->vitemstring(i).c_str());
+				sprintf(str, "%s", ITEMMANAGER->getvitemstring(i).c_str());
 				TextOut(getMemDC(), 160 + (int)(i % 3) * 293, 175 + (int)(i / 3) * 79, str, strlen(str));
-				sprintf(str, "%d", _Item->findItem(_Item->vitemstring(i)).count);
+				sprintf(str, "%d", ITEMMANAGER->findItem(ITEMMANAGER->getvitemstring(i)).count);
 				TextOut(getMemDC(), 300 + (int)(i % 3) * 293, 175 + (int)(i / 3) * 79, str, strlen(str));
 			}
 		}
