@@ -243,6 +243,9 @@
     <ClInclude Include="shopScene.h">
       <Filter>playGround\Scene\mainGameScene</Filter>
     </ClInclude>
+    <ClInclude Include="statusMenu.h">
+      <Filter>playGround\Scene\MenuScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -397,6 +400,9 @@
     </ClCompile>
     <ClCompile Include="shopScene.cpp">
       <Filter>playGround\Scene\mainGameScene</Filter>
+    </ClCompile>
+    <ClCompile Include="statusMenu.cpp">
+      <Filter>playGround\Scene\MenuScene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
