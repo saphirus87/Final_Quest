@@ -1,5 +1,7 @@
 #pragma once
 #include "gameNode.h"
+#define MIN_STMN 0.01f
+#define MAX_STMN 0.057f
 enum STATE
 {
 	LIFE_NONE,
@@ -47,8 +49,8 @@ protected:
 	//알파값받을 변수
 	int _alpha;
 
+	int aimPlayer;
 	int x, y;
-
 public:
 	enemy();
 	~enemy();
@@ -61,12 +63,11 @@ public:
 	virtual void endAttack();
 	virtual void enemySound();
 
-	virtual void SetPostion(int xx, int yy)
+	virtual void SetPosition(int positionX, int positionY)
 	{
-		x = xx;
-		y = yy;
+		x = positionX;
+		y = positionY;
 	}
-
 	void enemysetCurrentHp(int CurrentHp) { _curruntHp = CurrentHp; }
 	int enemygetCurrentHp(void) { return _curruntHp; }
 

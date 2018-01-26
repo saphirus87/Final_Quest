@@ -103,8 +103,11 @@ void knight::render(HDC hdc)
 		break;
 	}
 
-
 	if (attack_state == ATTACK)
-		img_attack->frameRender(hdc, x + 300, y, img_attack->getFrameX(), img_attack->getFrameY());
-		//플레이어 위치에 하게 설정할꺼에용
+	{
+		//update->num =rnd->  if(num==1)
+		if (aimPlayer == 1)  img_attack->frameRender(hdc, x + 300, 150, img_attack->getFrameX(), img_attack->getFrameY());
+		else if (aimPlayer == 2) img_attack->frameRender(hdc, x + 300, 300, img_attack->getFrameX(), img_attack->getFrameY());
+		else img_attack->frameRender(hdc, x + 300, 450, img_attack->getFrameX(), img_attack->getFrameY());
+	}
 }

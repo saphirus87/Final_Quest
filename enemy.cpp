@@ -18,7 +18,7 @@ HRESULT enemy::init()
 	attack_state = NONE;
 	_alpha = 255;
 	frameCount = count = 0;
-	_stmn = RND->getFromFloatTo(0.01f, 0.05f);
+	_stmn = RND->getFromFloatTo(MIN_STMN , MAX_STMN);
 	return S_OK;
 }
 
@@ -52,6 +52,7 @@ void enemy::Attack()
 		{
 			_startTime = 0;
 			isAttack = true;
+			aimPlayer = RND->getFromIntTo(1, 3);
 		}
 		if (!isAttack)
 			_startTime += _stmn;

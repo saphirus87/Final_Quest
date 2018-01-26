@@ -45,7 +45,7 @@ void enemyManager::set_wolf(int x,int y)
 	enemy* _wolf;
 	_wolf = new wolf;
 	_wolf->init();
-	_wolf->SetPostion(x, y);
+	_wolf->SetPosition(x, y);
 	venemy.push_back(_wolf);
 
 }
@@ -56,7 +56,7 @@ void enemyManager::set_knight(int x,int y)
 	enemy* _knight;
 	_knight = new knight;
 	_knight->init();
-	_knight->SetPostion(x, y);
+	_knight->SetPosition(x, y);
 	venemy.push_back(_knight);
 
 }
@@ -67,7 +67,7 @@ void enemyManager::set_mammos(int x,int y)
 	enemy* _mammos;
 	_mammos = new mammos;
 	_mammos->init();
-	_mammos->SetPostion(x, y);
+	_mammos->SetPosition(x, y);
 	venemy.push_back(_mammos);
 }
 
@@ -76,7 +76,7 @@ void enemyManager::set_boss(int x,int y)
 	enemy* _boss;
 	_boss = new Boss;
 	_boss->init();
-	_boss->SetPostion(x, y);
+	_boss->SetPosition(x, y);
 	venemy.push_back(_boss);
 }
 

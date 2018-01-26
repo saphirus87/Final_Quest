@@ -84,13 +84,13 @@ void Boss::bossAttack()
 		if (!isAttack)
 			_startTime += boss_StartTime;
 
-		else if (isAttack)
+		else if (isAttack) 
 		{
 			_attack = RND->getFromIntTo(0, 5);
 			if (_attack = 0 && _curruntMp >= 20)
 			{
 				attack_state = SKILL;      //½ºÅ³
-				SOUNDMANAGER->play("71.boss_reflex", 1.0f);
+				SOUNDMANAGER->play("71.boss_reflex", 0.7f);
 				_curruntMp -= 20;
 				isAttack = false;
 			}

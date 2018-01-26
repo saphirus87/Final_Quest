@@ -98,7 +98,12 @@ void wolf::render(HDC hdc)
 		break;
 	}
 
-	if (attack_state == ATTACK)                                  //x값 플레이어 위치 받아서 나타내게 밑에꺼 임시값
-		img_attack->frameRender(hdc, x+300, y, img_attack->getFrameX(), img_attack->getFrameY());
+	if (attack_state == ATTACK)
+	{
+		//update->num =rnd->  if(num==1)
+		if (aimPlayer == 1)  img_attack->frameRender(hdc, x + 300, 150, img_attack->getFrameX(), img_attack->getFrameY());
+		else if (aimPlayer == 2) img_attack->frameRender(hdc, x + 300, 300, img_attack->getFrameX(), img_attack->getFrameY());
+		else img_attack->frameRender(hdc, x + 300, 450, img_attack->getFrameX(), img_attack->getFrameY());
+	}
 	
 }
