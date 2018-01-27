@@ -8,9 +8,11 @@ public:
 	player2();
 	~player2();
 
-	HRESULT init();
-	void release();
-	void update();
-	void render(void);
+	virtual HRESULT init();
+	virtual void release();
+	virtual void update();
+	virtual void render(void);
+	
+	virtual void levelUp(void);
 };
 

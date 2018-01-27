@@ -28,6 +28,7 @@ private:
 	RECT _rcProgress;
 	int _x, _y;
 	float _width;
+	float _maxWidth;
 
 	image* _progressBarTop;
 	image* _progressBarBottom;
@@ -37,10 +38,14 @@ public:
 	~progressBar();
 
 	HRESULT init(int x, int y, int width, int height);
+	HRESULT frontBarInit(string frontBarKey, const char* frontBarImageName, int x, int y, int width, int height);
+	HRESULT backBarInit(string backBarKey, const char* backBarImageName, int x, int y, int width, int height);
 	void release();
 	void update();
 	void render();
 
+	void frontBarRender(void);
+	void backBarRender(void);
 	void setGauge(float currentGauge, float maxGauge);
 
 	void setX(int x) { _x = x; }

@@ -29,6 +29,15 @@ HRESULT player1::init()
 
 	player::init();
 
+	// 플레이어1 능력치 초기화
+	_currentHp = _maxHp = 100;
+	_currentMp = _maxMp = 100;
+	_str = 10;
+	_int = 10;
+	_agi = 10;
+	_def = 2;
+	_m_def = 2;
+
 	_name = "Tina";
 	_partyPos = 1;
 
@@ -49,4 +58,15 @@ void player1::update()
 void player1::render(void)
 {
 	player::render();
+}
+
+void player1::levelUp(void)
+{
+	_maxHp += 10;
+	_maxMp += 10;
+	_str += 2;
+	_int += 2;
+	_agi += 2;
+
+	player::levelUp();
 }

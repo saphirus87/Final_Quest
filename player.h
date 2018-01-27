@@ -1,5 +1,6 @@
 #pragma once
 #include "gameNode.h"
+#include "progressBar.h"
 
 #define COMMAND1_POSY 580
 #define COMMAND2_POSY 620
@@ -53,12 +54,14 @@ protected:
 	int _str, _int, _agi;				// 힘, 지력, 민첩
 	float _curActGauge, _maxActGauge;	// 속도 타이머 _curActGauge = 현재 행동 게이지 / _maxActGauge = 최대 행동 게이지  
 										// _curActGauge 가 0.1씩 올라 _maxActGauge에 도달하면 행동 실행
+	progressBar* _actGauge;				// 행동 게이지
+	progressBar* _completeActGauge;		// 행동 게이지 최대
 
 	int _x, _y;							// 플레이어 x,y 좌표
 	int _frameX, _frameY;				// 프레임 좌표
 						
-	int _maxHp, _curruntHp;				// 체력
-	int _maxMp, _curruntMp;				// 마나
+	int _maxHp, _currentHp;				// 체력
+	int _maxMp, _currentMp;				// 마나
 	int _mp;							// 소비마나
 	int _damage, _m_Damage;				// 물리공격력, 마법공격력
 	int _min, _max;						// 물리 최소공격력, 최대공격력
@@ -67,7 +70,7 @@ protected:
 	int _gold;							// 골드
 	int _exp;							// 경험치
 	int _maxExp;						// 최대경험치
-	int _curruntExp;					// 현재경험치
+	int _currentExp;					// 현재경험치
 
 	bool _isDead;						// 사망유무 true = 생존 , false 죽음
 
@@ -93,12 +96,14 @@ public:
 	virtual void release();
 	virtual void update();
 	virtual void render(void) = 0;
+	void statusRender(void);
+	void equipRender(void);
 
 	virtual void drawCommand(void);
 	virtual void selectCommand(void);
 	virtual void levelUp(void);
 
-	void drawPlayerName(void);
+	void drawPlayerInfoInBattle(void);
 	void increaseActGauge(void);
 
 public:
@@ -121,14 +126,14 @@ public:
 	inline void setMaxHp(int MaxHp) { _maxHp = MaxHp; }
 	inline int getMaxHp(void) { return _maxHp; }
 
-	inline void setCurrentHp(int CurrentHp) { _curruntHp = CurrentHp; }
-	inline int getCurrentHp(void) { return _curruntHp; }
+	inline void setCurrentHp(int CurrentHp) { _currentHp = CurrentHp; }
+	inline int getCurrentHp(void) { return _currentHp; }
 
 	inline void setMaxMp(int MaxMp) { _maxHp = MaxMp; }
 	inline int getMaxMp(void) { return _maxMp; }
 
-	inline void setCurrentMp(int CurrentMp) { _curruntMp = CurrentMp; }
-	inline int getCurrentMp(void) { return _curruntMp; }
+	inline void setCurrentMp(int CurrentMp) { _currentMp = CurrentMp; }
+	inline int getCurrentMp(void) { return _currentMp; }
 
 	inline void setMp(int Mp) { _mp = Mp; }
 	inline int getMp(void) { return _mp; }
@@ -154,8 +159,8 @@ public:
 	inline void setMaxExp(int MaxExp) { _maxExp = MaxExp; }
 	inline int getMaxExp(void) { return _maxExp; }
 
-	inline void setCurrentExp(int CurrentExp) { _curruntExp = CurrentExp; }
-	inline int getCurrentExp(void) { return _curruntExp; }
+	inline void setCurrentExp(int CurrentExp) { _currentExp = CurrentExp; }
+	inline int getCurrentExp(void) { return _currentExp; }
 
 	inline void setIsDead(bool IsDead) { _isDead = IsDead; }
 	inline bool getIsDead(void) { return _isDead; }
