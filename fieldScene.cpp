@@ -96,7 +96,13 @@ void fieldScene::render(void)
 	IMAGEMANAGER->render("worldMapSea", getMemDC(), 0, 0, _mapMoveX, _mapMoveY, WINSIZEX, WINSIZEY);
 	IMAGEMANAGER->render("worldMap", getMemDC(), 0, 0, _mapMoveX, _mapMoveY, WINSIZEX, WINSIZEY);
 
-	if (_isDebug) Rectangle(getMemDC(), _playerRc.left, _playerRc.top, _playerRc.right, _playerRc.bottom);
+	if (_isDebug)
+	{
+		char encountNum[128];
+		wsprintf(encountNum, "encount : %d", _encount);
+		Rectangle(getMemDC(), _playerRc.left, _playerRc.top, _playerRc.right, _playerRc.bottom);
+		TextOut(getMemDC(), _playerRc.right, _playerRc.top, encountNum, strlen(encountNum));
+	}
 	_playerImg->aniRender(getMemDC(), _playerRc.left, _playerRc.top, _playerAni);
 
 	Rectangle(getMemDC(), _townRc.left, _townRc.top, _townRc.right, _townRc.bottom);

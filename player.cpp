@@ -18,7 +18,8 @@ HRESULT player::init()
 	IMAGEMANAGER->addImage("battleSelectScene", ".//userInterface//battleSelectScene.bmp", 341, 200, true, RGB(255, 0, 255));
 
 	// 배틀 커맨드 사용 가능 불가로 초기화
-	_isCommandReady = true;
+	_isCommandReady = false;
+	// 초기 커맨드 위치는 기본공격
 	_curCommand = ATTACK_COMMAND;
 
 	_dir = PLAYER_DOWN;
@@ -26,9 +27,10 @@ HRESULT player::init()
 	_curruntHp = _maxHp = 100;
 	_curruntMp = _maxMp = 100;
 	_str = _int = 10;
+	_agi = 10;
 	_level = 1;
-	_startTime = 0;
-	_endTime = 5;
+	_curActGauge = 0;
+	_maxActGauge = 5;
 	_def = 0;
 	_m_def = 0;
 	_maxExp = 100;
@@ -39,6 +41,7 @@ HRESULT player::init()
 	_y = WINSIZEY / 2;
 	_frameX = 0;
 
+	// 사용 가능 커맨드
 	_enableCommand = ATTACK_COMMAND | ITEM_COMMAND | MAGIC_COMMAND | RUN_COMMAND;
 
 	return S_OK;
@@ -62,6 +65,7 @@ void player::render(void)
 	SetBkMode(getMemDC(), TRANSPARENT);
 	SetTextColor(getMemDC(), RGB(220, 220, 220));
 	if (_isCommandReady) drawCommand();
+	drawPlayerName();
 
 	SelectObject(getMemDC(), oFont);
 	DeleteObject(hFont);
@@ -117,4 +121,21 @@ void player::selectCommand(void)
 void player::levelUp(void)
 {
 
+}
+
+void player::drawPlayerName(void)
+{
+	if (_isCommandReady) SetTextColor(getMemDC(), RGB(180, 180, 40));
+
+	if (_partyPos == 1) TextOut(getMemDC(), 450, PLAYER1_NAME_Y, _name.c_str(), strlen(_name.c_str()));
+	if (_partyPos == 2) TextOut(getMemDC(), 450, PLAYER2_NAME_Y, _name.c_str(), strlen(_name.c_str()));
+	if (_partyPos == 3) TextOut(getMemDC(), 450, PLAYER3_NAME_Y, _name.c_str(), strlen(_name.c_str()));
+
+	if (_isCommandReady) SetTextColor(getMemDC(), RGB(220, 220, 220));
+}
+
+void player::increaseActGauge(void)
+{
+	if (_curActGauge < MAX_ACT_GAUGE) _curActGauge += _agi;
+	else _isCommandReady = true;
 }

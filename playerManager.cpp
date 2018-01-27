@@ -49,3 +49,23 @@ void playerManager::render()
 		_vPlayer[i]->render();
 	}
 }
+
+void playerManager::updateActGauge(void)
+{
+	for (int i = 0; i < _vPlayer.size(); i++)
+	{
+		_vPlayer[i]->increaseActGauge();
+	}
+}
+
+BOOL playerManager::isCommandReady(void)
+{
+	BOOL playerReady = false;
+
+	for (int i = 0; i < _vPlayer.size(); i++)
+	{
+		playerReady |= _vPlayer[i]->getIsCommandReady();
+	}
+
+	return playerReady;
+}

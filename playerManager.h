@@ -21,5 +21,8 @@ public:
 	void release();
 	void update();
 	void render();
+
+	void updateActGauge(void);
+	BOOL isCommandReady(void);
 };
 

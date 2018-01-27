@@ -73,9 +73,11 @@ void battleScene::update(void)
 		SCENEMANAGER->changeScene("fieldScene",false);
 	}
 	em->update();
-	_pm->update();
 	//스타트타임이 엔드타임이 되서 on이되면 1,2,3중에 하나뽑는다
 	//1이면 150 2면 300 3이면 450에 공격좌표들어가게 ㄱㄱ
+
+	_pm->update();
+	if (!_pm->isCommandReady()) _pm->updateActGauge();
 }
 
 void battleScene::render(void)

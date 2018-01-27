@@ -29,6 +29,9 @@ HRESULT player1::init()
 
 	player::init();
 
+	_name = "Tina";
+	_partyPos = 1;
+
 	return S_OK;
 }
 void player1::release()
