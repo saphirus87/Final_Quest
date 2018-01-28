@@ -14,7 +14,23 @@ player2::~player2()
 
 HRESULT player2::init()
 {
+	//===================================== 플레이어 1 이미지 추가 =====================================
 
+	IMAGEMANAGER->addFrameImage("player2Move", ".//playerImage//player2Move.bmp", 78, 172, 3, 4, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("player2Battle_Idle", ".//playerImage//player2_attack_idle.bmp", 25, 38, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("player2Die", ".//playerImage//player2_die.bmp", 42, 22, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("player2Hurt", ".//playerImage//player2_hurt.bmp", 25, 41, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("player2Skill", ".//playerImage//player2_skill.bmp", 50, 40, 2, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("player2Win", ".//playerImage//player2_win_motion.bmp", 100, 46, 4, 1, true, RGB(255, 0, 255));
+
+
+	IMAGEMANAGER->addImage("player2face", ".//playerImage//player2face.bmp", 100, 100, true, RGB(255, 0, 255));
+
+	//===================================== 플레이어 1 이미지 추가 =====================================
+
+	//===================================== 플레이어 1 애니메이션 추가 =====================================
+
+	//===================================== 플레이어 1 애니메이션 추가 =====================================
 	player::init();
 
 	// 플레이어2 능력치 초기화
