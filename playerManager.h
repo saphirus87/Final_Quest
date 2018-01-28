@@ -26,5 +26,6 @@ public:
 	BOOL isCommandReady(void);
 
 	vector<player*> getvplayer() { return _vPlayer; }
+	void resetActGauge(void);
 };
 
