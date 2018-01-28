@@ -75,5 +75,6 @@ void playerManager::resetActGauge(void)
 	for (int i = 0; i < _vPlayer.size(); i++)
 	{
 		_vPlayer[i]->setCurActGauge(0);
+		_vPlayer[i]->setIsCommandReady(false);
 	}
 }

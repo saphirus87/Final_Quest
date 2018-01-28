@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "fieldScene.h"
 #include "battleScene.h"
+#include "playerManager.h"
 
 fieldScene::fieldScene()
 {
@@ -272,8 +273,8 @@ void fieldScene::increasedEncount(void)
 	else if (_encount >= ENCOUNT_MAX_VALUE)
 	{
 		//배틀씬에서 에너미 랜덤받아오게하려면 펄스빼야되서 일단뺏어요
+		_pm->resetActGauge();
 		SCENEMANAGER->changeScene("battleScene");
-		((battleScene*)SCENEMANAGER->findScene("battleScene"))->setPlayerManagerAddressLink(_pm);
 		_encount = 0;
 	}
 }

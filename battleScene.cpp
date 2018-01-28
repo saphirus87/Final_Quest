@@ -55,16 +55,6 @@ HRESULT battleScene::init(void)
 		default:
 			break;
 		}
-
-	}
-
-	if (_isPMInit)
-	{
-		_isPMInit = !_isPMInit;			// 최초 씬 초기화시 PM이 없기때문에
-	}
-	else
-	{
-		_pm->resetActGauge();			// 전투 진입시 플레이어 행동 게이지 초기화
 	}
 	
 	return S_OK;
