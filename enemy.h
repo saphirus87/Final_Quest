@@ -2,6 +2,7 @@
 #include "gameNode.h"
 #define MIN_STMN 0.01f
 #define MAX_STMN 0.057f
+#define ALPHA_MAX_VALUE 255
 enum STATE
 {
 	LIFE_NONE,
@@ -15,10 +16,24 @@ enum ATTACK_STATE
 	DEFENSE,
 	NONE
 };
+/////////////////////////////// 배틀씬에서 담아서 쓸 변수들
+enum DAMAGETYPE
+{
+	SKILL_DAMAGE,
+	NORMAL_DAMAGE
+};
+struct BATTLE
+{
+	int playerTarget;
+	DAMAGETYPE damagetype;
+	int totalDamage;
+};
+///////////////////////////////
 class enemy : public gameNode
 {
 protected:
-
+	string _name;
+	BATTLE battle;
 	int frameCount, count;
 	STATE state;
 	ATTACK_STATE attack_state;
@@ -51,6 +66,7 @@ protected:
 
 	int aimPlayer;
 	int x, y;
+	int namePositionX, namePositionY;
 public:
 	enemy();
 	~enemy();
@@ -59,10 +75,16 @@ public:
 	virtual void release();
 	virtual void update();
 	virtual void render(HDC hdc);
-	virtual void Attack();
+	virtual void Attack(int damage);
 	virtual void endAttack();
 	virtual void enemySound();
 
+	virtual void SetNamePosition(int x, int y)
+	{
+		namePositionX = x;
+		namePositionY = y;
+		
+	}
 	virtual void SetPosition(int positionX, int positionY)
 	{
 		x = positionX;
@@ -71,16 +93,21 @@ public:
 	void enemysetCurrentHp(int CurrentHp) { _curruntHp = CurrentHp; }
 	int enemygetCurrentHp(void) { return _curruntHp; }
 
-	void enemysetMaxMp(int MaxMp) { _maxHp = MaxMp; }
-	int enemygetMaxMp(void) { return _maxMp; }
-
 	void enemysetDamage(int Damage) { _damage = Damage; }
 	int enemygetDamage(void) { return _damage; }
 
 	void enemysetMDamage(int m_damage) { _m_Damage = m_damage; }
 	int enemygetMDamage(void) { return _m_Damage; }
 
+	int enemygetPlayerTarget(void) { return battle.playerTarget; }
+
 	void setExp(int Exp) { _exp = Exp; }
 	int getExp(void) { return _exp; }
+
+	inline BATTLE _battle() { return battle; }
+	ATTACK_STATE enemygetAttackState() { return attack_state; }
+	
+
+	void nameInfo();
 };
 

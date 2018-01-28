@@ -23,9 +23,7 @@ void enemyManager::release()
 void enemyManager::update()
 {
 	for (vienemy = venemy.begin(); vienemy != venemy.end(); vienemy++)
-	{
-		//내가 플레이어 때려서 플레이어 피다르는 함수
-		//
+	{				
 		(*vienemy)->update();
 	}
 }
@@ -39,35 +37,38 @@ void enemyManager::render()
 }
 
 
-void enemyManager::set_wolf(int x,int y)
+void enemyManager::set_wolf(int x,int y,int nameX,int nameY)
 {
 	//셋팅값
 	enemy* _wolf;
 	_wolf = new wolf;
 	_wolf->init();
 	_wolf->SetPosition(x, y);
+	_wolf->SetNamePosition(nameX, nameY);
 	venemy.push_back(_wolf);
 
 }
 
-void enemyManager::set_knight(int x,int y)
+void enemyManager::set_knight(int x,int y,int nameX,int nameY)
 {
 	//셋팅값
 	enemy* _knight;
 	_knight = new knight;
 	_knight->init();
 	_knight->SetPosition(x, y);
+	_knight->SetNamePosition(nameX, nameY);
 	venemy.push_back(_knight);
 
 }
 
-void enemyManager::set_mammos(int x,int y)
+void enemyManager::set_mammos(int x,int y,int nameX,int nameY)
 {
 	//셋팅값
 	enemy* _mammos;
 	_mammos = new mammos;
 	_mammos->init();
 	_mammos->SetPosition(x, y);
+	_mammos->SetNamePosition(nameX,nameY);
 	venemy.push_back(_mammos);
 }
 

@@ -5,8 +5,6 @@
 #include "knight.h"
 #include "mammos.h"//
 #include "boss.h"
-
- 
 class enemyManager : public gameNode
 {
 private:
@@ -15,6 +13,8 @@ private:
 
 	vV venemy;
 	viV vienemy;
+
+	BATTLE battle;
 
 public:
 	enemyManager();
@@ -25,10 +25,12 @@ public:
 	void update();
 	void render();
 
-	void set_wolf(int x,int y);
-	void set_knight(int x,int y);
-	void set_mammos(int x,int y);
+	void set_wolf(int x,int y,int nameX,int nameY);
+	void set_knight(int x,int y,int nameX,int nameY);
+	void set_mammos(int x,int y,int nameX,int nameY);
 	void set_boss(int x,int y);
+	vector<enemy*> getVenemy() { return venemy; }
+	vector<enemy*>::iterator getVienemy() { return vienemy; }
 
 	void Hit();
 	void enemyErase();

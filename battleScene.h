@@ -6,12 +6,11 @@
 typedef void(*ACTION_FUNTION)(void*, void*);
 
 class playerManager;
-
 class battleScene : public gameNode
 {
 private:
 	vector<CALLBACK_FUNCTION> _vActionList;
-	enemyManager* em;
+	enemyManager* _em;
 	playerManager* _pm;
 
 public:
@@ -36,5 +35,7 @@ public:
 	void increasedActionGauge(void);
 
 	void setPlayerManagerAddressLink(playerManager* pm) { _pm = pm; }
+
+	void enemyPositionSetting();
 };
 

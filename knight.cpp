@@ -56,6 +56,8 @@ HRESULT knight::init()
 	_gold = RND->getFromFloatTo(_MINgold, _MAXgold);
 	//경험치
 	_exp = 17;
+
+	_name = "knight";
 	return S_OK;
 }
 
@@ -65,8 +67,12 @@ void knight::release()
 
 void knight::update()
 {
-	enemy::update();
-
+	count++;
+	if (count % 40 == 0)
+	{
+		_damage = RND->getFromIntTo(_MIN, _MAX);
+	}
+	Attack(_damage);
 	//공격 프레임
 	if (attack_state==ATTACK)
 	{
@@ -105,9 +111,9 @@ void knight::render(HDC hdc)
 
 	if (attack_state == ATTACK)
 	{
-		//update->num =rnd->  if(num==1)
-		if (aimPlayer == 1)  img_attack->frameRender(hdc, x + 300, 150, img_attack->getFrameX(), img_attack->getFrameY());
-		else if (aimPlayer == 2) img_attack->frameRender(hdc, x + 300, 300, img_attack->getFrameX(), img_attack->getFrameY());
+		if (battle.playerTarget == 1)  img_attack->frameRender(hdc, x + 300, 150, img_attack->getFrameX(), img_attack->getFrameY());
+		else if (battle.playerTarget == 2) img_attack->frameRender(hdc, x + 300, 300, img_attack->getFrameX(), img_attack->getFrameY());
 		else img_attack->frameRender(hdc, x + 300, 450, img_attack->getFrameX(), img_attack->getFrameY());
 	}
+	TextOut(hdc, 20, namePositionY, "knight", strlen("knight"));
 }

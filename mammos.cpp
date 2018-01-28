@@ -36,7 +36,7 @@ HRESULT mammos::init()
 	_m_Def = 2;
 	//물리 공격력범위
 	_MIN = _str;
-	_MAX = _str*1.3;
+	_MAX = _str*1.6;
 	_damage = RND->getFromIntTo(_MIN, _MAX);
 
 	//스킬 공격력 범위
@@ -50,6 +50,8 @@ HRESULT mammos::init()
 	_gold = RND->getFromFloatTo(_MINgold, _MAXgold);
 	//경험치
 	_exp = 21;
+
+	_name = "mammos";
 	return S_OK;
 }
 
@@ -59,8 +61,12 @@ void mammos::release()
 
 void mammos::update()
 {
-	enemy::update();
-
+	count++;
+	if (count % 40 == 0)
+	{
+		_damage = RND->getFromIntTo(_MIN, _MAX);
+	}
+	Attack(_damage);
 	if (attack_state == ATTACK)
 	{
 		if (count % 10 == 0)
@@ -99,8 +105,9 @@ void mammos::render(HDC hdc)
 	if (attack_state == ATTACK)
 	{
 		//update->num =rnd->  if(num==1)
-		if (aimPlayer == 1)  img_attack->frameRender(hdc, x + 300, 150, img_attack->getFrameX(), img_attack->getFrameY());
-		else if (aimPlayer == 2) img_attack->frameRender(hdc, x + 300, 300, img_attack->getFrameX(), img_attack->getFrameY());
+		if (battle.playerTarget == 1)  img_attack->frameRender(hdc, x + 300, 150, img_attack->getFrameX(), img_attack->getFrameY());
+		else if (battle.playerTarget == 2) img_attack->frameRender(hdc, x + 300, 300, img_attack->getFrameX(), img_attack->getFrameY());
 		else img_attack->frameRender(hdc, x + 300, 450, img_attack->getFrameX(), img_attack->getFrameY());
 	}
+	TextOut(hdc,20 , namePositionY, "mammos", strlen("mammos"));
 }
