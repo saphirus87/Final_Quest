@@ -13,6 +13,7 @@ private:
 	vector<CALLBACK_FUNCTION> _vActionList;
 	enemyManager* em;
 	playerManager* _pm;
+	bool _isPMInit;
 
 public:
 	battleScene();

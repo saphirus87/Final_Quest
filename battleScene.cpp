@@ -18,7 +18,6 @@ HRESULT battleScene::init(void)
 	IMAGEMANAGER->addImage("battleBackground","mapImage/battleBackground.bmp", 1136, 640, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("battleBox", ".//userInterface//BattleBox.bmp", 1024, 200, true, RGB(255, 0, 255));
 	
-
 	em = new enemyManager;
 		
 	int rnd1 = RND->getFromIntTo(2, 3);
@@ -58,6 +57,16 @@ HRESULT battleScene::init(void)
 		}
 
 	}
+
+	if (_isPMInit)
+	{
+		_isPMInit = !_isPMInit;			// 최초 씬 초기화시 PM이 없기때문에
+	}
+	else
+	{
+		_pm->resetActGauge();			// 전투 진입시 플레이어 행동 게이지 초기화
+	}
+	
 	return S_OK;
 }
 

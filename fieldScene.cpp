@@ -113,8 +113,11 @@ void fieldScene::enterTown(void)
 	if (PtInRect(&_townRc, PointMake(_playerRc.left + PLAYER_WIDTH / 2, _playerRc.top + PLAYER_HEIGHT * 3 / 4)))
 	{
 		SCENEMANAGER->changeScene("townScene", FALSE);
-		_x = TOWN_LEFT;
-		_y = TOWN_TOP - 60;
+		_x = TOWN_LEFT + 10;
+		_y = TOWN_TOP + TOWN_SIZE;
+		_playerState = PLAYER_IDLE | PLAYER_BOTTOM;
+		_playerAni = KEYANIMANAGER->findAnimation("playerBottomIdle");
+		_playerAni->start();
 	}
 }
 
@@ -266,7 +269,7 @@ void fieldScene::playerPixelCollision(void)
 void fieldScene::increasedEncount(void)
 {
 	if (_encount < ENCOUNT_MAX_VALUE) _encount += ENCOUNT_VALUE;
-	else if (_encount > ENCOUNT_MAX_VALUE)
+	else if (_encount >= ENCOUNT_MAX_VALUE)
 	{
 		//배틀씬에서 에너미 랜덤받아오게하려면 펄스빼야되서 일단뺏어요
 		SCENEMANAGER->changeScene("battleScene");

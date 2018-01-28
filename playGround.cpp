@@ -17,6 +17,12 @@ HRESULT playGround::init()
 	gameNode::init(true);
 	soundInit();
 
+	_pm = new playerManager;
+	_pm->init();
+
+	_Item = new Item;
+	_Item->init();
+
 	IMAGEMANAGER->addImage("½ºÅ¸Æ®¹è°æ", ".\\SceneImage\\startBackground.bmp", 1024, 665, true, RGB(255, 0, 255));
 
 	SCENEMANAGER->addScene("¿ÀÇÁ´×¾À", new gameOpenningScene);
@@ -35,21 +41,11 @@ HRESULT playGround::init()
 	SCENEMANAGER->addScene("battleScene", new battleScene);
 	SCENEMANAGER->addScene("shopScene", new shopScene);
 	
-	SCENEMANAGER->changeScene("shopScene");
-
-	_pm = new playerManager;
-	_pm->init();
+	SCENEMANAGER->changeScene("½ºÅ¸Æ®¾À");
 
 	((fieldScene*)SCENEMANAGER->findScene("fieldScene"))->setPlayerManagerAddressLink(_pm);
-	((itemMenu*)SCENEMANAGER->findScene("¾ÆÀÌÅÛ¸Þ´º¾À"))->setPlayerManagerAddressLink(_pm);
-	((equipMenu*)SCENEMANAGER->findScene("Àåºñ¸Þ´º¾À"))->setPlayerManagerAddressLink(_pm);
-
-	_Item = new Item;
-	_Item->init();
-
-	((shopScene*)SCENEMANAGER->findScene("shopScene"))->setItemAddressLink(_Item);
 	((itemMenu*)SCENEMANAGER->findScene("¾ÆÀÌÅÛ¸Þ´º¾À"))->setItemAddressLink(_Item);
-	((equipMenu*)SCENEMANAGER->findScene("Àåºñ¸Þ´º¾À"))->setItemAddressLink(_Item);
+	((shopScene*)SCENEMANAGER->findScene("shopScene"))->setItemAddressLink(_Item);
 
 	return S_OK;
 }
@@ -78,8 +74,6 @@ void playGround::update(void)
 	{
 		((gameMenuScene*)SCENEMANAGER->findScene("¸Þ´º¾À"))->setisWhere("townScene");
 	}
-
-
 }
 
 //±×¸®´Â°Å.......
