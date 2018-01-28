@@ -38,6 +38,7 @@ HRESULT player1::init()
 	_agi = 10;
 	_def = 2;
 	_m_def = 2;
+	_currentExp = 20;
 
 	_name = "Tina";
 	_partyPos = 1;

@@ -14,7 +14,7 @@ gameOpenningScene::~gameOpenningScene()
 
 HRESULT gameOpenningScene::init()
 {
-	IMAGEMANAGER->addImage("openningBackGround", ".\\SceneImage\\OpenningBackGround.bmp", 1024, 2048,true, RGB(255,0,255));
+	IMAGEMANAGER->addImage("openningBackGround", ".\\SceneImage\\OpenningBackGround.bmp", 1024, 2048, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("openningFrontGround", ".\\SceneImage\\OpenningFrontGround.bmp", 1024, 760, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("fire", ".\\SceneImage\\fire.bmp", 1024, 256, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("burn", ".\\SceneImage\\firBurn.bmp", 1024, 256, true, RGB(255, 0, 255));
@@ -34,7 +34,7 @@ void gameOpenningScene::release()
 
 }
 
-void gameOpenningScene::update() 
+void gameOpenningScene::update()
 {
 
 
@@ -64,24 +64,19 @@ void gameOpenningScene::update()
 			SOUNDMANAGER->stop("¿ÀÇÁ´×");
 		}
 	}
-	
-	
 
-		_alpha += 150;
+
+
+	_alpha += 150;
 
 
 }
 
-void gameOpenningScene::render() 
+void gameOpenningScene::render()
 {
-
-	SetTextColor(getMemDC(), RGB(255, 0, 0));
-	TextOut(getMemDC(), WINSIZEX / 2, WINSIZEY / 2, "¿ÀÇÁ´× ¾¯ºü!!!!!", strlen("¿ÀÇÁ´× ¾¯ºü!!!!!"));
-
-
 	IMAGEMANAGER->findImage("fire")->render(CAMERAMANAGER->findImage("¿ÀÇÁ´×")->getMemDC(), 0, 200);
-	IMAGEMANAGER->findImage("burn")->alphaRender(CAMERAMANAGER->findImage("¿ÀÇÁ´×")->getMemDC(), 0, 200,_alpha);
-	IMAGEMANAGER->findImage("openningBackGround")->render(CAMERAMANAGER->findImage("¿ÀÇÁ´×")->getMemDC(),0,0, 0, OpeningCameraY,1024,760);
+	IMAGEMANAGER->findImage("burn")->alphaRender(CAMERAMANAGER->findImage("¿ÀÇÁ´×")->getMemDC(), 0, 200, _alpha);
+	IMAGEMANAGER->findImage("openningBackGround")->render(CAMERAMANAGER->findImage("¿ÀÇÁ´×")->getMemDC(), 0, 0, 0, OpeningCameraY, 1024, 760);
 
 	IMAGEMANAGER->findImage("Knight")->alphaRender(CAMERAMANAGER->findImage("¿ÀÇÁ´×")->getMemDC(), 259, 155, knihgtAlpha);
 

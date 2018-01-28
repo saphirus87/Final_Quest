@@ -139,6 +139,9 @@ public:
 	inline void setStr(int Str) { _str = Str; }
 	inline int getStr(void) { return _str; }
 
+	inline void setAgi(int Agi) { _agi = Agi; }
+	inline int getAgi(void) { return _agi; }
+
 	inline void setInt(int Int) { _int = Int; }
 	inline int getInt(void) { return _int; }
 
@@ -150,6 +153,12 @@ public:
 
 	inline void setMaxHp(int MaxHp) { _maxHp = MaxHp; }
 	inline int getMaxHp(void) { return _maxHp; }
+
+	inline void setDef(int Def) { _def = Def; }
+	inline int getDef(void) { return _def; }
+
+	inline void setMDef(int MDef) { _m_def = MDef; }
+	inline int getMDef(void) { return _m_def; }
 
 	inline void setCurrentHp(int CurrentHp) { _currentHp = CurrentHp; }
 	inline int getCurrentHp(void) { return _currentHp; }

@@ -34,9 +34,10 @@ void gameStartScene::release()
 
 void gameStartScene::update() 
 {
-	if(!SOUNDMANAGER->isPlaySound("선택"))
-	SOUNDMANAGER->play("선택", 0.75);
-
+	if (!SOUNDMANAGER->isPlaySound("선택"))
+	{
+		SOUNDMANAGER->play("선택", 0.75);
+	}
 
 	alphaPlusMinus(_isStart, &_alpha);
 	keyControl();

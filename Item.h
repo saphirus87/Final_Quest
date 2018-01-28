@@ -25,7 +25,7 @@ struct tagItem
 	//int _int;
 	//int _agi;
 	//int currentHp;
-	//int currentMp;
+	//int	currentMp;
 	//int _def;
 	//int _m_def;
 };
