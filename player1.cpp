@@ -19,7 +19,7 @@ HRESULT player1::init()
 	IMAGEMANAGER->addImage("player1Die", ".//playerImage//player1_die.bmp", 47, 24, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("player1Hurt", ".//playerImage//player1_hurt.bmp", 36, 45, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("player1Skill", ".//playerImage//player1_skill.bmp", 54, 45, 2, 1, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("player1Win", ".//playerImage//player1_win_motion.bmp", 446, 46, 4, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("player1Win", ".//playerImage//player1_win_motion.bmp", 116, 46, 4, 1, true, RGB(255, 0, 255));
 	//===================================== 플레이어 1 이미지 추가 =====================================
 	IMAGEMANAGER->addImage("player1face", ".//playerImage//player1face.bmp", 100, 100, true, RGB(255, 0, 255));
 
