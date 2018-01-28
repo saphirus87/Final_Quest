@@ -20,12 +20,12 @@
 이름			가격	수치	타입
 단검(右)		10	5	TYPE_RIGHT
 지팡이			30	10	TYPE_RIGHT
-양손검			40	20	TYPE_RIGHT
+한손검			40	20	TYPE_RIGHT
 
 이름			가격	수치	타입
 단검(左)		10	5	TYPE_LEFT
 방패			20	20	TYPE_LEFT
-양손검1			40	20	TYPE_LEFT
+수정구			40	20	TYPE_LEFT
 
 이름			가격	수치	타입
 힘의 목걸이		20	10	TYPE_ACCESSARY

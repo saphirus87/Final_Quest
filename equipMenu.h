@@ -11,9 +11,9 @@ private:
 	playerManager* _pm;
 	int _cursorMenuNum;
 
-	bool _isCharater1;
-	bool _isCharater2;
-	bool _isCharater3;
+	int equipsize;
+	int _waitplayersel;
+	bool _isCharater;
 
 public:
 	HRESULT init();

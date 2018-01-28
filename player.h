@@ -208,5 +208,9 @@ public:
 	inline string getName(void) { return _name; }
 
 	inline tagCommandInfo getCommand(void) { return _commandInfo; }
+
+	inline void setplayerEquip(tagItem equips, int num) { _playerEquip[num] = equips; }
+	inline tagItem getplayerEquip(int num) { return _playerEquip[num]; }
+
 };
 

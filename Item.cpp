@@ -134,7 +134,7 @@ HRESULT Item::init(void)
 	tagItem right3;
 	right3.code = 303;
 	right3.itemtype = TYPE_RIGHT;
-	right3.name = "양손검";
+	right3.name = "한손검";
 	right3.price = 40;
 	right3.value = 20;
 	right3.count = 0;
@@ -160,7 +160,7 @@ HRESULT Item::init(void)
 	tagItem left3;
 	left3.code = 403;
 	left3.itemtype = TYPE_LEFT;
-	left3.name = "양손검1";
+	left3.name = "수정구";
 	left3.price = 40;
 	left3.value = 20;
 	left3.count = 0;
@@ -191,6 +191,9 @@ HRESULT Item::init(void)
 	accessary3.value = 10;
 	accessary3.count = 0;
 	_mItemList.insert(make_pair(accessary3.code, accessary3));
+
+	_iteminventory.clear();
+	_equipinventory.clear();
 
 	return S_OK;
 }

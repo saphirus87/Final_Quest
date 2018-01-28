@@ -58,6 +58,7 @@ void itemMenu::update()
 		_Item->addItem("메가포션");
 		_Item->addItem("후드");
 		_Item->addItem("철투구");
+		_Item->addItem("철갑옷");
 		_Item->addItem("양손검");
 		_Item->addItem("단검(右)");
 		_Item->addItem("단검(左)");
@@ -134,13 +135,13 @@ void itemMenu::update()
 			}
 			else if (_Item->findItem(_Item->getiteminventory()[waitselItem]).code == 5)
 			{
-				if (_pm->getvplayer()[selnum]->getCurrentMp());
+				if (_pm->getvplayer()[selnum]->getCurrentHp());
 				else
 				{
-					_pm->getvplayer()[selnum]->setCurrentMp(_pm->getvplayer()[selnum]->getCurrentMp() + _Item->findItem(_Item->getiteminventory()[waitselItem]).value);
-					if (_pm->getvplayer()[selnum]->getCurrentMp() > _pm->getvplayer()[selnum]->getMaxMp())
+					_pm->getvplayer()[selnum]->setCurrentHp(_pm->getvplayer()[selnum]->getCurrentHp() + _Item->findItem(_Item->getiteminventory()[waitselItem]).value);
+					if (_pm->getvplayer()[selnum]->getCurrentHp() > _pm->getvplayer()[selnum]->getMaxHp())
 					{
-						_pm->getvplayer()[selnum]->setCurrentMp(_pm->getvplayer()[selnum]->getMaxMp());
+						_pm->getvplayer()[selnum]->setCurrentHp(_pm->getvplayer()[selnum]->getMaxHp());
 					}
 				}
 			}
@@ -148,13 +149,13 @@ void itemMenu::update()
 			{
 				for (int i = 0; i < 3; i++)
 				{
-					if (_pm->getvplayer()[i]->getCurrentMp())continue;
+					if (_pm->getvplayer()[i]->getCurrentHp())continue;
 					else
 					{
-						_pm->getvplayer()[i]->setCurrentMp(_pm->getvplayer()[i]->getCurrentMp() + _Item->findItem(_Item->getiteminventory()[waitselItem]).value);
-						if (_pm->getvplayer()[i]->getCurrentMp() > _pm->getvplayer()[i]->getMaxMp())
+						_pm->getvplayer()[i]->setCurrentHp(_pm->getvplayer()[i]->getCurrentHp() + _Item->findItem(_Item->getiteminventory()[waitselItem]).value);
+						if (_pm->getvplayer()[i]->getCurrentHp() > _pm->getvplayer()[i]->getMaxHp())
 						{
-							_pm->getvplayer()[i]->setCurrentMp(_pm->getvplayer()[i]->getMaxMp());
+							_pm->getvplayer()[i]->setCurrentHp(_pm->getvplayer()[i]->getMaxHp());
 						}
 					}
 				}
@@ -325,6 +326,21 @@ void itemMenu::render()
 		}
 		else//매뉴 소비템 선택시
 		{
+			for (int i = 0; i < 3; ++i)
+			{
+				IMAGEMANAGER->findImage("아이템버튼")->render(getMemDC(), 82 + i * 293, 575);
+				char str[128];
+				sprintf(str, "%s", _pm->getvplayer()[i]->getName().c_str());
+				TextOut(getMemDC(), 160 + (int)(i % 3) * 293, 583, str, strlen(str));
+
+				str[128];
+				sprintf(str, "HP : %d / %d", _pm->getvplayer()[i]->getCurrentHp(), _pm->getvplayer()[i]->getMaxHp());
+				TextOut(getMemDC(), 115 + (int)(i % 3) * 293, 611, str, strlen(str));
+
+				str[128];
+				sprintf(str, "MP : %d / %d", _pm->getvplayer()[i]->getCurrentMp(), _pm->getvplayer()[i]->getMaxMp());
+				TextOut(getMemDC(), 230 + (int)(i % 3) * 293, 611, str, strlen(str));
+			}
 			for (int i = 0; i < itemsize; ++i)
 			{
 				IMAGEMANAGER->findImage("아이템버튼")->render(getMemDC(), 82 + (int)(i % 3) * 293, 163 + (int)(i / 3) * 79);
@@ -336,13 +352,6 @@ void itemMenu::render()
 			}
 			if (selItem)//만약 아이템 선택했을 시
 			{
-				for (int i = 0; i < 3; ++i)
-				{
-					IMAGEMANAGER->findImage("아이템버튼")->render(getMemDC(), 82 + i * 293, 575);
-					char str[128];
-					sprintf(str, "%s", _pm->getvplayer()[i]->getName().c_str());
-					TextOut(getMemDC(), 160 + (int)(i % 3) * 293, 583, str, strlen(str));
-				}
 				if (_Item->findItem(_Item->getiteminventory()[waitselItem]).code == 6)
 				{
 					for (int j = 0; j < 3; j++)

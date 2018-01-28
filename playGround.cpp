@@ -48,6 +48,7 @@ HRESULT playGround::init()
 	((gameSaveLoadScene*)SCENEMANAGER->findScene("게임세이브로드메뉴씬"))->setPlayerManagerAddressLink(_pm);
 	((abilitiesMenu*)SCENEMANAGER->findScene("스킬메뉴씬"))->setPlayerManagerAddressLink(_pm);
 	((equipMenu*)SCENEMANAGER->findScene("장비메뉴씬"))->setPlayerManagerAddressLink(_pm);
+	((equipMenu*)SCENEMANAGER->findScene("장비메뉴씬"))->setItemAddressLink(_Item);
 	((statusMenu*)SCENEMANAGER->findScene("스테이터스메뉴씬"))->setPlayerManagerAddressLink(_pm);
 	((fieldScene*)SCENEMANAGER->findScene("fieldScene"))->setPlayerManagerAddressLink(_pm);
 	((battleScene*)SCENEMANAGER->findScene("battleScene"))->setPlayerManagerAddressLink(_pm);
