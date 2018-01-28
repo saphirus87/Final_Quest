@@ -31,18 +31,21 @@ HRESULT soundManager::init()
 	//마스터그룹 추가된 모든 음악을 조절가능
 	_system->getMasterChannelGroup(&_masterGroup);
 
+
+	//이펙트 채널 그룹
+	_system->createChannelGroup("channelEffect", &_effectGroup);
+
+	//BGM 채널 그룹
+	_system->createChannelGroup("channelMusic", &_musicGroup);
+
 	//마스터사운드그룹 추가
 	_system->getMasterSoundGroup(&_masterSound);
 
-	//이펙트 사운드 그룹
-	_system->createChannelGroup("channelEffect", &_effectGroup);
+	//노래 사운드 그룹	
+	_system->createSoundGroup("musicSound", &_musicSound);
 
-	//BGM 노래 그룹
-	_system->createChannelGroup("channelMusic", &_musicGroup);
-
-	
-	_system->createSoundGroup("soundMusic", &_musicSound);
-
+	//노래 사운드 그룹	
+	_system->createSoundGroup("effectSound", &_effectSound);
 
 
 
@@ -165,9 +168,6 @@ void soundManager::stop(string keyName)
 		}
 	}
 }
-
-
-
 
 void soundManager::pause(string keyName)			 
 {
@@ -339,7 +339,7 @@ string soundManager::getTagTitle(string keyName)
 	{
 		if (keyName == iter->first)
 		{
-	_sound[count]->getTag("TITLE", 0, &Ftag);
+		_sound[count]->getTag("TITLE", 0, &Ftag);
 	break;
 		}
 	}

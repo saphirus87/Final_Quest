@@ -73,36 +73,44 @@ void configMenu::render()
 	if (_musicVolume == 1)
 	{
 		IMAGEMANAGER->findImage("high")->render(getMemDC(), 386, 157);
+		SOUNDMANAGER->setMusicVolume(1.0f);
 	}
 	if (_musicVolume == 2)
 	{
 		IMAGEMANAGER->findImage("medium")->render(getMemDC(), 386, 157);
+		SOUNDMANAGER->setMusicVolume(0.7f);
 	}
 	if (_musicVolume == 3)
 	{
 		IMAGEMANAGER->findImage("low")->render(getMemDC(), 386, 157);
+		SOUNDMANAGER->setMusicVolume(0.35f);
 	}
 	if (_musicVolume == 4)
 	{
 		IMAGEMANAGER->findImage("off")->render(getMemDC(), 386, 157);
+		SOUNDMANAGER->setMusicVolume(0.0f);
 	}
 
 	//이펙트 or 사운드 소리조절
 	if (_effectVolume == 1)
 	{
 		IMAGEMANAGER->findImage("high")->render(getMemDC(), 386, 262);
+		SOUNDMANAGER->setEffectVolume(1.0f);
 	}
 	if (_effectVolume == 2)
 	{
 		IMAGEMANAGER->findImage("medium")->render(getMemDC(), 386, 262);
+		SOUNDMANAGER->setEffectVolume(0.7f);
 	}
 	if (_effectVolume == 3)
 	{
 		IMAGEMANAGER->findImage("low")->render(getMemDC(), 386, 262);
+		SOUNDMANAGER->setEffectVolume(0.35);
 	}
 	if (_effectVolume == 4)
 	{
 		IMAGEMANAGER->findImage("off")->render(getMemDC(), 386, 262);
+		SOUNDMANAGER->setEffectVolume(0.0f);
 	}
 }
 
@@ -110,6 +118,7 @@ void configMenu::keyControl()
 {
 	if (KEYMANAGER->isOnceKeyDown(VK_UP))
 	{
+		SOUNDMANAGER->play("메뉴선택", 1.0f);
 		if (_cursorMenuNum == 1) _cursorMenuNum = 4;
 		else if (_cursorMenuNum == 2) _cursorMenuNum = 1;
 		else if (_cursorMenuNum == 3) _cursorMenuNum = 2;
@@ -118,6 +127,7 @@ void configMenu::keyControl()
 	
 	if (KEYMANAGER->isOnceKeyDown(VK_DOWN))
 	{
+		SOUNDMANAGER->play("메뉴선택", 1.0f);
 		if (_cursorMenuNum == 1) _cursorMenuNum = 2;
 		else if (_cursorMenuNum == 2) _cursorMenuNum = 3;
 		else if (_cursorMenuNum == 3) _cursorMenuNum = 4;
@@ -126,6 +136,7 @@ void configMenu::keyControl()
 
 	if (KEYMANAGER->isOnceKeyDown(VK_RIGHT))
 	{
+		SOUNDMANAGER->play("메뉴선택", 1.0f);
 		if (_cursorMenuNum == 1 && _musicVolume == 1)
 		{
 			_musicVolume = 1;
@@ -162,6 +173,7 @@ void configMenu::keyControl()
 	}
 	if (KEYMANAGER->isOnceKeyDown(VK_LEFT))
 	{
+		SOUNDMANAGER->play("메뉴선택", 1.0f);
 		if (_cursorMenuNum == 1 && _musicVolume == 1)
 		{
 			_musicVolume = 2;

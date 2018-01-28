@@ -32,7 +32,7 @@ public:
 	void useItem(void);
 	void defense(void);
 	void escape(void);
-	// 행동 게이지 증가 함수
+	// 행동 게이지 증가 함수 
 	void increasedActionGauge(void);
 
 	void setPlayerManagerAddressLink(playerManager* pm) { _pm = pm; }

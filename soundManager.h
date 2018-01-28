@@ -53,12 +53,8 @@ public:
 	// 사운드 추가 함수(string 키값, string 경로및파일명, bgm인가?, 반복재생할것인가?)
 	void addSound(string keyName, string soundName, bool bgm, bool loop);
 
-
-
-
 	//사운드재생(키값, 볼륨,bgm=true, effect=false) 볼륨은 0~1.0까지
 	void play(string keyName, float volume = 1.0f, bool isMusic = false);
-
 
 	//재생 중단(키값);
 	void stop(string keyName);

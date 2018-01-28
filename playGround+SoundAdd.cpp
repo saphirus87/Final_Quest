@@ -19,6 +19,8 @@ void playGround::soundInit()
 
 
 	//EffectSound
+	
+	SOUNDMANAGER->addSound("메뉴선택", ".//effectSound//MenuSelectSound.MP3", false, false);
 	SOUNDMANAGER->addSound("배틀입장", ".//effectSound//BattleEncounter.wav", false, false);
 
 	//에너미 사운드

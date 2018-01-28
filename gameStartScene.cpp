@@ -14,7 +14,7 @@ gameStartScene::~gameStartScene()
 
 HRESULT gameStartScene::init()
 {
-	SOUNDMANAGER->play("02.선택", 0.75);
+	SOUNDMANAGER->play("선택", 0.75);
 	IMAGEMANAGER->addImage("스타트씬", ".\\SceneImage\\startBackground.bmp", 1024, 665, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("선택", ".\\SceneImage\\selectPoint.bmp", 27, 27, true, RGB(255, 0, 255));
 
@@ -73,12 +73,14 @@ void gameStartScene::keyControl()
 			if (_cursorMenuNum == 1) _cursorMenuNum = 3;
 			else if (_cursorMenuNum == 2) _cursorMenuNum = 1;
 			else if (_cursorMenuNum == 3) _cursorMenuNum = 2;
+			SOUNDMANAGER->play("메뉴선택",1.0f);
 		}
 		if (KEYMANAGER->isOnceKeyDown(VK_DOWN))
 		{
 			if (_cursorMenuNum == 1) _cursorMenuNum = 2;
 			else if (_cursorMenuNum == 2) _cursorMenuNum = 3;
 			else if (_cursorMenuNum == 3) _cursorMenuNum = 1;
+			SOUNDMANAGER->play("메뉴선택", 1.0f);
 		}
 	}
 
@@ -99,10 +101,12 @@ void gameStartScene::keyControl()
 		{
 			PostQuitMessage(0);
 		}
+		SOUNDMANAGER->play("메뉴선택", 1.0f);
 	}
 
 	if (_alpha == 0)
 	{
+		SOUNDMANAGER->stop("선택");
 		SCENEMANAGER->changeScene("fieldScene");
 
 		_isStart = true;
