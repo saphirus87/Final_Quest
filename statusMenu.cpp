@@ -144,6 +144,7 @@ void statusMenu::keyControl()
 			_isCharater3 = true;
 		}
 	}
+
 	if (KEYMANAGER->isOnceKeyDown(VK_BACK))
 	{
 		SCENEMANAGER->changeScene("¸Þ´º¾À", FALSE);
