@@ -22,6 +22,10 @@ HRESULT player::init()
 	_isCommandReady = false;
 	// 초기 커맨드 위치는 기본공격
 	_curCommand = ATTACK_COMMAND;
+	_commandInfo.damagetype = NORMAL_DAMAGE;
+	_commandInfo.selectCommand = NO_COMMAND;
+	_commandInfo.target = 0;
+	_commandInfo.totalDamage = 0;
 
 	//_dir = PLAYER_DOWN;
 	//_isAttack = false;
@@ -143,6 +147,32 @@ void player::selectCommand(void)
 			else if (_enableCommand & DEFFENCE_COMMAND) _curCommand = DEFFENCE_COMMAND;
 		}
 	}
+
+	if (KEYMANAGER->isOnceKeyDown(VK_RETURN))
+	{
+		switch (_curCommand)
+		{
+		case ATTACK_COMMAND:
+			commandAttack();
+			break;
+		case ITEM_COMMAND:
+			commandItem();
+			break;
+		case MAGIC_COMMAND:
+			commandMagic();
+			break;
+		case RUN_COMMAND:
+			commandRun();
+			break;
+		case DEFFENCE_COMMAND:
+			// 방어는 미구현
+			break;
+		case ALL_COMMAND:
+			break;
+		default:
+			break;
+		}
+	}
 }
 
 void player::levelUp(void)
@@ -192,5 +222,43 @@ void player::increaseActGauge(void)
 	_actGauge->setGauge(_curActGauge, MAX_ACT_GAUGE);
 	_actGauge->update();
 	_completeActGauge->update();
-	
+}
+
+void player::commandAttack(void)
+{
+	if (KEYMANAGER->isOnceKeyDown(VK_UP))
+	{
+		
+	}
+
+	if (KEYMANAGER->isOnceKeyDown(VK_DOWN))
+	{
+		
+	}
+
+	if (KEYMANAGER->isOnceKeyDown(VK_RETURN))
+	{
+		
+	}
+}
+
+void player::commandItem(void)
+{
+
+}
+
+
+void player::commandMagic(void)
+{
+
+}
+
+void player::commandRun(void)
+{
+	_commandInfo.damagetype = NORMAL_DAMAGE;
+	_commandInfo.selectCommand = RUN_COMMAND;
+	_commandInfo.target = 0;
+	_commandInfo.totalDamage = 0;
+
+	_curActGauge = 0;
 }

@@ -19,9 +19,6 @@ void playGround::soundInit()
 	
 	SOUNDMANAGER->addSound("티나", ".//musicSound//tinaThema.mp3", true, true);
 
-
-
-
 	//EffectSound
 	
 	SOUNDMANAGER->addSound("메뉴선택", ".//effectSound//MenuSelectSound.MP3", false, false);

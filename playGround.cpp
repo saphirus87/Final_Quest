@@ -43,6 +43,7 @@ HRESULT playGround::init()
 	
 	((gameMenuScene*)SCENEMANAGER->findScene("메뉴씬"))->setPlayerManagerAddressLink(_pm);
 	((itemMenu*)SCENEMANAGER->findScene("아이템메뉴씬"))->setItemAddressLink(_Item);
+	((itemMenu*)SCENEMANAGER->findScene("아이템메뉴씬"))->setPlayerManagerAddressLink(_pm);
 	((saveLoadMenu*)SCENEMANAGER->findScene("세이브로드메뉴씬"))->setPlayerManagerAddressLink(_pm);
 	((gameSaveLoadScene*)SCENEMANAGER->findScene("게임세이브로드메뉴씬"))->setPlayerManagerAddressLink(_pm);
 	((abilitiesMenu*)SCENEMANAGER->findScene("스킬메뉴씬"))->setPlayerManagerAddressLink(_pm);

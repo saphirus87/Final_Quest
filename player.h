@@ -14,6 +14,17 @@
 
 #define MAX_ACT_GAUGE 1000
 
+enum BATTLE_COMAAND
+{
+	NO_COMMAND = 0,
+	ATTACK_COMMAND = 1,
+	ITEM_COMMAND = 2,
+	MAGIC_COMMAND = 4,
+	RUN_COMMAND = 8,
+	DEFFENCE_COMMAND = 16,
+	ALL_COMMAND = ATTACK_COMMAND | ITEM_COMMAND | MAGIC_COMMAND | RUN_COMMAND | DEFFENCE_COMMAND
+};
+
 class player : public gameNode
 {
 protected:
@@ -38,14 +49,18 @@ protected:
 		RUN_MOTION,
 		MOTION_END
 	};
-	enum BATTLE_COMAAND
+	
+	enum DAMAGETYPE
 	{
-		ATTACK_COMMAND = 1,
-		ITEM_COMMAND = 2,
-		MAGIC_COMMAND = 4,
-		RUN_COMMAND = 8,
-		DEFFENCE_COMMAND = 16,
-		ALL_COMMAND = ATTACK_COMMAND | ITEM_COMMAND | MAGIC_COMMAND | RUN_COMMAND | DEFFENCE_COMMAND
+		SKILL_DAMAGE,
+		NORMAL_DAMAGE
+	};
+	struct tagCommandInfo
+	{
+		BATTLE_COMAAND selectCommand;
+		int target;
+		DAMAGETYPE damagetype;
+		int totalDamage;
 	};
 
 protected:
@@ -87,6 +102,8 @@ protected:
 	SKILL _skill;						// 스킬 종류
 	BATTLE_MOTION _battleMotion;		// 전투시 행동
 
+	tagCommandInfo _commandInfo;
+
 	int _count;
 
 	tagItem _playerEquip[5];
@@ -108,6 +125,11 @@ public:
 
 	void drawPlayerInfoInBattle(void);
 	void increaseActGauge(void);
+
+	void commandAttack(void);
+	void commandItem(void);
+	void commandMagic(void);
+	void commandRun(void);
 
 public:
 	// getset 부분
@@ -175,5 +197,7 @@ public:
 	inline bool getIsCommandReady(void) { return _isCommandReady; }
 
 	inline string getName(void) { return _name; }
+
+	inline tagCommandInfo getCommand(void) { return _commandInfo; }
 };
 
