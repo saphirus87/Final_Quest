@@ -1,6 +1,8 @@
 #pragma once
 #include "gameNode.h"
 
+class playerManager;
+
 class gameMenuScene : public gameNode
 {
 private:
@@ -12,6 +14,8 @@ private:
 
 	string _iswhere;
 
+	playerManager* _pm;
+
 public:
 	HRESULT init();
 	void release();
@@ -20,7 +24,8 @@ public:
 
 	void keyControl();
 
-	void setisWhere(string iswhere) { _iswhere = iswhere; }
+	inline void setisWhere(string iswhere) { _iswhere = iswhere; }
+	inline void setPlayerManagerAddressLink(playerManager* pm) { _pm = pm; }
 
 	gameMenuScene();
 	~gameMenuScene();

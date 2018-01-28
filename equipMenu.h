@@ -23,8 +23,8 @@ public:
 
 	void keyControl();
 
-	void setPlayerManagerAddressLink(playerManager* pm) { _pm = pm; }
-	void setItemAddressLink(Item* Item) { _Item = Item; }
+	inline void setPlayerManagerAddressLink(playerManager* pm) { _pm = pm; }
+	inline void setItemAddressLink(Item* Item) { _Item = Item; }
 
 	equipMenu();
 	~equipMenu();

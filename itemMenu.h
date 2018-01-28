@@ -27,8 +27,8 @@ public:
 	void update();
 	void render();
 
-	void setPlayerManagerAddressLink(playerManager* pm) { _pm = pm; }
-	void setItemAddressLink(Item* Item) { _Item = Item; }
+	inline void setPlayerManagerAddressLink(playerManager* pm) { _pm = pm; }
+	inline void setItemAddressLink(Item* Item) { _Item = Item; }
 
 	itemMenu();
 	~itemMenu();

@@ -19,7 +19,7 @@ public:
 	shopScene();
 	~shopScene();
 
-	void setItemAddressLink(Item* Item) { _Item = Item; }
+	inline void setItemAddressLink(Item* Item) { _Item = Item; }
 
 	HRESULT init(void);
 	void release(void);

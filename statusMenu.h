@@ -1,6 +1,8 @@
 #pragma once
 #include "gameNode.h"
 
+class playerManager;
+
 class statusMenu : public gameNode
 {
 private:
@@ -10,6 +12,8 @@ private:
 	bool _isCharater2;
 	bool _isCharater3;
 
+	playerManager* _pm;
+
 public:
 	HRESULT init();
 	void release();
@@ -17,6 +21,8 @@ public:
 	void render();
 
 	void keyControl();
+
+	inline void setPlayerManagerAddressLink(playerManager* pm) { _pm = pm; }
 
 	statusMenu();
 	~statusMenu();

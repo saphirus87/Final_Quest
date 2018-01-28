@@ -30,7 +30,7 @@ HRESULT playGround::init()
 	SCENEMANAGER->addScene("스타트씬", new gameStartScene);
 	SCENEMANAGER->addScene("메뉴씬", new gameMenuScene);
 	SCENEMANAGER->addScene("아이템메뉴씬", new itemMenu);
-	SCENEMANAGER->addScene("세이브로드메뉴씬", new saveLoadMenu);
+	SCENEMANAGER->addScene("세이브로드메뉴씬", new saveLoadMenu);	
 	SCENEMANAGER->addScene("게임세이브로드메뉴씬", new gameSaveLoadScene);
 	SCENEMANAGER->addScene("스킬메뉴씬", new abilitiesMenu);
 	SCENEMANAGER->addScene("옵션씬", new configMenu);
@@ -41,12 +41,18 @@ HRESULT playGround::init()
 	SCENEMANAGER->addScene("battleScene", new battleScene);
 	SCENEMANAGER->addScene("shopScene", new shopScene);
 	
-	SCENEMANAGER->changeScene("스타트씬");
-
+	((gameMenuScene*)SCENEMANAGER->findScene("메뉴씬"))->setPlayerManagerAddressLink(_pm);
+	((itemMenu*)SCENEMANAGER->findScene("아이템메뉴씬"))->setItemAddressLink(_Item);
+	((saveLoadMenu*)SCENEMANAGER->findScene("세이브로드메뉴씬"))->setPlayerManagerAddressLink(_pm);
+	((gameSaveLoadScene*)SCENEMANAGER->findScene("게임세이브로드메뉴씬"))->setPlayerManagerAddressLink(_pm);
+	((abilitiesMenu*)SCENEMANAGER->findScene("스킬메뉴씬"))->setPlayerManagerAddressLink(_pm);
+	((equipMenu*)SCENEMANAGER->findScene("장비메뉴씬"))->setPlayerManagerAddressLink(_pm);
+	((statusMenu*)SCENEMANAGER->findScene("스테이터스메뉴씬"))->setPlayerManagerAddressLink(_pm);
 	((fieldScene*)SCENEMANAGER->findScene("fieldScene"))->setPlayerManagerAddressLink(_pm);
 	((battleScene*)SCENEMANAGER->findScene("battleScene"))->setPlayerManagerAddressLink(_pm);
-	((itemMenu*)SCENEMANAGER->findScene("아이템메뉴씬"))->setItemAddressLink(_Item);
 	((shopScene*)SCENEMANAGER->findScene("shopScene"))->setItemAddressLink(_Item);
+
+	SCENEMANAGER->changeScene("스타트씬");
 
 	return S_OK;
 }
