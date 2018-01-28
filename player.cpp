@@ -59,7 +59,7 @@ HRESULT player::init()
 	for (int i = 0; i < 5; i++)
 	{
 		_playerEquip[i].code = 0;
-		_playerEquip[i].name = "";
+		_playerEquip[i].name = "¾øÀ½";
 		_playerEquip[i].price = 0;
 		_playerEquip[i].value = 0;
 		_playerEquip[i].count = 0;

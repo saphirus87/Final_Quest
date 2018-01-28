@@ -23,6 +23,10 @@ public:
 
 	void keyControl();
 
+	void player1Information();
+	void player2Information();
+	void player3Information();
+
 	inline void setPlayerManagerAddressLink(playerManager* pm) { _pm = pm; }
 	inline void setItemAddressLink(Item* Item) { _Item = Item; }
 

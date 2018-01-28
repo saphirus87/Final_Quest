@@ -127,3 +127,21 @@ void equipMenu::keyControl()
 		}
 	}
 }
+
+void equipMenu::player1Information()
+{
+	//char str[128];
+	//
+	//sprintf(str, "%s", _pm->getvplayer()[0]->getplayerEquip(0).name.c_str());
+	//TextOut(getMemDC(), 145, 127, str, strlen(str));
+}
+
+void equipMenu::player2Information()
+{
+
+}
+
+void equipMenu::player3Information()
+{
+
+}

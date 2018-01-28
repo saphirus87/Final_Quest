@@ -218,6 +218,11 @@ void statusMenu::player1Information()
 
 	sprintf(str2, "%d", _pm->getvplayer()[0]->getMaxExp() - _pm->getvplayer()[0]->getCurrentExp());
 	TextOut(getMemDC(), 700 - strlen(str2) * 10, 264, str2, strlen(str2));
+
+	char str3[128];
+
+	sprintf(str3, "%s", _pm->getvplayer()[0]->getplayerEquip(0).name.c_str());
+	TextOut(getMemDC(), 525, 515, str3, strlen(str3));
 }
 
 void statusMenu::player2Information()
