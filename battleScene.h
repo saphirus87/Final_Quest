@@ -6,6 +6,7 @@
 typedef void(*ACTION_FUNTION)(void*, void*);
 
 class playerManager;
+
 class battleScene : public gameNode
 {
 private:

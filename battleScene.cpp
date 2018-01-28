@@ -18,8 +18,10 @@ HRESULT battleScene::init(void)
 	IMAGEMANAGER->addImage("battleBackground","mapImage/battleBackground.bmp", 1136, 640, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("battleBox", ".//userInterface//BattleBox.bmp", 1024, 200, true, RGB(255, 0, 255));
 	
-	_em = new enemyManager;	
+	_em = new enemyManager;
 	enemyPositionSetting();
+		
+	int rnd1 = RND->getFromIntTo(2, 3);
 	
 	return S_OK;
 }
@@ -31,12 +33,15 @@ void battleScene::release(void)
 
 void battleScene::update(void)
 {
-	if (KEYMANAGER->isOnceKeyDown(VK_F10))
+	// 도망 커맨드 구현으로 불필요
+	/*if (KEYMANAGER->isOnceKeyDown(VK_F10))
 	{
 		SCENEMANAGER->changeScene("fieldScene",false);
-	}
+	}*/
 	_em->update();
-	
+	//스타트타임이 엔드타임이 되서 on이되면 1,2,3중에 하나뽑는다
+	//1이면 150 2면 300 3이면 450에 공격좌표들어가게 ㄱㄱ 
+
 	for (int i = 0; i < _em->getVenemy().size(); i++)
 	{
 		for (int j = 0; j < _pm->getvplayer().size(); j++)
@@ -55,16 +60,13 @@ void battleScene::update(void)
 				{
 					_pm->getvplayer()[2]->setCurrentHp(_pm->getvplayer()[2]->getCurrentHp() - _em->getVenemy()[i]->enemygetDamage());
 				}
-				cout <<j+1<<" 번쨰" <<_pm->getvplayer()[j]->getCurrentHp() << endl;
+				cout << j + 1 << " 번쨰" << _pm->getvplayer()[j]->getCurrentHp() << endl;
 			}
 		}
 	}
-	////////////
+
 	_pm->update();
 	if (!_pm->isCommandReady()) _pm->updateActGauge();
-
-
-
 }
 
 void battleScene::render(void)
@@ -77,7 +79,7 @@ void battleScene::render(void)
 
 void battleScene::enemyPositionSetting()
 {
-	int rnd1 = RND->getFromIntTo(2,3);
+	int rnd1 = RND->getFromIntTo(2, 3);
 
 	for (int i = 0; i < rnd1; i++)
 	{
@@ -89,7 +91,7 @@ void battleScene::enemyPositionSetting()
 			x = 200;
 			y = 150;
 			nameX = 20;
-			nameY = 540;		
+			nameY = 540;
 		}
 		else if (i == 1)
 		{
@@ -108,13 +110,13 @@ void battleScene::enemyPositionSetting()
 		switch (rnd2)
 		{
 		case 1:
-			_em->set_wolf(x, y,nameX,nameY);
+			_em->set_wolf(x, y, nameX, nameY);
 			break;
 		case 2:
-			_em->set_knight(x, y,nameX,nameY);
+			_em->set_knight(x, y, nameX, nameY);
 			break;
 		case 3:
-			_em->set_mammos(x, y,nameX,nameY);
+			_em->set_mammos(x, y, nameX, nameY);
 		default:
 			break;
 		}

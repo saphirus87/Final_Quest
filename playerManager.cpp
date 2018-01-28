@@ -40,6 +40,11 @@ void playerManager::update()
 	for (int i = 0; i < _vPlayer.size(); i++)
 	{
 		_vPlayer[i]->update();
+
+		if (_vPlayer[i]->getCommand().selectCommand == RUN_COMMAND)
+		{
+			SCENEMANAGER->changeScene("fieldScene");
+		}
 	}
 }
 void playerManager::render()
@@ -66,6 +71,7 @@ BOOL playerManager::isCommandReady(void)
 	{
 		playerReady |= _vPlayer[i]->getIsCommandReady();
 	}
+
 	return playerReady;
 }
 
