@@ -278,7 +278,7 @@ void fieldScene::increasedEncount(void)
 		_pm->resetActGauge();
 		SOUNDMANAGER->stop("티나");
 		SOUNDMANAGER->play("배틀입장");
-		SOUNDMANAGER->play("배틀");
+		SOUNDMANAGER->play("배틀",0.75,true);
 
 		SCENEMANAGER->changeScene("battleScene");
 		_encount = 0;

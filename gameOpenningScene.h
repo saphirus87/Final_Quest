@@ -9,6 +9,11 @@ public:
 	void update();
 	void render();
 
+	float OpeningCameraY;
+
+	int _alpha;
+	int knihgtAlpha;
+
 	gameOpenningScene();
 	~gameOpenningScene();
 };

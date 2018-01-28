@@ -78,12 +78,12 @@ void configMenu::render()
 	if (_musicVolume == 2)
 	{
 		IMAGEMANAGER->findImage("medium")->render(getMemDC(), 386, 157);
-		SOUNDMANAGER->setMusicVolume(0.7f);
+		SOUNDMANAGER->setMusicVolume(0.6f);
 	}
 	if (_musicVolume == 3)
 	{
 		IMAGEMANAGER->findImage("low")->render(getMemDC(), 386, 157);
-		SOUNDMANAGER->setMusicVolume(0.35f);
+		SOUNDMANAGER->setMusicVolume(0.2f);
 	}
 	if (_musicVolume == 4)
 	{
@@ -100,12 +100,12 @@ void configMenu::render()
 	if (_effectVolume == 2)
 	{
 		IMAGEMANAGER->findImage("medium")->render(getMemDC(), 386, 262);
-		SOUNDMANAGER->setEffectVolume(0.7f);
+		SOUNDMANAGER->setEffectVolume(0.6f);
 	}
 	if (_effectVolume == 3)
 	{
 		IMAGEMANAGER->findImage("low")->render(getMemDC(), 386, 262);
-		SOUNDMANAGER->setEffectVolume(0.35);
+		SOUNDMANAGER->setEffectVolume(0.2f);
 	}
 	if (_effectVolume == 4)
 	{

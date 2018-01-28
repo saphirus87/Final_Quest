@@ -14,7 +14,6 @@ gameStartScene::~gameStartScene()
 
 HRESULT gameStartScene::init()
 {
-	SOUNDMANAGER->play("선택", 0.75);
 	IMAGEMANAGER->addImage("스타트씬", ".\\SceneImage\\startBackground.bmp", 1024, 665, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("선택", ".\\SceneImage\\selectPoint.bmp", 27, 27, true, RGB(255, 0, 255));
 
@@ -35,6 +34,10 @@ void gameStartScene::release()
 
 void gameStartScene::update() 
 {
+	if(!SOUNDMANAGER->isPlaySound("선택"))
+	SOUNDMANAGER->play("선택", 0.75);
+
+
 	alphaPlusMinus(_isStart, &_alpha);
 	keyControl();
 }
