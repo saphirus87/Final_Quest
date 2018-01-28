@@ -24,5 +24,7 @@ public:
 
 	void updateActGauge(void);
 	BOOL isCommandReady(void);
+
+	vector<player*> getvplayer() { return _vPlayer; }
 };
 

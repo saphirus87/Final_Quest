@@ -45,6 +45,7 @@ public:
 	friend DWORD CALLBACK loadingThread(LPVOID prc);
 
 	gameNode* findScene(string sceneKey) { return _mSceneList.find(sceneKey)->second; }
+	gameNode* getnowScene() { return _currentScene; }
 
 };
 

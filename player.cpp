@@ -46,6 +46,21 @@ HRESULT player::init()
 	// 사용 가능 커맨드
 	_enableCommand = ATTACK_COMMAND | ITEM_COMMAND | MAGIC_COMMAND | RUN_COMMAND;
 
+	_playerEquip[0].itemtype = TYPE_HEAD;
+	_playerEquip[1].itemtype = TYPE_BODY;
+	_playerEquip[2].itemtype = TYPE_RIGHT;
+	_playerEquip[3].itemtype = TYPE_LEFT;
+	_playerEquip[4].itemtype = TYPE_ACCESSARY;
+
+	for (int i = 0; i < 5; i++)
+	{
+		_playerEquip[i].code = 0;
+		_playerEquip[i].name = "";
+		_playerEquip[i].price = 0;
+		_playerEquip[i].value = 0;
+		_playerEquip[i].count = 0;
+	}
+
 	return S_OK;
 }
 void player::release()

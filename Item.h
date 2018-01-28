@@ -21,6 +21,13 @@ struct tagItem
 	int value;
 	int price;
 	int count;
+	//int _str;
+	//int _int;
+	//int _agi;
+	//int currentHp;
+	//int	currentMp;
+	//int _def;
+	//int _m_def;
 };
 
 class Item : public gameNode

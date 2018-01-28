@@ -35,18 +35,21 @@ HRESULT playGround::init()
 	SCENEMANAGER->addScene("battleScene", new battleScene);
 	SCENEMANAGER->addScene("shopScene", new shopScene);
 	
-	SCENEMANAGER->changeScene("½ºÅ¸Æ®¾À");
+	SCENEMANAGER->changeScene("shopScene");
 
 	_pm = new playerManager;
 	_pm->init();
 
 	((fieldScene*)SCENEMANAGER->findScene("fieldScene"))->setPlayerManagerAddressLink(_pm);
+	((itemMenu*)SCENEMANAGER->findScene("¾ÆÀÌÅÛ¸Þ´º¾À"))->setPlayerManagerAddressLink(_pm);
+	((equipMenu*)SCENEMANAGER->findScene("Àåºñ¸Þ´º¾À"))->setPlayerManagerAddressLink(_pm);
 
 	_Item = new Item;
 	_Item->init();
 
-	((itemMenu*)SCENEMANAGER->findScene("¾ÆÀÌÅÛ¸Þ´º¾À"))->setItemAddressLink(_Item);
 	((shopScene*)SCENEMANAGER->findScene("shopScene"))->setItemAddressLink(_Item);
+	((itemMenu*)SCENEMANAGER->findScene("¾ÆÀÌÅÛ¸Þ´º¾À"))->setItemAddressLink(_Item);
+	((equipMenu*)SCENEMANAGER->findScene("Àåºñ¸Þ´º¾À"))->setItemAddressLink(_Item);
 
 	return S_OK;
 }
@@ -66,6 +69,16 @@ void playGround::update(void)
 	if (KEYMANAGER->isOnceKeyDown(VK_F1)) _isDebug = !_isDebug;
 
 	SCENEMANAGER->update();
+
+	if (SCENEMANAGER->getnowScene() == SCENEMANAGER->findScene("fieldScene"))
+	{
+		((gameMenuScene*)SCENEMANAGER->findScene("¸Þ´º¾À"))->setisWhere("fieldScene");
+	}
+	else if (SCENEMANAGER->getnowScene() == SCENEMANAGER->findScene("townScene"))
+	{
+		((gameMenuScene*)SCENEMANAGER->findScene("¸Þ´º¾À"))->setisWhere("townScene");
+	}
+
 
 }
 

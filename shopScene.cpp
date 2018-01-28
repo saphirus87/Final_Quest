@@ -16,12 +16,14 @@ shopScene::~shopScene()
 HRESULT shopScene::init(void)
 {
 	IMAGEMANAGER->addImage("샵구매", ".\\userInterface\\Shop_Buy.bmp", 1024, 760, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("샵판매", ".\\userInterface\\shop_Sell_Image.bmp", 1024, 760, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("샵판매", ".\\userInterface\\Shop_UI.bmp", 1024, 760, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("샵매뉴버튼", ".\\userInterface\\noselButton.bmp", 300, 49, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("샵매뉴선택", ".\\userInterface\\selButton.bmp", 300, 49, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("판매버튼", ".\\SceneImage\\button1.bmp", 205, 44, true, RGB(255, 0, 255));
 
 	seltype = false;
 
-	selX = 150;
+	selX = 65;
 	selY = 125;
 	selnum = 0;
 
@@ -40,9 +42,9 @@ void shopScene::release(void)
 
 void shopScene::update(void) 
 {
-	if (!seltype)
+	if (!seltype)//매뉴 선택 안했을 시
 	{
-		if (KEYMANAGER->isOnceKeyDown('1'))
+		if (KEYMANAGER->isOnceKeyDown('1'))//임시로 소지템 늘리기
 		{
 			_Item->addItem("포션");
 			_Item->addItem("밀집모자");
@@ -70,19 +72,21 @@ void shopScene::update(void)
 		{
 			--selnum;
 		}
-		if (selnum < 0)selnum += 2;
-		selnum = selnum % 2;
+		if (selnum < 0)selnum += 3;
+		selnum = selnum % 3;
+		//대기할 선택 저장
 		waitselnum = selnum;
-		waitX = selX + selnum * 422;
+		waitX = selX + selnum * 320;
 		waitY = selY;
+
 		if (KEYMANAGER->isOnceKeyDown(VK_RETURN))
 		{
-			if (waitselnum)
+			if (waitselnum)//소비템 이외의 매뉴 선택시
 			{
 				selX = 85;
 				selY = 250;
 			}
-			else
+			else//소비템 선택시
 			{
 				selX = 405;
 				selY = 294;
@@ -101,13 +105,13 @@ void shopScene::update(void)
 		equipsize = _Item->getequipinventory().size();
 		if (KEYMANAGER->isOnceKeyDown(VK_BACK) || (!equipsize && !itemsize && waitselnum))
 		{
-			selX = 150;
+			selX = 65;
 			selY = 125;
 			selnum = waitselnum;
 			seltype = false;
 		}
 
-		if (waitselnum)
+		if (waitselnum == 1)//판매 선택시
 		{
 			if (KEYMANAGER->isOnceKeyDown(VK_RIGHT))
 			{
@@ -152,7 +156,7 @@ void shopScene::update(void)
 				if (selnum >= itemsize + equipsize)--selnum;
 			}
 		}
-		else
+		else if (waitselnum == 0)//구매 선택시
 		{
 			if (KEYMANAGER->isOnceKeyDown(VK_RIGHT))
 			{
@@ -187,33 +191,50 @@ void shopScene::update(void)
 				}
 			}
 		}
+		else//DLC선택시
+		{
 
+		}
 	}
 }
 
-void shopScene::render(void) 
+void shopScene::render(void)
 {
 	SetTextColor(getMemDC(), RGB(255, 255, 255));
 	SetBkMode(getMemDC(), 0);
-	if (waitselnum)
+	if (waitselnum)//선택이 판매, DLC 시
 	{
 		IMAGEMANAGER->findImage("샵판매")->render(getMemDC(), (WINSIZEX - 1024) / 2, (WINSIZEY - 760) / 2);
 		char str[128];
 		sprintf(str, "%d", _Item->getMoney());
 		TextOut(getMemDC(), 920 - strlen(str) * 7, 185, str, strlen(str));
 	}
-	else
+	else//선택이 구매시
 	{
 		IMAGEMANAGER->findImage("샵구매")->render(getMemDC(), (WINSIZEX - 1024) / 2, (WINSIZEY - 760) / 2);
 		char str[128];
 		sprintf(str, "%d", _Item->getMoney());
 		TextOut(getMemDC(), 925 - strlen(str) * 7, 224, str, strlen(str));
 	}
+	for (int i = 0; i < 3; ++i)
+	{
+		IMAGEMANAGER->findImage("샵매뉴버튼")->render(getMemDC(), WINSIZEX / 2 - 470 + i * 320, 113);
+		if (PtInRect(&RectMake(WINSIZEX / 2 - 470 + i * 320, 113, 300, 49), PointMake(waitX, waitY)))
+		{
+			IMAGEMANAGER->findImage("샵매뉴선택")->render(getMemDC(), WINSIZEX / 2 - 470 + i * 320, 113);
+		}
+	}
+	char* str = "구매";
+	TextOut(getMemDC(), 174, 131, str, strlen(str));
+	str = "판매";
+	TextOut(getMemDC(), 174 + 320, 131, str, strlen(str));
+	str = "DLC";
+	TextOut(getMemDC(), 174 + 640, 131, str, strlen(str));
 	IMAGEMANAGER->findImage("선택")->alphaRender(getMemDC(), waitX, waitY, 255 - seltype * 125);
 
 	if (seltype)
 	{
-		if (waitselnum)
+		if (waitselnum == 1)//판매 선택 시
 		{
 			for (int i = 0; i < itemsize; ++i)
 			{
@@ -235,8 +256,11 @@ void shopScene::render(void)
 			}
 			IMAGEMANAGER->findImage("선택")->render(getMemDC(), selX + selnum % 4 * 224, selY + selnum / 4 * 52);
 		}
-		else
+		else if (waitselnum == 0)//구매 선택 시
 		{
+			char item_count[128];
+			sprintf(item_count, "%d", _Item->getitemlist()[selnum + 1].count);
+			TextOut(getMemDC(), 500, 197, item_count, strlen(item_count));
 			for (int i = 0; i < 7; ++i)
 			{
 				IMAGEMANAGER->findImage("아이템버튼")->render(getMemDC(), 390 + (int)(i % 2) * 320, 278 + (int)(i / 2) * 70);
@@ -247,6 +271,10 @@ void shopScene::render(void)
 				TextOut(getMemDC(), 600 + (int)(i % 2) * 293, 313 + (int)(i / 2) * 70, str, strlen(str));
 			}
 			IMAGEMANAGER->findImage("선택")->render(getMemDC(), selX + selnum % 2 * 320, selY + selnum / 2 * 70);
+		}
+		else//DLC 선택 시
+		{
+
 		}
 	}
 }

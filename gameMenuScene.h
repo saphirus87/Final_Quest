@@ -10,6 +10,8 @@ private:
 
 	bool _isMenu;
 
+	string _iswhere;
+
 public:
 	HRESULT init();
 	void release();
@@ -17,6 +19,8 @@ public:
 	void render();
 
 	void keyControl();
+
+	void setisWhere(string iswhere) { _iswhere = iswhere; }
 
 	gameMenuScene();
 	~gameMenuScene();

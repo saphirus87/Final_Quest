@@ -38,20 +38,22 @@ void equipMenu::update()
 
 void equipMenu::render() 
 {
+	//배경 뿌리기
 	IMAGEMANAGER->findImage("장비메뉴씬")->render(getMemDC(), 0, 0);
+	//매뉴 버튼 뿌리기
+	for (int i = 0; i < 3; ++i)
+	{
+		if (_cursorMenuNum == i + 1)
+		{
+			IMAGEMANAGER->findImage("아이템매뉴선택")->render(getMemDC(), 40 + i * 240, 56);
+		}
+		else
+		{
+			IMAGEMANAGER->findImage("아이템매뉴버튼")->render(getMemDC(), 40 + i * 240, 56);
+		}
+	}
+	IMAGEMANAGER->findImage("선택")->render(getMemDC(), 50 + (_cursorMenuNum - 1) * 240, 64);
 
-	if (_cursorMenuNum == 1)
-	{
-		IMAGEMANAGER->findImage("선택")->render(getMemDC(), 25, 65);
-	}
-	if (_cursorMenuNum == 2)
-	{
-		IMAGEMANAGER->findImage("선택")->render(getMemDC(), 280, 65);
-	}
-	if (_cursorMenuNum == 3)
-	{
-		IMAGEMANAGER->findImage("선택")->render(getMemDC(), 535, 65);
-	}
 	if (_isCharater1 == true)
 	{
 		IMAGEMANAGER->findImage("플레이어1얼굴")->render(getMemDC(), 90, 160);

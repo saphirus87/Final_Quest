@@ -159,11 +159,10 @@ void gameMenuScene::keyControl()
 			_isMenu = false;
 		}
 	}
-
 	
 	if (_alpha == 0)
 	{
-		SCENEMANAGER->changeScene("fieldScene", FALSE);
+		SCENEMANAGER->changeScene(_iswhere, FALSE);
 
 		_isMenu = true;
 	}

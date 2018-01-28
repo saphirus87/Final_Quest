@@ -1,9 +1,14 @@
 #pragma once
 #include "gameNode.h"
+class Item;
+class playerManager;
+
 
 class equipMenu : public gameNode
 {
 private:
+	Item * _Item;
+	playerManager* _pm;
 	int _cursorMenuNum;
 
 	bool _isCharater1;
@@ -17,6 +22,9 @@ public:
 	void render();
 
 	void keyControl();
+
+	void setPlayerManagerAddressLink(playerManager* pm) { _pm = pm; }
+	void setItemAddressLink(Item* Item) { _Item = Item; }
 
 	equipMenu();
 	~equipMenu();

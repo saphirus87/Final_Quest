@@ -1,6 +1,7 @@
 #pragma once
 #include "gameNode.h"
 #include "progressBar.h"
+#include "Item.h"
 
 #define COMMAND1_POSY 580
 #define COMMAND2_POSY 620
@@ -87,6 +88,8 @@ protected:
 	BATTLE_MOTION _battleMotion;		// 전투시 행동
 
 	int _count;
+
+	tagItem _playerEquip[5];
 
 public:
 	player();
