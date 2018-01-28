@@ -72,18 +72,24 @@ void equipMenu::keyControl()
 {
 	if (KEYMANAGER->isOnceKeyDown(VK_RIGHT))
 	{
+		SOUNDMANAGER->play("메뉴선택", 1.0f); //메뉴선택 소리
+
 		if (_cursorMenuNum == 1) _cursorMenuNum = 2;
 		else if (_cursorMenuNum == 2) _cursorMenuNum = 3;
 		else if (_cursorMenuNum == 3) _cursorMenuNum = 3;
 	}
 	if (KEYMANAGER->isOnceKeyDown(VK_LEFT))
 	{
+		SOUNDMANAGER->play("메뉴선택", 1.0f); //메뉴선택 소리
+
 		if (_cursorMenuNum == 1) _cursorMenuNum = 1;
 		else if (_cursorMenuNum == 2) _cursorMenuNum = 1;
 		else if (_cursorMenuNum == 3) _cursorMenuNum = 2;
 	}
 	if (KEYMANAGER->isOnceKeyDown(VK_RETURN))
 	{
+		SOUNDMANAGER->play("메뉴선택", 1.0f); //메뉴선택 소리
+
 		if (_cursorMenuNum == 1)
 		{
 			_isCharater1 = true;
@@ -106,6 +112,8 @@ void equipMenu::keyControl()
 
 	if (KEYMANAGER->isOnceKeyDown(VK_BACK))
 	{
+		SOUNDMANAGER->play("메뉴선택", 1.0f); //메뉴선택 소리
+
 		SCENEMANAGER->changeScene("메뉴씬", FALSE);
 	}
 }

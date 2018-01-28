@@ -15,6 +15,10 @@ void playGround::soundInit()
 	SOUNDMANAGER->addSound("선택", ".//musicSound//selectScene.mp3", true, true);
 	SOUNDMANAGER->addSound("배틀", ".//musicSound//battleThema.mp3",true, true);
 	SOUNDMANAGER->addSound("배틀승리", ".//musicSound//battleEnding.mp3", true, false);
+	
+	
+	SOUNDMANAGER->addSound("티나", ".//musicSound//tinaThema.mp3", true, true);
+
 
 
 

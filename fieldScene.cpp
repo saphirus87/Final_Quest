@@ -82,6 +82,8 @@ void fieldScene::update(void)
 	//메뉴 호출
 	if (KEYMANAGER->isOnceKeyDown(VK_ESCAPE))
 	{
+		SOUNDMANAGER->play("메뉴선택", 1.0f); //메뉴선택 소리
+
 		SCENEMANAGER->changeScene("메뉴씬", FALSE);
 	}
 	
@@ -274,6 +276,10 @@ void fieldScene::increasedEncount(void)
 	{
 		//배틀씬에서 에너미 랜덤받아오게하려면 펄스빼야되서 일단뺏어요
 		_pm->resetActGauge();
+		SOUNDMANAGER->stop("티나");
+		SOUNDMANAGER->play("배틀입장");
+		SOUNDMANAGER->play("배틀");
+
 		SCENEMANAGER->changeScene("battleScene");
 		_encount = 0;
 	}

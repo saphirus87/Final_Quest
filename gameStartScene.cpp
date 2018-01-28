@@ -108,7 +108,7 @@ void gameStartScene::keyControl()
 	{
 		SOUNDMANAGER->stop("선택");
 		SCENEMANAGER->changeScene("fieldScene");
-
+		SOUNDMANAGER->play("티나", 0.75f, true);
 		_isStart = true;
 	}
 }

@@ -70,10 +70,14 @@ void itemMenu::update()
 	{
 		if (KEYMANAGER->isOnceKeyDown(VK_RIGHT))
 		{
+			SOUNDMANAGER->play("메뉴선택", 1.0f); //메뉴선택 소리
+
 			++selnum;
 		}
 		if (KEYMANAGER->isOnceKeyDown(VK_LEFT))
 		{
+			SOUNDMANAGER->play("메뉴선택", 1.0f); //메뉴선택 소리
+
 			--selnum;
 		}
 
@@ -85,6 +89,8 @@ void itemMenu::update()
 
 		if (KEYMANAGER->isOnceKeyDown(VK_RETURN) && ((itemsize && waitselnum == 0) || (equipsize && waitselnum == 1)))
 		{
+			SOUNDMANAGER->play("메뉴선택", 1.0f); //메뉴선택 소리
+
 			selX = 100;
 			selY = 180;
 			selnum = 0;
@@ -92,6 +98,8 @@ void itemMenu::update()
 		}
 		if (KEYMANAGER->isOnceKeyDown(VK_BACK))
 		{
+			SOUNDMANAGER->play("메뉴선택", 1.0f); //메뉴선택 소리
+
 			SCENEMANAGER->changeScene("메뉴씬");
 		}
 	}
@@ -99,10 +107,14 @@ void itemMenu::update()
 	{
 		if (KEYMANAGER->isOnceKeyDown(VK_RIGHT))
 		{
+			SOUNDMANAGER->play("메뉴선택", 1.0f); //메뉴선택 소리
+
 			++selnum;
 		}
 		if (KEYMANAGER->isOnceKeyDown(VK_LEFT))
 		{
+			SOUNDMANAGER->play("메뉴선택", 1.0f); //메뉴선택 소리
+
 			--selnum;
 			if (selnum < 0)selnum += 3;
 		}
@@ -110,6 +122,8 @@ void itemMenu::update()
 
 		if (KEYMANAGER->isOnceKeyDown(VK_RETURN))
 		{
+			SOUNDMANAGER->play("메뉴선택", 1.0f); //메뉴선택 소리
+
 			if (_Item->findItem(_Item->getiteminventory()[waitselItem]).code == 4)
 			{
 				_pm->getvplayer()[selnum]->setCurrentMp(_pm->getvplayer()[selnum]->getCurrentMp() + _Item->findItem(_Item->getiteminventory()[waitselItem]).value);
@@ -165,6 +179,8 @@ void itemMenu::update()
 
 		if (KEYMANAGER->isOnceKeyDown(VK_BACK))
 		{
+			SOUNDMANAGER->play("메뉴선택", 1.0f); //메뉴선택 소리
+
 			selX = 100;
 			selY = 180;
 			selnum = waitselItem;
@@ -175,6 +191,8 @@ void itemMenu::update()
 	{
 		if (KEYMANAGER->isOnceKeyDown(VK_BACK))
 		{
+			SOUNDMANAGER->play("메뉴선택", 1.0f); //메뉴선택 소리
+
 			selX = 50;
 			selY = 64;
 			selnum = waitselnum;
@@ -187,6 +205,8 @@ void itemMenu::update()
 
 		if (KEYMANAGER->isOnceKeyDown(VK_RIGHT))
 		{
+			SOUNDMANAGER->play("메뉴선택", 1.0f); //메뉴선택 소리
+
 			++selnum;
 			if (waitselnum)
 			{
@@ -199,6 +219,8 @@ void itemMenu::update()
 		}
 		if (KEYMANAGER->isOnceKeyDown(VK_LEFT))
 		{
+			SOUNDMANAGER->play("메뉴선택", 1.0f); //메뉴선택 소리
+
 			--selnum;
 			if (waitselnum)
 			{
@@ -211,6 +233,8 @@ void itemMenu::update()
 		}
 		if (KEYMANAGER->isOnceKeyDown(VK_UP))
 		{
+			SOUNDMANAGER->play("메뉴선택", 1.0f); //메뉴선택 소리
+
 			selnum -= 3;
 			if (waitselnum)
 			{
@@ -227,6 +251,8 @@ void itemMenu::update()
 		}
 		if (KEYMANAGER->isOnceKeyDown(VK_DOWN))
 		{
+			SOUNDMANAGER->play("메뉴선택", 1.0f); //메뉴선택 소리
+
 			selnum += 3;
 			if (waitselnum)
 			{
@@ -244,6 +270,8 @@ void itemMenu::update()
 
 		if (KEYMANAGER->isOnceKeyDown(VK_RETURN) && !waitselnum && _Item->findItem(_Item->getiteminventory()[waitselItem]).code != 7)
 		{
+			SOUNDMANAGER->play("메뉴선택", 1.0f); //메뉴선택 소리
+
 			selItem = true;
 			selX = 100;
 			selY = 700;

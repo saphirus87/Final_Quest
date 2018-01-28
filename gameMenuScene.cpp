@@ -95,6 +95,8 @@ void gameMenuScene::keyControl()
 	{
 		if (KEYMANAGER->isOnceKeyDown(VK_UP))
 		{
+			SOUNDMANAGER->play("메뉴선택", 1.0f); //메뉴선택 소리
+
 			if (_cursorMenuNum == 1) _cursorMenuNum = 6;
 			else if (_cursorMenuNum == 2) _cursorMenuNum = 1;
 			else if (_cursorMenuNum == 3) _cursorMenuNum = 2;
@@ -108,6 +110,8 @@ void gameMenuScene::keyControl()
 		}
 		if (KEYMANAGER->isOnceKeyDown(VK_DOWN))
 		{
+			SOUNDMANAGER->play("메뉴선택", 1.0f); //메뉴선택 소리
+
 			if (_cursorMenuNum == 1) _cursorMenuNum = 2;
 			else if (_cursorMenuNum == 2) _cursorMenuNum = 3;
 			else if (_cursorMenuNum == 3) _cursorMenuNum = 4;
@@ -121,14 +125,20 @@ void gameMenuScene::keyControl()
 		}
 		if (KEYMANAGER->isOnceKeyDown(VK_LEFT))
 		{
+			SOUNDMANAGER->play("메뉴선택", 1.0f); //메뉴선택 소리
+
 			if (_cursorMenuNum < 7) _cursorMenuNum = 7;
 		}
 		if (KEYMANAGER->isOnceKeyDown(VK_RIGHT))
 		{
+			SOUNDMANAGER->play("메뉴선택", 1.0f); //메뉴선택 소리
+
 			if (_cursorMenuNum > 6) _cursorMenuNum = 1;
 		}
 		if (KEYMANAGER->isOnceKeyDown(VK_RETURN))
 		{
+			SOUNDMANAGER->play("메뉴선택", 1.0f); //메뉴선택 소리
+
 			if (_cursorMenuNum == 1)
 			{
 				SCENEMANAGER->changeScene("아이템메뉴씬");
@@ -156,6 +166,8 @@ void gameMenuScene::keyControl()
 		}
 		if (KEYMANAGER->isOnceKeyDown(VK_BACK))
 		{
+			SOUNDMANAGER->play("메뉴선택", 1.0f); //메뉴선택 소리
+
 			_isMenu = false;
 		}
 	}
