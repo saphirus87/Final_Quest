@@ -89,11 +89,13 @@ void abilitiesMenu::render()
 	{
 		IMAGEMANAGER->findImage("플레이어얼굴배경")->render(getMemDC(), 145, 127);
 		IMAGEMANAGER->findImage("플레이어2얼굴")->render(getMemDC(), 148, 130);
+		player2Information();
 	}
 	if (_isCharater3 == true)
 	{
 		IMAGEMANAGER->findImage("플레이어얼굴배경")->render(getMemDC(), 145, 127);
 		IMAGEMANAGER->findImage("플레이어3얼굴")->render(getMemDC(), 148, 130);
+		player3Information();
 	}
 
 	SelectObject(getMemDC(), oFont);
