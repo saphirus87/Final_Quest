@@ -62,6 +62,16 @@ void battleScene::update(void)
 				}
 				cout << j + 1 << " 번쨰" << _pm->getvplayer()[j]->getCurrentHp() << endl;
 			}
+			//에너미가 적에게 맞으면
+			//if (_pm->getvplayer()[j]->getCommand().damagetype == SKILL_DAMAGE ||
+			//	_pm->getvplayer()[j]->getCommand().damagetype == NORMAL_DAMAGE)
+			//{
+			//	_em->getVenemy()[i]->enemysetState(HIT);
+			//}
+			if (KEYMANAGER->isOnceKeyDown('W'))
+			{
+				_em->getVenemy()[0]->enemysetState(HIT);
+			}
 		}
 	}
 

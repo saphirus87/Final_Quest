@@ -3,6 +3,7 @@
 class mammos : public enemy
 {
 private:
+	int frame;
 public:
 	mammos();
 	~mammos();

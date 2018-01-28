@@ -3,6 +3,7 @@
 class wolf : public enemy
 {
 private:
+	int frame;
 public:
 	wolf();
 	~wolf();

@@ -18,15 +18,15 @@ HRESULT wolf::init()
 	isAttack = false;
 	_startTime = 0.0f;
 	_endTime = 12.0f;
-
+	frame = 0;
 	img = new image;
 	img->init("enemyimages/wolf.bmp", 144, 116, true, RGB(255, 0, 255));
 
 	img_hit = new image;
-	img_hit->init("enemyimages/wolf_hit.bmp", 144, 116, true, RGB(255, 0, 255));
+	img_hit->init("enemyimages/wolf_hit.bmp", 576, 116,4,1, true, RGB(255, 0, 255));
 
 	img_die = new image;
-	img_die->init("enemyimages/wolf_die.bmp", 144, 116, true, RGB(255, 0, 255));
+	img_die->init("enemyimages/wolf_die.bmp", 114, 116, true, RGB(255, 0, 255));
 
 	img_attack = new image;
 	img_attack->init("enemyimages/wolf_attack.bmp", 600, 134, 3, 1, true, RGB(255, 0, 255));
@@ -83,6 +83,19 @@ void wolf::update()
 			img_attack->setFrameX(frameCount);
 		}
 	}
+	if (state == HIT)
+	{
+		if (count % 14 == 0)
+		{
+			frame++;
+			if (frame > img_hit->getMaxFrameX())
+			{
+				frame = 0;
+				state = LIFE_NONE;
+			}
+			img_hit->setFrameX(frame);
+		}
+	}
 
 	//스킬소리
 }
@@ -95,7 +108,7 @@ void wolf::render(HDC hdc)
 		img->render(hdc, x, y);
 		break;
 	case HIT:
-		img_hit->render(hdc, x, y);
+		img_hit->frameRender(hdc, x, y,img_hit->getFrameX(),img_hit->getFrameY());
 		break;
 	case DIE:
 		img_die->alphaRender(hdc, x, y, _alpha);

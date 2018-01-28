@@ -3,6 +3,7 @@
 class knight : public enemy
 {
 private:
+	int frame;
 
 public:
 	knight();

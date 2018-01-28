@@ -18,7 +18,7 @@ HRESULT mammos::init()
 	img->init("enemyimages/mammos.bmp", 173, 114, true, RGB(255, 0, 255));
 
 	img_hit = new image;
-	img_hit->init("enemyimages/mammos_hit.bmp", 173, 114, true, RGB(255, 0, 255));
+	img_hit->init("enemyimages/mammos_hit.bmp", 692, 114,4,1, true, RGB(255, 0, 255));
 
 	img_die = new image;
 	img_die->init("enemyimages/mammos_die.bmp", 173, 114, true, RGB(255, 0, 255));
@@ -50,7 +50,7 @@ HRESULT mammos::init()
 	_gold = RND->getFromFloatTo(_MINgold, _MAXgold);
 	//경험치
 	_exp = 21;
-
+	frame = 0;
 	_name = "mammos";
 	return S_OK;
 }
@@ -80,6 +80,20 @@ void mammos::update()
 			img_attack->setFrameX(frameCount);
 		}
 	}
+	if (state == HIT)
+	{
+		if (count % 14 == 0)
+		{
+			frame++;
+			if (frame > img_hit->getMaxFrameX())
+			{
+				frame = 0;
+				state = LIFE_NONE;
+			}
+			img_hit->setFrameX(frame);
+		}
+	}
+
 
 
 	//스킬소리
@@ -93,7 +107,7 @@ void mammos::render(HDC hdc)
 		img->render(hdc, x, y);
 		break;
 	case HIT:
-		img_hit->render(hdc, x, y);
+		img_hit->frameRender(hdc, x, y,img_hit->getFrameX(),img_hit->getFrameY());
 		break;
 	case DIE:
 		img_die->alphaRender(hdc,x,y,_alpha);

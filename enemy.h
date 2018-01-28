@@ -106,7 +106,7 @@ public:
 
 	inline BATTLE _battle() { return battle; }
 	ATTACK_STATE enemygetAttackState() { return attack_state; }
-	
+	void enemysetState(STATE enemystate) { state = enemystate; }
 
 	void nameInfo();
 };
