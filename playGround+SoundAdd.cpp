@@ -25,9 +25,9 @@ void playGround::soundInit()
 	//EffectSound
 	
 	SOUNDMANAGER->addSound("메뉴선택", ".//effectSound//MenuSelectSound.MP3", false, false);
-	SOUNDMANAGER->addSound("배틀입장", ".//effectSound//BattleEncounter.wav", false, false);
+	SOUNDMANAGER->addSound("배틀입장", ".//effectSound//BattleEncounter.mp3", false, false);
 
 	//에너미 사운드
-	SOUNDMANAGER->addSound("70.basic", ".//enemySound//basic.wav", false, false);
-	SOUNDMANAGER->addSound("71.boss_reflex", ".//enemySound//boss_reflex.wav", false, false);
+	SOUNDMANAGER->addSound("70.basic", ".//enemySound//basic.mp3", false, false);
+	SOUNDMANAGER->addSound("71.boss_reflex", ".//enemySound//boss_reflex.mp3", false, false);
 }
