@@ -139,9 +139,9 @@ void knight::render(HDC hdc)
 
 	if (attack_state == ATTACK)
 	{
-		if (battle.playerTarget == 1)  img_attack->frameRender(hdc, x + 300, 150, img_attack->getFrameX(), img_attack->getFrameY());
-		else if (battle.playerTarget == 2) img_attack->frameRender(hdc, x + 300, 300, img_attack->getFrameX(), img_attack->getFrameY());
-		else img_attack->frameRender(hdc, x + 300, 450, img_attack->getFrameX(), img_attack->getFrameY());
+		if (battle.playerTarget == 1)  img_attack->frameRender(hdc, 850, 150, img_attack->getFrameX(), img_attack->getFrameY());
+		else if (battle.playerTarget == 2) img_attack->frameRender(hdc, 910, 300, img_attack->getFrameX(), img_attack->getFrameY());
+		else img_attack->frameRender(hdc, 980, 450, img_attack->getFrameX(), img_attack->getFrameY());
 	}
 
 	HFONT hFont = CreateFont(30, 0, 0, 0, 600, 0, 0, 0, ANSI_CHARSET, 0, 0, 0, VARIABLE_PITCH | FF_ROMAN, TEXT("consolas"));

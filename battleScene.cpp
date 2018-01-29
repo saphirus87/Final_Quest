@@ -87,8 +87,8 @@ void battleScene::render(void)
 {
 	IMAGEMANAGER->findImage("battleBackground")->render(getMemDC(),0,0);
 	IMAGEMANAGER->findImage("battleBox")->render(getMemDC(), 0, 557);
-	_em->render();
 	_pm->render();
+	_em->render();
 
 	targetSelectCursorDraw();
 	takenDamageDraw();
@@ -192,7 +192,7 @@ void battleScene::enemyHitPlayer()
 					_pm->getvplayer()[2]->setCurrentHp(_pm->getvplayer()[2]->getCurrentHp() - _em->getVenemy()[i]->enemygetDamage());
 				}
 				_em->getVenemy()[i]->SetAttackOn(false);
-				//	cout << j + 1 << " ¹ø¤Š" << _pm->getvplayer()[j]->getCurrentHp() << endl;
+					cout << j + 1 << " ¹ø¤Š" << _pm->getvplayer()[j]->getCurrentHp() << endl;
 			}
 		}
 	}

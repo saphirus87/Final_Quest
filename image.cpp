@@ -432,6 +432,29 @@ void image::render(HDC hdc)
 }
 
 
+void image::render(HDC hdc, int destX, int destY, int showWidth, int showHeight)
+{
+	if (_trans) 
+	{
+
+		GdiTransparentBlt(
+			hdc,           
+			destX,           
+			destY,           
+			showWidth,         
+			showHeight,         
+			_imageInfo->hMemDC,   
+			0, 0,     
+			_imageInfo->width,       
+			_imageInfo->height,        
+			_transColor);      
+	}
+	else
+	{
+		StretchBlt(hdc, destX, destY, showWidth, showHeight,
+			_imageInfo->hMemDC, 0, 0, _imageInfo->width, _imageInfo->height, SRCCOPY);
+	}
+}
 //·»´õ¸µÇÔ¼ö »Ñ¸±DC , »Ñ¸±°÷X(Left), »Ñ¸±°÷Y(top)
 void image::render(HDC hdc, int destX, int destY)
 {

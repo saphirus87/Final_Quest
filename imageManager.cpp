@@ -191,6 +191,12 @@ void imageManager::render(string strKey, HDC hdc)
 	if (img) img->render(hdc);
 }
 
+
+void imageManager::render(string strKey, HDC hdc, int destX, int destY, int showWidth, int showHeight)
+{
+	image* img = findImage(strKey);
+	if (img) img->render(hdc, destX, destY, showWidth, showHeight);
+}
 void imageManager::render(string strKey, HDC hdc, int destX, int destY)
 {
 	image* img = findImage(strKey);

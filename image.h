@@ -98,6 +98,7 @@ public:
 	void render(HDC hdc);
 	//·»´õ¸µÇÔ¼ö »Ñ¸±DC , »Ñ¸±°÷X(Left), »Ñ¸±°÷Y(top)
 	void render(HDC hdc, int destX, int destY);
+	void render(HDC hdc, int destX, int destY, int showWidth, int showHeight);
 	void render(HDC hdc, int destX, int destY, int sourX, int sourY, int sourWidth, int sourHeight);
 
 	void frameRender(HDC hdc, int destX, int destY);

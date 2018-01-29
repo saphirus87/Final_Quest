@@ -32,6 +32,7 @@ public:
 
 	void render(string strKey, HDC hdc);
 	void render(string strKey, HDC hdc, int destX, int destY);
+	void render(string strKey, HDC hdc, int destX, int destY, int showWidth, int showHeight);
 	void render(string strKey, HDC hdc, int destX, int destY, int sourX, int sourY, int sourWidth, int sourHeight);
 
 	//«¡∑π¿” ∑ª¥ı
