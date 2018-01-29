@@ -43,8 +43,8 @@ protected:
 	image* img_attack;
 	int _str, _int;
 	float _startTime, _endTime, _stmn;
-	int _maxHp, _curruntHp;
-	int _maxMp, _curruntMp;
+	int _maxHp, _currentHp;
+	int _maxMp, _currentMp;
 	//공격력 , 스킬공격력
 	int _damage, _m_Damage;
 	//방어력 마방
@@ -72,6 +72,7 @@ protected:
 public:
 	enemy();
 	~enemy();
+
 	virtual HRESULT init();
 	virtual void release();
 	virtual void update();
@@ -93,8 +94,8 @@ public:
 		x = positionX;
 		y = positionY;
 	}
-	void enemysetCurrentHp(int CurrentHp) { _curruntHp = CurrentHp; }
-	int enemygetCurrentHp(void) { return _curruntHp; }
+	void enemysetCurrentHp(int CurrentHp) { _currentHp = CurrentHp; }
+	int enemygetCurrentHp(void) { return _currentHp; }
 
 	void enemysetDamage(int Damage) { _damage = Damage; }
 	int enemygetDamage(void) { return _damage; }

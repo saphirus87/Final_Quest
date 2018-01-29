@@ -37,10 +37,10 @@ void enemy::update()
 	GOLD = RND->getFromIntTo(13, 22);
 	EXP = RND->getFromIntTo(13, 15);
 	//hp0µÇ¸é Á×¾î¶ó
-	if (_curruntHp <= 0)
+	if (_currentHp <= 0)
 	{
 		state = DIE;
-		if(_alpha>=0)
+		if (_alpha >= 0)
 		_alpha--;
 	}
 }

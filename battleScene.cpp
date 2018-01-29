@@ -19,10 +19,6 @@ HRESULT battleScene::init(void)
 	IMAGEMANAGER->addImage("battleBox", ".//userInterface//BattleBox.bmp", 1024, 200, true, RGB(255, 0, 255));
 	isinit = false;
 	_em = new enemyManager;
-
-
-
-		
 	
 	return S_OK;
 }
@@ -45,12 +41,17 @@ void battleScene::update(void)
 		SCENEMANAGER->changeScene("fieldScene",false);
 	}*/
 	_em->update();
+	//스타트타임이 엔드타임이 되서 on이되면 1,2,3중에 하나뽑는다
+	//1이면 150 2면 300 3이면 450에 공격좌표들어가게 ㄱㄱ 
 	enemyHitPlayer();
 	playerHitEnemy();
-
+	
 
 	_pm->update();
-	if (!_pm->isCommandReady()) _pm->updateActGauge();
+
+	playerAction();
+
+	if (!_pm->isCommandReady()) _pm->updateActGauge();		// 플레이어 행동 게이지 증가
 }
 
 void battleScene::render(void)
@@ -59,6 +60,20 @@ void battleScene::render(void)
 	IMAGEMANAGER->findImage("battleBox")->render(getMemDC(), 0, 557);
 	_em->render();
 	_pm->render();
+}
+
+void battleScene::playerAction(void)
+{
+	for (int i = 0; i < _pm->getvplayer().size(); i++)
+	{
+		if (_pm->getvplayer()[i]->getCommand()->selectCommand == ATTACK_COMMAND)
+		{
+			_em->getVenemy()[_pm->getvplayer()[i]->getCommand()->target]->
+				enemysetCurrentHp(_em->getVenemy()[_pm->getvplayer()[i]->getCommand()->target]->enemygetCurrentHp() - _pm->getvplayer()[i]->getCommand()->totalDamage);
+		}
+
+		_pm->getvplayer()[i]->commandReset();
+	}
 }
 
 void battleScene::enemyPositionSetting()
@@ -134,7 +149,7 @@ void battleScene::enemyHitPlayer()
 					_pm->getvplayer()[2]->setCurrentHp(_pm->getvplayer()[2]->getCurrentHp() - _em->getVenemy()[i]->enemygetDamage());
 				}
 				_em->getVenemy()[i]->setAttackState(NONE);
-			//	cout << j + 1 << " 번쨰" << _pm->getvplayer()[j]->getCurrentHp() << endl;
+				//	cout << j + 1 << " 번쨰" << _pm->getvplayer()[j]->getCurrentHp() << endl;
 			}
 		}
 	}
@@ -165,8 +180,8 @@ void battleScene::playerHitEnemy()
 			}
 			if (_em->getVenemy()[i]->enemygetState() == DIE)
 			{
-				if(_em->getVenemy()[i]->getAlpha()==0)
-				_em->enemyErase(i);
+				if (_em->getVenemy()[i]->getAlpha() == 0)
+					_em->enemyErase(i);
 			}
 		}
 	}

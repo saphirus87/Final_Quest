@@ -55,6 +55,7 @@ protected:
 		SKILL_DAMAGE,
 		NORMAL_DAMAGE
 	};
+
 	struct tagCommandInfo
 	{
 		BATTLE_COMAAND selectCommand;
@@ -130,6 +131,7 @@ public:
 	void commandItem(void);
 	void commandMagic(void);
 	void commandRun(void);
+	void commandReset(void);
 
 public:
 	// getset ºÎºÐ
@@ -210,7 +212,7 @@ public:
 
 	inline string getName(void) { return _name; }
 
-	inline tagCommandInfo getCommand(void) { return _commandInfo; }
+	inline tagCommandInfo* getCommand(void) { return &_commandInfo; }
 
 	inline void setplayerEquip(tagItem equips, int num) { _playerEquip[num] = equips; }
 	inline tagItem getplayerEquip(int num) { return _playerEquip[num]; }

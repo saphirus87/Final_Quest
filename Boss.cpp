@@ -21,8 +21,8 @@ HRESULT Boss::init()
 	isAttack = false;
 	_startTime = 0.0f;
 	_endTime = 5.0f;
-	_curruntHp = _maxHp = 370;
-	_curruntMp = _maxMp = 60;
+	_currentHp = _maxHp = 370;
+	_currentMp = _maxMp = 60;
 	_str = _int = 16;
 	_def = 3;
 	_m_Def = 5;
@@ -55,7 +55,7 @@ void Boss::update()
 	bossAttack();
 
 	//Á×¾î¶ó~~~~
-	if (_curruntHp <= 0)
+	if (_currentHp <= 0)
 	{
 		state = DIE;
 		_alpha--;
@@ -87,11 +87,11 @@ void Boss::bossAttack()
 		else if (isAttack) 
 		{
 			_attack = RND->getFromIntTo(0, 5);
-			if (_attack = 0 && _curruntMp >= 20)
+			if (_attack = 0 && _currentMp >= 20)
 			{
 				attack_state = SKILL;      //½ºÅ³
 				SOUNDMANAGER->play("71.boss_reflex", 0.7f);
-				_curruntMp -= 20;
+				_currentMp -= 20;
 				isAttack = false;
 			}
 			else if (_attack = 1)

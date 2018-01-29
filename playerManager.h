@@ -22,6 +22,7 @@ public:
 	void update();
 	void render();
 
+	void playerAction(int playerIndex);
 	void updateActGauge(void);
 	BOOL isCommandReady(void);
 

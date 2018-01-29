@@ -29,8 +29,8 @@ HRESULT mammos::init()
 	isAttack = false;
 	_startTime = 0.0f;
 	_endTime = 22.0f;
-	_curruntHp = _maxHp = 60;
-	_curruntMp = _maxMp = 60;
+	_currentHp = _maxHp = 60;
+	_currentMp = _maxMp = 60;
 	_str = _int = 3;
 	_def = 2;
 	_m_Def = 2;
@@ -62,6 +62,7 @@ void mammos::release()
 void mammos::update()
 {
 	enemy::update();
+
 	count++;
 	if (count % 40 == 0)
 	{
@@ -102,6 +103,11 @@ void mammos::update()
 
 void mammos::render(HDC hdc)
 {
+	char hpPrint[128];
+	wsprintf(hpPrint, "%d / %d", _currentHp, _maxHp);
+
+	if (_isDebug) TextOut(getMemDC(), x + img->getWidth(), y, hpPrint, strlen(hpPrint));
+
 	switch (state)
 	{
 	case LIFE_NONE:

@@ -26,13 +26,13 @@ HRESULT wolf::init()
 	img_hit->init("enemyimages/wolf_hit.bmp", 576, 116,4,1, true, RGB(255, 0, 255));
 
 	img_die = new image;
-	img_die->init("enemyimages/wolf_die.bmp", 144, 116, true, RGB(255, 0, 255));
+	img_die->init("enemyimages/wolf_die.bmp", 114, 116, true, RGB(255, 0, 255));
 
 	img_attack = new image;
 	img_attack->init("enemyimages/wolf_attack.bmp", 600, 134, 3, 1, true, RGB(255, 0, 255));
 
-	_curruntHp = _maxHp = 45;
-	_curruntMp = _maxMp = 45;
+	_currentHp = _maxHp = 45;
+	_currentMp = _maxMp = 45;
 	_str = _int = 4;
 	_def = 1;
 	_m_Def = 3;
@@ -64,6 +64,7 @@ void wolf::release()
 void wolf::update()
 {
 	enemy::update();
+
 	count++;
 	if (count % 40 == 0)
 	{
@@ -102,6 +103,11 @@ void wolf::update()
 
 void wolf::render(HDC hdc)
 {
+	char hpPrint[128];
+	wsprintf(hpPrint, "%d / %d", _currentHp, _maxHp);
+
+	if (_isDebug) TextOut(getMemDC(), x + img->getWidth(), y, hpPrint, strlen(hpPrint));
+
 	switch (state)
 	{
 	case LIFE_NONE:

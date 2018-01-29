@@ -35,8 +35,8 @@ HRESULT knight::init()
 	img_attack->init("enemyimages/knight_attack.bmp", 259, 128, 4, 1, true, RGB(255, 0, 255));
 
 
-	_curruntHp = _maxHp = 50;
-	_curruntMp = _maxMp = 50;
+	_currentHp = _maxHp = 50;
+	_currentMp = _maxMp = 50;
 	_str = _int = 5;
 	_def = 1;
 	_m_Def = 1;
@@ -69,6 +69,7 @@ void knight::release()
 void knight::update()
 {
 	enemy::update();
+
 	count++;
 	if (count % 40 == 0)
 	{
@@ -110,6 +111,11 @@ void knight::update()
 
 void knight::render(HDC hdc)
 {
+	char hpPrint[128];
+	wsprintf(hpPrint, "%d / %d", _currentHp, _maxHp);
+
+	if (_isDebug) TextOut(getMemDC(), x + img->getWidth(), y, hpPrint, strlen(hpPrint));
+
 	switch (state)
 	{
 	case LIFE_NONE:

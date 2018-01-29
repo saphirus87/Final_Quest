@@ -41,9 +41,10 @@ void playerManager::update()
 	{
 		_vPlayer[i]->update();
 
-		if (_vPlayer[i]->getCommand().selectCommand == RUN_COMMAND)
+		if (_vPlayer[i]->getCommand()->selectCommand == RUN_COMMAND)
 		{
-			SCENEMANAGER->changeScene("fieldScene");
+			SCENEMANAGER->changeScene("fieldScene", FALSE);
+			_vPlayer[i]->getCommand()->selectCommand = NO_COMMAND;
 		}
 	}
 }
@@ -52,6 +53,17 @@ void playerManager::render()
 	for (int i = 0; i < _vPlayer.size(); i++)
 	{
 		_vPlayer[i]->render();
+
+		playerAction(i);
+	}
+}
+
+void playerManager::playerAction(int playerIndex)
+{
+	if (_vPlayer[playerIndex]->getCommand()->selectCommand == RUN_COMMAND)
+	{
+		SCENEMANAGER->changeScene("fieldScene", FALSE);
+		_vPlayer[playerIndex]->commandReset();
 	}
 }
 

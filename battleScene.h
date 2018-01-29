@@ -25,7 +25,8 @@ public:
 	void release(void);
 	void update(void);
 	void render(void);
-	
+
+	/*
 	// 플레이어 행동 선택 함수
 	void selectCommand(void);
 
@@ -37,6 +38,10 @@ public:
 	void escape(void);
 	// 행동 게이지 증가 함수 
 	void increasedActionGauge(void);
+	미사용 함수
+	*/
+
+	void playerAction(void);
 
 	void setPlayerManagerAddressLink(playerManager* pm) { _pm = pm; }
 

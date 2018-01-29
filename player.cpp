@@ -228,17 +228,21 @@ void player::commandAttack(void)
 {
 	if (KEYMANAGER->isOnceKeyDown(VK_UP))
 	{
-		
+		if (_commandInfo.target > 1) _commandInfo.target--;
+		else _commandInfo.target = 3;
 	}
 
 	if (KEYMANAGER->isOnceKeyDown(VK_DOWN))
 	{
-		
+		if (_commandInfo.target < 3) _commandInfo.target++;
+		else _commandInfo.target = 1;
 	}
 
 	if (KEYMANAGER->isOnceKeyDown(VK_RETURN))
 	{
-		
+		_commandInfo.damagetype = NORMAL_DAMAGE;
+		_commandInfo.selectCommand = ATTACK_COMMAND;
+		_commandInfo.totalDamage = RND->getFromIntTo(_str / 2, _str * 1.5);
 	}
 }
 
@@ -261,4 +265,12 @@ void player::commandRun(void)
 	_commandInfo.totalDamage = 0;
 
 	_curActGauge = 0;
+}
+
+void player::commandReset(void)
+{
+	_commandInfo.damagetype = NORMAL_DAMAGE;
+	_commandInfo.selectCommand = NO_COMMAND;
+	_commandInfo.target = 0;
+	_commandInfo.totalDamage = 0;
 }
