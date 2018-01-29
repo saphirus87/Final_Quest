@@ -20,7 +20,8 @@ HRESULT enemy::init()
 	_alpha = ALPHA_MAX_VALUE;
 	frameCount = count = 0;
 	battle.totalDamage = 0;
-
+	GOLD = RND->getFromIntTo(13, 20);
+	EXP = RND->getFromIntTo(13, 15);
 	battle.playerTarget = RND->getFromIntTo(1, 3);
 	aimPlayer = battle.playerTarget;
 	_stmn = RND->getFromFloatTo(MIN_STMN , MAX_STMN);
@@ -33,7 +34,8 @@ void enemy::release()
 
 void enemy::update()
 {
-
+	GOLD = RND->getFromIntTo(13, 22);
+	EXP = RND->getFromIntTo(13, 15);
 	//hp0되면 죽어라
 	if (_curruntHp <= 0)
 	{
@@ -72,11 +74,10 @@ void enemy::Attack(int damage)
 
 		else if (isAttack)
 		{
-			//일반공격
+
 			attack_state = ATTACK;
 			isAttack = false;
-			//endAttack 함수사용 할껀대 그때  밑에 사운드 뺴기~~
-			//endAttack();
+
 		}
 	}
 }

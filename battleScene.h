@@ -10,6 +10,9 @@ class playerManager;
 class battleScene : public gameNode
 {
 private:
+	int totalGold;
+	int totalExp;
+	bool isinit;
 	vector<CALLBACK_FUNCTION> _vActionList;
 	enemyManager* _em;
 	playerManager* _pm;
@@ -38,5 +41,9 @@ public:
 	void setPlayerManagerAddressLink(playerManager* pm) { _pm = pm; }
 
 	void enemyPositionSetting();
+	//에너미가 플레이어때리는거
+	void enemyHitPlayer();
+	//플레이어가 에너미 때리는거
+	void playerHitEnemy();
 };
 

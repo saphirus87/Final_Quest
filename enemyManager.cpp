@@ -27,7 +27,6 @@ void enemyManager::update()
 		(*vienemy)->update();
 	}
 }
-
 void enemyManager::render()
 {
 	for (vienemy = venemy.begin(); vienemy != venemy.end(); vienemy++)

@@ -57,6 +57,8 @@ protected:
 	//골드 획득범위
 	int _MINgold, _MAXgold;
 	int _gold, _exp;
+	int GOLD;
+	int EXP;
 	//on되면 공격 off되면 공격불가능
 	bool isAttack;
 	//랜덤으로 돌려서 스킬인지 일반공격인지
@@ -70,7 +72,6 @@ protected:
 public:
 	enemy();
 	~enemy();
-
 	virtual HRESULT init();
 	virtual void release();
 	virtual void update();
@@ -78,6 +79,8 @@ public:
 	virtual void Attack(int damage);
 	virtual void endAttack();
 	virtual void enemySound();
+	virtual int getGold() { return GOLD; }
+	virtual int getExp() { return _exp; }
 
 	virtual void SetNamePosition(int x, int y)
 	{
@@ -101,8 +104,8 @@ public:
 
 	int enemygetPlayerTarget(void) { return battle.playerTarget; }
 
-	void setExp(int Exp) { _exp = Exp; }
-	int getExp(void) { return _exp; }
+	/*void setExp(int Exp) { _exp = Exp; }
+	int getExp(void) { return _exp; }*/
 
 	inline BATTLE _battle() { return battle; }
 	ATTACK_STATE enemygetAttackState() { return attack_state; }

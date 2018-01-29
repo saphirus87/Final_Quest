@@ -13,15 +13,16 @@ battleScene::~battleScene()
 
 HRESULT battleScene::init(void) 
 {
-
+	totalExp = totalGold = 0;
 	/////배틀씬 임시 이미지///
 	IMAGEMANAGER->addImage("battleBackground","mapImage/battleBackground.bmp", 1136, 640, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("battleBox", ".//userInterface//BattleBox.bmp", 1024, 200, true, RGB(255, 0, 255));
-	
+	isinit = false;
 	_em = new enemyManager;
-	enemyPositionSetting();
+
+
+
 		
-	int rnd1 = RND->getFromIntTo(2, 3);
 	
 	return S_OK;
 }
@@ -33,48 +34,23 @@ void battleScene::release(void)
 
 void battleScene::update(void)
 {
+	if (!isinit)
+	{
+		isinit = true;
+		enemyPositionSetting();
+	}
+	cout << "배틀씬" << endl;
+	cout << "경험치" << totalExp << endl;
+	cout << "골드" << totalGold << endl;
 	// 도망 커맨드 구현으로 불필요
 	/*if (KEYMANAGER->isOnceKeyDown(VK_F10))
 	{
 		SCENEMANAGER->changeScene("fieldScene",false);
 	}*/
 	_em->update();
-	//스타트타임이 엔드타임이 되서 on이되면 1,2,3중에 하나뽑는다
-	//1이면 150 2면 300 3이면 450에 공격좌표들어가게 ㄱㄱ 
+	enemyHitPlayer();
+	playerHitEnemy();
 
-	for (int i = 0; i < _em->getVenemy().size(); i++)
-	{
-		for (int j = 0; j < _pm->getvplayer().size(); j++)
-		{
-			if (_em->getVenemy()[i]->enemygetAttackState() == ATTACK)
-			{
-				if (_em->getVenemy()[i]->enemygetPlayerTarget() == 1)
-				{
-					_pm->getvplayer()[0]->setCurrentHp(_pm->getvplayer()[0]->getCurrentHp() - _em->getVenemy()[i]->enemygetDamage());
-				}
-				if (_em->getVenemy()[i]->enemygetPlayerTarget() == 2)
-				{
-					_pm->getvplayer()[1]->setCurrentHp(_pm->getvplayer()[1]->getCurrentHp() - _em->getVenemy()[i]->enemygetDamage());
-				}
-				if (_em->getVenemy()[i]->enemygetPlayerTarget() == 3)
-				{
-					_pm->getvplayer()[2]->setCurrentHp(_pm->getvplayer()[2]->getCurrentHp() - _em->getVenemy()[i]->enemygetDamage());
-				}
-				cout << j + 1 << " 번쨰" << _pm->getvplayer()[j]->getCurrentHp() << endl;
-				_em->getVenemy()[i]->setAttackState(NONE);
-			}
-			//에너미가 적에게 맞으면
-			//if (_pm->getvplayer()[j]->getCommand().damagetype == SKILL_DAMAGE ||
-			//	_pm->getvplayer()[j]->getCommand().damagetype == NORMAL_DAMAGE)
-			//{
-			//	_em->getVenemy()[i]->enemysetState(HIT);
-			//}
-			if (KEYMANAGER->isOnceKeyDown('W'))
-			{
-				_em->getVenemy()[0]->enemysetState(HIT);
-			}
-		}
-	}
 
 	_pm->update();
 	if (!_pm->isCommandReady()) _pm->updateActGauge();
@@ -122,14 +98,67 @@ void battleScene::enemyPositionSetting()
 		{
 		case 1:
 			_em->set_wolf(x, y, nameX, nameY);
+			totalGold += _em->getVenemy()[i]->getGold();
+			totalExp += _em->getVenemy()[i]->getExp();
 			break;
 		case 2:
 			_em->set_knight(x, y, nameX, nameY);
+			totalGold += _em->getVenemy()[i]->getGold();
+			totalExp += _em->getVenemy()[i]->getExp();
 			break;
 		case 3:
 			_em->set_mammos(x, y, nameX, nameY);
+			totalGold += _em->getVenemy()[i]->getGold();
+			totalExp += _em->getVenemy()[i]->getExp();
 		default:
 			break;
+		}
+	}
+}
+
+void battleScene::enemyHitPlayer()
+{
+	for (int i = 0; i < _em->getVenemy().size(); i++)
+	{
+		for (int j = 0; j < _pm->getvplayer().size(); j++)
+		{
+			if (_em->getVenemy()[i]->enemygetAttackState() == ATTACK)
+			{
+				if (_em->getVenemy()[i]->enemygetPlayerTarget() == 1)
+				{
+					_pm->getvplayer()[0]->setCurrentHp(_pm->getvplayer()[0]->getCurrentHp() - _em->getVenemy()[i]->enemygetDamage());
+				}
+				if (_em->getVenemy()[i]->enemygetPlayerTarget() == 2)
+				{
+					_pm->getvplayer()[1]->setCurrentHp(_pm->getvplayer()[1]->getCurrentHp() - _em->getVenemy()[i]->enemygetDamage());
+				}
+				if (_em->getVenemy()[i]->enemygetPlayerTarget() == 3)
+				{
+					_pm->getvplayer()[2]->setCurrentHp(_pm->getvplayer()[2]->getCurrentHp() - _em->getVenemy()[i]->enemygetDamage());
+				}
+				_em->getVenemy()[i]->setAttackState(NONE);
+			//	cout << j + 1 << " 번쨰" << _pm->getvplayer()[j]->getCurrentHp() << endl;
+			}
+		}
+	}
+}
+
+void battleScene::playerHitEnemy()
+{
+	for (int i = 0; i < _em->getVenemy().size(); i++)
+	{
+		for (int j = 0; j < _pm->getvplayer().size(); j++)
+		{
+			//에너미가 적에게 맞으면
+			//if (_pm->getvplayer()[j]->getCommand().damagetype == SKILL_DAMAGE ||
+			//	_pm->getvplayer()[j]->getCommand().damagetype == NORMAL_DAMAGE)
+			//{
+			//	_em->getVenemy()[i]->enemysetState(HIT);
+			//}
+			if (KEYMANAGER->isOnceKeyDown('W'))
+			{
+				_em->getVenemy()[0]->enemysetState(HIT);
+			}
 		}
 	}
 }
