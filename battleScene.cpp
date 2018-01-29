@@ -59,9 +59,9 @@ void battleScene::render(void)
 	IMAGEMANAGER->findImage("battleBackground")->render(getMemDC(),0,0);
 	IMAGEMANAGER->findImage("battleBox")->render(getMemDC(), 0, 557);
 	_em->render();
-	IMAGEMANAGER->render("player1Battle_Idle", getMemDC(), 870, 180);
-	IMAGEMANAGER->render("player2Battle_Idle", getMemDC(), 870, 340);
-	IMAGEMANAGER->render("player3Battle_Idle", getMemDC(), 870, 510);
+	IMAGEMANAGER->render("player1Battle_Idle", getMemDC(), 850, 180);
+	IMAGEMANAGER->render("player2Battle_Idle", getMemDC(), 910, 330);
+	IMAGEMANAGER->render("player3Battle_Idle", getMemDC(), 960, 510);
 
 	_pm->render();
 }
@@ -92,21 +92,21 @@ void battleScene::enemyPositionSetting()
 		if (i == 0)
 		{
 			x = 200;
-			y = 150;
+			y = 130;
 			nameX = 20;
 			nameY = 570;
 		}
 		else if (i == 1)
 		{
-			x = 200;
-			y = 300;
+			x = 150;
+			y = 280;
 			nameX = 20;
 			nameY = 630;
 		}
 		else if (i == 2)
 		{
-			x = 200;
-			y = 450;
+			x = 100;
+			y = 430;
 			nameX = 20;
 			nameY = 690;
 		}
