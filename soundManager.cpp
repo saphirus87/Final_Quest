@@ -48,6 +48,10 @@ HRESULT soundManager::init()
 	_system->createSoundGroup("effectSound", &_effectSound);
 
 
+	_currentMusic = 0;
+
+
+	_maxCount = 0;
 
 	return S_OK;
 
@@ -103,6 +107,7 @@ void soundManager::addSound(string keyName, string soundName, bool bgm, bool loo
 		{
 			_system->createSound(soundName.c_str(), FMOD_LOOP_NORMAL , NULL, &_sound[_mTotalSounds.size()]);
 		}
+		_maxCount++;
 	}
 	else
 	{
@@ -112,8 +117,9 @@ void soundManager::addSound(string keyName, string soundName, bool bgm, bool loo
 		}
 		else
 		{
-			_system->createSound(soundName.c_str(), FMOD_DEFAULT , NULL, &_sound[_mTotalSounds.size()]);
+			_system->createSound(soundName.c_str(), FMOD_DEFAULT, NULL, &_sound[_mTotalSounds.size()]);
 		}
+		_maxCount++;
 	}
 
 	_mTotalSounds.insert(make_pair(keyName, &_sound[_mTotalSounds.size()]));
@@ -152,6 +158,20 @@ void soundManager::play(string keyName, float volume, bool isMusic)
 	}
 }
 
+void soundManager::currentPlay()
+{
+	bool isPlay;
+	for(int i=0;i<=_maxCount;i++)
+	{
+
+		_channel[i]->stop();
+	}
+	_system->playSound(_sound[_currentMusic-1], 0, false, &_channel[_currentMusic-1]);
+	_channel[_currentMusic - 1]->setVolume(0.75);
+
+	_channel[_currentMusic - 1]->setChannelGroup(_musicGroup);
+
+}
 
 void soundManager::stop(string keyName)				 
 {
@@ -346,6 +366,38 @@ string soundManager::getTagTitle(string keyName)
 	return (char*)Ftag.data;
 }
 
+string soundManager::getTagTitle(bool isPlus)
+{
+
+	
+	unsigned int tempLenght = 0;
+		
+	while (1)
+		{
+			_sound[_currentMusic]->getLength(&tempLenght, FMOD_TIMEUNIT_MS);
+
+			if (tempLenght <= 50000)
+			{
+				if (_maxCount > _currentMusic)
+					_currentMusic++;
+				else if (_maxCount <= _currentMusic)
+					_currentMusic = 0;
+			}
+			else
+			{
+				break;
+			}
+		}
+		_sound[_currentMusic]->getTag("TITLE", 0, &Ftag);
+
+		if (_maxCount > _currentMusic)
+			_currentMusic++;
+		else if (_maxCount < _currentMusic)
+			_currentMusic = 0;
+
+	return (char*)Ftag.data;
+}
+
 // 작곡가를 얻어서 string형태로 반환
 string soundManager::getTagArtist(string keyName)
 {
@@ -444,5 +496,7 @@ void soundManager::reverbOff(string keyName)
 
 	_system->setReverbProperties(0, &propOff);
 }
+
+
 
 // dsp장난치기

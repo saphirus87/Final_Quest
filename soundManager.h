@@ -40,6 +40,11 @@ private:
 
 	FMOD_TAG Ftag; //태그를 받아오기 위한 Ftag
 
+	int _currentMusic;
+
+	int _maxCount;
+
+
 	float _frequency;//주파수 조절을 위한 변수
 
 public:
@@ -55,6 +60,7 @@ public:
 
 	//사운드재생(키값, 볼륨,bgm=true, effect=false) 볼륨은 0~1.0까지
 	void play(string keyName, float volume = 1.0f, bool isMusic = false);
+	void currentPlay();
 
 	//재생 중단(키값);
 	void stop(string keyName);
@@ -74,6 +80,7 @@ public:
 
 	//음악이름얻기(키값),리턴은 string;
 	string getTagTitle(string keyName);
+	string getTagTitle(bool isPlus);
 
 	//작곡가명얻기(키값), 리턴은 string;
 	string getTagArtist(string keyName);

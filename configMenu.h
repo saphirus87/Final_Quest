@@ -8,6 +8,8 @@ private:
 	int _musicVolume;
 	int _effectVolume;
 
+	string _musicTitle;
+
 public:
 	HRESULT init();
 	void release();
