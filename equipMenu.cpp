@@ -82,7 +82,7 @@ void equipMenu::render()
 	if (_isCharater)
 	{
 		char str[128];
-		sprintf(str, "player%dface", _waitplayersel + 1);
+		sprintf(str, "player%dface", playerposition + 1);
 		IMAGEMANAGER->findImage(str)->render(getMemDC(), 85, 160);
 
 		for (int i = 0; i < 5; ++i)
