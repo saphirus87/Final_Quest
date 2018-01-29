@@ -172,7 +172,7 @@ void battleScene::enemyHitPlayer()
 	{
 		for (int j = 0; j < _pm->getvplayer().size(); j++)
 		{
-			if (_em->getVenemy()[i]->GetAttackOn())
+			if (_em->getVenemy()[i]->enemygetAttackState() == ATTACK)
 			{
 				if (_em->getVenemy()[i]->enemygetPlayerTarget() == 1)
 				{
@@ -186,7 +186,7 @@ void battleScene::enemyHitPlayer()
 				{
 					_pm->getvplayer()[2]->setCurrentHp(_pm->getvplayer()[2]->getCurrentHp() - _em->getVenemy()[i]->enemygetDamage());
 				}
-				_em->getVenemy()[i]->SetAttackOn(false);
+				_em->getVenemy()[i]->setAttackState(NONE);
 				//	cout << j + 1 << " ¹ø¤Š" << _pm->getvplayer()[j]->getCurrentHp() << endl;
 			}
 		}

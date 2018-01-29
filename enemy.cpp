@@ -41,7 +41,7 @@ void enemy::update()
 	{
 		state = DIE;
 		if (_alpha >= 0)
-		_alpha-=3;
+		_alpha--;
 	}
 }
 
@@ -72,6 +72,7 @@ void enemy::Attack(int damage)
 			battle.playerTarget = RND->getFromIntTo(1, 3);
 			SOUNDMANAGER->play("70.basic", 0.7f);
 			attack_state = ATTACK;
+			isAttack = false;
 		}
 	}
 }

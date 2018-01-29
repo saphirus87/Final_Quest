@@ -17,7 +17,7 @@ HRESULT wolf::init()
 	state = LIFE_NONE;
 	isAttack = false;
 	_startTime = 0;
-	_endTime = 2600;
+	_endTime = 1200;
 	frame = 0;
 	img = new image;
 	img->init("enemyimages/wolf.bmp", 144, 116, true, RGB(255, 0, 255));
@@ -26,7 +26,7 @@ HRESULT wolf::init()
 	img_hit->init("enemyimages/wolf_hit.bmp", 576, 116,4,1, true, RGB(255, 0, 255));
 
 	img_die = new image;
-	img_die->init("enemyimages/wolf_die.bmp", 144, 116, true, RGB(255, 0, 255));
+	img_die->init("enemyimages/wolf_die.bmp", 114, 116, true, RGB(255, 0, 255));
 
 	img_attack = new image;
 	img_attack->init("enemyimages/wolf_attack.bmp", 600, 134, 3, 1, true, RGB(255, 0, 255));
@@ -126,9 +126,9 @@ void wolf::render(HDC hdc)
 	if (attack_state == ATTACK)
 	{
 		//update->num =rnd->  if(num==1)
-		if (battle.playerTarget == 1)  img_attack->frameRender(hdc, 760, 150, img_attack->getFrameX(), img_attack->getFrameY());
-		else if (battle.playerTarget == 2) img_attack->frameRender(hdc, 820, 300, img_attack->getFrameX(), img_attack->getFrameY());
-		else img_attack->frameRender(hdc, 880, 450, img_attack->getFrameX(), img_attack->getFrameY());
+		if (battle.playerTarget == 1)  img_attack->frameRender(hdc, x + 300, 150, img_attack->getFrameX(), img_attack->getFrameY());
+		else if (battle.playerTarget == 2) img_attack->frameRender(hdc, x + 300, 300, img_attack->getFrameX(), img_attack->getFrameY());
+		else img_attack->frameRender(hdc, x + 300, 450, img_attack->getFrameX(), img_attack->getFrameY());
 	}
 	HFONT hFont = CreateFont(30, 0, 0, 0, 600, 0, 0, 0, ANSI_CHARSET, 0, 0, 0, VARIABLE_PITCH | FF_ROMAN, TEXT("consolas"));
 	HFONT oFont = (HFONT)SelectObject(getMemDC(), hFont);
