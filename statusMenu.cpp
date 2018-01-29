@@ -222,7 +222,19 @@ void statusMenu::player1Information()
 	char str3[128];
 
 	sprintf(str3, "%s", _pm->getvplayer()[0]->getplayerEquip(0).name.c_str());
-	TextOut(getMemDC(), 525, 515, str3, strlen(str3));
+	TextOut(getMemDC(), 525, 345, str3, strlen(str3));
+
+	sprintf(str3, "%s", _pm->getvplayer()[0]->getplayerEquip(1).name.c_str());
+	TextOut(getMemDC(), 525, 345 + 60, str3, strlen(str3));
+
+	sprintf(str3, "%s", _pm->getvplayer()[0]->getplayerEquip(2).name.c_str());
+	TextOut(getMemDC(), 525, 345 + 108, str3, strlen(str3));
+
+	sprintf(str3, "%s", _pm->getvplayer()[0]->getplayerEquip(3).name.c_str());
+	TextOut(getMemDC(), 525, 345 + 168, str3, strlen(str3));
+
+	sprintf(str3, "%s", _pm->getvplayer()[0]->getplayerEquip(4).name.c_str());
+	TextOut(getMemDC(), 525, 345 + 228, str3, strlen(str3));
 }
 
 void statusMenu::player2Information()
@@ -292,6 +304,25 @@ void statusMenu::player2Information()
 
 	sprintf(str2, "%d", _pm->getvplayer()[1]->getMaxExp() - _pm->getvplayer()[1]->getCurrentExp());
 	TextOut(getMemDC(), 700 - strlen(str2) * 10, 264, str2, strlen(str2));
+
+	///////////////////////////////////////////////////////////////////////////////////
+
+	char str3[128];
+
+	sprintf(str3, "%s", _pm->getvplayer()[1]->getplayerEquip(0).name.c_str());
+	TextOut(getMemDC(), 525, 345, str3, strlen(str3));
+
+	sprintf(str3, "%s", _pm->getvplayer()[1]->getplayerEquip(1).name.c_str());
+	TextOut(getMemDC(), 525, 345 + 60, str3, strlen(str3));
+
+	sprintf(str3, "%s", _pm->getvplayer()[1]->getplayerEquip(2).name.c_str());
+	TextOut(getMemDC(), 525, 345 + 108, str3, strlen(str3));
+
+	sprintf(str3, "%s", _pm->getvplayer()[1]->getplayerEquip(3).name.c_str());
+	TextOut(getMemDC(), 525, 345 + 168, str3, strlen(str3));
+
+	sprintf(str3, "%s", _pm->getvplayer()[1]->getplayerEquip(4).name.c_str());
+	TextOut(getMemDC(), 525, 345 + 228, str3, strlen(str3));
 }
 
 void statusMenu::player3Information()
@@ -361,4 +392,23 @@ void statusMenu::player3Information()
 
 	sprintf(str2, "%d", _pm->getvplayer()[2]->getMaxExp() - _pm->getvplayer()[2]->getCurrentExp());
 	TextOut(getMemDC(), 700 - strlen(str2) * 10, 264, str2, strlen(str2));
+
+	///////////////////////////////////////////////////////////////////////////////
+
+	char str3[128];
+
+	sprintf(str3, "%s", _pm->getvplayer()[2]->getplayerEquip(0).name.c_str());
+	TextOut(getMemDC(), 525, 345, str3, strlen(str3));
+
+	sprintf(str3, "%s", _pm->getvplayer()[2]->getplayerEquip(1).name.c_str());
+	TextOut(getMemDC(), 525, 345 + 60, str3, strlen(str3));
+
+	sprintf(str3, "%s", _pm->getvplayer()[2]->getplayerEquip(2).name.c_str());
+	TextOut(getMemDC(), 525, 345 + 108, str3, strlen(str3));
+
+	sprintf(str3, "%s", _pm->getvplayer()[2]->getplayerEquip(3).name.c_str());
+	TextOut(getMemDC(), 525, 345 + 168, str3, strlen(str3));
+
+	sprintf(str3, "%s", _pm->getvplayer()[2]->getplayerEquip(4).name.c_str());
+	TextOut(getMemDC(), 525, 345 + 228, str3, strlen(str3));
 }
