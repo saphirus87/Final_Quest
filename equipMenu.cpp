@@ -157,14 +157,17 @@ void equipMenu::keyControl()
 		if (KEYMANAGER->isOnceKeyDown(VK_RETURN))
 		{
 			SOUNDMANAGER->play("메뉴선택", 1.0f); //메뉴선택 소리
-			if (_pm->getvplayer()[playerposition]->getplayerEquip(_Item->findItem(_Item->getequipinventory()[_cursorMenuNum]).code / 100 - 1).code)
+			string str = "없음";
+			if (_pm->getvplayer()[playerposition]->getplayerEquip(_Item->findItem(_Item->getequipinventory()[_cursorMenuNum]).code / 100 - 1).name != str)
 			{
-				_Item->addItem(_pm->getvplayer()[playerposition]->getplayerEquip(_Item->findItem(_Item->getequipinventory()[_cursorMenuNum]).code / 100 - 1).name);
+				str = _pm->getvplayer()[playerposition]->getplayerEquip(_Item->findItem(_Item->getequipinventory()[_cursorMenuNum]).code / 100 - 1).name;
 			}
 
 			_pm->getvplayer()[playerposition]->setplayerEquip(_Item->findItem(_Item->getequipinventory()[_cursorMenuNum]), _Item->findItem(_Item->getequipinventory()[_cursorMenuNum]).code / 100 - 1);
 			
 			_Item->delItem(_Item->getequipinventory()[_cursorMenuNum]);
+
+			_Item->addItem(str.c_str());
 		}
 	}
 	else
