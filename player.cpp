@@ -52,6 +52,9 @@ HRESULT player::init()
 	// 사용 가능 커맨드
 	_enableCommand = ATTACK_COMMAND | ITEM_COMMAND | MAGIC_COMMAND | RUN_COMMAND;
 
+	//임시로 적 숫자 1로 초기화
+	_nowenemycount = 0;
+
 	_playerEquip[0].itemtype = TYPE_HEAD;
 	_playerEquip[1].itemtype = TYPE_BODY;
 	_playerEquip[2].itemtype = TYPE_RIGHT;
@@ -245,14 +248,18 @@ void player::commandAttack(void)
 {
 	if (KEYMANAGER->isOnceKeyDown(VK_UP))
 	{
-		if (_commandInfo.target > 1) _commandInfo.target--;
-		else _commandInfo.target = 3;
+		--_commandInfo.target;//일단 -1을 한 후(0~2)
+		_commandInfo.target--;//키 이동
+		if (_commandInfo.target < 0)_commandInfo.target += _nowenemycount;//예외 추가
+		++_commandInfo.target;//다시 +1
 	}
 
 	if (KEYMANAGER->isOnceKeyDown(VK_DOWN))
 	{
-		if (_commandInfo.target < 3) _commandInfo.target++;
-		else _commandInfo.target = 1;
+		--_commandInfo.target;//일단 -1을 한 후
+		_commandInfo.target++;//키 이동
+		_commandInfo.target = _commandInfo.target % _nowenemycount;//예외 추가
+		++_commandInfo.target;
 	}
 
 	if (KEYMANAGER->isOnceKeyDown(VK_RETURN))

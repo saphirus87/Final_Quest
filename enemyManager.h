@@ -37,5 +37,6 @@ public:
 
 	//void PlayerSet(Player* one, Player* two, Player* Three);
 
+	vector<enemy*> nowvenemy();
 };
 

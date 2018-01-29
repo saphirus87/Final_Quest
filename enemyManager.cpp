@@ -90,3 +90,16 @@ void enemyManager::enemyErase(int arr)
 {
 	venemy.erase(venemy.begin() + arr);
 }
+
+vector<enemy*> enemyManager::nowvenemy()
+{
+	vector<enemy*> vtemp;
+	for (int i = 0; i < venemy.size(); ++i)
+	{
+		if (venemy[i]->enemygetCurrentHp() > 0)
+		{
+			vtemp.push_back(venemy[i]);
+		}
+	}
+	return vtemp;
+}

@@ -97,6 +97,8 @@ protected:
 	bool _isCommandReady;				// 플레이어 행동 준비 여부
 	bool _isDamageDraw;
 
+	int _nowenemycount;					//현재 적의 숫자
+
 	int _enableCommand;
 	BATTLE_COMAAND _curCommand;
 	BATTLE_COMAAND _selectCommand;
@@ -223,5 +225,7 @@ public:
 
 	inline float getDamageDrawTimer(void) { return _damageDrawTimer; }
 	inline bool getIsDamageDraw(void) { return _isDamageDraw; }
+
+	inline void setnowenemycount(int enemycount) { _nowenemycount = enemycount; }
 };
 

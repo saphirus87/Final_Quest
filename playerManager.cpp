@@ -39,6 +39,7 @@ void playerManager::update()
 {
 	for (int i = 0; i < _vPlayer.size(); i++)
 	{
+		_vPlayer[i]->setnowenemycount(_nowenemycount);
 		_vPlayer[i]->update();
 
 		if (_vPlayer[i]->getCommand()->selectCommand == RUN_COMMAND)

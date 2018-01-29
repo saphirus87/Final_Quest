@@ -12,6 +12,7 @@ private:
 
 private:
 	vPlayer _vPlayer;
+	int _nowenemycount;					//현재 적의 숫자
 
 public:
 	playerManager();
@@ -28,5 +29,7 @@ public:
 
 	vector<player*> getvplayer() { return _vPlayer; }
 	void resetActGauge(void);
+
+	inline void setnowenemycount(int enemycount) { _nowenemycount = enemycount; }
 };
 

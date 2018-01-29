@@ -58,7 +58,7 @@ void battleScene::update(void)
 		enemyHitPlayer();
 		playerHitEnemy();
 
-
+		_pm->setnowenemycount(_em->nowvenemy().size());
 		_pm->update();
 
 		playerAction();
@@ -69,7 +69,7 @@ void battleScene::update(void)
 			increaseEnemyTimer();
 		}
 
-		if (_em->getVenemy().size() == 0)
+		if (_em->nowvenemy().size() == 0)
 		{
 			_isVictory = true;
 		}
@@ -233,13 +233,13 @@ void battleScene::playerHitEnemy()
 }
 
 void battleScene::targetSelectCursorDraw(void)
-{	
+{
 	for (int i = 0; i < _pm->getvplayer().size(); i++)
 	{
 		if (_pm->getvplayer()[i]->getSelectCommand() == ATTACK_COMMAND)
 		{
-			IMAGEMANAGER->findImage("selectPointLeft")->render(getMemDC(), _em->getVenemy()[_pm->getvplayer()[i]->getCommand()->target - 1]->getLeftPos(),
-				50 + 150 * _pm->getvplayer()[i]->getCommand()->target);
+			IMAGEMANAGER->findImage("selectPointLeft")->render(getMemDC(), _em->nowvenemy()[_pm->getvplayer()[i]->getCommand()->target - 1]->getLeftPos(),
+				_em->nowvenemy()[_pm->getvplayer()[i]->getCommand()->target - 1]->getTopcursorPos());
 		}
 	}
 }
