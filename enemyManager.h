@@ -33,7 +33,7 @@ public:
 	vector<enemy*>::iterator getVienemy() { return vienemy; }
 
 	void Hit();
-	void enemyErase();
+	void enemyErase(int arr);
 
 	//void PlayerSet(Player* one, Player* two, Player* Three);
 

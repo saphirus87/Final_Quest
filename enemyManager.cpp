@@ -86,7 +86,7 @@ void enemyManager::Hit()
 
 }
 
-void enemyManager::enemyErase()
+void enemyManager::enemyErase(int arr)
 {
-	//venemy.erase()
+	venemy.erase(venemy.begin() + arr);
 }

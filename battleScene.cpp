@@ -163,6 +163,13 @@ void battleScene::playerHitEnemy()
 					30);
 				cout << _em->getVenemy()[i]->enemygetCurrentHp() << endl;
 			}
+			if (_em->getVenemy()[i]->enemygetState() == DIE)
+			{
+				//알파값이 0이되면
+				if(_em->getVenemy()[i]->getAlpha()==0)
+				_em->enemyErase(i);
+			}
+			cout << _em->getVenemy().size() << endl;
 		}
 	}
 }

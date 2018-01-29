@@ -110,9 +110,10 @@ public:
 	inline BATTLE _battle() { return battle; }
 	ATTACK_STATE enemygetAttackState() { return attack_state; }
 	void enemysetState(STATE enemystate) { state = enemystate; }
-
+	STATE enemygetState() { return state; }
 	void nameInfo();
 
+	int getAlpha() { return _alpha; }
 	inline void setAttackState(ATTACK_STATE attackState) { attack_state = attackState; }
 };
 

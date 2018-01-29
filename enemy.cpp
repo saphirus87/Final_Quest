@@ -40,6 +40,7 @@ void enemy::update()
 	if (_curruntHp <= 0)
 	{
 		state = DIE;
+		if(_alpha>=0)
 		_alpha--;
 	}
 }
