@@ -120,6 +120,8 @@ public:
 	int getAlpha() { return _alpha; }
 	inline void setAttackState(ATTACK_STATE attackState) { attack_state = attackState; }
 	inline int getLeftPos(void) { return x + img->getWidth(); }
+	inline int getCenterX(void) { return x + img->getWidth() / 2; }
+	inline int getTopPos(void) { return y; }
 
 	bool GetAttackOn() { return isAttack; }
 	void SetAttackOn(bool att) { isAttack = att; }

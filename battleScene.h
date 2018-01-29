@@ -7,7 +7,7 @@ typedef void(*ACTION_FUNTION)(void*, void*);
 
 struct tagDamageDraw
 {
-	int pos;
+	POINT pos;
 	int damage;
 };
 

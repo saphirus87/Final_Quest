@@ -101,7 +101,9 @@ void battleScene::playerAction(void)
 		if (_pm->getvplayer()[i]->getCommand()->selectCommand == ATTACK_COMMAND)
 		{
 			_playerDamage[i].damage = _pm->getvplayer()[i]->getCommand()->totalDamage;
-			_playerDamage[i].pos = _pm->getvplayer()[i]->getCommand()->target - 1;
+			_playerDamage[i].pos.x = _em->getVenemy()[_pm->getvplayer()[i]->getCommand()->target - 1]->getCenterX();
+			_playerDamage[i].pos.y = _em->getVenemy()[_pm->getvplayer()[i]->getCommand()->target - 1]->getTopPos();
+
 			_em->getVenemy()[_pm->getvplayer()[i]->getCommand()->target - 1]->
 				enemysetCurrentHp(_em->getVenemy()[_pm->getvplayer()[i]->getCommand()->target - 1]->enemygetCurrentHp() - _pm->getvplayer()[i]->getCommand()->totalDamage);
 			_pm->getvplayer()[i]->commandReset();
@@ -259,14 +261,18 @@ void battleScene::takenDamageDraw(void)
 	}
 	
 
-	HFONT hFont = CreateFont(30, 0, 0, 0, 600, 0, 0, 0, ANSI_CHARSET, 0, 0, 0, VARIABLE_PITCH | FF_ROMAN, TEXT("consolas"));
+	HFONT hFont = CreateFont(20, 0, 0, 0, 600, 0, 0, 0, ANSI_CHARSET, 0, 0, 0, VARIABLE_PITCH | FF_ROMAN, TEXT("consolas"));
 	HFONT oFont = (HFONT)SelectObject(getMemDC(), hFont);
 
 	SetBkMode(getMemDC(), TRANSPARENT);
 	SetTextColor(getMemDC(), RGB(220, 220, 220));
 	for (int i = 0; i < _pm->getvplayer().size(); i++)
 	{
-		if (_pm->getvplayer()[i]->getIsDamageDraw()) TextOut(getMemDC(), 100, 100, playerDamage[i], strlen(playerDamage[i]));
+		if (_pm->getvplayer()[i]->getIsDamageDraw())
+		{
+			// 그림자 , 상하 좌우로 같은 스타일의 글자를 뿌려준다.
+			outlineTextOut(getMemDC(), _playerDamage[i].pos.x, _playerDamage[i].pos.y - 10, playerDamage[i], RGB(220, 220, 220), RGB(0, 0, 0));
+		}
 	}
 
 	for (int i = 0; i < _em->getVenemy().size(); i++)
