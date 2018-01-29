@@ -63,6 +63,11 @@ void battleScene::update(void)
 		_pm->updateActGauge();		// 플레이어 행동 게이지 증가
 		increaseEnemyTimer();
 	}
+
+	if (_em->getVenemy().size() == 0)
+	{
+		SCENEMANAGER->changeScene("fieldScene", FALSE);
+	}
 }
 
 void battleScene::render(void)
@@ -197,10 +202,13 @@ void battleScene::playerHitEnemy()
 					30);
 				cout << _em->getVenemy()[i]->enemygetCurrentHp() << endl;
 			}
-			if (_em->getVenemy()[i]->enemygetState() == DIE)
+			if (_em->getVenemy().size() > 0)
 			{
-				if (_em->getVenemy()[i]->getAlpha() == 0)
-					_em->enemyErase(i);
+				if (_em->getVenemy()[i]->enemygetState() == DIE)
+				{
+					if (_em->getVenemy()[i]->getAlpha() == 0)
+						_em->enemyErase(i);
+				}
 			}
 		}
 	}
