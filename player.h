@@ -218,5 +218,6 @@ public:
 	inline void setplayerEquip(tagItem equips, int num) { _playerEquip[num] = equips; }
 	inline tagItem getplayerEquip(int num) { return _playerEquip[num]; }
 
+	inline BATTLE_COMAAND getSelectCommand(void) { return _selectCommand; }
 };
 

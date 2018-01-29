@@ -17,6 +17,8 @@ HRESULT battleScene::init(void)
 	/////배틀씬 임시 이미지///
 	IMAGEMANAGER->addImage("battleBackground","mapImage/battleBackground.bmp", 1136, 640, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("battleBox", ".//userInterface//BattleBox.bmp", 1024, 200, true, RGB(255, 0, 255));
+
+	IMAGEMANAGER->addImage("selectPointLeft", ".//SceneImage//selectPointLeft.bmp", 27, 27, true, RGB(255, 0, 255));
 	isinit = false;
 	_isVictory = false;
 	_em = new enemyManager;
@@ -87,6 +89,8 @@ void battleScene::render(void)
 	IMAGEMANAGER->findImage("battleBox")->render(getMemDC(), 0, 557);
 	_em->render();
 	_pm->render();
+
+	targetSelectCursorDraw();
 }
 
 void battleScene::playerAction(void)
@@ -95,11 +99,10 @@ void battleScene::playerAction(void)
 	{
 		if (_pm->getvplayer()[i]->getCommand()->selectCommand == ATTACK_COMMAND)
 		{
-			_em->getVenemy()[_pm->getvplayer()[i]->getCommand()->target]->
-				enemysetCurrentHp(_em->getVenemy()[_pm->getvplayer()[i]->getCommand()->target]->enemygetCurrentHp() - _pm->getvplayer()[i]->getCommand()->totalDamage);
+			_em->getVenemy()[_pm->getvplayer()[i]->getCommand()->target - 1]->
+				enemysetCurrentHp(_em->getVenemy()[_pm->getvplayer()[i]->getCommand()->target - 1]->enemygetCurrentHp() - _pm->getvplayer()[i]->getCommand()->totalDamage);
+			_pm->getvplayer()[i]->commandReset();
 		}
-
-		_pm->getvplayer()[i]->commandReset();
 	}
 }
 
@@ -161,6 +164,14 @@ void battleScene::enemyPositionSetting()
 			break;
 		}
 	}
+
+	for (int i = 0; i < _em->getVenemy().size(); i++)
+	{
+		for (int j = 0; j < _pm->getvplayer().size(); j++)
+		{
+			_pm->getvplayer()[j]->getEnemyLeftPos()[i] = _em->getVenemy()[i]->getLeftPos();
+		}
+	}
 }
 
 void battleScene::enemyHitPlayer()
@@ -209,8 +220,7 @@ void battleScene::playerHitEnemy()
 			if (KEYMANAGER->isOnceKeyDown('W'))
 			{
 				_em->getVenemy()[i]->enemysetState(HIT);
-				_em->getVenemy()[i]->enemysetCurrentHp(_em->getVenemy()[i]->enemygetCurrentHp() -
-					30);
+				_em->getVenemy()[i]->enemysetCurrentHp(_em->getVenemy()[i]->enemygetCurrentHp() - 30);
 				cout << _em->getVenemy()[i]->enemygetCurrentHp() << endl;
 			}
 			if (_em->getVenemy().size() > 0)
@@ -221,6 +231,18 @@ void battleScene::playerHitEnemy()
 						_em->enemyErase(i);
 				}
 			}
+		}
+	}
+}
+
+void battleScene::targetSelectCursorDraw(void)
+{	
+	for (int i = 0; i < _pm->getvplayer().size(); i++)
+	{
+		if (_pm->getvplayer()[i]->getSelectCommand() == ATTACK_COMMAND)
+		{
+			IMAGEMANAGER->findImage("selectPointLeft")->render(getMemDC(), _em->getVenemy()[_pm->getvplayer()[i]->getCommand()->target - 1]->getLeftPos(),
+				50 + 150 * _pm->getvplayer()[i]->getCommand()->target);
 		}
 	}
 }

@@ -25,7 +25,7 @@ HRESULT player::init()
 	_selectCommand = NO_COMMAND;
 	_commandInfo.damagetype = NORMAL_DAMAGE;
 	_commandInfo.selectCommand = NO_COMMAND;
-	_commandInfo.target = 0;
+	_commandInfo.target = 1;
 	_commandInfo.totalDamage = 0;
 
 	//_dir = PLAYER_DOWN;
@@ -81,6 +81,8 @@ void player::update()
 }
 void player::render(void)
 {
+	char target[128];
+
 	HFONT hFont = CreateFont(30, 0, 0, 0, 600, 0, 0, 0, ANSI_CHARSET, 0, 0, 0, VARIABLE_PITCH | FF_ROMAN, TEXT("consolas"));
 	HFONT oFont = (HFONT)SelectObject(getMemDC(), hFont);
 
@@ -92,6 +94,9 @@ void player::render(void)
 	SelectObject(getMemDC(), oFont);
 	DeleteObject(hFont);
 	DeleteObject(oFont);
+
+	wsprintf(target, "curTarget : %d", _commandInfo.target);
+	if (_selectCommand == ATTACK_COMMAND) TextOut(getMemDC(), 500, 100, target, strlen(target));
 }
 
 void player::statusRender(void)
@@ -272,7 +277,7 @@ void player::commandRun(void)
 
 	_commandInfo.damagetype = NORMAL_DAMAGE;
 	_commandInfo.selectCommand = RUN_COMMAND;
-	_commandInfo.target = 0;
+	_commandInfo.target = 1;
 	_commandInfo.totalDamage = 0;
 
 	_curActGauge = 0;
@@ -281,7 +286,7 @@ void player::commandRun(void)
 void player::commandReset(void)
 {
 	_commandInfo.damagetype = NORMAL_DAMAGE;
-	_commandInfo.target = 0;
+	_commandInfo.target = 1;
 	_commandInfo.totalDamage = 0;
 
 	if (_commandInfo.selectCommand != NO_COMMAND)
@@ -289,6 +294,7 @@ void player::commandReset(void)
 		_isCommandReady = false;
 		_curActGauge = 0;
 		_commandInfo.selectCommand = NO_COMMAND;
+		_selectCommand = NO_COMMAND;
 	}
 	
 }

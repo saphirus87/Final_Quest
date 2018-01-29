@@ -53,7 +53,12 @@ public:
 	//플레이어가 에너미 때리는거
 	void playerHitEnemy();
 
-	// 관리자모드 함수
+	void targetSelectCursorDraw(void);
+
+
+	//****************** 관리자모드 함수 ******************
 	void resetPlayerActGauge(void);
+
+
 };
 
