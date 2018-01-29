@@ -101,7 +101,7 @@ void itemMenu::update()
 		{
 			SOUNDMANAGER->play("메뉴선택", 1.0f); //메뉴선택 소리
 
-			SCENEMANAGER->changeScene("메뉴씬");
+			SCENEMANAGER->changeScene("메뉴씬", FALSE);
 		}
 	}
 	else if (selItem) // 아이템 선택했을 때

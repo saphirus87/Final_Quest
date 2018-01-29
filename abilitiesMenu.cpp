@@ -174,10 +174,10 @@ void abilitiesMenu::player2Information()
 	sprintf(str, "%d", _pm->getvplayer()[1]->getLevel());
 	TextOut(getMemDC(), 600 - strlen(str) * 10, 156, str, strlen(str));
 
-	sprintf(str, "%d / %d", _pm->getvplayer()[1]->getCurrentHp(), _pm->getvplayer()[0]->getMaxHp());
+	sprintf(str, "%d / %d", _pm->getvplayer()[1]->getCurrentHp(), _pm->getvplayer()[1]->getMaxHp());
 	TextOut(getMemDC(), 600 - strlen(str) * 10, 183, str, strlen(str));
 
-	sprintf(str, "%d / %d", _pm->getvplayer()[1]->getCurrentMp(), _pm->getvplayer()[0]->getMaxMp());
+	sprintf(str, "%d / %d", _pm->getvplayer()[1]->getCurrentMp(), _pm->getvplayer()[1]->getMaxMp());
 	TextOut(getMemDC(), 600 - strlen(str) * 10, 210, str, strlen(str));
 }
 
@@ -188,9 +188,9 @@ void abilitiesMenu::player3Information()
 	sprintf(str, "%d", _pm->getvplayer()[2]->getLevel());
 	TextOut(getMemDC(), 600 - strlen(str) * 10, 156, str, strlen(str));
 
-	sprintf(str, "%d / %d", _pm->getvplayer()[2]->getCurrentHp(), _pm->getvplayer()[0]->getMaxHp());
+	sprintf(str, "%d / %d", _pm->getvplayer()[2]->getCurrentHp(), _pm->getvplayer()[2]->getMaxHp());
 	TextOut(getMemDC(), 600 - strlen(str) * 10, 183, str, strlen(str));
 
-	sprintf(str, "%d / %d", _pm->getvplayer()[2]->getCurrentMp(), _pm->getvplayer()[0]->getMaxMp());
+	sprintf(str, "%d / %d", _pm->getvplayer()[2]->getCurrentMp(), _pm->getvplayer()[2]->getMaxMp());
 	TextOut(getMemDC(), 600 - strlen(str) * 10, 210, str, strlen(str));
 }
