@@ -20,7 +20,7 @@ HRESULT itemMenu::init()
 	IMAGEMANAGER->addImage("아이템버튼", ".\\SceneImage\\button.bmp", 273, 59, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("아이템매뉴버튼", ".\\userInterface\\noselButton.bmp", 220, 40, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("아이템매뉴선택", ".\\userInterface\\selButton.bmp", 220, 40, true, RGB(255, 0, 255));
-	
+	int ia;
 	seltype = false;
 	selItem = false;
 
