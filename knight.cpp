@@ -16,7 +16,7 @@ HRESULT knight::init()
 	enemy::init();
 	isAttack = false;
 	_startTime = 0;
-	_endTime = 1900;
+	_endTime = 3000;
 	//img = IMAGEMANAGER->addImage("knight", "enemyimages/knight.bmp", 92, 122, true, RGB(255, 0, 255));
 	//IMAGEMANAGER->addImage("knight_hit", "enemyimages/knight_hit.bmp", 96, 120, true, RGB(255, 0, 255));
 	//IMAGEMANAGER->addImage("knight_die", "enemyimages/knight_die.bmp", 96, 120, true, RGB(255, 0, 255));

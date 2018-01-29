@@ -91,6 +91,7 @@ void battleScene::render(void)
 	_pm->render();
 
 	targetSelectCursorDraw();
+	takenDamageDraw();
 }
 
 void battleScene::playerAction(void)
@@ -99,6 +100,8 @@ void battleScene::playerAction(void)
 	{
 		if (_pm->getvplayer()[i]->getCommand()->selectCommand == ATTACK_COMMAND)
 		{
+			_playerDamage[i].damage = _pm->getvplayer()[i]->getCommand()->totalDamage;
+			_playerDamage[i].pos = _pm->getvplayer()[i]->getCommand()->target - 1;
 			_em->getVenemy()[_pm->getvplayer()[i]->getCommand()->target - 1]->
 				enemysetCurrentHp(_em->getVenemy()[_pm->getvplayer()[i]->getCommand()->target - 1]->enemygetCurrentHp() - _pm->getvplayer()[i]->getCommand()->totalDamage);
 			_pm->getvplayer()[i]->commandReset();
@@ -172,7 +175,7 @@ void battleScene::enemyHitPlayer()
 	{
 		for (int j = 0; j < _pm->getvplayer().size(); j++)
 		{
-			if (_em->getVenemy()[i]->enemygetAttackState() == ATTACK)
+			if (_em->getVenemy()[i]->GetAttackOn())
 			{
 				if (_em->getVenemy()[i]->enemygetPlayerTarget() == 1)
 				{
@@ -186,7 +189,7 @@ void battleScene::enemyHitPlayer()
 				{
 					_pm->getvplayer()[2]->setCurrentHp(_pm->getvplayer()[2]->getCurrentHp() - _em->getVenemy()[i]->enemygetDamage());
 				}
-				_em->getVenemy()[i]->setAttackState(NONE);
+				_em->getVenemy()[i]->SetAttackOn(false);
 				//	cout << j + 1 << " ¹ø¤Š" << _pm->getvplayer()[j]->getCurrentHp() << endl;
 			}
 		}
@@ -237,6 +240,43 @@ void battleScene::targetSelectCursorDraw(void)
 				50 + 150 * _pm->getvplayer()[i]->getCommand()->target);
 		}
 	}
+}
+
+void battleScene::takenDamageDraw(void)
+{
+	char playerDamage[3][64];
+	char enemyDamage[3][64];
+
+	for (int i = 0; i < _pm->getvplayer().size(); i++)
+	{
+		
+		wsprintf(playerDamage[i], "%d", _playerDamage[i].damage);
+	}
+
+	for (int i = 0; i < _em->getVenemy().size(); i++)
+	{
+		wsprintf(enemyDamage[i], "%d", _enemyDamage[i].damage);
+	}
+	
+
+	HFONT hFont = CreateFont(30, 0, 0, 0, 600, 0, 0, 0, ANSI_CHARSET, 0, 0, 0, VARIABLE_PITCH | FF_ROMAN, TEXT("consolas"));
+	HFONT oFont = (HFONT)SelectObject(getMemDC(), hFont);
+
+	SetBkMode(getMemDC(), TRANSPARENT);
+	SetTextColor(getMemDC(), RGB(220, 220, 220));
+	for (int i = 0; i < _pm->getvplayer().size(); i++)
+	{
+		if (_pm->getvplayer()[i]->getIsDamageDraw()) TextOut(getMemDC(), 100, 100, playerDamage[i], strlen(playerDamage[i]));
+	}
+
+	for (int i = 0; i < _em->getVenemy().size(); i++)
+	{
+		//TextOut(getMemDC(), 100, 100, enemyDamage[i], strlen(enemyDamage[i]));
+	}
+
+	SelectObject(getMemDC(), oFont);
+	DeleteObject(hFont);
+	DeleteObject(oFont);
 }
 
 void battleScene::resetPlayerActGauge(void)

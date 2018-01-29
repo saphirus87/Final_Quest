@@ -120,5 +120,8 @@ public:
 	int getAlpha() { return _alpha; }
 	inline void setAttackState(ATTACK_STATE attackState) { attack_state = attackState; }
 	inline int getLeftPos(void) { return x + img->getWidth(); }
+
+	bool GetAttackOn() { return isAttack; }
+	void SetAttackOn(bool att) { isAttack = att; }
 };
 

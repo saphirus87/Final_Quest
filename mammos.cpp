@@ -28,7 +28,7 @@ HRESULT mammos::init()
 
 	isAttack = false;
 	_startTime = 0;
-	_endTime = 2200;
+	_endTime = 2500;
 	_currentHp = _maxHp = 60;
 	_currentMp = _maxMp = 60;
 	_str = _int = 3;
