@@ -43,3 +43,13 @@ void DLCManager::setTrue(string strKey, bool istrue)
 		key->second = istrue;
 	}
 }
+
+map<string, bool>::iterator DLCManager::getmdlcIter(int num)
+{
+	_mDLCIter = _mDLCList.begin();
+	for (int i = 0; i < num; ++i)
+	{
+		++_mDLCIter;
+	}
+	return _mDLCIter;
+}

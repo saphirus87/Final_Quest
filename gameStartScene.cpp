@@ -106,6 +106,15 @@ void gameStartScene::keyControl()
 			PostQuitMessage(0);
 		}
 		SOUNDMANAGER->play("메뉴선택", 1.0f);
+
+		if (!DLCMANAGER->findDLC("BGM"))
+		{
+			SOUNDMANAGER->setMusicVolume(0.0f);
+		}
+		if (!DLCMANAGER->findDLC("Effect"))
+		{
+			SOUNDMANAGER->setEffectVolume(0.0f);
+		}
 	}
 
 	if (_alpha == 0)

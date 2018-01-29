@@ -11,6 +11,7 @@ private:
 	
 private:
 	mapDLCList _mDLCList;
+	mapDLCIter _mDLCIter;
 
 public:
 	DLCManager() {};
@@ -24,5 +25,8 @@ public:
 	bool findDLC(string strKey);
 
 	void setTrue(string strKey, bool istrue);
+
+	mapDLCList getmdlclist() { return _mDLCList; }
+	map<string, bool>::iterator getmdlcIter(int num);
 };
 

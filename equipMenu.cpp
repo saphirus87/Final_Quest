@@ -93,21 +93,24 @@ void equipMenu::render()
 			sprintf(str, "%s", _pm->getvplayer()[playerposition]->getplayerEquip(i).name.c_str());
 			TextOut(getMemDC(), 330 + i % 2 * 380, 125 + i / 2 * 63, str, strlen(str));
 		}
-		for (int i = 0; i < equipsize; ++i)
+
+		if (equipsize)
 		{
-			IMAGEMANAGER->findImage("판매버튼")->render(getMemDC(), 50 + i % 4 * 240, 325 + i / 4 * 65);
+			for (int i = 0; i < equipsize; ++i)
+			{
+				IMAGEMANAGER->findImage("판매버튼")->render(getMemDC(), 50 + i % 4 * 240, 325 + i / 4 * 65);
 
-			char str[128];
-			sprintf(str, "%s", _Item->getequipinventory()[i].c_str());
-			TextOut(getMemDC(), 100 + i % 4 * 240, 329 + i / 4 * 65, str, strlen(str));
-			str[128];
-			sprintf(str, "%d", _Item->findItem(_Item->getequipinventory()[i]).count);
-			TextOut(getMemDC(), 200 + i % 4 * 240, 349 + i / 4 * 65, str, strlen(str));
+				char str[128];
+				sprintf(str, "%s", _Item->getequipinventory()[i].c_str());
+				TextOut(getMemDC(), 100 + i % 4 * 240, 329 + i / 4 * 65, str, strlen(str));
+				str[128];
+				sprintf(str, "%d", _Item->findItem(_Item->getequipinventory()[i]).count);
+				TextOut(getMemDC(), 200 + i % 4 * 240, 349 + i / 4 * 65, str, strlen(str));
+			}
+
+			IMAGEMANAGER->findImage("선택")->render(getMemDC(), 60 + _cursorMenuNum % 4 * 240, 335 + _cursorMenuNum / 4 * 65);
 		}
-
-		IMAGEMANAGER->findImage("선택")->render(getMemDC(), 60 + _cursorMenuNum % 4 * 240, 335 + _cursorMenuNum / 4 * 65);
 	}
-
 }
 
 void equipMenu::keyControl()
@@ -126,48 +129,53 @@ void equipMenu::keyControl()
 	}
 	if (_isCharater)
 	{
-		if (KEYMANAGER->isOnceKeyDown(VK_UP))
-		{
-			SOUNDMANAGER->play("메뉴선택", 1.0f); //메뉴선택 소리
-
-			_cursorMenuNum -= 4;
-			if (_cursorMenuNum < 0)_cursorMenuNum += ((equipsize - 1) / 4 + 1) * 4;
-			if (_cursorMenuNum >= equipsize)_cursorMenuNum -= 4;
-			if (_cursorMenuNum < 0)_cursorMenuNum += 4;
-		}
-		if (KEYMANAGER->isOnceKeyDown(VK_DOWN))
-		{
-			SOUNDMANAGER->play("메뉴선택", 1.0f); //메뉴선택 소리
-
-			_cursorMenuNum += 4;
-			if (_cursorMenuNum >= equipsize)_cursorMenuNum -= ((equipsize - 1) / 4 + 1) * 4;
-			if (_cursorMenuNum >= equipsize)_cursorMenuNum -= 4;
-			if (_cursorMenuNum < 0)_cursorMenuNum += 4;
-		}
-		_cursorMenuNum = _cursorMenuNum % equipsize;
-		if (_cursorMenuNum < 0)_cursorMenuNum += equipsize;
 		if (KEYMANAGER->isOnceKeyDown(VK_BACK))
 		{
 			_cursorMenuNum = _waitplayersel;
 			SOUNDMANAGER->play("메뉴선택", 1.0f); //메뉴선택 소리
-			
+
 			_isCharater = false;
 		}
-
-		if (KEYMANAGER->isOnceKeyDown(VK_RETURN))
+		if (equipsize)
 		{
-			SOUNDMANAGER->play("메뉴선택", 1.0f); //메뉴선택 소리
-			string str = "없음";
-			if (_pm->getvplayer()[playerposition]->getplayerEquip(_Item->findItem(_Item->getequipinventory()[_cursorMenuNum]).code / 100 - 1).name != str)
+			if (KEYMANAGER->isOnceKeyDown(VK_UP))
 			{
-				str = _pm->getvplayer()[playerposition]->getplayerEquip(_Item->findItem(_Item->getequipinventory()[_cursorMenuNum]).code / 100 - 1).name;
+				SOUNDMANAGER->play("메뉴선택", 1.0f); //메뉴선택 소리
+
+				_cursorMenuNum -= 4;
+				if (_cursorMenuNum < 0)_cursorMenuNum += ((equipsize - 1) / 4 + 1) * 4;
+				if (_cursorMenuNum >= equipsize)_cursorMenuNum -= 4;
+				if (_cursorMenuNum < 0)_cursorMenuNum += 4;
 			}
+			if (KEYMANAGER->isOnceKeyDown(VK_DOWN))
+			{
+				SOUNDMANAGER->play("메뉴선택", 1.0f); //메뉴선택 소리
 
-			_pm->getvplayer()[playerposition]->setplayerEquip(_Item->findItem(_Item->getequipinventory()[_cursorMenuNum]), _Item->findItem(_Item->getequipinventory()[_cursorMenuNum]).code / 100 - 1);
-			
-			_Item->delItem(_Item->getequipinventory()[_cursorMenuNum]);
+				_cursorMenuNum += 4;
+				if (_cursorMenuNum >= equipsize)_cursorMenuNum -= ((equipsize - 1) / 4 + 1) * 4;
+				if (_cursorMenuNum >= equipsize)_cursorMenuNum -= 4;
+				if (_cursorMenuNum < 0)_cursorMenuNum += 4;
+			}
+			_cursorMenuNum = _cursorMenuNum % equipsize;
+			if (_cursorMenuNum < 0)_cursorMenuNum += equipsize;
 
-			_Item->addItem(str.c_str());
+			if (KEYMANAGER->isOnceKeyDown(VK_RETURN))
+			{
+				SOUNDMANAGER->play("메뉴선택", 1.0f); //메뉴선택 소리
+				string str = "없음";
+				if (_pm->getvplayer()[playerposition]->getplayerEquip(_Item->findItem(_Item->getequipinventory()[_cursorMenuNum]).code / 100 - 1).name != str)
+				{
+					str = _pm->getvplayer()[playerposition]->getplayerEquip(_Item->findItem(_Item->getequipinventory()[_cursorMenuNum]).code / 100 - 1).name;
+				}
+
+				_pm->getvplayer()[playerposition]->setplayerEquip(_Item->findItem(_Item->getequipinventory()[_cursorMenuNum]), _Item->findItem(_Item->getequipinventory()[_cursorMenuNum]).code / 100 - 1);
+
+				_Item->delItem(_Item->getequipinventory()[_cursorMenuNum]);
+				if (str != "없음")
+				{
+					_Item->addItem(str.c_str());
+				}
+			}
 		}
 	}
 	else

@@ -26,13 +26,15 @@ HRESULT configMenu::init()
 	IMAGEMANAGER->addImage("off", ".\\SceneImage\\off.bmp", 552, 61, true, RGB(255, 0, 255));
 	/////////////////////////////////////////////////////////////////////////////////////////
 	
+	DLCMANAGER->addDLC("BGM", false);
+	DLCMANAGER->addDLC("Effect", false);
+
 	//선택을 위한 변수
 	_cursorMenuNum = 1;
 
 	//볼륨 조절을 위한 변수
 	_effectVolume = 1;
 	_musicVolume = 1;
-	_musicTitle = SOUNDMANAGER->getTagTitle(false);
 
 	return S_OK;
 }
@@ -114,8 +116,14 @@ void configMenu::render()
 		SOUNDMANAGER->setEffectVolume(0.0f);
 	}
 
-	TextOut(getMemDC(), WINSIZEX/2+70, 492, _musicTitle.c_str(), strlen(_musicTitle.c_str()));
-
+	if (!DLCMANAGER->findDLC("BGM"))
+	{
+		SOUNDMANAGER->setMusicVolume(0.0f);
+	}
+	if (!DLCMANAGER->findDLC("Effect"))
+	{
+		SOUNDMANAGER->setEffectVolume(0.0f);
+	}
 }
 
 void configMenu::keyControl()
@@ -174,11 +182,6 @@ void configMenu::keyControl()
 		{
 			_effectVolume = 3;
 		}
-
-		if (_cursorMenuNum == 4)
-		{
-			_musicTitle = SOUNDMANAGER->getTagTitle(false);
-		}
 	}
 	if (KEYMANAGER->isOnceKeyDown(VK_LEFT))
 	{
@@ -216,30 +219,14 @@ void configMenu::keyControl()
 		{
 			_effectVolume = 4;
 		}
-
-		if (_cursorMenuNum == 4)
-		{
-			_musicTitle = SOUNDMANAGER->getTagTitle(true);
-		}
 	}
 	
 	if (KEYMANAGER->isOnceKeyDown(VK_BACK))
 	{
 		SCENEMANAGER->changeScene("메뉴씬", FALSE);
 	}
-
-	if (KEYMANAGER->isOnceKeyDown(VK_RETURN))
-	{
-		if (_cursorMenuNum == 4)
-		{
-			SOUNDMANAGER->play("배틀");
-			SOUNDMANAGER->stop("배틀");
-			SOUNDMANAGER->currentPlay();
-		}
-	}
 }
 
 //void configMenu::cursorReset()
 //{
 //}
-
