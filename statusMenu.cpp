@@ -172,21 +172,10 @@ void statusMenu::player1Information()
 	++lll;
 
 	char* str1 = "天";
-	//sprintf(str, "%d", _pm->getvplayer()[0]->getAgi());
 	TextOut(getMemDC(), 230, kkk + lll * nnn, str1, strlen(str1));
 	++lll;
 
 	str1 = "天";
-	//sprintf(str, "%d", _pm->getvplayer()[0]->getAgi());
-	TextOut(getMemDC(), 230, kkk + lll * nnn, str1, strlen(str1));
-	++lll;
-
-	sprintf(str, "%d", _pm->getvplayer()[0]->getAgi());
-	TextOut(getMemDC(), 230, kkk + lll * nnn, str, strlen(str));
-	++lll;
-
-	str1 = "天";
-	//sprintf(str, "%d", _pm->getvplayer()[0]->getAgi());
 	TextOut(getMemDC(), 230, kkk + lll * nnn, str1, strlen(str1));
 	++lll;
 
@@ -195,7 +184,14 @@ void statusMenu::player1Information()
 	++lll;
 
 	str1 = "天";
+	TextOut(getMemDC(), 230, kkk + lll * nnn, str1, strlen(str1));
+	++lll;
+
 	sprintf(str, "%d", _pm->getvplayer()[0]->getAgi());
+	TextOut(getMemDC(), 230, kkk + lll * nnn, str, strlen(str));
+	++lll;
+
+	str1 = "天";
 	TextOut(getMemDC(), 230, kkk + lll * nnn, str1, strlen(str1));
 	//////////////////////////////////////////////////////////////////
 
@@ -219,6 +215,8 @@ void statusMenu::player1Information()
 	sprintf(str2, "%d", _pm->getvplayer()[0]->getMaxExp() - _pm->getvplayer()[0]->getCurrentExp());
 	TextOut(getMemDC(), 700 - strlen(str2) * 10, 264, str2, strlen(str2));
 
+	////////////////////////////////////////////////////////////////////
+
 	char str3[128];
 
 	sprintf(str3, "%s", _pm->getvplayer()[0]->getplayerEquip(0).name.c_str());
@@ -235,6 +233,20 @@ void statusMenu::player1Information()
 
 	sprintf(str3, "%s", _pm->getvplayer()[0]->getplayerEquip(4).name.c_str());
 	TextOut(getMemDC(), 525, 345 + 228, str3, strlen(str3));
+
+	///////////////////////////////////////////////////////////////////////////////
+
+	char* str4 = "ATTACK";
+	TextOut(getMemDC(), 727, 380 + 20, str4, strlen(str4));
+
+	char* str5 = "ITEM";
+	TextOut(getMemDC(), 727, 420 + 20, str5, strlen(str5));
+
+	char* str6 = "MAGIC";
+	TextOut(getMemDC(), 727, 460 + 20, str6, strlen(str6));
+
+	char* str7 = "RUN";
+	TextOut(getMemDC(), 727, 500 + 20, str7, strlen(str7));
 }
 
 void statusMenu::player2Information()
@@ -258,12 +270,10 @@ void statusMenu::player2Information()
 	++lll;
 
 	char* str1 = "天";
-	//sprintf(str, "%d", _pm->getvplayer()[1]->getAgi());
 	TextOut(getMemDC(), 230, kkk + lll * nnn, str1, strlen(str1));
 	++lll;
 
 	str1 = "天";
-	//sprintf(str, "%d", _pm->getvplayer()[1]->getAgi());
 	TextOut(getMemDC(), 230, kkk + lll * nnn, str1, strlen(str1));
 	++lll;
 
@@ -272,7 +282,6 @@ void statusMenu::player2Information()
 	++lll;
 
 	str1 = "天";
-	//sprintf(str, "%d", _pm->getvplayer()[1]->getAgi());
 	TextOut(getMemDC(), 230, kkk + lll * nnn, str1, strlen(str1));
 	++lll;
 
@@ -283,6 +292,7 @@ void statusMenu::player2Information()
 	str1 = "天";
 	sprintf(str, "%d", _pm->getvplayer()[1]->getAgi());
 	TextOut(getMemDC(), 230, kkk + lll * nnn, str1, strlen(str1));
+
 	//////////////////////////////////////////////////////////////////
 
 	char str2[128];
@@ -323,6 +333,20 @@ void statusMenu::player2Information()
 
 	sprintf(str3, "%s", _pm->getvplayer()[1]->getplayerEquip(4).name.c_str());
 	TextOut(getMemDC(), 525, 345 + 228, str3, strlen(str3));
+
+	///////////////////////////////////////////////////////////////////////////////
+
+	char* str4 = "ATTACK";
+	TextOut(getMemDC(), 727, 380 + 20, str4, strlen(str4));
+
+	char* str5 = "ITEM";
+	TextOut(getMemDC(), 727, 420 + 20, str5, strlen(str5));
+
+	char* str6 = "MAGIC";
+	TextOut(getMemDC(), 727, 460 + 20, str6, strlen(str6));
+
+	char* str7 = "RUN";
+	TextOut(getMemDC(), 727, 500 + 20, str7, strlen(str7));
 }
 
 void statusMenu::player3Information()
@@ -411,4 +435,18 @@ void statusMenu::player3Information()
 
 	sprintf(str3, "%s", _pm->getvplayer()[2]->getplayerEquip(4).name.c_str());
 	TextOut(getMemDC(), 525, 345 + 228, str3, strlen(str3));
+
+	///////////////////////////////////////////////////////////////////////////////
+
+	char* str4 = "ATTACK";
+	TextOut(getMemDC(), 727, 380 + 20, str4, strlen(str4));
+
+	char* str5 = "ITEM";
+	TextOut(getMemDC(), 727, 420 + 20, str5, strlen(str5));
+
+	char* str6 = "MAGIC";
+	TextOut(getMemDC(), 727, 460 + 20, str6, strlen(str6));
+
+	char* str7 = "RUN";
+	TextOut(getMemDC(), 727, 500 + 20, str7, strlen(str7));
 }
