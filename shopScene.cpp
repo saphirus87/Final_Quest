@@ -103,7 +103,7 @@ void shopScene::update(void)
 	{
 		itemsize = _Item->getiteminventory().size();
 		equipsize = _Item->getequipinventory().size();
-		if (KEYMANAGER->isOnceKeyDown(VK_BACK) || (!equipsize && !itemsize && waitselnum == 1) || (!DLCMANAGER->getmdlclist().size() && waitselnum == 2))
+		if (KEYMANAGER->isOnceKeyDown(VK_BACK) || (!equipsize && !itemsize && waitselnum == 1) || (!DLCMANAGER->getDLCshop().size() && waitselnum == 2))
 		{
 			selX = 65;
 			selY = 125;
