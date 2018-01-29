@@ -16,7 +16,7 @@ HRESULT knight::init()
 	enemy::init();
 	isAttack = false;
 	_startTime = 0;
-	_endTime = 1900;
+	_endTime = 2600;
 	//img = IMAGEMANAGER->addImage("knight", "enemyimages/knight.bmp", 92, 122, true, RGB(255, 0, 255));
 	//IMAGEMANAGER->addImage("knight_hit", "enemyimages/knight_hit.bmp", 96, 120, true, RGB(255, 0, 255));
 	//IMAGEMANAGER->addImage("knight_die", "enemyimages/knight_die.bmp", 96, 120, true, RGB(255, 0, 255));
@@ -139,9 +139,9 @@ void knight::render(HDC hdc)
 
 	if (attack_state == ATTACK)
 	{
-		if (battle.playerTarget == 1)  img_attack->frameRender(hdc, x + 300, 150, img_attack->getFrameX(), img_attack->getFrameY());
-		else if (battle.playerTarget == 2) img_attack->frameRender(hdc, x + 300, 300, img_attack->getFrameX(), img_attack->getFrameY());
-		else img_attack->frameRender(hdc, x + 300, 450, img_attack->getFrameX(), img_attack->getFrameY());
+		if (battle.playerTarget == 1)  img_attack->frameRender(hdc, 825, 150, img_attack->getFrameX(), img_attack->getFrameY());
+		else if (battle.playerTarget == 2) img_attack->frameRender(hdc,885, 300, img_attack->getFrameX(), img_attack->getFrameY());
+		else img_attack->frameRender(hdc, 945, 450, img_attack->getFrameX(), img_attack->getFrameY());
 	}
 
 	HFONT hFont = CreateFont(30, 0, 0, 0, 600, 0, 0, 0, ANSI_CHARSET, 0, 0, 0, VARIABLE_PITCH | FF_ROMAN, TEXT("consolas"));
