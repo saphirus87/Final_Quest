@@ -9,14 +9,14 @@ private:
 	int _cursorMenuNum;
 
 	int _selectNum;
-	int _currentNum;
 
 	int _alpha;
 
 	bool _isMenu;
-	bool _isCharater1;
-	bool _isCharater2;
-	bool _isCharater3;
+	bool _isCharater;
+
+	int positiontemp;
+	int positiontemp1;
 
 	string _iswhere;
 
@@ -30,9 +30,9 @@ public:
 
 	void keyControl();
 
-	void player1Information();
-	void player2Information();
-	void player3Information();
+	void playerInformation(int playerv);
+
+	void playerposchange(int key);
 
 	inline void setisWhere(string iswhere) { _iswhere = iswhere; }
 	inline void setPlayerManagerAddressLink(playerManager* pm) { _pm = pm; }
