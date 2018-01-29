@@ -18,6 +18,7 @@ HRESULT battleScene::init(void)
 	IMAGEMANAGER->addImage("battleBackground","mapImage/battleBackground.bmp", 1136, 640, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("battleBox", ".//userInterface//BattleBox.bmp", 1024, 200, true, RGB(255, 0, 255));
 	isinit = false;
+	_isVictory = false;
 	_em = new enemyManager;
 	
 	return S_OK;
@@ -36,37 +37,47 @@ void battleScene::update(void)
 		enemyPositionSetting();
 	}
 
-	if (KEYMANAGER->isOnceKeyDown(VK_F4))
+	if (!_isVictory)
 	{
-		resetPlayerActGauge();
-	}
-	// 도망 커맨드 구현으로 불필요
-	/*if (KEYMANAGER->isOnceKeyDown(VK_F10))
-	{
+		if (KEYMANAGER->isOnceKeyDown(VK_F4))
+		{
+			resetPlayerActGauge();
+		}
+		// 도망 커맨드 구현으로 불필요
+		/*if (KEYMANAGER->isOnceKeyDown(VK_F10))
+		{
 		SCENEMANAGER->changeScene("fieldScene",false);
-	}*/
-	_em->update();
-	//스타트타임이 엔드타임이 되서 on이되면 1,2,3중에 하나뽑는다
-	//1이면 150 2면 300 3이면 450에 공격좌표들어가게 ㄱㄱ 
-	
-	
-	enemyHitPlayer();
-	playerHitEnemy();
-	
+		}*/
+		_em->update();
+		//스타트타임이 엔드타임이 되서 on이되면 1,2,3중에 하나뽑는다
+		//1이면 150 2면 300 3이면 450에 공격좌표들어가게 ㄱㄱ 
 
-	_pm->update();
 
-	playerAction();
+		enemyHitPlayer();
+		playerHitEnemy();
 
-	if (!_pm->isCommandReady())
-	{
-		_pm->updateActGauge();		// 플레이어 행동 게이지 증가
-		increaseEnemyTimer();
+
+		_pm->update();
+
+		playerAction();
+
+		if (!_pm->isCommandReady())
+		{
+			_pm->updateActGauge();		// 플레이어 행동 게이지 증가
+			increaseEnemyTimer();
+		}
+
+		if (_em->getVenemy().size() == 0)
+		{
+			_isVictory = true;
+		}
 	}
-
-	if (_em->getVenemy().size() == 0)
+	else
 	{
-		SCENEMANAGER->changeScene("fieldScene", FALSE);
+		if (KEYMANAGER->isOnceKeyDown(VK_RETURN))
+		{
+			SCENEMANAGER->changeScene("fieldScene", FALSE);
+		}
 	}
 }
 

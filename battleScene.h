@@ -13,6 +13,7 @@ private:
 	int totalGold;
 	int totalExp;
 	bool isinit;
+	bool _isVictory;
 	vector<CALLBACK_FUNCTION> _vActionList;
 	enemyManager* _em;
 	playerManager* _pm;
