@@ -136,6 +136,9 @@ public:
 	inline void setLevel(int Level) { _level = Level ; }
 	inline int getLevel(void) { return _level; }
 
+	inline void setpartyPos(int partyPos) { _partyPos = partyPos; }
+	inline int getpartyPos(void) { return _partyPos; }
+
 	inline void setStr(int Str) { _str = Str; }
 	inline int getStr(void) { return _str; }
 
