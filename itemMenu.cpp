@@ -385,4 +385,14 @@ void itemMenu::render()
 		}
 
 	}
+	else if (waitselnum == 2)
+	{
+		for (int i = 0; i < DLCMANAGER->getDLCinven().size(); ++i)
+		{
+			IMAGEMANAGER->findImage("아이템버튼")->render(getMemDC(), 82 + (int)(i % 3) * 293, 163 + (int)(i / 3) * 79);
+			char str[128];
+			sprintf(str, "%s", DLCMANAGER->getDLCinven()[i].c_str());
+			TextOut(getMemDC(), 160 + (int)(i % 3) * 293, 175 + (int)(i / 3) * 79, str, strlen(str));
+		}
+	}
 }

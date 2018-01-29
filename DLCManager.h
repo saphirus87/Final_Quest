@@ -1,6 +1,7 @@
 #pragma once
 #include "singletonBase.h"
 #include <map>
+#include <vector>
 
 class DLCManager : public singletonBase<DLCManager>
 {
@@ -12,6 +13,8 @@ private:
 private:
 	mapDLCList _mDLCList;
 	mapDLCIter _mDLCIter;
+	vector<string> _vDLCinvenlist;
+	vector<string> _vDLCshoplist;
 
 public:
 	DLCManager() {};
@@ -19,6 +22,7 @@ public:
 
 	HRESULT init(void);
 	void release(void);
+	void update(void);
 
 	bool addDLC(string strKey, bool istrue);
 
@@ -27,6 +31,7 @@ public:
 	void setTrue(string strKey, bool istrue);
 
 	mapDLCList getmdlclist() { return _mDLCList; }
-	map<string, bool>::iterator getmdlcIter(int num);
+	vector<string> getDLCinven() { return _vDLCinvenlist; }
+	vector<string> getDLCshop() { return _vDLCshoplist; }
 };
 

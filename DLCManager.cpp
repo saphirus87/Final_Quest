@@ -19,7 +19,9 @@ bool DLCManager::addDLC(string strKey, bool istrue)
 	if (isTrue) return isTrue;
 
 	_mDLCList.insert(make_pair(strKey, istrue));
-	
+
+	update();
+
 	return istrue;
 }
 
@@ -42,14 +44,29 @@ void DLCManager::setTrue(string strKey, bool istrue)
 	{
 		key->second = istrue;
 	}
+	update();
 }
 
-map<string, bool>::iterator DLCManager::getmdlcIter(int num)
+void DLCManager::update(void)
 {
 	_mDLCIter = _mDLCList.begin();
-	for (int i = 0; i < num; ++i)
+	_vDLCshoplist.clear();
+	for (; _mDLCIter != _mDLCList.end();)
 	{
+		if (!_mDLCIter->second)
+		{
+			_vDLCshoplist.push_back(_mDLCIter->first);
+		}
 		++_mDLCIter;
 	}
-	return _mDLCIter;
+	_mDLCIter = _mDLCList.begin();
+	_vDLCinvenlist.clear();
+	for (; _mDLCIter != _mDLCList.end();)
+	{
+		if (_mDLCIter->second)
+		{
+			_vDLCinvenlist.push_back(_mDLCIter->first);
+		}
+		++_mDLCIter;
+	}
 }
