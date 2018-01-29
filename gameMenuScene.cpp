@@ -34,7 +34,7 @@ HRESULT gameMenuScene::init()
 
 	CAMERAMANAGER->addImage("¸Þ´º", WINSIZEX, WINSIZEY);
 
-	return S_OK;
+	return S_OK;  
 }
 
 void gameMenuScene::release()

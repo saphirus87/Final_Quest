@@ -22,6 +22,7 @@ HRESULT player::init()
 	_isCommandReady = false;
 	// 초기 커맨드 위치는 기본공격
 	_curCommand = ATTACK_COMMAND;
+	_selectCommand = NO_COMMAND;
 	_commandInfo.damagetype = NORMAL_DAMAGE;
 	_commandInfo.selectCommand = NO_COMMAND;
 	_commandInfo.target = 0;
@@ -120,59 +121,64 @@ void player::drawCommand(void)
 
 void player::selectCommand(void)
 {
-	if (KEYMANAGER->isOnceKeyDown(VK_UP))
+	switch (_selectCommand)
 	{
-		_curCommand = (BATTLE_COMAAND)(_curCommand / 2);
-		
-		if (_curCommand == 0)
+	case NO_COMMAND:
+		if (KEYMANAGER->isOnceKeyDown(VK_UP))
 		{
-			if (_enableCommand & DEFFENCE_COMMAND) _curCommand = DEFFENCE_COMMAND;
-			else if (_enableCommand & RUN_COMMAND) _curCommand = RUN_COMMAND;
-			else if (_enableCommand & MAGIC_COMMAND) _curCommand = MAGIC_COMMAND;
-			else if (_enableCommand & ITEM_COMMAND) _curCommand = ITEM_COMMAND;
-			else if (_enableCommand & ATTACK_COMMAND) _curCommand = ATTACK_COMMAND;
+			_curCommand = (BATTLE_COMAAND)(_curCommand / 2);
+
+			if (_curCommand == 0)
+			{
+				if (_enableCommand & DEFFENCE_COMMAND) _curCommand = DEFFENCE_COMMAND;
+				else if (_enableCommand & RUN_COMMAND) _curCommand = RUN_COMMAND;
+				else if (_enableCommand & MAGIC_COMMAND) _curCommand = MAGIC_COMMAND;
+				else if (_enableCommand & ITEM_COMMAND) _curCommand = ITEM_COMMAND;
+				else if (_enableCommand & ATTACK_COMMAND) _curCommand = ATTACK_COMMAND;
+			}
 		}
+
+		if (KEYMANAGER->isOnceKeyDown(VK_DOWN))
+		{
+			_curCommand = (BATTLE_COMAAND)(_curCommand * 2);
+
+			if (_curCommand > _enableCommand)
+			{
+				if (_enableCommand & ATTACK_COMMAND) _curCommand = ATTACK_COMMAND;
+				else if (_enableCommand & ITEM_COMMAND) _curCommand = ITEM_COMMAND;
+				else if (_enableCommand & MAGIC_COMMAND) _curCommand = MAGIC_COMMAND;
+				else if (_enableCommand & RUN_COMMAND) _curCommand = RUN_COMMAND;
+				else if (_enableCommand & DEFFENCE_COMMAND) _curCommand = DEFFENCE_COMMAND;
+			}
+		}
+
+		if (KEYMANAGER->isOnceKeyDown(VK_RETURN))
+		{
+			_selectCommand = _curCommand;
+		}
+		break;
+	case ATTACK_COMMAND:
+		commandAttack();
+		break;
+	case ITEM_COMMAND:
+		commandItem();
+		break;
+	case MAGIC_COMMAND:
+		commandMagic();
+		break;
+	case RUN_COMMAND:
+		commandRun();
+		break;
+	case DEFFENCE_COMMAND:
+		// 방어는 미구현
+		break;
+	case ALL_COMMAND:
+		break;
+	default:
+		break;
 	}
+
 	
-	if (KEYMANAGER->isOnceKeyDown(VK_DOWN))
-	{
-		_curCommand = (BATTLE_COMAAND)(_curCommand * 2);
-
-		if (_curCommand > _enableCommand)
-		{
-			if (_enableCommand & ATTACK_COMMAND) _curCommand = ATTACK_COMMAND;
-			else if (_enableCommand & ITEM_COMMAND) _curCommand = ITEM_COMMAND;
-			else if (_enableCommand & MAGIC_COMMAND) _curCommand = MAGIC_COMMAND;
-			else if (_enableCommand & RUN_COMMAND) _curCommand = RUN_COMMAND;
-			else if (_enableCommand & DEFFENCE_COMMAND) _curCommand = DEFFENCE_COMMAND;
-		}
-	}
-
-	if (KEYMANAGER->isOnceKeyDown(VK_RETURN))
-	{
-		switch (_curCommand)
-		{
-		case ATTACK_COMMAND:
-			commandAttack();
-			break;
-		case ITEM_COMMAND:
-			commandItem();
-			break;
-		case MAGIC_COMMAND:
-			commandMagic();
-			break;
-		case RUN_COMMAND:
-			commandRun();
-			break;
-		case DEFFENCE_COMMAND:
-			// 방어는 미구현
-			break;
-		case ALL_COMMAND:
-			break;
-		default:
-			break;
-		}
-	}
 }
 
 void player::levelUp(void)
@@ -261,8 +267,8 @@ void player::commandRun(void)
 {
 	SOUNDMANAGER->stop("배틀");
 	SOUNDMANAGER->setMP3Volume(0.75f);
-	if(SOUNDMANAGER->isPlaySound("티나"))
-	SOUNDMANAGER->setVolume("티나", 0.75f);
+	if (SOUNDMANAGER->isPlaySound("티나"))
+		SOUNDMANAGER->setVolume("티나", 0.75f);
 
 	_commandInfo.damagetype = NORMAL_DAMAGE;
 	_commandInfo.selectCommand = RUN_COMMAND;
@@ -275,7 +281,14 @@ void player::commandRun(void)
 void player::commandReset(void)
 {
 	_commandInfo.damagetype = NORMAL_DAMAGE;
-	_commandInfo.selectCommand = NO_COMMAND;
 	_commandInfo.target = 0;
 	_commandInfo.totalDamage = 0;
+
+	if (_commandInfo.selectCommand != NO_COMMAND)
+	{
+		_isCommandReady = false;
+		_curActGauge = 0;
+		_commandInfo.selectCommand = NO_COMMAND;
+	}
+	
 }

@@ -98,6 +98,7 @@ protected:
 
 	int _enableCommand;
 	BATTLE_COMAAND _curCommand;
+	BATTLE_COMAAND _selectCommand;
 
 	MOVEDIR _dir;						// 상하좌우 판단
 	SKILL _skill;						// 스킬 종류
