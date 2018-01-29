@@ -103,7 +103,7 @@ void shopScene::update(void)
 	{
 		itemsize = _Item->getiteminventory().size();
 		equipsize = _Item->getequipinventory().size();
-		if (KEYMANAGER->isOnceKeyDown(VK_BACK) || (!equipsize && !itemsize && waitselnum))
+		if (KEYMANAGER->isOnceKeyDown(VK_BACK) || (!equipsize && !itemsize && waitselnum == 1) || (!DLCMANAGER->getmdlclist().size() && waitselnum == 2))
 		{
 			selX = 65;
 			selY = 125;
@@ -193,7 +193,34 @@ void shopScene::update(void)
 		}
 		else//DLC선택시
 		{
-
+			if (KEYMANAGER->isOnceKeyDown(VK_RIGHT))
+			{
+				++selnum;
+				selnum = selnum % DLCMANAGER->getmdlclist().size();
+			}
+			if (KEYMANAGER->isOnceKeyDown(VK_LEFT))
+			{
+				--selnum;
+				if (selnum < 0)selnum += DLCMANAGER->getmdlclist().size();
+			}
+			if (KEYMANAGER->isOnceKeyDown(VK_UP))
+			{
+				selnum -= 4;
+				if (selnum < 0)selnum += ((DLCMANAGER->getmdlclist().size() - 1) / 4 + 1) * 4;
+				if (selnum >= DLCMANAGER->getmdlclist().size())selnum -= 4;
+				if (selnum < 0)selnum += 4;
+			}
+			if (KEYMANAGER->isOnceKeyDown(VK_DOWN))
+			{
+				selnum += 4;
+				if (selnum >= DLCMANAGER->getmdlclist().size())selnum -= ((DLCMANAGER->getmdlclist().size() - 1) / 4 + 1) * 4;
+				if (selnum >= DLCMANAGER->getmdlclist().size())selnum -= 4;
+				if (selnum < 0)selnum += 4;
+			}
+			if (KEYMANAGER->isOnceKeyDown(VK_RETURN))
+			{
+				DLCMANAGER->setTrue(DLCMANAGER->getmdlcIter(selnum)->first.c_str(), true);
+			}
 		}
 	}
 }
@@ -275,6 +302,14 @@ void shopScene::render(void)
 		else//DLC 선택 시
 		{
 
+			for (int i = 0; i < DLCMANAGER->getmdlclist().size(); ++i)
+			{
+				IMAGEMANAGER->findImage("판매버튼")->render(getMemDC(), 72 + (int)(i % 4) * 224, 240 + (int)(i / 4) * 52);
+				char str[128];
+				sprintf(str, "%s", DLCMANAGER->getmdlcIter(i)->first.c_str());
+				TextOut(getMemDC(), 120 + (int)(i % 4) * 224, 243 + (int)(i / 4) * 52, str, strlen(str));
+			}
+			IMAGEMANAGER->findImage("선택")->render(getMemDC(), selX + selnum % 4 * 224, selY + selnum / 4 * 52);
 		}
 	}
 }
