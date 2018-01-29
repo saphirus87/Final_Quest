@@ -164,14 +164,6 @@ void battleScene::enemyPositionSetting()
 			break;
 		}
 	}
-
-	for (int i = 0; i < _em->getVenemy().size(); i++)
-	{
-		for (int j = 0; j < _pm->getvplayer().size(); j++)
-		{
-			_pm->getvplayer()[j]->getEnemyLeftPos()[i] = _em->getVenemy()[i]->getLeftPos();
-		}
-	}
 }
 
 void battleScene::enemyHitPlayer()
