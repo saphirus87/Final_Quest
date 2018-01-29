@@ -1,7 +1,7 @@
 #pragma once
 #include "gameNode.h"
-#define MIN_STMN 0.01f
-#define MAX_STMN 0.057f
+#define MIN_STMN 1
+#define MAX_STMN 57
 #define ALPHA_MAX_VALUE 255
 enum STATE
 {
@@ -42,7 +42,7 @@ protected:
 	image* img_die;
 	image* img_attack;
 	int _str, _int;
-	float _startTime, _endTime, _stmn;
+	int _startTime, _endTime, _stmn;
 	int _maxHp, _currentHp;
 	int _maxMp, _currentMp;
 	//공격력 , 스킬공격력
@@ -80,6 +80,9 @@ public:
 	virtual void Attack(int damage);
 	virtual void endAttack();
 	virtual void enemySound();
+
+	void increaseTime(void);
+
 	virtual int getGold() { return GOLD; }
 	virtual int getExp() { return _exp; }
 

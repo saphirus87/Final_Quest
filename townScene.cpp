@@ -82,6 +82,11 @@ void townScene::update(void)
 		SCENEMANAGER->changeScene("¸Ş´º¾À", FALSE);
 	}
 
+	if (KEYMANAGER->isOnceKeyDown('S'))
+	{
+		SCENEMANAGER->changeScene("shopScene");
+	}
+
 	_exitAreaRc = RectMake(EXIT_AREA_LEFT - _mapMoveX, EXIT_AREA_TOP - _mapMoveY, EXIT_AREA_SIZEX, EXIT_AREA_SIZEY);
 	KEYANIMANAGER->update();
 }

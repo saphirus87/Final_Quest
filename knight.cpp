@@ -15,8 +15,8 @@ HRESULT knight::init()
 {
 	enemy::init();
 	isAttack = false;
-	_startTime = 0.0f;
-	_endTime = 19.0f;
+	_startTime = 0;
+	_endTime = 1900;
 	//img = IMAGEMANAGER->addImage("knight", "enemyimages/knight.bmp", 92, 122, true, RGB(255, 0, 255));
 	//IMAGEMANAGER->addImage("knight_hit", "enemyimages/knight_hit.bmp", 96, 120, true, RGB(255, 0, 255));
 	//IMAGEMANAGER->addImage("knight_die", "enemyimages/knight_die.bmp", 96, 120, true, RGB(255, 0, 255));
@@ -112,9 +112,15 @@ void knight::update()
 void knight::render(HDC hdc)
 {
 	char hpPrint[128];
+	char startTime[128];
 	wsprintf(hpPrint, "%d / %d", _currentHp, _maxHp);
+	wsprintf(startTime, "%d / %d", _startTime, _endTime);
 
-	if (_isDebug) TextOut(getMemDC(), x + img->getWidth(), y, hpPrint, strlen(hpPrint));
+	if (_isDebug)
+	{
+		TextOut(getMemDC(), x + img->getWidth(), y, hpPrint, strlen(hpPrint));
+		TextOut(getMemDC(), x + img->getWidth(), y + 10, startTime, strlen(startTime));
+	}
 
 	switch (state)
 	{

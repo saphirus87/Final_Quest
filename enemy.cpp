@@ -74,7 +74,6 @@ void enemy::Attack(int damage)
 			attack_state = ATTACK;
 			isAttack = false;
 		}
-		if (!isAttack) _startTime += _stmn;
 	}
 }
 
@@ -87,6 +86,11 @@ void enemy::endAttack()
 void enemy::enemySound()
 {
 	SOUNDMANAGER->play("70.basic", 0.8f);
+}
+
+void enemy::increaseTime(void)
+{
+	if (!isAttack) _startTime += _stmn;
 }
 
 void enemy::nameInfo()

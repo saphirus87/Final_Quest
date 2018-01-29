@@ -6,7 +6,7 @@
 #define EXIT_AREA_SIZEX 100
 #define EXIT_AREA_SIZEY 50
 #define TOWN_INIT_POSX 1110;
-#define TOWN_INIT_POSY 1450;
+#define TOWN_INIT_POSY 1430;
 
 class townScene : public gameNode
 {

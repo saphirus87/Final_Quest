@@ -42,6 +42,7 @@ public:
 	*/
 
 	void playerAction(void);
+	void increaseEnemyTimer(void);
 
 	void setPlayerManagerAddressLink(playerManager* pm) { _pm = pm; }
 
@@ -50,5 +51,8 @@ public:
 	void enemyHitPlayer();
 	//플레이어가 에너미 때리는거
 	void playerHitEnemy();
+
+	// 관리자모드 함수
+	void resetPlayerActGauge(void);
 };
 

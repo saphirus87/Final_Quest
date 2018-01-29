@@ -16,8 +16,8 @@ HRESULT wolf::init()
 	enemy::init();
 	state = LIFE_NONE;
 	isAttack = false;
-	_startTime = 0.0f;
-	_endTime = 12.0f;
+	_startTime = 0;
+	_endTime = 1200;
 	frame = 0;
 	img = new image;
 	img->init("enemyimages/wolf.bmp", 144, 116, true, RGB(255, 0, 255));

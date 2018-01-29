@@ -27,8 +27,8 @@ HRESULT mammos::init()
 	img_attack->init("enemyimages/mammos_attack.bmp", 600, 134, 3, 1, true, RGB(255, 0, 255));
 
 	isAttack = false;
-	_startTime = 0.0f;
-	_endTime = 22.0f;
+	_startTime = 0;
+	_endTime = 2200;
 	_currentHp = _maxHp = 60;
 	_currentMp = _maxMp = 60;
 	_str = _int = 3;

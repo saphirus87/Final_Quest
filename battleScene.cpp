@@ -35,6 +35,11 @@ void battleScene::update(void)
 		isinit = true;
 		enemyPositionSetting();
 	}
+
+	if (KEYMANAGER->isOnceKeyDown(VK_F4))
+	{
+		resetPlayerActGauge();
+	}
 	// 도망 커맨드 구현으로 불필요
 	/*if (KEYMANAGER->isOnceKeyDown(VK_F10))
 	{
@@ -43,6 +48,8 @@ void battleScene::update(void)
 	_em->update();
 	//스타트타임이 엔드타임이 되서 on이되면 1,2,3중에 하나뽑는다
 	//1이면 150 2면 300 3이면 450에 공격좌표들어가게 ㄱㄱ 
+	
+	
 	enemyHitPlayer();
 	playerHitEnemy();
 	
@@ -51,7 +58,11 @@ void battleScene::update(void)
 
 	playerAction();
 
-	if (!_pm->isCommandReady()) _pm->updateActGauge();		// 플레이어 행동 게이지 증가
+	if (!_pm->isCommandReady())
+	{
+		_pm->updateActGauge();		// 플레이어 행동 게이지 증가
+		increaseEnemyTimer();
+	}
 }
 
 void battleScene::render(void)
@@ -73,6 +84,14 @@ void battleScene::playerAction(void)
 		}
 
 		_pm->getvplayer()[i]->commandReset();
+	}
+}
+
+void battleScene::increaseEnemyTimer(void)
+{
+	for (int i = 0; i < _em->getVenemy().size(); i++)
+	{
+		_em->getVenemy()[i]->increaseTime();
 	}
 }
 
@@ -184,5 +203,14 @@ void battleScene::playerHitEnemy()
 					_em->enemyErase(i);
 			}
 		}
+	}
+}
+
+void battleScene::resetPlayerActGauge(void)
+{
+	for (int i = 0; i < _pm->getvplayer().size(); i++)
+	{
+		_pm->getvplayer()[i]->setCurActGauge(0);
+		_pm->getvplayer()[i]->setIsCommandReady(false);
 	}
 }
