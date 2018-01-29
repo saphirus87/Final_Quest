@@ -35,6 +35,7 @@ HRESULT configMenu::init()
 	//볼륨 조절을 위한 변수
 	_effectVolume = 1;
 	_musicVolume = 1;
+	_musicTitle = SOUNDMANAGER->getTagTitle(true);
 
 	return S_OK;
 }
@@ -124,6 +125,8 @@ void configMenu::render()
 	{
 		SOUNDMANAGER->setEffectVolume(0.0f);
 	}
+
+	TextOut(getMemDC(), WINSIZEX / 2 + 70, 492, _musicTitle.c_str(), strlen(_musicTitle.c_str()));
 }
 
 void configMenu::keyControl()
@@ -182,6 +185,10 @@ void configMenu::keyControl()
 		{
 			_effectVolume = 3;
 		}
+		if (_cursorMenuNum == 4)
+		{
+			_musicTitle= SOUNDMANAGER->getTagTitle(true);
+		}
 	}
 	if (KEYMANAGER->isOnceKeyDown(VK_LEFT))
 	{
@@ -219,11 +226,22 @@ void configMenu::keyControl()
 		{
 			_effectVolume = 4;
 		}
+
+		if (_cursorMenuNum == 4)
+		{
+			_musicTitle=SOUNDMANAGER->getTagTitle(false);
+		}
 	}
 	
 	if (KEYMANAGER->isOnceKeyDown(VK_BACK))
 	{
 		SCENEMANAGER->changeScene("메뉴씬", FALSE);
+	}
+	if (KEYMANAGER->isOnceKeyDown(VK_RETURN))
+	{
+		SOUNDMANAGER->play("배틀");
+		SOUNDMANAGER->stop("배틀");
+		SOUNDMANAGER->currentPlay();
 	}
 }
 

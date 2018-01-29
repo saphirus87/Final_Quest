@@ -382,8 +382,9 @@ string soundManager::getTagTitle(bool isPlus)
 
 	
 	unsigned int tempLenght = 0;
-		
-	while (1)
+
+
+		while (1)
 		{
 			_sound[_currentMusic]->getLength(&tempLenght, FMOD_TIMEUNIT_MS);
 
@@ -405,6 +406,9 @@ string soundManager::getTagTitle(bool isPlus)
 			_currentMusic++;
 		else if (_maxCount < _currentMusic)
 			_currentMusic = 0;
+	
+	
+
 
 	return (char*)Ftag.data;
 }

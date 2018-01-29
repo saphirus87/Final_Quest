@@ -259,6 +259,11 @@ void player::commandMagic(void)
 
 void player::commandRun(void)
 {
+	SOUNDMANAGER->stop("배틀");
+	SOUNDMANAGER->setMP3Volume(0.75f);
+	if(SOUNDMANAGER->isPlaySound("티나"))
+	SOUNDMANAGER->setVolume("티나", 0.75f);
+
 	_commandInfo.damagetype = NORMAL_DAMAGE;
 	_commandInfo.selectCommand = RUN_COMMAND;
 	_commandInfo.target = 0;

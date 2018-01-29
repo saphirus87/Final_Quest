@@ -122,4 +122,7 @@ public:
 
 	//주파수 배율조절
 	void multipleFrequency(string keyName, float multiple); 
+
+	//맥스카운트 겟터
+	int getMaxCounter() { return _maxCount; }
 };

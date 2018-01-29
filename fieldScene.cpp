@@ -277,6 +277,8 @@ void fieldScene::increasedEncount(void)
 		//배틀씬에서 에너미 랜덤받아오게하려면 펄스빼야되서 일단뺏어요
 		_pm->resetActGauge();
 		SOUNDMANAGER->setMP3Volume(0.0f);
+		if (SOUNDMANAGER->isPlaySound("티나"))
+		SOUNDMANAGER->setVolume("티나", 0.0f);
 		SOUNDMANAGER->play("배틀입장");
 		SOUNDMANAGER->play("배틀",0.75,true);
 
