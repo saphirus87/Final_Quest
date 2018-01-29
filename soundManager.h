@@ -113,12 +113,12 @@ public:
 	void setPan(string keyName, float panValue);  // -1에 가까울수록 왼쪽으로 1에 가까울 수록 오른쪽으로
 
 	//반사음 기본셋팅
-	void setReverb(string keyName);
+	void setReverb();
 
 
 	//반사음 온 오프
-	void reverbOn(string keyName);
-	void reverbOff(string keyName);
+	void reverbOn();
+	void reverbOff();
 
 	//주파수 배율조절
 	void multipleFrequency(string keyName, float multiple); 

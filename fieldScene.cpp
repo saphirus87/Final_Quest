@@ -86,7 +86,7 @@ void fieldScene::update(void)
 
 		SCENEMANAGER->changeScene("¸Þ´º¾À", FALSE);
 	}
-	
+
 	KEYANIMANAGER->update();
 
 	_townRc = RectMake(TOWN_LEFT - _mapMoveX, TOWN_TOP - _mapMoveY, TOWN_SIZE, TOWN_SIZE);

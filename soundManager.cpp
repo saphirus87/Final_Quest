@@ -458,24 +458,7 @@ void soundManager::setPan(string keyName, float panValue)
 }
 
 
-//반사음설정
-void soundManager::setReverb(string keyName)
-{
-	arrSoundsIter iter = _mTotalSounds.begin();
-	int count = 0;
 
-	for (iter; iter != _mTotalSounds.end(); ++iter, count++)
-	{
-		if (keyName == iter->first)
-		{
-			//모든 그룹에 반사음의 우선순위를 2로 넣어놓는다.
-	_masterGroup->setReverbProperties(2, 0.5);
-	//그 채널의 우선순위를 1로 넣는다.
-	_channel[count]->setPriority(1);
-	break;
-		}
-	}
-}
 
 //현재 주파수를 얻어온후 주파수의 진동수를 speed의 배수로 곱한다.
 //진동수가 빨라질수록 곡의 길이는 짧아지고 재생속도는 빨라진다.
@@ -496,16 +479,26 @@ void soundManager::multipleFrequency(string keyName, float speed)
 		}
 	}
 }
+//반사음설정
+void soundManager::setReverb()
+{
 
+	//모든 그룹에 반사음의 우선순위를 2로 넣어놓는다.
+	_masterGroup->setReverbProperties(1, 0.5);
+	//그 채널의 우선순위를 1로 넣는다.
+
+	
+}
 
 //FMod를 사용하여 반사음의 효과를 넣을 수 있음
-void soundManager::reverbOn(string keyName)
+void soundManager::reverbOn()
 {
 	FMOD_REVERB_PROPERTIES propOn = FMOD_PRESET_CONCERTHALL;
 
 	_system->setReverbProperties(0, &propOn);
 }
-void soundManager::reverbOff(string keyName)
+
+void soundManager::reverbOff()
 {
 	FMOD_REVERB_PROPERTIES propOff = FMOD_PRESET_OFF;
 
