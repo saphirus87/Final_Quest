@@ -61,6 +61,7 @@ void battleScene::update(void)
 					_pm->getvplayer()[2]->setCurrentHp(_pm->getvplayer()[2]->getCurrentHp() - _em->getVenemy()[i]->enemygetDamage());
 				}
 				cout << j + 1 << " 번쨰" << _pm->getvplayer()[j]->getCurrentHp() << endl;
+				_em->getVenemy()[i]->setAttackState(NONE);
 			}
 			//에너미가 적에게 맞으면
 			//if (_pm->getvplayer()[j]->getCommand().damagetype == SKILL_DAMAGE ||

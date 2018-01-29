@@ -109,5 +109,7 @@ public:
 	void enemysetState(STATE enemystate) { state = enemystate; }
 
 	void nameInfo();
+
+	inline void setAttackState(ATTACK_STATE attackState) { attack_state = attackState; }
 };
 
