@@ -35,6 +35,7 @@ private:
 	ChannelGroup*   _masterGroup; //마스터 채널그룹
 	ChannelGroup*	_musicGroup;  //노래 채널그룹
 	ChannelGroup*	_effectGroup; //이펙트 채널그룹
+	ChannelGroup*	_mp3Group;
 
 	arrSounds _mTotalSounds;
 
@@ -103,6 +104,10 @@ public:
 	//채널관련 볼륨 직접적으로 그 볼륨애 관련된 볼륨을 조절한다.
 	float getVolume(string keyName);
 	void  setVolume(string keyName, float volume);
+
+
+	//현재 추가된 곡들의 볼륨조절
+	void setMP3Volume(float volume);
 
 	//팬조절 //팬이란 스피커 좌우 음향의 치우침 조절기능
 	void setPan(string keyName, float panValue);  // -1에 가까울수록 왼쪽으로 1에 가까울 수록 오른쪽으로

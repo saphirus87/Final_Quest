@@ -38,6 +38,8 @@ HRESULT soundManager::init()
 	//BGM 채널 그룹
 	_system->createChannelGroup("channelMusic", &_musicGroup);
 
+	_system->createChannelGroup("MP3Group", &_mp3Group);
+
 	//마스터사운드그룹 추가
 	_system->getMasterSoundGroup(&_masterSound);
 
@@ -47,6 +49,9 @@ HRESULT soundManager::init()
 	//노래 사운드 그룹	
 	_system->createSoundGroup("effectSound", &_effectSound);
 
+
+
+	_musicGroup->addGroup(_mp3Group);
 
 	_currentMusic = 0;
 
@@ -169,9 +174,9 @@ void soundManager::currentPlay()
 	_system->playSound(_sound[_currentMusic-1], 0, false, &_channel[_currentMusic-1]);
 	_channel[_currentMusic - 1]->setVolume(0.75);
 
-	_channel[_currentMusic - 1]->setChannelGroup(_musicGroup);
-
+	_channel[_currentMusic - 1]->setChannelGroup(_mp3Group);
 }
+
 
 void soundManager::stop(string keyName)				 
 {
@@ -344,6 +349,12 @@ float soundManager::getEffectVolume()
 void soundManager::setEffectVolume(float volume)
 {
 	_effectGroup->setVolume(volume);
+}
+
+
+void soundManager::setMP3Volume(float volume)
+{
+	_mp3Group->setVolume(volume);
 }
 
 
