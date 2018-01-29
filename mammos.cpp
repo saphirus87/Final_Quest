@@ -130,5 +130,15 @@ void mammos::render(HDC hdc)
 		else if (battle.playerTarget == 2) img_attack->frameRender(hdc, x + 300, 300, img_attack->getFrameX(), img_attack->getFrameY());
 		else img_attack->frameRender(hdc, x + 300, 450, img_attack->getFrameX(), img_attack->getFrameY());
 	}
-	TextOut(hdc,20 , namePositionY, "mammos", strlen("mammos"));
+
+	HFONT hFont = CreateFont(30, 0, 0, 0, 600, 0, 0, 0, ANSI_CHARSET, 0, 0, 0, VARIABLE_PITCH | FF_ROMAN, TEXT("consolas"));
+	HFONT oFont = (HFONT)SelectObject(getMemDC(), hFont);
+
+	SetBkMode(getMemDC(), TRANSPARENT);
+	SetTextColor(getMemDC(), RGB(220, 220, 220));
+
+	TextOut(hdc, 20, namePositionY, "mammos", strlen("mammos"));
+	SelectObject(getMemDC(), oFont);
+	DeleteObject(hFont);
+	DeleteObject(oFont);	
 }
