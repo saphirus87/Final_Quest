@@ -5,6 +5,12 @@
 
 typedef void(*ACTION_FUNTION)(void*, void*);
 
+struct tagDamageDraw
+{
+	int pos;
+	int damage;
+};
+
 class playerManager;
 
 class battleScene : public gameNode
@@ -14,6 +20,8 @@ private:
 	int totalExp;
 	bool isinit;
 	bool _isVictory;
+	tagDamageDraw _playerDamage[3];
+	tagDamageDraw _enemyDamage[3];
 	vector<CALLBACK_FUNCTION> _vActionList;
 	enemyManager* _em;
 	playerManager* _pm;
@@ -54,7 +62,7 @@ public:
 	void playerHitEnemy();
 
 	void targetSelectCursorDraw(void);
-
+	void takenDamageDraw(void);
 
 	//****************** 관리자모드 함수 ******************
 	void resetPlayerActGauge(void);

@@ -38,6 +38,7 @@ HRESULT player::init()
 	_maxExp = 100;
 	_currentExp = 0;
 	_isDead = true;
+	_isDamageDraw = false;
 
 	_actGauge = new progressBar;
 	_actGauge->frontBarInit("chargeActGauge", ".//userInterface//ProgressBar.bmp", 0, 0, 140, 14);
@@ -77,6 +78,11 @@ void player::update()
 	if (_isCommandReady)
 	{
 		selectCommand();
+	}
+
+	if (TIMEMANAGER->getWorldTime() - _damageDrawTimer > 2 && _isDamageDraw)
+	{
+		_isDamageDraw = false;
 	}
 }
 void player::render(void)
@@ -254,6 +260,8 @@ void player::commandAttack(void)
 		_commandInfo.damagetype = NORMAL_DAMAGE;
 		_commandInfo.selectCommand = ATTACK_COMMAND;
 		_commandInfo.totalDamage = RND->getFromIntTo(_str / 2, _str * 1.5);
+		_damageDrawTimer = TIMEMANAGER->getWorldTime();
+		_isDamageDraw = true;
 	}
 }
 

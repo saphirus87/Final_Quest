@@ -17,8 +17,7 @@ void playGround::soundInit()
 	SOUNDMANAGER->addSound("배틀승리", ".//musicSound//battleEnding.mp3", true, false);
 	SOUNDMANAGER->addSound("파라다이스", ".//musicSound//Finding Paradise.mp3", true, true);
 
-
-	
+	SOUNDMANAGER->addSound("예거", ".//musicSound//edgarThema.mp3", true, true);
 	SOUNDMANAGER->addSound("티나", ".//musicSound//tinaThema.mp3", true, true);
 
 
