@@ -57,6 +57,7 @@ void player3::update()
 void player3::render()
 {
 	player::render();
+	IMAGEMANAGER->render("player3Battle_Idle", getMemDC(), 960, 480);
 }
 
 void player3::levelUp(void)

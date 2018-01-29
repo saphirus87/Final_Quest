@@ -60,6 +60,7 @@ void player1::update()
 void player1::render(void)
 {
 	player::render();
+	IMAGEMANAGER->render("player1Battle_Idle", getMemDC(), 850, 180);
 }
 
 void player1::levelUp(void)

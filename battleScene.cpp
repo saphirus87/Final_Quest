@@ -59,10 +59,6 @@ void battleScene::render(void)
 	IMAGEMANAGER->findImage("battleBackground")->render(getMemDC(),0,0);
 	IMAGEMANAGER->findImage("battleBox")->render(getMemDC(), 0, 557);
 	_em->render();
-	IMAGEMANAGER->render("player1Battle_Idle", getMemDC(), 850, 180);
-	IMAGEMANAGER->render("player2Battle_Idle", getMemDC(), 910, 330);
-	IMAGEMANAGER->render("player3Battle_Idle", getMemDC(), 960, 480);
-
 	_pm->render();
 }
 
