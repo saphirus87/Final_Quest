@@ -95,6 +95,7 @@ protected:
 	bool _isFight;						// 싸움유무 true = 싸우겟음, false = 안싸우겠음
 	bool _isAttack;						// 공격 유무 true = 공격 가능, false 공격 불가능
 	bool _isCommandReady;				// 플레이어 행동 준비 여부
+	bool _isDamageDraw;
 
 	int _enableCommand;
 	BATTLE_COMAAND _curCommand;
@@ -106,7 +107,7 @@ protected:
 
 	tagCommandInfo _commandInfo;
 
-	int _count;
+	float _damageDrawTimer;
 
 	tagItem _playerEquip[5];
 
@@ -219,5 +220,8 @@ public:
 	inline tagItem getplayerEquip(int num) { return _playerEquip[num]; }
 
 	inline BATTLE_COMAAND getSelectCommand(void) { return _selectCommand; }
+
+	inline float getDamageDrawTimer(void) { return _damageDrawTimer; }
+	inline bool getIsDamageDraw(void) { return _isDamageDraw; }
 };
 
