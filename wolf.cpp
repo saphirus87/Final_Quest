@@ -26,7 +26,7 @@ HRESULT wolf::init()
 	img_hit->init("enemyimages/wolf_hit.bmp", 576, 116,4,1, true, RGB(255, 0, 255));
 
 	img_die = new image;
-	img_die->init("enemyimages/wolf_die.bmp", 114, 116, true, RGB(255, 0, 255));
+	img_die->init("enemyimages/wolf_die.bmp", 144, 116, true, RGB(255, 0, 255));
 
 	img_attack = new image;
 	img_attack->init("enemyimages/wolf_attack.bmp", 600, 134, 3, 1, true, RGB(255, 0, 255));
@@ -63,7 +63,7 @@ void wolf::release()
 
 void wolf::update()
 {
-
+	enemy::update();
 	count++;
 	if (count % 40 == 0)
 	{

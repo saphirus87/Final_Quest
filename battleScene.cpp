@@ -39,9 +39,6 @@ void battleScene::update(void)
 		isinit = true;
 		enemyPositionSetting();
 	}
-	cout << "배틀씬" << endl;
-	cout << "경험치" << totalExp << endl;
-	cout << "골드" << totalGold << endl;
 	// 도망 커맨드 구현으로 불필요
 	/*if (KEYMANAGER->isOnceKeyDown(VK_F10))
 	{
@@ -78,21 +75,21 @@ void battleScene::enemyPositionSetting()
 			x = 200;
 			y = 150;
 			nameX = 20;
-			nameY = 540;
+			nameY = 570;
 		}
 		else if (i == 1)
 		{
 			x = 200;
 			y = 300;
 			nameX = 20;
-			nameY = 610;
+			nameY = 630;
 		}
 		else if (i == 2)
 		{
 			x = 200;
 			y = 450;
 			nameX = 20;
-			nameY = 660;
+			nameY = 690;
 		}
 		switch (rnd2)
 		{
@@ -155,9 +152,16 @@ void battleScene::playerHitEnemy()
 			//{
 			//	_em->getVenemy()[i]->enemysetState(HIT);
 			//}
+
+
+
+			//임시 테스트 DIE값 HIT값 
 			if (KEYMANAGER->isOnceKeyDown('W'))
 			{
-				_em->getVenemy()[0]->enemysetState(HIT);
+				_em->getVenemy()[i]->enemysetState(HIT);
+				_em->getVenemy()[i]->enemysetCurrentHp(_em->getVenemy()[i]->enemygetCurrentHp() -
+					30);
+				cout << _em->getVenemy()[i]->enemygetCurrentHp() << endl;
 			}
 		}
 	}

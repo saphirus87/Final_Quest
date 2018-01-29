@@ -68,6 +68,7 @@ void knight::release()
 
 void knight::update()
 {
+	enemy::update();
 	count++;
 	if (count % 40 == 0)
 	{

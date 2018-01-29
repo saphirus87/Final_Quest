@@ -69,16 +69,11 @@ void enemy::Attack(int damage)
 			_startTime = 0;
 			isAttack = true;
 			battle.playerTarget = RND->getFromIntTo(1, 3);
-		}
-		if (!isAttack) _startTime += _stmn;
-
-		else if (isAttack)
-		{
-
+			SOUNDMANAGER->play("70.basic", 0.7f);
 			attack_state = ATTACK;
 			isAttack = false;
-
 		}
+		if (!isAttack) _startTime += _stmn;
 	}
 }
 

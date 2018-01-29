@@ -61,6 +61,7 @@ void mammos::release()
 
 void mammos::update()
 {
+	enemy::update();
 	count++;
 	if (count % 40 == 0)
 	{
