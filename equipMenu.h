@@ -10,6 +10,7 @@ private:
 	Item * _Item;
 	playerManager* _pm;
 	int _cursorMenuNum;
+	int playerposition;
 
 	int equipsize;
 	int _waitplayersel;

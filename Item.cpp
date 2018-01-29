@@ -63,60 +63,8 @@ HRESULT Item::init(void)
 	_mItemList.insert(make_pair(smoke.code, smoke));
 
 
-	tagItem head1;
-	head1.code = 101;
-	head1.itemtype = TYPE_HEAD;
-	head1.name = "¹ÐÁý¸ðÀÚ";
-	head1.price = 10;
-	head1.value = 5;
-	head1.count = 0;
-	_mItemList.insert(make_pair(head1.code, head1));
-	tagItem head2;
-	head2.code = 102;
-	head2.itemtype = TYPE_HEAD;
-	head2.name = "Ã¶Åõ±¸";
-	head2.price = 30;
-	head2.value = 20;
-	head2.count = 0;
-	_mItemList.insert(make_pair(head2.code, head2));
-	tagItem head3;
-	head3.code = 103;
-	head3.itemtype = TYPE_HEAD;
-	head3.name = "ÈÄµå";
-	head3.price = 40;
-	head3.value = 50;
-	head3.count = 0;
-	_mItemList.insert(make_pair(head3.code, head3));
-
-
-	tagItem body1;
-	body1.code = 201;
-	body1.itemtype = TYPE_BODY;
-	body1.name = "°¡Á×°©¿Ê";
-	body1.price = 10;
-	body1.value = 5;
-	body1.count = 0;
-	_mItemList.insert(make_pair(body1.code, body1));
-	tagItem body2;
-	body2.code = 202;
-	body2.itemtype = TYPE_BODY;
-	body2.name = "Ã¶°©¿Ê";
-	body2.price = 30;
-	body2.value = 20;
-	body2.count = 0;
-	_mItemList.insert(make_pair(body2.code, body2));
-	tagItem body3;
-	body3.code = 203;
-	body3.itemtype = TYPE_BODY;
-	body3.name = "·Îºê";
-	body3.price = 40;
-	body3.value = 50;
-	body3.count = 0;
-	_mItemList.insert(make_pair(body3.code, body3));
-
-
 	tagItem right1;
-	right1.code = 301;
+	right1.code = 101;
 	right1.itemtype = TYPE_RIGHT;
 	right1.name = "´Ü°Ë(éÓ)";
 	right1.price = 10;
@@ -124,7 +72,7 @@ HRESULT Item::init(void)
 	right1.count = 0;
 	_mItemList.insert(make_pair(right1.code, right1));
 	tagItem right2;
-	right2.code = 302;
+	right2.code = 102;
 	right2.itemtype = TYPE_RIGHT;
 	right2.name = "ÁöÆÎÀÌ";
 	right2.price = 30;
@@ -132,7 +80,7 @@ HRESULT Item::init(void)
 	right2.count = 0;
 	_mItemList.insert(make_pair(right2.code, right2));
 	tagItem right3;
-	right3.code = 303;
+	right3.code = 103;
 	right3.itemtype = TYPE_RIGHT;
 	right3.name = "ÇÑ¼Õ°Ë";
 	right3.price = 40;
@@ -142,7 +90,7 @@ HRESULT Item::init(void)
 
 
 	tagItem left1;
-	left1.code = 401;
+	left1.code = 201;
 	left1.itemtype = TYPE_LEFT;
 	left1.name = "´Ü°Ë(ñ§)";
 	left1.price = 10;
@@ -150,7 +98,7 @@ HRESULT Item::init(void)
 	left1.count = 0;
 	_mItemList.insert(make_pair(left1.code, left1));
 	tagItem left2;
-	left2.code = 402;
+	left2.code = 202;
 	left2.itemtype = TYPE_LEFT;
 	left2.name = "¹æÆÐ";
 	left2.price = 20;
@@ -158,13 +106,65 @@ HRESULT Item::init(void)
 	left2.count = 0;
 	_mItemList.insert(make_pair(left2.code, left2));
 	tagItem left3;
-	left3.code = 403;
+	left3.code = 203;
 	left3.itemtype = TYPE_LEFT;
 	left3.name = "¼öÁ¤±¸";
 	left3.price = 40;
 	left3.value = 20;
 	left3.count = 0;
 	_mItemList.insert(make_pair(left3.code, left3));
+
+
+	tagItem head1;
+	head1.code = 301;
+	head1.itemtype = TYPE_HEAD;
+	head1.name = "¹ÐÁý¸ðÀÚ";
+	head1.price = 10;
+	head1.value = 5;
+	head1.count = 0;
+	_mItemList.insert(make_pair(head1.code, head1));
+	tagItem head2;
+	head2.code = 302;
+	head2.itemtype = TYPE_HEAD;
+	head2.name = "Ã¶Åõ±¸";
+	head2.price = 30;
+	head2.value = 20;
+	head2.count = 0;
+	_mItemList.insert(make_pair(head2.code, head2));
+	tagItem head3;
+	head3.code = 303;
+	head3.itemtype = TYPE_HEAD;
+	head3.name = "ÈÄµå";
+	head3.price = 40;
+	head3.value = 50;
+	head3.count = 0;
+	_mItemList.insert(make_pair(head3.code, head3));
+
+
+	tagItem body1;
+	body1.code = 401;
+	body1.itemtype = TYPE_BODY;
+	body1.name = "°¡Á×°©¿Ê";
+	body1.price = 10;
+	body1.value = 5;
+	body1.count = 0;
+	_mItemList.insert(make_pair(body1.code, body1));
+	tagItem body2;
+	body2.code = 402;
+	body2.itemtype = TYPE_BODY;
+	body2.name = "Ã¶°©¿Ê";
+	body2.price = 30;
+	body2.value = 20;
+	body2.count = 0;
+	_mItemList.insert(make_pair(body2.code, body2));
+	tagItem body3;
+	body3.code = 403;
+	body3.itemtype = TYPE_BODY;
+	body3.name = "·Îºê";
+	body3.price = 40;
+	body3.value = 50;
+	body3.count = 0;
+	_mItemList.insert(make_pair(body3.code, body3));
 
 
 	tagItem accessary1;

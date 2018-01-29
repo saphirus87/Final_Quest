@@ -63,7 +63,7 @@ void itemMenu::update()
 		_Item->addItem("단검(右)");
 		_Item->addItem("단검(左)");
 		_Item->addItem("힘의 목걸이");
-		_Item->addItem("체력의 목걸이");
+		_Item->addItem("피닉스의 깃털");
 		_Item->addItem("마력의 목걸이");
 	}
 
@@ -124,24 +124,31 @@ void itemMenu::update()
 		if (KEYMANAGER->isOnceKeyDown(VK_RETURN))
 		{
 			SOUNDMANAGER->play("메뉴선택", 1.0f); //메뉴선택 소리
-
+			int playerposition;
+			for (int i = 0; i < 3; ++i)
+			{
+				if (selnum == _pm->getvplayer()[i]->getpartyPos() - 1)
+				{
+					playerposition = i;
+				}
+			}
 			if (_Item->findItem(_Item->getiteminventory()[waitselItem]).code == 4)
 			{
-				_pm->getvplayer()[selnum]->setCurrentMp(_pm->getvplayer()[selnum]->getCurrentMp() + _Item->findItem(_Item->getiteminventory()[waitselItem]).value);
-				if (_pm->getvplayer()[selnum]->getCurrentMp() > _pm->getvplayer()[selnum]->getMaxMp())
+				_pm->getvplayer()[playerposition]->setCurrentMp(_pm->getvplayer()[playerposition]->getCurrentMp() + _Item->findItem(_Item->getiteminventory()[waitselItem]).value);
+				if (_pm->getvplayer()[playerposition]->getCurrentMp() > _pm->getvplayer()[playerposition]->getMaxMp())
 				{
-					_pm->getvplayer()[selnum]->setCurrentMp(_pm->getvplayer()[selnum]->getMaxMp());
+					_pm->getvplayer()[playerposition]->setCurrentMp(_pm->getvplayer()[playerposition]->getMaxMp());
 				}
 			}
 			else if (_Item->findItem(_Item->getiteminventory()[waitselItem]).code == 5)
 			{
-				if (_pm->getvplayer()[selnum]->getCurrentHp());
+				if (_pm->getvplayer()[playerposition]->getCurrentHp());
 				else
 				{
-					_pm->getvplayer()[selnum]->setCurrentHp(_pm->getvplayer()[selnum]->getCurrentHp() + _Item->findItem(_Item->getiteminventory()[waitselItem]).value);
-					if (_pm->getvplayer()[selnum]->getCurrentHp() > _pm->getvplayer()[selnum]->getMaxHp())
+					_pm->getvplayer()[playerposition]->setCurrentHp(_pm->getvplayer()[playerposition]->getCurrentHp() + _Item->findItem(_Item->getiteminventory()[waitselItem]).value);
+					if (_pm->getvplayer()[playerposition]->getCurrentHp() > _pm->getvplayer()[playerposition]->getMaxHp())
 					{
-						_pm->getvplayer()[selnum]->setCurrentHp(_pm->getvplayer()[selnum]->getMaxHp());
+						_pm->getvplayer()[playerposition]->setCurrentHp(_pm->getvplayer()[playerposition]->getMaxHp());
 					}
 				}
 			}
@@ -163,10 +170,13 @@ void itemMenu::update()
 			else if (_Item->findItem(_Item->getiteminventory()[waitselItem]).code == 7);
 			else
 			{
-				_pm->getvplayer()[selnum]->setCurrentHp(_pm->getvplayer()[selnum]->getCurrentHp() + _Item->findItem(_Item->getiteminventory()[waitselItem]).value);
-				if (_pm->getvplayer()[selnum]->getCurrentHp() > _pm->getvplayer()[selnum]->getMaxHp())
+				if (_pm->getvplayer()[playerposition]->getCurrentHp())
 				{
-					_pm->getvplayer()[selnum]->setCurrentHp(_pm->getvplayer()[selnum]->getMaxHp());
+					_pm->getvplayer()[playerposition]->setCurrentHp(_pm->getvplayer()[playerposition]->getCurrentHp() + _Item->findItem(_Item->getiteminventory()[waitselItem]).value);
+					if (_pm->getvplayer()[playerposition]->getCurrentHp() > _pm->getvplayer()[playerposition]->getMaxHp())
+					{
+						_pm->getvplayer()[playerposition]->setCurrentHp(_pm->getvplayer()[playerposition]->getMaxHp());
+					}
 				}
 			}
 
@@ -328,19 +338,29 @@ void itemMenu::render()
 		{
 			for (int i = 0; i < 3; ++i)
 			{
-				IMAGEMANAGER->findImage("아이템버튼")->render(getMemDC(), 82 + i * 293, 575);
+				if (_pm->getvplayer()[(_pm->getvplayer()[i]->getpartyPos() - 1)]->getCurrentHp())
+				{
+					SetTextColor(getMemDC(), RGB(255, 255, 255));
+				}
+				else
+				{
+					SetTextColor(getMemDC(), RGB(255, 0, 0));
+				}
+
+				IMAGEMANAGER->findImage("아이템버튼")->render(getMemDC(), 82 + (_pm->getvplayer()[i]->getpartyPos() - 1) * 293, 575);
 				char str[128];
 				sprintf(str, "%s", _pm->getvplayer()[i]->getName().c_str());
-				TextOut(getMemDC(), 160 + (int)(i % 3) * 293, 583, str, strlen(str));
+				TextOut(getMemDC(), 160 + (_pm->getvplayer()[i]->getpartyPos() - 1) % 3 * 293, 583, str, strlen(str));
 
 				str[128];
 				sprintf(str, "HP : %d / %d", _pm->getvplayer()[i]->getCurrentHp(), _pm->getvplayer()[i]->getMaxHp());
-				TextOut(getMemDC(), 115 + (int)(i % 3) * 293, 611, str, strlen(str));
+				TextOut(getMemDC(), 115 + (int)(_pm->getvplayer()[i]->getpartyPos() - 1) * 293, 611, str, strlen(str));
 
 				str[128];
 				sprintf(str, "MP : %d / %d", _pm->getvplayer()[i]->getCurrentMp(), _pm->getvplayer()[i]->getMaxMp());
-				TextOut(getMemDC(), 230 + (int)(i % 3) * 293, 611, str, strlen(str));
+				TextOut(getMemDC(), 230 + (int)(_pm->getvplayer()[i]->getpartyPos() - 1) * 293, 611, str, strlen(str));
 			}
+			SetTextColor(getMemDC(), RGB(255, 255, 255));
 			for (int i = 0; i < itemsize; ++i)
 			{
 				IMAGEMANAGER->findImage("아이템버튼")->render(getMemDC(), 82 + (int)(i % 3) * 293, 163 + (int)(i / 3) * 79);
