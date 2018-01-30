@@ -158,6 +158,7 @@
     <ClInclude Include="enemyManager.h" />
     <ClInclude Include="equipMenu.h" />
     <ClInclude Include="fieldScene.h" />
+    <ClInclude Include="gameBattleLodingScene.h" />
     <ClInclude Include="gameEndingScene.h" />
     <ClInclude Include="gameMenuScene.h" />
     <ClInclude Include="gameNode.h" />
@@ -215,6 +216,7 @@
     <ClCompile Include="enemyManager.cpp" />
     <ClCompile Include="equipMenu.cpp" />
     <ClCompile Include="fieldScene.cpp" />
+    <ClCompile Include="gameBattleLodingScene.cpp" />
     <ClCompile Include="gameEndingScene.cpp" />
     <ClCompile Include="gameMenuScene.cpp" />
     <ClCompile Include="gameNode.cpp" />

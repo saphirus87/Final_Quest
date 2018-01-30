@@ -249,6 +249,9 @@
     <ClInclude Include="gameSaveLoadScene.h">
       <Filter>playGround\Scene\startScene</Filter>
     </ClInclude>
+    <ClInclude Include="gameBattleLodingScene.h">
+      <Filter>playGround\Scene\startScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -408,6 +411,9 @@
       <Filter>playGround\Scene\MenuScene</Filter>
     </ClCompile>
     <ClCompile Include="gameSaveLoadScene.cpp">
+      <Filter>playGround\Scene\startScene</Filter>
+    </ClCompile>
+    <ClCompile Include="gameBattleLodingScene.cpp">
       <Filter>playGround\Scene\startScene</Filter>
     </ClCompile>
   </ItemGroup>

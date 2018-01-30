@@ -17,6 +17,7 @@
 #include "playerManager.h"
 #include "shopScene.h"
 #include "Item.h"
+#include "gameBattleLodingScene.h"
 
 class playGround : public gameNode
 {
