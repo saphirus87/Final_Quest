@@ -12,6 +12,7 @@ struct tagDamageDraw
 };
 
 class playerManager;
+class Item;
 
 class battleScene : public gameNode
 {
@@ -25,6 +26,7 @@ private:
 	vector<CALLBACK_FUNCTION> _vActionList;
 	enemyManager* _em;
 	playerManager* _pm;
+	Item* _item;
 
 public:
 	battleScene();
@@ -54,6 +56,7 @@ public:
 	void increaseEnemyTimer(void);
 
 	void setPlayerManagerAddressLink(playerManager* pm) { _pm = pm; }
+	void setItemAddressLink(Item* item) { _item = item; }
 
 	void enemyPositionSetting();
 	//에너미가 플레이어때리는거

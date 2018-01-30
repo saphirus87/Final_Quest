@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "battleScene.h"
 #include "playerManager.h"
+#include "Item.h"
 
 battleScene::battleScene()
 {
@@ -78,6 +79,14 @@ void battleScene::update(void)
 	{
 		if (KEYMANAGER->isOnceKeyDown(VK_RETURN))
 		{
+			for (int i = 0; i < _pm->getvplayer().size(); i++)
+			{
+				_pm->getvplayer()[i]->gainExp(totalExp);
+				_pm->getvplayer()[i]->levelUp();
+			}
+			
+			_item->setMoney(_item->getMoney() + totalGold);
+
 			SOUNDMANAGER->stop("배틀");
 			SOUNDMANAGER->setMP3Volume(0.75f);
 			if (SOUNDMANAGER->isPlaySound("티나"))

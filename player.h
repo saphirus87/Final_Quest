@@ -139,6 +139,7 @@ public:
 	void commandReset(void);
 
 	void setBattlePos(void);
+	inline void gainExp(int exp) { _currentExp += exp; }
 
 public:
 	// getset ºÎºÐ

@@ -337,3 +337,5 @@ void player::setBattlePos(void)
 		_y = 480;
 	}
 }
+
+

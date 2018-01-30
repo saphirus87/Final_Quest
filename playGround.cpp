@@ -52,6 +52,7 @@ HRESULT playGround::init()
 	((statusMenu*)SCENEMANAGER->findScene("½ºÅ×ÀÌÅÍ½º¸Þ´º¾À"))->setPlayerManagerAddressLink(_pm);
 	((fieldScene*)SCENEMANAGER->findScene("fieldScene"))->setPlayerManagerAddressLink(_pm);
 	((battleScene*)SCENEMANAGER->findScene("battleScene"))->setPlayerManagerAddressLink(_pm);
+	((battleScene*)SCENEMANAGER->findScene("battleScene"))->setItemAddressLink(_Item);
 	((shopScene*)SCENEMANAGER->findScene("shopScene"))->setItemAddressLink(_Item);
 
 	SCENEMANAGER->changeScene("¿ÀÇÁ´×¾À");
