@@ -25,6 +25,9 @@ HRESULT enemy::init()
 	battle.playerTarget = RND->getFromIntTo(1, 3);
 	aimPlayer = battle.playerTarget;
 	_stmn = RND->getFromFloatTo(MIN_STMN , MAX_STMN);
+
+	_isDamageDraw = false;
+
 	return S_OK;
 }
 
@@ -42,6 +45,11 @@ void enemy::update()
 		state = DIE;
 		if (_alpha >= 0)
 		_alpha-=3;
+	}
+
+	if (TIMEMANAGER->getWorldTime() - _damageDrawTimer > 1.2f && _isDamageDraw)
+	{
+		_isDamageDraw = false;
 	}
 }
 
@@ -73,6 +81,9 @@ void enemy::Attack(int damage)
 			SOUNDMANAGER->play("70.basic", 0.7f);
 			attack_state = ATTACK;
 			//isAttack = false;
+
+			_damageDrawTimer = TIMEMANAGER->getWorldTime();
+			_isDamageDraw = true;
 		}
 	}
 }

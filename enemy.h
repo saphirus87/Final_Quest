@@ -69,6 +69,11 @@ protected:
 	int aimPlayer;
 	int x, y;
 	int namePositionX, namePositionY;
+
+	float _damageDrawTimer;
+
+	bool _isDamageDraw;
+
 public:
 	enemy();
 	~enemy();

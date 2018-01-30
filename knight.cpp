@@ -32,7 +32,7 @@ HRESULT knight::init()
 	img_die->init("enemyimages/knight_die.bmp", 96, 120, true, RGB(255, 0, 255));
 
 	img_attack = new image;
-	img_attack->init("enemyimages/knight_attack.bmp", 259, 128, 4, 1, true, RGB(255, 0, 255));
+	img_attack->init("enemyimages/knight_attack.bmp", 199, 48, 4, 1, true, RGB(255, 0, 255));
 
 
 	_currentHp = _maxHp = 50;
