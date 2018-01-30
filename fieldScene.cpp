@@ -18,6 +18,7 @@ HRESULT fieldScene::init(void)
 	IMAGEMANAGER->addImage("worldMap", ".//mapImage//worldMap.bmp", 4608, 4608, true, RGB(255, 0, 255));				// 월드맵 추가
 	IMAGEMANAGER->addImage("worldMapSea", ".//mapImage//sea.bmp", 4608, 4608, true, RGB(255, 0, 255));					// 월드맵 바다 이미지
 	IMAGEMANAGER->addImage("worldMapCollision", ".//mapImage//worldMapCollision.bmp", 4608, 4608, true, RGB(255, 0, 255));	// 월드맵 충돌 영역
+	IMAGEMANAGER->addImage("town", ".//mapImage//town.bmp", 80, 112, true, RGB(255, 0, 255));
 	//============================= 월드맵 이미지 추가 =============================
 
 
@@ -98,6 +99,7 @@ void fieldScene::render(void)
 
 	IMAGEMANAGER->render("worldMapSea", getMemDC(), 0, 0, _mapMoveX, _mapMoveY, WINSIZEX, WINSIZEY);
 	IMAGEMANAGER->render("worldMap", getMemDC(), 0, 0, _mapMoveX, _mapMoveY, WINSIZEX, WINSIZEY);
+	IMAGEMANAGER->render("town", getMemDC(), _townRc.left - 15, _townRc.top - 30);
 
 	if (_isDebug)
 	{
@@ -105,10 +107,11 @@ void fieldScene::render(void)
 		wsprintf(encountNum, "encount : %d", _encount);
 		Rectangle(getMemDC(), _playerRc.left, _playerRc.top, _playerRc.right, _playerRc.bottom);
 		TextOut(getMemDC(), _playerRc.right, _playerRc.top, encountNum, strlen(encountNum));
+		Rectangle(getMemDC(), _townRc.left, _townRc.top, _townRc.right, _townRc.bottom);
 	}
 	_playerImg->aniRender(getMemDC(), _playerRc.left, _playerRc.top, _playerAni);
 
-	Rectangle(getMemDC(), _townRc.left, _townRc.top, _townRc.right, _townRc.bottom);
+	
 }
 
 void fieldScene::enterTown(void)
