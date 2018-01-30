@@ -7,10 +7,8 @@ class abilitiesMenu : public gameNode
 {
 private:
 	int _cursorMenuNum;
-
-	bool _isCharater1;
-	bool _isCharater2;
-	bool _isCharater3;
+	int _selectNum;
+	int _tempPos;
 
 	playerManager* _pm;
 
@@ -22,9 +20,7 @@ public:
 
 	void keyControl();
 
-	void player1Information();
-	void player2Information();
-	void player3Information();
+	void playerInformation(int playerv);
 
 	inline void setPlayerManagerAddressLink(playerManager* pm) { _pm = pm; }
 

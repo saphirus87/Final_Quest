@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "gameMenuScene.h"
 #include "playerManager.h"
+#include "Item.h"
 
 gameMenuScene::gameMenuScene()
 {

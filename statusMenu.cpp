@@ -25,10 +25,7 @@ HRESULT statusMenu::init()
 	IMAGEMANAGER->addImage("플레이어버튼선택", ".\\userInterface\\selButton.bmp", 220, 40, true, RGB(255, 0, 255));
 
 	_cursorMenuNum = 1;
-
-	_isCharater1 = false;
-	_isCharater2 = false;
-	_isCharater3 = false;
+	_selectNum = 0;
 
 	return S_OK;
 }
@@ -53,6 +50,9 @@ void statusMenu::render()
 
 	IMAGEMANAGER->findImage("스테이터스메뉴씬")->render(getMemDC(), 0, 0);
 
+	
+	//playerInformation(_cursorMenuNum);
+
 	for (int i = 0; i < 3; ++i)
 	{
 		IMAGEMANAGER->findImage("플레이어버튼")->render(getMemDC(), 40 + i * 240, 56);
@@ -75,28 +75,30 @@ void statusMenu::render()
 
 		char str[128];
 		sprintf(str, "%s", _pm->getvplayer()[i]->getName().c_str());
-		TextOut(getMemDC(), 125 + 235 * i, 65, str, strlen(str));
+		TextOut(getMemDC(), 125 + 235 * (_pm->getvplayer()[i]->getpartyPos() - 1), 65, str, strlen(str));
+		
+		SetTextColor(getMemDC(), RGB(255, 255, 255));
 	}
 	IMAGEMANAGER->findImage("선택")->render(getMemDC(), 50 + (_cursorMenuNum - 1) * 240, 64);
 	
-	if (_isCharater1 == true)
+	if (_selectNum)
 	{
+		for (int i = 0; i < 3; ++i)
+		{
+			if (_pm->getvplayer()[i]->getpartyPos() == _selectNum)
+			{
+				_tempPos = i;
+			}
+		}
+
 		IMAGEMANAGER->findImage("플레이어얼굴배경")->render(getMemDC(), 152, 155);
-		IMAGEMANAGER->findImage("플레이어1얼굴")->render(getMemDC(), 155, 158);
-		player1Information();
+	
+		char facename[128];
+		sprintf(facename, "player%dface", _tempPos + 1);
+		IMAGEMANAGER->findImage(facename)->render(getMemDC(), 155, 158);
+		playerInformation(_tempPos);
 	}
-	if (_isCharater2 == true)
-	{
-		IMAGEMANAGER->findImage("플레이어얼굴배경")->render(getMemDC(), 152, 155);
-		IMAGEMANAGER->findImage("플레이어2얼굴")->render(getMemDC(), 155, 158);
-		player2Information();
-	}
-	if (_isCharater3 == true)
-	{
-		IMAGEMANAGER->findImage("플레이어얼굴배경")->render(getMemDC(), 152, 155);
-		IMAGEMANAGER->findImage("플레이어3얼굴")->render(getMemDC(), 155, 158);
-		player3Information();
-	}
+
 
 	SelectObject(getMemDC(), oFont);
 	DeleteObject(hFont);
@@ -125,24 +127,7 @@ void statusMenu::keyControl()
 	{
 		SOUNDMANAGER->play("메뉴선택", 1.0f); //메뉴선택 소리
 
-		if (_cursorMenuNum == 1)
-		{
-			_isCharater1 = true;
-			_isCharater2 = false;
-			_isCharater3 = false;
-		}
-		if (_cursorMenuNum == 2)
-		{
-			_isCharater1 = false;
-			_isCharater2 = true;
-			_isCharater3 = false;
-		}
-		if (_cursorMenuNum == 3)
-		{
-			_isCharater1 = false;
-			_isCharater2 = false;
-			_isCharater3 = true;
-		}
+		_selectNum = _cursorMenuNum;
 	}
 
 	if (KEYMANAGER->isOnceKeyDown(VK_BACK))
@@ -151,7 +136,7 @@ void statusMenu::keyControl()
 	}
 }
 
-void statusMenu::player1Information()
+void statusMenu::playerInformation(int playerv)
 {
 	//스텟 부분 /////////////////////////////////////////////////////
 	char str[128];
@@ -159,15 +144,11 @@ void statusMenu::player1Information()
 	int lll = 0;
 	float nnn = 27.5;
 
-	sprintf(str, "%d", _pm->getvplayer()[0]->getStr());
+	sprintf(str, "%d", _pm->getvplayer()[playerv]->getStr());
 	TextOut(getMemDC(), 230, kkk + lll * nnn, str, strlen(str));
 	++lll;
 
-	sprintf(str, "%d", _pm->getvplayer()[0]->getAgi());
-	TextOut(getMemDC(), 230, kkk + lll * nnn, str, strlen(str));
-	++lll;
-
-	sprintf(str, "%d", _pm->getvplayer()[0]->getAgi());
+	sprintf(str, "%d", _pm->getvplayer()[playerv]->getAgi());
 	TextOut(getMemDC(), 230, kkk + lll * nnn, str, strlen(str));
 	++lll;
 
@@ -179,7 +160,11 @@ void statusMenu::player1Information()
 	TextOut(getMemDC(), 230, kkk + lll * nnn, str1, strlen(str1));
 	++lll;
 
-	sprintf(str, "%d", _pm->getvplayer()[0]->getAgi());
+	sprintf(str, "%d ~ %d", _pm->getvplayer()[playerv]->getStr() / 2, (int)(_pm->getvplayer()[playerv]->getStr() * 1.5));
+	TextOut(getMemDC(), 230, kkk + lll * nnn, str, strlen(str));
+	++lll;
+
+	sprintf(str, "%d", _pm->getvplayer()[playerv]->getDef());
 	TextOut(getMemDC(), 230, kkk + lll * nnn, str, strlen(str));
 	++lll;
 
@@ -187,7 +172,7 @@ void statusMenu::player1Information()
 	TextOut(getMemDC(), 230, kkk + lll * nnn, str1, strlen(str1));
 	++lll;
 
-	sprintf(str, "%d", _pm->getvplayer()[0]->getAgi());
+	sprintf(str, "%d", _pm->getvplayer()[playerv]->getMDef());
 	TextOut(getMemDC(), 230, kkk + lll * nnn, str, strlen(str));
 	++lll;
 
@@ -200,240 +185,38 @@ void statusMenu::player1Information()
 	//sprintf(str2, "%s", _pm->getvplayer()[0]->getName().c_str());
 	//TextOut(getMemDC(), 650, 130, str2, strlen(str2));
 
-	sprintf(str2, "%d", _pm->getvplayer()[0]->getLevel());
+	sprintf(str2, "%d", _pm->getvplayer()[playerv]->getLevel());
 	TextOut(getMemDC(), 700 - strlen(str2) * 10, 156, str2, strlen(str2));
 
-	sprintf(str2, "%d / %d", _pm->getvplayer()[0]->getCurrentHp(), _pm->getvplayer()[0]->getMaxHp());
+	sprintf(str2, "%d / %d", _pm->getvplayer()[playerv]->getCurrentHp(), _pm->getvplayer()[playerv]->getMaxHp());
 	TextOut(getMemDC(), 700 - strlen(str2) * 10, 183, str2, strlen(str2));
 
-	sprintf(str2, "%d / %d", _pm->getvplayer()[0]->getCurrentMp(), _pm->getvplayer()[0]->getMaxMp());
+	sprintf(str2, "%d / %d", _pm->getvplayer()[playerv]->getCurrentMp(), _pm->getvplayer()[playerv]->getMaxMp());
 	TextOut(getMemDC(), 700 - strlen(str2) * 10, 210, str2, strlen(str2));
 
-	sprintf(str2, "%d", _pm->getvplayer()[0]->getCurrentExp());
+	sprintf(str2, "%d", _pm->getvplayer()[playerv]->getCurrentExp());
 	TextOut(getMemDC(), 700 - strlen(str2) * 10, 237, str2, strlen(str2));
 
-	sprintf(str2, "%d", _pm->getvplayer()[0]->getMaxExp() - _pm->getvplayer()[0]->getCurrentExp());
+	sprintf(str2, "%d", _pm->getvplayer()[playerv]->getMaxExp() - _pm->getvplayer()[playerv]->getCurrentExp());
 	TextOut(getMemDC(), 700 - strlen(str2) * 10, 264, str2, strlen(str2));
 
 	////////////////////////////////////////////////////////////////////
 
 	char str3[128];
 
-	sprintf(str3, "%s", _pm->getvplayer()[0]->getplayerEquip(0).name.c_str());
+	sprintf(str3, "%s", _pm->getvplayer()[playerv]->getplayerEquip(0).name.c_str());
 	TextOut(getMemDC(), 525, 345, str3, strlen(str3));
 
-	sprintf(str3, "%s", _pm->getvplayer()[0]->getplayerEquip(1).name.c_str());
+	sprintf(str3, "%s", _pm->getvplayer()[playerv]->getplayerEquip(1).name.c_str());
 	TextOut(getMemDC(), 525, 345 + 60, str3, strlen(str3));
 
-	sprintf(str3, "%s", _pm->getvplayer()[0]->getplayerEquip(2).name.c_str());
+	sprintf(str3, "%s", _pm->getvplayer()[playerv]->getplayerEquip(2).name.c_str());
 	TextOut(getMemDC(), 525, 345 + 108, str3, strlen(str3));
 
-	sprintf(str3, "%s", _pm->getvplayer()[0]->getplayerEquip(3).name.c_str());
+	sprintf(str3, "%s", _pm->getvplayer()[playerv]->getplayerEquip(3).name.c_str());
 	TextOut(getMemDC(), 525, 345 + 168, str3, strlen(str3));
 
-	sprintf(str3, "%s", _pm->getvplayer()[0]->getplayerEquip(4).name.c_str());
-	TextOut(getMemDC(), 525, 345 + 228, str3, strlen(str3));
-
-	///////////////////////////////////////////////////////////////////////////////
-
-	char* str4 = "ATTACK";
-	TextOut(getMemDC(), 727, 380 + 20, str4, strlen(str4));
-
-	char* str5 = "ITEM";
-	TextOut(getMemDC(), 727, 420 + 20, str5, strlen(str5));
-
-	char* str6 = "MAGIC";
-	TextOut(getMemDC(), 727, 460 + 20, str6, strlen(str6));
-
-	char* str7 = "RUN";
-	TextOut(getMemDC(), 727, 500 + 20, str7, strlen(str7));
-}
-
-void statusMenu::player2Information()
-{
-	//스텟 부분 /////////////////////////////////////////////////////
-	char str[128];
-	int kkk = 340;
-	int lll = 0;
-	float nnn = 27.5;
-
-	sprintf(str, "%d", _pm->getvplayer()[1]->getStr());
-	TextOut(getMemDC(), 230, kkk + lll * nnn, str, strlen(str));
-	++lll;
-
-	sprintf(str, "%d", _pm->getvplayer()[1]->getAgi());
-	TextOut(getMemDC(), 230, kkk + lll * nnn, str, strlen(str));
-	++lll;
-
-	sprintf(str, "%d", _pm->getvplayer()[1]->getAgi());
-	TextOut(getMemDC(), 230, kkk + lll * nnn, str, strlen(str));
-	++lll;
-
-	char* str1 = "ㅡ";
-	TextOut(getMemDC(), 230, kkk + lll * nnn, str1, strlen(str1));
-	++lll;
-
-	str1 = "ㅡ";
-	TextOut(getMemDC(), 230, kkk + lll * nnn, str1, strlen(str1));
-	++lll;
-
-	sprintf(str, "%d", _pm->getvplayer()[1]->getAgi());
-	TextOut(getMemDC(), 230, kkk + lll * nnn, str, strlen(str));
-	++lll;
-
-	str1 = "ㅡ";
-	TextOut(getMemDC(), 230, kkk + lll * nnn, str1, strlen(str1));
-	++lll;
-
-	sprintf(str, "%d", _pm->getvplayer()[1]->getAgi());
-	TextOut(getMemDC(), 230, kkk + lll * nnn, str, strlen(str));
-	++lll;
-
-	str1 = "ㅡ";
-	sprintf(str, "%d", _pm->getvplayer()[1]->getAgi());
-	TextOut(getMemDC(), 230, kkk + lll * nnn, str1, strlen(str1));
-
-	//////////////////////////////////////////////////////////////////
-
-	char str2[128];
-
-	//sprintf(str2, "%s", _pm->getvplayer()[1]->getName().c_str());
-	//TextOut(getMemDC(), 650, 130, str2, strlen(str2));
-
-	sprintf(str2, "%d", _pm->getvplayer()[1]->getLevel());
-	TextOut(getMemDC(), 700 - strlen(str2) * 10, 156, str2, strlen(str2));
-
-	sprintf(str2, "%d / %d", _pm->getvplayer()[1]->getCurrentHp(), _pm->getvplayer()[1]->getMaxHp());
-	TextOut(getMemDC(), 700 - strlen(str2) * 10, 183, str2, strlen(str2));
-
-	sprintf(str2, "%d / %d", _pm->getvplayer()[1]->getCurrentMp(), _pm->getvplayer()[1]->getMaxMp());
-	TextOut(getMemDC(), 700 - strlen(str2) * 10, 210, str2, strlen(str2));
-
-	sprintf(str2, "%d", _pm->getvplayer()[1]->getCurrentExp());
-	TextOut(getMemDC(), 700 - strlen(str2) * 10, 237, str2, strlen(str2));
-
-	sprintf(str2, "%d", _pm->getvplayer()[1]->getMaxExp() - _pm->getvplayer()[1]->getCurrentExp());
-	TextOut(getMemDC(), 700 - strlen(str2) * 10, 264, str2, strlen(str2));
-
-	///////////////////////////////////////////////////////////////////////////////////
-
-	char str3[128];
-
-	sprintf(str3, "%s", _pm->getvplayer()[1]->getplayerEquip(0).name.c_str());
-	TextOut(getMemDC(), 525, 345, str3, strlen(str3));
-
-	sprintf(str3, "%s", _pm->getvplayer()[1]->getplayerEquip(1).name.c_str());
-	TextOut(getMemDC(), 525, 345 + 60, str3, strlen(str3));
-
-	sprintf(str3, "%s", _pm->getvplayer()[1]->getplayerEquip(2).name.c_str());
-	TextOut(getMemDC(), 525, 345 + 108, str3, strlen(str3));
-
-	sprintf(str3, "%s", _pm->getvplayer()[1]->getplayerEquip(3).name.c_str());
-	TextOut(getMemDC(), 525, 345 + 168, str3, strlen(str3));
-
-	sprintf(str3, "%s", _pm->getvplayer()[1]->getplayerEquip(4).name.c_str());
-	TextOut(getMemDC(), 525, 345 + 228, str3, strlen(str3));
-
-	///////////////////////////////////////////////////////////////////////////////
-
-	char* str4 = "ATTACK";
-	TextOut(getMemDC(), 727, 380 + 20, str4, strlen(str4));
-
-	char* str5 = "ITEM";
-	TextOut(getMemDC(), 727, 420 + 20, str5, strlen(str5));
-
-	char* str6 = "MAGIC";
-	TextOut(getMemDC(), 727, 460 + 20, str6, strlen(str6));
-
-	char* str7 = "RUN";
-	TextOut(getMemDC(), 727, 500 + 20, str7, strlen(str7));
-}
-
-void statusMenu::player3Information()
-{
-	//스텟 부분 /////////////////////////////////////////////////////
-	char str[128];
-	int kkk = 340;
-	int lll = 0;
-	float nnn = 27.5;
-
-	sprintf(str, "%d", _pm->getvplayer()[2]->getStr());
-	TextOut(getMemDC(), 230, kkk + lll * nnn, str, strlen(str));
-	++lll;
-
-	sprintf(str, "%d", _pm->getvplayer()[2]->getAgi());
-	TextOut(getMemDC(), 230, kkk + lll * nnn, str, strlen(str));
-	++lll;
-
-	sprintf(str, "%d", _pm->getvplayer()[2]->getAgi());
-	TextOut(getMemDC(), 230, kkk + lll * nnn, str, strlen(str));
-	++lll;
-
-	char* str1 = "ㅡ";
-	//sprintf(str, "%d", _pm->getvplayer()[2]->getAgi());
-	TextOut(getMemDC(), 230, kkk + lll * nnn, str1, strlen(str1));
-	++lll;
-
-	str1 = "ㅡ";
-	//sprintf(str, "%d", _pm->getvplayer()[2]->getAgi());
-	TextOut(getMemDC(), 230, kkk + lll * nnn, str1, strlen(str1));
-	++lll;
-
-	sprintf(str, "%d", _pm->getvplayer()[2]->getAgi());
-	TextOut(getMemDC(), 230, kkk + lll * nnn, str, strlen(str));
-	++lll;
-
-	str1 = "ㅡ";
-	//sprintf(str, "%d", _pm->getvplayer()[2]->getAgi());
-	TextOut(getMemDC(), 230, kkk + lll * nnn, str1, strlen(str1));
-	++lll;
-
-	sprintf(str, "%d", _pm->getvplayer()[2]->getAgi());
-	TextOut(getMemDC(), 230, kkk + lll * nnn, str, strlen(str));
-	++lll;
-
-	str1 = "ㅡ";
-	sprintf(str, "%d", _pm->getvplayer()[2]->getAgi());
-	TextOut(getMemDC(), 230, kkk + lll * nnn, str1, strlen(str1));
-	//////////////////////////////////////////////////////////////////
-
-	char str2[128];
-
-	//sprintf(str2, "%s", _pm->getvplayer()[2]->getName().c_str());
-	//TextOut(getMemDC(), 650, 130, str2, strlen(str2));
-
-	sprintf(str2, "%d", _pm->getvplayer()[2]->getLevel());
-	TextOut(getMemDC(), 700 - strlen(str2) * 10, 156, str2, strlen(str2));
-
-	sprintf(str2, "%d / %d", _pm->getvplayer()[2]->getCurrentHp(), _pm->getvplayer()[2]->getMaxHp());
-	TextOut(getMemDC(), 700 - strlen(str2) * 10, 183, str2, strlen(str2));
-
-	sprintf(str2, "%d / %d", _pm->getvplayer()[2]->getCurrentMp(), _pm->getvplayer()[2]->getMaxMp());
-	TextOut(getMemDC(), 700 - strlen(str2) * 10, 210, str2, strlen(str2));
-
-	sprintf(str2, "%d", _pm->getvplayer()[2]->getCurrentExp());
-	TextOut(getMemDC(), 700 - strlen(str2) * 10, 237, str2, strlen(str2));
-
-	sprintf(str2, "%d", _pm->getvplayer()[2]->getMaxExp() - _pm->getvplayer()[2]->getCurrentExp());
-	TextOut(getMemDC(), 700 - strlen(str2) * 10, 264, str2, strlen(str2));
-
-	///////////////////////////////////////////////////////////////////////////////
-
-	char str3[128];
-
-	sprintf(str3, "%s", _pm->getvplayer()[2]->getplayerEquip(0).name.c_str());
-	TextOut(getMemDC(), 525, 345, str3, strlen(str3));
-
-	sprintf(str3, "%s", _pm->getvplayer()[2]->getplayerEquip(1).name.c_str());
-	TextOut(getMemDC(), 525, 345 + 60, str3, strlen(str3));
-
-	sprintf(str3, "%s", _pm->getvplayer()[2]->getplayerEquip(2).name.c_str());
-	TextOut(getMemDC(), 525, 345 + 108, str3, strlen(str3));
-
-	sprintf(str3, "%s", _pm->getvplayer()[2]->getplayerEquip(3).name.c_str());
-	TextOut(getMemDC(), 525, 345 + 168, str3, strlen(str3));
-
-	sprintf(str3, "%s", _pm->getvplayer()[2]->getplayerEquip(4).name.c_str());
+	sprintf(str3, "%s", _pm->getvplayer()[playerv]->getplayerEquip(4).name.c_str());
 	TextOut(getMemDC(), 525, 345 + 228, str3, strlen(str3));
 
 	///////////////////////////////////////////////////////////////////////////////
