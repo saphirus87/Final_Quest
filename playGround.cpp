@@ -42,6 +42,7 @@ HRESULT playGround::init()
 	SCENEMANAGER->addScene("shopScene", new shopScene);
 	
 	((gameMenuScene*)SCENEMANAGER->findScene("¸Ş´º¾À"))->setPlayerManagerAddressLink(_pm);
+	((gameMenuScene*)SCENEMANAGER->findScene("¸Ş´º¾À"))->setItemAddressLink(_Item);
 	((itemMenu*)SCENEMANAGER->findScene("¾ÆÀÌÅÛ¸Ş´º¾À"))->setItemAddressLink(_Item);
 	((itemMenu*)SCENEMANAGER->findScene("¾ÆÀÌÅÛ¸Ş´º¾À"))->setPlayerManagerAddressLink(_pm);
 	((saveLoadMenu*)SCENEMANAGER->findScene("¼¼ÀÌºê·Îµå¸Ş´º¾À"))->setPlayerManagerAddressLink(_pm);

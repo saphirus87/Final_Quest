@@ -45,10 +45,15 @@ void gameMenuScene::update()
 {
 	alphaPlusMinus(_isMenu, &_alpha);
 	keyControl();
+
+	_curGil = _item->getMoney();
 }
 
 void gameMenuScene::render()
 {
+	char gil[128];
+	wsprintf(gil, "%10d", _curGil);
+
 	HFONT hFont = CreateFont(20, 0, 0, 0, 600, 0, 0, 0, ANSI_CHARSET, 0, 0, 0, VARIABLE_PITCH | FF_ROMAN, TEXT("consolas"));
 	HFONT oFont = (HFONT)SelectObject(CAMERAMANAGER->findImage("메뉴")->getMemDC(), hFont);
 
@@ -56,6 +61,7 @@ void gameMenuScene::render()
 	SetTextColor(CAMERAMANAGER->findImage("메뉴")->getMemDC(), RGB(220, 220, 220));
 
 	IMAGEMANAGER->findImage("메뉴씬")->render(CAMERAMANAGER->findImage("메뉴")->getMemDC(), 0, 0);
+	outlineTextOut(CAMERAMANAGER->findImage("메뉴")->getMemDC(), 800, 684, gil, RGB(220, 220, 220), RGB(0, 0, 0), 1);
 
 	for (int i = 0; i < 3; ++i)
 	{
