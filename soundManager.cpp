@@ -51,7 +51,21 @@ HRESULT soundManager::init()
 
 
 
+	//로우패스 필터
+	_system->createDSPByType(FMOD_DSP_TYPE_LOWPASS, &dspLowPass);
+	//하이패스필터
+	_system->createDSPByType(FMOD_DSP_TYPE_HIGHPASS, &dspHighPass);
+
+
+
+
+
 	_musicGroup->addGroup(_mp3Group);
+
+	//DSP영역 초기화
+	addDspLowPass();
+	addDspHighPass();
+
 
 	_currentMusic = 0;
 
@@ -479,6 +493,16 @@ void soundManager::multipleFrequency(string keyName, float speed)
 		}
 	}
 }
+
+void soundManager::setFrequency(float speed)
+{
+	
+	_channel[_currentMusic-1]->getFrequency(&_frequency);
+	_frequency *= speed;
+	_channel[_currentMusic-1]->setFrequency(_frequency);
+
+}
+
 //반사음설정
 void soundManager::setReverb()
 {
@@ -506,5 +530,32 @@ void soundManager::reverbOff()
 }
 
 
+// digital signal pulse영역
 
-// dsp장난치기
+
+//저음역 주파수만 통과
+void soundManager::addDspLowPass()
+{
+	_masterGroup->addDSP(0, dspLowPass);
+	dspLowPass->setBypass(true);
+}
+
+//고음역 주파수만 통과
+void soundManager::addDspHighPass()
+{
+	_masterGroup->addDSP(0, dspHighPass);
+	dspHighPass->setBypass(true);
+}
+
+
+//리버스함수들은 토글방식으로 위에서 추가한 dsp효과들을
+//껏다켰다 가능 false일때가 On 
+//true일때가 off
+void soundManager::reverseLowPass(bool byPass)
+{
+	dspLowPass->setBypass(byPass);
+}
+void soundManager::reverseHighPass(bool byPass)
+{
+	dspHighPass->setBypass(byPass);
+}

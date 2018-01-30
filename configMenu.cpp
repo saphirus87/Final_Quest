@@ -28,9 +28,19 @@ HRESULT configMenu::init()
 	
 	DLCMANAGER->addDLC("BGM", false);
 	DLCMANAGER->addDLC("Effect", false);
+	DLCMANAGER->addDLC("MP3", false);
+	DLCMANAGER->addDLC("reverb", false);
+	DLCMANAGER->addDLC("musicSpeed", false);
+	DLCMANAGER->addDLC("LowFrequency", false);
+	DLCMANAGER->addDLC("Mp3MaxVolume", false);
+
+	
+
+
 
 	//선택을 위한 변수
 	_cursorMenuNum = 1;
+	_musicSpeed = 1.0;
 
 	//볼륨 조절을 위한 변수
 	_effectVolume = 1;
@@ -133,7 +143,7 @@ void configMenu::render()
 	SetTextColor(getMemDC(), RGB(255, 255, 0));
 	SetBkMode(getMemDC(), TRANSPARENT);
 
-	if (DLCMANAGER->findDLC("BGM"))
+	if (DLCMANAGER->findDLC("MP3"))
 	{
 		TextOut(getMemDC(), WINSIZEX / 2 + 53, 482, _musicTitle.c_str(), strlen(_musicTitle.c_str()));
 	}
@@ -148,6 +158,18 @@ void configMenu::render()
 
 void configMenu::keyControl()
 {
+
+	if (DLCMANAGER->findDLC("musicSpeed"))
+	{
+		if (KEYMANAGER->isOnceKeyDown(VK_ADD))
+		{
+		}
+		if (KEYMANAGER->isOnceKeyDown(VK_SUBTRACT))
+		{
+			SOUNDMANAGER->setFrequency(-500);
+		}
+	}
+
 	if (KEYMANAGER->isOnceKeyDown(VK_UP))
 	{
 		SOUNDMANAGER->play("메뉴선택", 1.0f);
@@ -254,11 +276,33 @@ void configMenu::keyControl()
 	{
 		SCENEMANAGER->changeScene("메뉴씬", FALSE);
 	}
-	if (KEYMANAGER->isOnceKeyDown(VK_RETURN))
+	if (KEYMANAGER->isOnceKeyDown(VK_RETURN)&& DLCMANAGER->findDLC("MP3"))
 	{
 		SOUNDMANAGER->play("배틀");
 		SOUNDMANAGER->stop("배틀");
 		SOUNDMANAGER->currentPlay();
+
+		if (!DLCMANAGER->findDLC("LowFrequency"))
+		{
+			SOUNDMANAGER->reverseHighPass(false);
+		}
+		if(!DLCMANAGER->findDLC("reverb"))
+		{
+			SOUNDMANAGER->setReverb();
+			SOUNDMANAGER->reverbOn();
+		}
+		if(!DLCMANAGER->findDLC("musicSpeed"))
+		{
+			SOUNDMANAGER->setFrequency(2);
+		}
+		if (!DLCMANAGER->findDLC("Mp3MaxVolume"))
+		{
+			SOUNDMANAGER->setMP3Volume(0.2);
+		}
+		else if (DLCMANAGER->findDLC("Mp3MaxVolume"))
+		{
+			SOUNDMANAGER->setMP3Volume(1);
+		}
 	}
 }
 

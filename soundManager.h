@@ -37,6 +37,9 @@ private:
 	ChannelGroup*	_effectGroup; //이펙트 채널그룹
 	ChannelGroup*	_mp3Group;
 
+	DSP				*dspLowPass = 0;  //낮은음역
+	DSP				*dspHighPass = 0; //높은음역
+
 	arrSounds _mTotalSounds;
 
 	FMOD_TAG Ftag; //태그를 받아오기 위한 Ftag
@@ -55,6 +58,11 @@ public:
 	HRESULT init();
 	void release();
 	void update();
+
+
+	//DSP영역 초기화
+	void addDspLowPass();
+	void addDspHighPass();
 
 	// 사운드 추가 함수(string 키값, string 경로및파일명, bgm인가?, 반복재생할것인가?)
 	void addSound(string keyName, string soundName, bool bgm, bool loop);
@@ -122,7 +130,11 @@ public:
 
 	//주파수 배율조절
 	void multipleFrequency(string keyName, float multiple); 
+	void setFrequency(float speed);
 
 	//맥스카운트 겟터
 	int getMaxCounter() { return _maxCount; }
+
+	void reverseLowPass(bool byPass);
+	void reverseHighPass(bool byPass);
 };

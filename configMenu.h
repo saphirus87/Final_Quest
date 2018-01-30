@@ -8,6 +8,8 @@ private:
 	int _musicVolume;
 	int _effectVolume;
 
+
+	float _musicSpeed;
 	string _musicTitle;
 
 public:
