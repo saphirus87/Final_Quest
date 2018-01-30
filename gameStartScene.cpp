@@ -94,6 +94,8 @@ void gameStartScene::keyControl()
 		{
 			if (_isStart == true && _alpha == 255)
 			{
+				SOUNDMANAGER->setMusicVolume(0.0f);
+				SOUNDMANAGER->setEffectVolume(0.0f);
 				_isStart = false;
 			}
 		}
@@ -107,14 +109,9 @@ void gameStartScene::keyControl()
 		}
 		SOUNDMANAGER->play("메뉴선택", 1.0f);
 
-		if (!DLCMANAGER->findDLC("BGM"))
-		{
-			SOUNDMANAGER->setMusicVolume(0.0f);
-		}
-		if (!DLCMANAGER->findDLC("Effect"))
-		{
-			SOUNDMANAGER->setEffectVolume(0.0f);
-		}
+
+			
+	
 	}
 
 	if (_alpha == 0)
