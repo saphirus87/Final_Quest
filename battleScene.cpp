@@ -107,6 +107,7 @@ void battleScene::playerAction(void)
 
 			_em->getVenemy()[_pm->getvplayer()[i]->getCommand()->target - 1]->
 				enemysetCurrentHp(_em->getVenemy()[_pm->getvplayer()[i]->getCommand()->target - 1]->enemygetCurrentHp() - _pm->getvplayer()[i]->getCommand()->totalDamage);
+			_em->getVenemy()[_pm->getvplayer()[i]->getCommand()->target - 1]->enemysetState(HIT);
 			_pm->getvplayer()[i]->commandReset();
 		}
 	}
