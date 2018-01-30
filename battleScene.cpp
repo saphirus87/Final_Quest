@@ -220,12 +220,15 @@ void battleScene::playerHitEnemy()
 				_em->getVenemy()[i]->enemysetCurrentHp(_em->getVenemy()[i]->enemygetCurrentHp() - 30);
 				cout << _em->getVenemy()[i]->enemygetCurrentHp() << endl;
 			}
-			if (_em->getVenemy().size() > 0)
+		}
+		if (_em->getVenemy().size() > 0)
+		{
+			if (_em->getVenemy()[i]->enemygetState() == DIE)
 			{
-				if (_em->getVenemy()[i]->enemygetState() == DIE)
+				if (_em->getVenemy()[i]->getAlpha() == 0)
 				{
-					if (_em->getVenemy()[i]->getAlpha() == 0)
-						_em->enemyErase(i);
+					_em->enemyErase(i);
+					break;
 				}
 			}
 		}
