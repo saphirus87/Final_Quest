@@ -117,10 +117,20 @@ void battleScene::playerAction(void)
 			_playerDamage[i].damage = _pm->getvplayer()[i]->getCommand()->totalDamage;
 			_playerDamage[i].pos.x = _em->getVenemy()[_pm->getvplayer()[i]->getCommand()->target - 1]->getCenterX();
 			_playerDamage[i].pos.y = _em->getVenemy()[_pm->getvplayer()[i]->getCommand()->target - 1]->getTopPos();
+			
+			int enemypos;
+			for (int j = 0; j < _em->getVenemy().size(); ++j)
+			{
+				if (_em->getVenemy()[j] == _em->nowvenemy()[_pm->getvplayer()[i]->getCommand()->target - 1])
+				{
+					enemypos = j;
+				}
+			}
+			_em->getVenemy()[enemypos]->
+				enemysetCurrentHp(_em->getVenemy()[enemypos]->enemygetCurrentHp() - _pm->getvplayer()[i]->getCommand()->totalDamage);
 
-			_em->getVenemy()[_pm->getvplayer()[i]->getCommand()->target - 1]->
-				enemysetCurrentHp(_em->getVenemy()[_pm->getvplayer()[i]->getCommand()->target - 1]->enemygetCurrentHp() - _pm->getvplayer()[i]->getCommand()->totalDamage);
-			_em->getVenemy()[_pm->getvplayer()[i]->getCommand()->target - 1]->enemysetState(HIT);
+			_em->getVenemy()[enemypos]->enemysetState(HIT);
+
 			_pm->getvplayer()[i]->commandReset();
 		}
 	}
