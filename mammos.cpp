@@ -137,7 +137,8 @@ void mammos::render(HDC hdc)
 	SetBkMode(getMemDC(), TRANSPARENT);
 	SetTextColor(getMemDC(), RGB(220, 220, 220));
 
-	TextOut(hdc, 20, namePositionY, "mammos", strlen("mammos"));
+	//TextOut(hdc, 20, namePositionY, "mammos", strlen("mammos"));
+	outlineTextOut(hdc, 20, namePositionY, "mammos", RGB(220, 220, 220), RGB(0, 0, 0), 2);
 	SelectObject(getMemDC(), oFont);
 	DeleteObject(hFont);
 	DeleteObject(oFont);	

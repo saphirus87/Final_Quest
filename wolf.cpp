@@ -136,7 +136,8 @@ void wolf::render(HDC hdc)
 	SetBkMode(getMemDC(), TRANSPARENT);
 	SetTextColor(getMemDC(), RGB(220, 220, 220));
 
-	TextOut(hdc, 20, namePositionY, "wolf", strlen("wolf"));
+	//TextOut(hdc, 20, namePositionY, "wolf", strlen("wolf"));
+	outlineTextOut(hdc, 20, namePositionY, "wolf", RGB(220, 220, 220), RGB(0, 0, 0), 2);
 	SelectObject(getMemDC(), oFont);
 	DeleteObject(hFont);
 	DeleteObject(oFont);

@@ -150,7 +150,8 @@ void knight::render(HDC hdc)
 	SetBkMode(getMemDC(), TRANSPARENT);
 	SetTextColor(getMemDC(), RGB(220, 220, 220));
 
-	TextOut(hdc, 20, namePositionY, "knight", strlen("knight"));
+	//TextOut(hdc, 20, namePositionY, "knight", strlen("knight"));
+	outlineTextOut(hdc, 20, namePositionY, "knight", RGB(220, 220, 220), RGB(0, 0, 0), 2);
 	SelectObject(getMemDC(), oFont);
 	DeleteObject(hFont);
 	DeleteObject(oFont);

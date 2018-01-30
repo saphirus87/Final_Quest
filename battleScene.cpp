@@ -87,8 +87,9 @@ void battleScene::render(void)
 {
 	IMAGEMANAGER->findImage("battleBackground")->render(getMemDC(),0,0);
 	IMAGEMANAGER->findImage("battleBox")->render(getMemDC(), 0, 557);
-	_pm->render();
+	
 	_em->render();
+	_pm->render();
 
 	targetSelectCursorDraw();
 	takenDamageDraw();
@@ -274,7 +275,7 @@ void battleScene::takenDamageDraw(void)
 		if (_pm->getvplayer()[i]->getIsDamageDraw())
 		{
 			// 그림자 , 상하 좌우로 같은 스타일의 글자를 뿌려준다.
-			outlineTextOut(getMemDC(), _playerDamage[i].pos.x, _playerDamage[i].pos.y - 10, playerDamage[i], RGB(220, 220, 220), RGB(0, 0, 0));
+			outlineTextOut(getMemDC(), _playerDamage[i].pos.x, _playerDamage[i].pos.y - 10, playerDamage[i], RGB(220, 220, 220), RGB(0, 0, 0), 1);
 		}
 	}
 

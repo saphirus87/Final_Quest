@@ -105,7 +105,7 @@ void player::render(void)
 	DeleteObject(oFont);
 
 	wsprintf(target, "curTarget : %d", _commandInfo.target);
-	if (_selectCommand == ATTACK_COMMAND) TextOut(getMemDC(), 500, 100, target, strlen(target));
+	if (_isDebug) TextOut(getMemDC(), 500, 100, target, strlen(target));
 }
 
 void player::statusRender(void)
@@ -121,10 +121,10 @@ void player::equipRender(void)
 void player::drawCommand(void)
 {
 	IMAGEMANAGER->findImage("battleSelectScene")->render(getMemDC(), 100, 557);
-	TextOut(getMemDC(), 170, COMMAND1_POSY, "ATTACK", strlen("ATTACK"));
-	TextOut(getMemDC(), 170, COMMAND2_POSY, "ITEM", strlen("ITEM"));
-	TextOut(getMemDC(), 170, COMMAND3_POSY, "MAGIC", strlen("MAGIC"));
-	TextOut(getMemDC(), 170, COMMAND4_POSY, "RUN", strlen("RUN"));
+	outlineTextOut(getMemDC(), 170, COMMAND1_POSY, "ATTACK", RGB(220, 220, 220), RGB(0, 0, 0), 2);
+	outlineTextOut(getMemDC(), 170, COMMAND2_POSY, "ITEM", RGB(220, 220, 220), RGB(0, 0, 0), 2);
+	outlineTextOut(getMemDC(), 170, COMMAND3_POSY, "MAGIC", RGB(220, 220, 220), RGB(0, 0, 0), 2);
+	outlineTextOut(getMemDC(), 170, COMMAND4_POSY, "RUN", RGB(220, 220, 220), RGB(0, 0, 0), 2);
 	
 	if (_curCommand == ATTACK_COMMAND) IMAGEMANAGER->findImage("선택")->render(getMemDC(), 130, COMMAND1_POSY);
 	if (_curCommand == ITEM_COMMAND) IMAGEMANAGER->findImage("선택")->render(getMemDC(), 130, COMMAND2_POSY);
@@ -209,19 +209,22 @@ void player::drawPlayerInfoInBattle(void)
 {
 	char displayHp[128];
 	int drawPos = 0;
+	COLORREF nameColor = RGB(220, 220, 220);
 
 	if (_partyPos == 1) drawPos = PLAYER1_NAME_Y;
 	if (_partyPos == 2) drawPos = PLAYER2_NAME_Y;
 	if (_partyPos == 3) drawPos = PLAYER3_NAME_Y;
 	
 	// 플레이어 이름 출력
-	if (_isCommandReady) SetTextColor(getMemDC(), RGB(180, 180, 40));
-	TextOut(getMemDC(), 450, drawPos, _name.c_str(), strlen(_name.c_str()));
-	if (_isCommandReady) SetTextColor(getMemDC(), RGB(220, 220, 220));
+	if (_isCommandReady) nameColor = RGB(180, 180, 40);
+	//TextOut(getMemDC(), 450, drawPos, _name.c_str(), strlen(_name.c_str()));
+	outlineTextOut(getMemDC(), 450, drawPos, _name.c_str(), nameColor, RGB(0, 0, 0), 1);
+	if (_isCommandReady) nameColor = RGB(220, 220, 220);
 
 	// 플레이어 체력 출력
 	wsprintf(displayHp, "%d / %d", _currentHp, _maxHp);
-	TextOut(getMemDC(), 650, drawPos, displayHp, strlen(displayHp));
+	outlineTextOut(getMemDC(), 650, drawPos, displayHp, RGB(220, 220, 220), RGB(0, 0, 0), 1);
+	//TextOut(getMemDC(), 650, drawPos, displayHp, strlen(displayHp));
 
 	// 플레이어 행동 게이지 출력
 	IMAGEMANAGER->findImage("actGaugeBox")->render(getMemDC(), 810, drawPos +5);

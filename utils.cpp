@@ -30,14 +30,14 @@ namespace HEPTA_UTIL
 		return angle;
 	}
 
-	void outlineTextOut(HDC hdc, int left, int top, const char * str, COLORREF fontColor, COLORREF outlineColor)
+	void outlineTextOut(HDC hdc, int left, int top, const char * str, COLORREF fontColor, COLORREF outlineColor, int outlineThick)
 	{
 		SetTextColor(hdc, outlineColor);
 
-		TextOut(hdc, left + 1, top, str, strlen(str));
-		TextOut(hdc, left - 1, top, str, strlen(str));
-		TextOut(hdc, left, top + 1, str, strlen(str));
-		TextOut(hdc, left, top - 1, str, strlen(str));
+		TextOut(hdc, left + outlineThick, top, str, strlen(str));
+		TextOut(hdc, left - outlineThick, top, str, strlen(str));
+		TextOut(hdc, left, top + outlineThick, str, strlen(str));
+		TextOut(hdc, left, top - outlineThick, str, strlen(str));
 
 		SetTextColor(hdc, fontColor);
 		TextOut(hdc, left, top, str, strlen(str));

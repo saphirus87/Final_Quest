@@ -15,5 +15,5 @@ namespace HEPTA_UTIL
 
 	float getAngle(float x1, float y1, float x2, float y2);
 
-	void outlineTextOut(HDC hdc, int left, int top, const char* str, COLORREF fontColor, COLORREF outlineColor);
+	void outlineTextOut(HDC hdc, int left, int top, const char* str, COLORREF fontColor, COLORREF outlineColor, int outlineThick);
 }
