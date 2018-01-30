@@ -126,7 +126,24 @@ void configMenu::render()
 		SOUNDMANAGER->setEffectVolume(0.0f);
 	}
 
-	TextOut(getMemDC(), WINSIZEX / 2 + 70, 492, _musicTitle.c_str(), strlen(_musicTitle.c_str()));
+	HFONT hFont = CreateFont(30, 0, 0, 0, 600, 0, 0, 0, ANSI_CHARSET, 0, 0, 0, VARIABLE_PITCH | FF_ROMAN, TEXT("consolas"));
+	HFONT oFont = (HFONT)SelectObject(getMemDC(), hFont);
+
+
+	SetTextColor(getMemDC(), RGB(255, 255, 0));
+	SetBkMode(getMemDC(), TRANSPARENT);
+
+	if (DLCMANAGER->findDLC("BGM"))
+	{
+		TextOut(getMemDC(), WINSIZEX / 2 + 53, 482, _musicTitle.c_str(), strlen(_musicTitle.c_str()));
+	}
+	SetTextColor(getMemDC(), RGB(255, 255, 0));
+
+	
+	SelectObject(getMemDC(), oFont);
+	DeleteObject(hFont);
+	DeleteObject(oFont);
+
 }
 
 void configMenu::keyControl()
