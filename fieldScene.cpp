@@ -285,7 +285,7 @@ void fieldScene::increasedEncount(void)
 		SOUNDMANAGER->play("배틀입장");
 		SOUNDMANAGER->play("배틀",0.75,true);
 
-		SCENEMANAGER->changeScene("battleScene");
+		SCENEMANAGER->changeScene("배틀로딩씬");
 		_encount = 0;
 	}
 }
