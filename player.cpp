@@ -83,7 +83,7 @@ void player::update()
 		selectCommand();
 	}
 
-	if (TIMEMANAGER->getWorldTime() - _damageDrawTimer > 2 && _isDamageDraw)
+	if (TIMEMANAGER->getWorldTime() - _damageDrawTimer > 1.2f && _isDamageDraw)
 	{
 		_isDamageDraw = false;
 	}
@@ -140,7 +140,7 @@ void player::selectCommand(void)
 	case NO_COMMAND:
 		if (KEYMANAGER->isOnceKeyDown(VK_UP))
 		{
-			_curCommand = (BATTLE_COMAAND)(_curCommand / 2);
+			_curCommand = (BATTLE_COMMAND)(_curCommand / 2);
 
 			if (_curCommand == 0)
 			{
@@ -154,7 +154,7 @@ void player::selectCommand(void)
 
 		if (KEYMANAGER->isOnceKeyDown(VK_DOWN))
 		{
-			_curCommand = (BATTLE_COMAAND)(_curCommand * 2);
+			_curCommand = (BATTLE_COMMAND)(_curCommand * 2);
 
 			if (_curCommand > _enableCommand)
 			{

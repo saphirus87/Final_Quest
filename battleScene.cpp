@@ -250,6 +250,8 @@ void battleScene::targetSelectCursorDraw(void)
 
 void battleScene::takenDamageDraw(void)
 {
+	static float _playerDamageMove[3] = { 0, 0, 0 };
+	static bool _playerDamageMoveUp[3] = { true, true, true };
 	char playerDamage[3][64];
 	char enemyDamage[3][64];
 
@@ -274,8 +276,12 @@ void battleScene::takenDamageDraw(void)
 	{
 		if (_pm->getvplayer()[i]->getIsDamageDraw())
 		{
-			// 그림자 , 상하 좌우로 같은 스타일의 글자를 뿌려준다.
-			outlineTextOut(getMemDC(), _playerDamage[i].pos.x, _playerDamage[i].pos.y - 10, playerDamage[i], RGB(220, 220, 220), RGB(0, 0, 0), 1);
+			if (_playerDamageMoveUp[i]) _playerDamageMove[i] -= 0.7f;
+			else _playerDamageMove[i] += 0.7f;
+
+			if (_playerDamageMove[i] > 25 || _playerDamageMove[i] < 0) _playerDamageMoveUp[i] = !_playerDamageMoveUp[i];
+
+			outlineTextOut(getMemDC(), _playerDamage[i].pos.x, _playerDamage[i].pos.y - 10 - _playerDamageMove[i], playerDamage[i], RGB(220, 220, 220), RGB(0, 0, 0), 1);
 		}
 	}
 
@@ -295,5 +301,6 @@ void battleScene::resetPlayerActGauge(void)
 	{
 		_pm->getvplayer()[i]->setCurActGauge(0);
 		_pm->getvplayer()[i]->setIsCommandReady(false);
+		_pm->getvplayer()[i]->setSelectCommand(NO_COMMAND);
 	}
 }

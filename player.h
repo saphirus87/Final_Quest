@@ -14,7 +14,7 @@
 
 #define MAX_ACT_GAUGE 1000
 
-enum BATTLE_COMAAND
+enum BATTLE_COMMAND
 {
 	NO_COMMAND = 0,
 	ATTACK_COMMAND = 1,
@@ -58,7 +58,7 @@ protected:
 
 	struct tagCommandInfo
 	{
-		BATTLE_COMAAND selectCommand;
+		BATTLE_COMMAND selectCommand;
 		int target;
 		DAMAGETYPE damagetype;
 		int totalDamage;
@@ -100,8 +100,8 @@ protected:
 	int _nowenemycount;					//현재 적의 숫자
 
 	int _enableCommand;
-	BATTLE_COMAAND _curCommand;
-	BATTLE_COMAAND _selectCommand;
+	BATTLE_COMMAND _curCommand;
+	BATTLE_COMMAND _selectCommand;
 
 	MOVEDIR _dir;						// 상하좌우 판단
 	SKILL _skill;						// 스킬 종류
@@ -221,7 +221,9 @@ public:
 	inline void setplayerEquip(tagItem equips, int num) { _playerEquip[num] = equips; }
 	inline tagItem getplayerEquip(int num) { return _playerEquip[num]; }
 
-	inline BATTLE_COMAAND getSelectCommand(void) { return _selectCommand; }
+	inline void setCurCommand(BATTLE_COMMAND command) { _curCommand = command; }
+	inline void setSelectCommand(BATTLE_COMMAND command) { _selectCommand = command; }
+	inline BATTLE_COMMAND getSelectCommand(void) { return _selectCommand; }
 
 	inline float getDamageDrawTimer(void) { return _damageDrawTimer; }
 	inline bool getIsDamageDraw(void) { return _isDamageDraw; }

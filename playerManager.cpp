@@ -94,5 +94,6 @@ void playerManager::resetActGauge(void)
 	{
 		_vPlayer[i]->setCurActGauge(0);
 		_vPlayer[i]->setIsCommandReady(false);
+		_vPlayer[i]->setSelectCommand(NO_COMMAND);
 	}
 }
