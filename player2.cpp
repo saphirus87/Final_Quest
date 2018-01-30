@@ -17,7 +17,7 @@ HRESULT player2::init()
 	//===================================== 플레이어 1 이미지 추가 =====================================
 
 	IMAGEMANAGER->addFrameImage("player2Move", ".//playerImage//player2Move.bmp", 78, 172, 3, 4, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("player2Battle_Idle", ".//playerImage//player2_attack_idle.bmp", 25, 38, true, RGB(255, 0, 255));
+	_img = IMAGEMANAGER->addImage("player2Battle_Idle", ".//playerImage//player2_attack_idle.bmp", 25, 38, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("player2Die", ".//playerImage//player2_die.bmp", 42, 22, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("player2Hurt", ".//playerImage//player2_hurt.bmp", 25, 41, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("player2Skill", ".//playerImage//player2_skill.bmp", 50, 40, 2, 1, true, RGB(255, 0, 255));
@@ -41,6 +41,9 @@ HRESULT player2::init()
 	_agi = 8;
 	_def = 0;
 	_m_def = 4;
+	
+	_x = 910;
+	_y = 330;
 
 	_name = "Moogle";
 	_partyPos = 2;
@@ -58,7 +61,7 @@ void player2::update()
 void player2::render()
 {
 	player::render();
-	IMAGEMANAGER->render("player2Battle_Idle", getMemDC(), 910, 330,40,65);
+	IMAGEMANAGER->render("player2Battle_Idle", getMemDC(), _x, _y, 40, 65);
 }
 
 void player2::levelUp(void)

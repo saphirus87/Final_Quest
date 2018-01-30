@@ -129,6 +129,9 @@ public:
 	inline int getTopPos(void) { return y; }
 	inline int getTopcursorPos(void) { return y + img->getHeight() / 3; }
 
+	inline float getDamageDrawTimer(void) { return _damageDrawTimer; }
+	inline bool getIsDamageDraw(void) { return _isDamageDraw; }
+
 	bool GetAttackOn() { return isAttack; }
 	void SetAttackOn(bool att) { isAttack = att; }
 };

@@ -65,6 +65,7 @@ protected:
 	};
 
 protected:
+	image* _img;
 	string _name;						// 플레이어 이름
 	int _partyPos;						// 파티에서 위치
 	int _level;							// 플레이어 레벨
@@ -136,6 +137,8 @@ public:
 	void commandMagic(void);
 	void commandRun(void);
 	void commandReset(void);
+
+	void setBattlePos(void);
 
 public:
 	// getset 부분
@@ -229,5 +232,10 @@ public:
 	inline bool getIsDamageDraw(void) { return _isDamageDraw; }
 
 	inline void setnowenemycount(int enemycount) { _nowenemycount = enemycount; }
+
+	inline int getLeftPos(void) { return _x + _img->getWidth(); }
+	inline int getCenterX(void) { return _x + _img->getWidth() / 2; }
+	inline int getTopPos(void) { return _y; }
+	inline int getTopcursorPos(void) { return _y + _img->getHeight() / 3; }
 };
 

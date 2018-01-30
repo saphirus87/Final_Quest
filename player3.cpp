@@ -17,7 +17,7 @@ HRESULT player3::init()
 {
 	//===================================== 플레이어 1 이미지 추가 =====================================
 	IMAGEMANAGER->addFrameImage("player3Move", ".//playerImage//player3Move.bmp", 90, 192, 3, 4, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("player3Battle_Idle", ".//playerImage//player3_attack_idle.bmp", 33, 43, true, RGB(255, 0, 255));
+	_img = IMAGEMANAGER->addImage("player3Battle_Idle", ".//playerImage//player3_attack_idle.bmp", 33, 43, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("player3Die", ".//playerImage//player3_die.bmp", 39, 25, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("player3Hurt", ".//playerImage//player3_hurt.bmp", 39, 47, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("player3Skill", ".//playerImage//player3_skill.bmp", 72, 45, 2, 1, true, RGB(255, 0, 255));
@@ -41,6 +41,9 @@ HRESULT player3::init()
 	_def = 2;
 	_m_def = 3;
 
+	_x = 960;
+	_y = 480;
+
 	_name = "trance";
 	_partyPos = 3;
 
@@ -53,11 +56,13 @@ void player3::release()
 void player3::update() 
 {
 	player::update();
+
+
 }
 void player3::render()
 {
 	player::render();
-	IMAGEMANAGER->render("player3Battle_Idle", getMemDC(), 960, 480,50,65);
+	IMAGEMANAGER->render("player3Battle_Idle", getMemDC(), _x, _y, 50, 65);
 }
 
 void player3::levelUp(void)

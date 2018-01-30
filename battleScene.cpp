@@ -194,7 +194,11 @@ void battleScene::enemyHitPlayer()
 					_pm->getvplayer()[2]->setCurrentHp(_pm->getvplayer()[2]->getCurrentHp() - _em->getVenemy()[i]->enemygetDamage());
 				}
 				_em->getVenemy()[i]->SetAttackOn(false);
-					cout << j + 1 << " ¹ø¤Š" << _pm->getvplayer()[j]->getCurrentHp() << endl;
+				cout << j + 1 << " ¹ø¤Š" << _pm->getvplayer()[j]->getCurrentHp() << endl;
+
+				_enemyDamage[i].damage = _em->getVenemy()[i]->enemygetDamage();
+				_enemyDamage[i].pos.x = _pm->getvplayer()[_em->getVenemy()[i]->enemygetPlayerTarget() - 1]->getCenterX();
+				_enemyDamage[i].pos.y = _pm->getvplayer()[_em->getVenemy()[i]->enemygetPlayerTarget() - 1]->getTopPos();
 			}
 		}
 	}
@@ -253,6 +257,8 @@ void battleScene::takenDamageDraw(void)
 {
 	static float _playerDamageMove[3] = { 0, 0, 0 };
 	static bool _playerDamageMoveUp[3] = { true, true, true };
+	static float _enemyDamageMove[3] = { 0, 0, 0 };
+	static bool _enemyDamageMoveUp[3] = { true, true, true };
 	char playerDamage[3][64];
 	char enemyDamage[3][64];
 
@@ -289,6 +295,15 @@ void battleScene::takenDamageDraw(void)
 	for (int i = 0; i < _em->getVenemy().size(); i++)
 	{
 		//TextOut(getMemDC(), 100, 100, enemyDamage[i], strlen(enemyDamage[i]));
+		if (_em->getVenemy()[i]->getIsDamageDraw())
+		{
+			if (_enemyDamageMoveUp[i]) _enemyDamageMove[i] -= 0.7f;
+			else _enemyDamageMove[i] += 0.7f;
+
+			if (_enemyDamageMove[i] > 25 || _enemyDamageMove[i] < 0) _enemyDamageMoveUp[i] = !_enemyDamageMoveUp[i];
+
+			outlineTextOut(getMemDC(), _enemyDamage[i].pos.x, _enemyDamage[i].pos.y - 10 - _enemyDamageMove[i], enemyDamage[i], RGB(220, 220, 220), RGB(0, 0, 0), 1);
+		}
 	}
 
 	SelectObject(getMemDC(), oFont);

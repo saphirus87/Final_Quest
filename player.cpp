@@ -87,6 +87,8 @@ void player::update()
 	{
 		_isDamageDraw = false;
 	}
+
+	setBattlePos();
 }
 void player::render(void)
 {
@@ -315,4 +317,23 @@ void player::commandReset(void)
 		_selectCommand = NO_COMMAND;
 	}
 	
+}
+
+void player::setBattlePos(void)
+{
+	if (_partyPos == 1)
+	{
+		_x = 850;
+		_y = 180;
+	}
+	else if (_partyPos == 2)
+	{
+		_x = 910;
+		_y = 330;
+	}
+	else if (_partyPos == 3)
+	{
+		_x = 960;
+		_y = 480;
+	}
 }
