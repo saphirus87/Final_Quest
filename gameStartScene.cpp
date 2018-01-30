@@ -96,6 +96,7 @@ void gameStartScene::keyControl()
 			{
 				SOUNDMANAGER->setMusicVolume(0.0f);
 				SOUNDMANAGER->setEffectVolume(0.0f);
+				SOUNDMANAGER->setPan(2);
 				_isStart = false;
 			}
 		}

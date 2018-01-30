@@ -471,6 +471,10 @@ void soundManager::setPan(string keyName, float panValue)
 	}
 }
 
+void soundManager::setPan(float panValue)
+{
+	_masterGroup->setPan(panValue);
+}
 
 
 

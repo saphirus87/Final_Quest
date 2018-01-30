@@ -33,8 +33,7 @@ HRESULT configMenu::init()
 	DLCMANAGER->addDLC("musicSpeed", false);
 	DLCMANAGER->addDLC("LowFrequency", false);
 	DLCMANAGER->addDLC("Mp3MaxVolume", false);
-
-	
+	DLCMANAGER->addDLC("LeftSpeaker", false);
 
 
 
@@ -57,6 +56,10 @@ void configMenu::release()
 
 void configMenu::update()
 {
+	if (DLCMANAGER->findDLC("LeftSpeaker"))
+	{
+		SOUNDMANAGER->setPan(0);
+	}
 	keyControl();
 }
 

@@ -119,7 +119,7 @@ public:
 
 	//팬조절 //팬이란 스피커 좌우 음향의 치우침 조절기능
 	void setPan(string keyName, float panValue);  // -1에 가까울수록 왼쪽으로 1에 가까울 수록 오른쪽으로
-
+	void setPan(float panValue);
 	//반사음 기본셋팅
 	void setReverb();
 
